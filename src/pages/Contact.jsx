@@ -60,7 +60,7 @@ const Contact = () => {
                 {
                   icon: <Mail className="h-6 w-6 text-white" />,
                   title: "Email Us",
-                  lines: ["info@skyliftgroup.com"],
+                  lines: ["hello@skyliftgroup.com"],
                 },
                 {
                   icon: <MapPin className="h-6 w-6 text-white" />,
