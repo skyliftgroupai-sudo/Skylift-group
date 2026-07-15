@@ -109,10 +109,10 @@ export const Footer = () => {
             <li className="flex items-center gap-2">
               <Mail className="w-5 h-5 text-[#00A693]" />
               <a
-                href="mailto:Hello@skyliftgroup.com"
+                href="mailto:hello@skyliftgroup.com"
                 className="hover:text-[#00A693] transition-colors duration-300"
               >
-                Hello@skyliftgroup.com
+                hello@skyliftgroup.com
               </a>
             </li>
 
@@ -179,7 +179,7 @@ export const Footer = () => {
         viewport={{ once: true }}
       >
         <p className="text-gray-400 text-md font-medium">
-          © {new Date().getFullYear()} Sky Lift Group. All rights reserved.
+          © {new Date().getFullYear()} Sky Lift LLC. All rights reserved. Sky Lift Group is a brand operated by Sky Lift LLC.
         </p>
       </motion.div>
     </footer>
