@@ -186,7 +186,7 @@ const TermsConditions = () => {
           </h1>
 
           <p className="max-w-3xl mx-auto text-lg">
-            We are committed to protecting your data while delivering
+        Last updated: July 15, 2026. We are committed to protecting your data while delivering
             high-performance digital marketing and AI-powered solutions.
           </p>
         </motion.div>
@@ -277,7 +277,7 @@ const TermsConditions = () => {
               Changes to Terms and Conditions
             </h2>
             <p>
-              Sky Lift Group reserves the right to update these Terms and Conditions at any time. Updates will be communicated via the website or direct notice where possible.
+              Sky Lift LLC reserves the right to update these Terms and Conditions at any time. Updates will be communicated via the website or direct notice where possible.
             </p>
           </div>
           <div>
@@ -289,7 +289,7 @@ const TermsConditions = () => {
             </p>
 
             <div className="mt-4 space-y-2 text-gray-300">
-              <div>Sky Lift Group</div>
+              <div>Sky Lift LLC</div>
 
               <div className="flex items-center gap-2">
                 <Mail className="text-[#00A693]" size={18} />
