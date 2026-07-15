@@ -200,7 +200,7 @@ const PrivacyPolicy = () => {
                             Introduction
                         </h2>
                         <p>
-                            This Privacy Policy explains how Sky Lift Group collects, uses,
+Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky Lift LLC, referred to as "Sky Lift Group," "we," "us," or "our" throughout this policy.                             This Privacy Policy explains how Sky Lift Group collects, uses,
                             processes, and protects your information when you use our website
                             and services. By accessing or using our services, you agree to the
                             collection and use of information in accordance with this policy.
