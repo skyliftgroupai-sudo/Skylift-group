@@ -21,9 +21,9 @@ export default function StatsSection() {
                             <Smile className="w-7 h-7" />
                         </div>
                         <div className="text-4xl font-bold text-white">
-                            <AnimatedCounter end={350} suffix="+" />
+                            <AnimatedCounter end={50} suffix="+" />
                         </div>
-                        <div className="text-sm text-gray-400 mt-2">Happy Clients</div>
+                        <div className="text-sm text-gray-400 mt-2">Businesses Helped</div>
                     </div>
 
                     {/* Average Growth */}
@@ -36,9 +36,9 @@ export default function StatsSection() {
                             <TrendingUp className="w-7 h-7" />
                         </div>
                         <div className="text-4xl font-bold text-white">
-                            <AnimatedCounter end={85} suffix="%" />
+                            <AnimatedCounter end={300} suffix="%" />
                         </div>
-                        <div className="text-sm text-gray-400 mt-2">Average Growth</div>
+                        <div className="text-sm text-gray-400 mt-2">Average Lead Growth</div>
                     </div>
 
                     {/* Support */}
@@ -64,9 +64,9 @@ export default function StatsSection() {
                             <Briefcase className="w-7 h-7" />
                         </div>
                         <div className="text-4xl font-bold text-white">
-                            <AnimatedCounter end={10} suffix="+" />
+                            <AnimatedCounter end={5} suffix="+" />
                         </div>
-                        <div className="text-sm text-gray-400 mt-2">Years Experience</div>
+                        <div className="text-sm text-gray-400 mt-2">Years Combined Industry Experience</div>
                     </div>
 
                 </div>
