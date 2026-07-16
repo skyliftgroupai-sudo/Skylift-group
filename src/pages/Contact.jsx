@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 import SliderBar from "./Sliderbar";
 import useSeo from "../hooks/useSeo";
 import "flag-icons/css/flag-icons.min.css";
 
 const Contact = () => {
-  const [loading, setLoading] = useState(true);
 
 
   useSeo({
@@ -16,10 +14,6 @@ const Contact = () => {
     canonical: "https://www.skyliftgroup.com/contact"
   });
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 8000);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="flex flex-col">
@@ -108,45 +102,23 @@ const Contact = () => {
                 </motion.div>
               ))}
             </div>
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-2"
-            >
-
-              <div className="relative w-full h-[850px] rounded-lg overflow-hidden">
-
-                {/* Loader */}
-                {loading && (
-                  <div
-                    className={`absolute inset-0 flex items-center justify-center bg-[#111111] z-10 transition-opacity duration-500 ${loading ? "opacity-100" : "opacity-0 pointer-events-none"
-                      }`}
-                  >
-                    <div className="flex flex-col items-center gap-3">
-
-                      {/* Spinner */}
-                      <div className="w-10 h-10 border-4 border-[#c1a944] border-t-transparent rounded-full animate-spin"></div>
-
-                      {/* Text */}
-                      <p className="text-gray-300 text-sm">Loading form...</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Iframe */}
-                <iframe
-                  src="https://api.leadconnectorhq.com/widget/form/J6Gtz1pzBFNFDvoMGV05"
-                  className="w-full h-full border-none"
-                  title="Form"
-                  onLoad={() => setLoading(false)}
-                />
-
-              </div>
-
-
-            </motion.div>
+<motion.div
+    initial={{ opacity: 0, x: 40 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+    className="lg:col-span-2"
+  ><div className="relative w-full h-full min-h-[600px] rounded-lg overflow-hidden bg-[#111111] shadow-md flex flex-col items-center justify-center text-center p-10 md:p-16"
+     >
+  <div className="h-16 w-16 flex items-center justify-center rounded-full bg-[#00A693] shadow-md mb-6">
+    <MessageCircle className="h-8 w-8 text-white" />
+  </div>
+    <h2 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Talk With Our AI Business Assistant</h2>
+    <p className="text-gray-300 text-base md:text-lg max-w-xl mb-3">Get instant answers about our services, pricing, websites, AI automation, Google Business Profile optimization, SEO, and marketing solutions.</p>
+    <p className="text-gray-300 text-base md:text-lg max-w-xl mb-3">Our AI Assistant is available 24/7 to answer your questions, qualify your needs, and help you get started.</p>
+    <p className="text-[#00A693] font-semibold text-base md:text-lg">Click the chat icon in the bottom-right corner to begin.</p>
+  </div>
+</motion.div>
           </div>
         </div>
       </section>
