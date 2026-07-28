@@ -1,0 +1,107 @@
+// Regenerates public/sitemap.xml and public/rss.xml from the static routes
+// and every markdown post in src/content/blog. Runs automatically before
+// `vite build` (see package.json), so search engines always see fresh posts.
+
+import { readFileSync, readdirSync, writeFileSync, existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+import { parseFrontmatter } from "../src/lib/frontmatter.js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const root = join(__dirname, "..");
+const SITE = "https://www.skyliftgroup.com";
+
+// Static routes mirror src/App.jsx.
+const staticRoutes = [
+  { path: "/", priority: "1.0", changefreq: "weekly" },
+  { path: "/about-us", priority: "0.8", changefreq: "monthly" },
+  { path: "/services", priority: "0.9", changefreq: "monthly" },
+  { path: "/work", priority: "0.7", changefreq: "monthly" },
+  { path: "/blog", priority: "0.9", changefreq: "daily" },
+  { path: "/contact", priority: "0.7", changefreq: "monthly" },
+  { path: "/book", priority: "0.7", changefreq: "monthly" },
+  { path: "/services/web-design", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/seo", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/local-maps", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/social-media", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/ppc-management", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/content-writing", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/meta-ads", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/one-click-campaigns", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/tiktok-ads", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/google-ads", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/reviews", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/ai-workflows", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/ai-voice-agents", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/ai-chatbots", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/missed-call-text-back", priority: "0.8", changefreq: "monthly" },
+  { path: "/services/lead-follow-up", priority: "0.8", changefreq: "monthly" },
+  { path: "/privacy-policy", priority: "0.3", changefreq: "yearly" },
+  { path: "/terms-conditions", priority: "0.3", changefreq: "yearly" },
+  { path: "/faq", priority: "0.6", changefreq: "monthly" },
+];
+
+function escapeXml(str = "") {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function loadPosts() {
+  const dir = join(root, "src", "content", "blog");
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".md"))
+    .map((file) => {
+      const raw = readFileSync(join(dir, file), "utf8");
+      const { data } = parseFrontmatter(raw);
+      return {
+        slug: data.slug || file.replace(/\.md$/, ""),
+        title: data.title || "Untitled",
+        description: data.description || data.excerpt || "",
+        category: data.category || "Digital Marketing",
+        date: data.date || "1970-01-01",
+      };
+    })
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+function buildSitemap(posts) {
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = [];
+
+  for (const r of staticRoutes) {
+    urls.push(
+      `  <url>\n    <loc>${SITE}${r.path}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority}</priority>\n  </url>`
+    );
+  }
+
+  for (const p of posts) {
+    urls.push(
+      `  <url>\n    <loc>${SITE}/blog/${p.slug}</loc>\n    <lastmod>${p.date}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`
+    );
+  }
+
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
+}
+
+function buildRss(posts) {
+  const items = posts
+    .map((p) => {
+      const link = `${SITE}/blog/${p.slug}`;
+      return `    <item>\n      <title>${escapeXml(p.title)}</title>\n      <link>${link}</link>\n      <guid isPermaLink="true">${link}</guid>\n      <category>${escapeXml(p.category)}</category>\n      <pubDate>${new Date(p.date).toUTCString()}</pubDate>\n      <description>${escapeXml(p.description)}</description>\n    </item>`;
+    })
+    .join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n  <channel>\n    <title>Sky Lift Group Blog</title>\n    <link>${SITE}/blog</link>\n    <description>AI marketing, local SEO, and lead generation guides for local and home service businesses.</description>\n    <language>en-us</language>\n    <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />\n    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>\n${items}\n  </channel>\n</rss>\n`;
+}
+
+const posts = loadPosts();
+writeFileSync(join(root, "public", "sitemap.xml"), buildSitemap(posts));
+writeFileSync(join(root, "public", "rss.xml"), buildRss(posts));
+console.log(
+  `[seo] Generated sitemap.xml (${staticRoutes.length} static + ${posts.length} posts) and rss.xml`
+);

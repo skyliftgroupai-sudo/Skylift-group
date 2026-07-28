@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sky Lift Group Blog</title>
+    <link>https://www.skyliftgroup.com/blog</link>
+    <description>AI marketing, local SEO, and lead generation guides for local and home service businesses.</description>
+    <language>en-us</language>
+    <atom:link href="https://www.skyliftgroup.com/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Jul 2026 20:16:41 GMT</lastBuildDate>
+    <item>
+      <title>Google Business Profile Optimization for Home Service Businesses (2026 Guide)</title>
+      <link>https://www.skyliftgroup.com/blog/google-business-profile-optimization-home-service-businesses</link>
+      <guid isPermaLink="true">https://www.skyliftgroup.com/blog/google-business-profile-optimization-home-service-businesses</guid>
+      <category>Google Business Profile</category>
+      <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Optimize your Google Business Profile to win the Map Pack and more local leads. The complete 2026 GBP checklist for HVAC, roofing, plumbing and home services.</description>
+    </item>
+  </channel>
+</rss>

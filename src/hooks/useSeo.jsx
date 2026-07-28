@@ -1,19 +1,48 @@
 import { useEffect } from "react";
 
-export default function useSeo({ title, description, canonical }) {
+// Sets a <meta> tag by name, creating it if needed.
+function setMetaByName(name, content) {
+    if (!content) return;
+    let meta = document.querySelector(`meta[name='${name}']`);
+    if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("name", name);
+        document.head.appendChild(meta);
+    }
+    meta.setAttribute("content", content);
+}
+
+// Sets a <meta property="..."> (Open Graph) tag, creating it if needed.
+function setMetaByProperty(property, content) {
+    if (!content) return;
+    let meta = document.querySelector(`meta[property='${property}']`);
+    if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("property", property);
+        document.head.appendChild(meta);
+    }
+    meta.setAttribute("content", content);
+}
+
+export default function useSeo({
+    title,
+    description,
+    canonical,
+    image,
+    type = "website",
+    jsonLd,
+}) {
     useEffect(() => {
         if (title) {
             document.title = title;
+            setMetaByProperty("og:title", title);
+            setMetaByName("twitter:title", title);
         }
 
         if (description) {
-            let meta = document.querySelector("meta[name='description']");
-            if (!meta) {
-                meta = document.createElement("meta");
-                meta.setAttribute("name", "description");
-                document.head.appendChild(meta);
-            }
-            meta.setAttribute("content", description);
+            setMetaByName("description", description);
+            setMetaByProperty("og:description", description);
+            setMetaByName("twitter:description", description);
         }
 
         if (canonical) {
@@ -24,6 +53,38 @@ export default function useSeo({ title, description, canonical }) {
                 document.head.appendChild(link);
             }
             link.setAttribute("href", canonical);
+            setMetaByProperty("og:url", canonical);
         }
-    }, [title, description, canonical]);
+
+        setMetaByProperty("og:type", type);
+
+        if (image) {
+            const absolute = image.startsWith("http")
+                ? image
+                : `https://www.skyliftgroup.com${image}`;
+            setMetaByProperty("og:image", absolute);
+            setMetaByName("twitter:image", absolute);
+            setMetaByName("twitter:card", "summary_large_image");
+        }
+
+        // Inject page-specific JSON-LD, tagged so we can clean it up on unmount
+        // and never collide with the site-wide Organization schema in index.html.
+        const injected = [];
+        if (jsonLd) {
+            const blocks = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+            for (const block of blocks) {
+                if (!block) continue;
+                const script = document.createElement("script");
+                script.type = "application/ld+json";
+                script.setAttribute("data-seo-jsonld", "true");
+                script.textContent = JSON.stringify(block);
+                document.head.appendChild(script);
+                injected.push(script);
+            }
+        }
+
+        return () => {
+            injected.forEach((s) => s.remove());
+        };
+    }, [title, description, canonical, image, type, jsonLd]);
 }

@@ -30,8 +30,8 @@ export const Header = () => {
         { label: "About Us", to: "/about-us" },
         { label: "Our Services", to: "/services", hasDropdown: true },
         { label: "Our Work", to: "/work" },
+        { label: "Blog", to: "/blog" },
         { label: "Contact Us", to: "/contact" },
-        // { label: "Blog", to: "/blog" },
     ];
 
     const mobilenav = [
@@ -39,6 +39,7 @@ export const Header = () => {
         { label: "About Us", to: "/about-us" },
         { label: "Our Services", to: "/services" },
         { label: "Our Work", to: "/work" },
+        { label: "Blog", to: "/blog" },
         { label: "Contact Us", to: "/contact" },
 
     ]

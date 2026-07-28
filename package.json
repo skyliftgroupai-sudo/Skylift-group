@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "generate:seo": "node scripts/generate-seo-files.mjs",
+    "build": "node scripts/generate-seo-files.mjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -23,8 +24,10 @@
     "next-themes": "^0.4.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-markdown": "^9.1.0",
     "react-router-dom": "^7.9.5",
     "react-slick": "^0.31.0",
+    "remark-gfm": "^4.0.1",
     "slick-carousel": "^1.8.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0"

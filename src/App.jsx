@@ -30,6 +30,8 @@ import AIWorkflowAutomation from "./pages/Aiworkflowautomation";
 import AIVoiceAgents from "./pages/Aivoiceagents";
 import AIChatbot from "./pages/Aichatbot";
 import Maintenance from "./pages/Maintenance";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +70,8 @@ const App = () => (
             <Route path="/services/ai-chatbots" element={<AIChatbot />} />
             <Route path="/services/missed-call-text-back" element={<MissedCall />} />
             <Route path="/services/lead-follow-up" element={<AutomatedLeadFollowUp />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/book" element={<Schedule />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
