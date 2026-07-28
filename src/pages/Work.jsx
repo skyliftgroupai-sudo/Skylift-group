@@ -1,9 +1,48 @@
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  Home,
+  Droplets,
+  Zap,
+  Hammer,
+  Truck,
+  Landmark,
+  Car,
+  HardHat,
+  HeartPulse,
+  Trash2,
+  Building2,
+} from "lucide-react";
 import { useCountUp } from "../hooks/counte";
 import { useRef } from "react";
 import CTASection from "./CtaSection";
 import useSeo from "../hooks/useSeo";
+
+const iconClass = "h-8 w-8";
+const industries = [
+  { name: "Roofing", icon: <Home className={iconClass} strokeWidth={1.75} /> },
+  { name: "Plumbing", icon: <Droplets className={iconClass} strokeWidth={1.75} /> },
+  { name: "Electrical", icon: <Zap className={iconClass} strokeWidth={1.75} /> },
+  { name: "Handyman", icon: <Hammer className={iconClass} strokeWidth={1.75} /> },
+  { name: "Moving Services", icon: <Truck className={iconClass} strokeWidth={1.75} /> },
+  { name: "Mortgage", icon: <Landmark className={iconClass} strokeWidth={1.75} /> },
+  { name: "Roadside Assistance", icon: <Car className={iconClass} strokeWidth={1.75} /> },
+  { name: "General Contractors", icon: <HardHat className={iconClass} strokeWidth={1.75} /> },
+  { name: "Assisted Living", icon: <HeartPulse className={iconClass} strokeWidth={1.75} /> },
+  { name: "Junk Removal", icon: <Trash2 className={iconClass} strokeWidth={1.75} /> },
+  { name: "Real Estate", icon: <Building2 className={iconClass} strokeWidth={1.75} /> },
+];
+
+const gridContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+
+const gridItem = {
+  hidden: { opacity: 0, y: 26 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 
 const Work = () => {
@@ -17,37 +56,10 @@ const Work = () => {
     { value: 95, suffix: "%", label: "Client Retention" }
   ];
 
-  const projects = [
-    {
-      title: "TechStart Solutions",
-      category: "B2B SaaS",
-      description: "Complete digital transformation including website redesign, SEO strategy, and lead generation campaigns.",
-      results: ["150% increase in organic traffic", "85% growth in qualified leads", "2.5x ROI on ad spend"],
-      image: "/assets/analytics.jpg",
-      tags: ["SEO", "Web Design", "PPC"],
-    },
-    {
-      title: "EcoLife Marketplace",
-      category: "E-commerce",
-      description: "End-to-end e-commerce marketing strategy with focus on social media and influencer partnerships.",
-      results: ["300% social media growth", "65% increase in conversion rate", "4x revenue in 6 months"],
-      image: "/assets/team-work.jpg",
-      tags: ["Social Media", "Content", "Email"],
-    },
-    {
-      title: "HealthWell Clinic",
-      category: "Healthcare",
-      description: "Local SEO optimization and reputation management for a growing healthcare provider.",
-      results: ["Top 3 Google rankings", "200+ positive reviews", "120% patient growth"],
-      image: "/assets/work-desk.jpg",
-      tags: ["Local SEO", "Reputation", "Content"],
-    },
-  ];
-
   useSeo({
-    title: "Success Stories | Sky Lift Group – Inspiring Client Results",
+    title: "Industries We Serve | Sky Lift Group – AI Marketing for Local Business",
     description:
-      "Discover the success stories of our clients. Sky Lift Group helps businesses grow through digital marketing, SEO, social media, PPC, and web solutions, delivering measurable results.",
+      "Sky Lift Group delivers AI-powered marketing and automation for roofing, plumbing, electrical, moving, real estate, senior care, and more local service industries.",
     canonical: "https://www.skyliftgroup.com/work"
   });
 
@@ -67,7 +79,7 @@ return (
         transition={{ duration: 0.8 }}
         className="relative text-white text-3xl sm:text-4xl md:text-6xl font-bold text-center leading-tight"
       >
-        Success Stories That Inspire
+        Trusted Across Every Industry
       </motion.h1>
 
       <motion.p
@@ -76,7 +88,7 @@ return (
         transition={{ duration: 1 }}
         className="relative text-gray-200 text-base sm:text-lg md:text-xl mt-4 text-center max-w-md sm:max-w-xl"
       >
-        Explore how we've helped businesses like yours achieve remarkable growth through innovative digital marketing strategies.
+        From the trades to real estate and senior care, our AI marketing and automation solutions help local service businesses grow.
       </motion.p>
     </section>
 
@@ -113,87 +125,80 @@ return (
       </div>
     </section>
 
-    <section className="py-24 bg-[#0a0a0a]">
-      <div className="container mx-auto px-4">
-        <motion.h2
+    <section className="relative py-24 overflow-hidden bg-[#0a0a0a]">
+      {/* soft brand glow */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,#00A69318,transparent_60%)]" />
+
+      <div className="container mx-auto px-4 relative">
+        {/* Heading */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-14 text-gray-100"
+          className="max-w-2xl mx-auto text-center mb-14"
         >
-          Our Work
-        </motion.h2>
+          <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] text-[#00A693] uppercase">
+            Who We Serve
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-100 mt-4 leading-tight">
+            AI Marketing for Every{" "}
+            <span className="text-[#00A693]">Local Industry</span>
+          </h2>
+          <p className="text-gray-300 text-base sm:text-lg mt-5">
+            From the trades to real estate and senior care, we help local
+            service businesses across a wide range of industries generate more
+            leads and automate their growth.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {projects.map((project, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group"
-            >
-              <div className="bg-[#111111] rounded-2xl overflow-hidden shadow-lg hover:shadow-[0_10px_35px_rgba(0,166,147,0.35)] transition-all duration-300 border border-gray-700 hover:border-[#00A693]/40 hover:-translate-y-2">
-                <div className="h-56 w-full overflow-hidden cursor-pointer">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover group-hover:scale-110 transition-all duration-500"
-                  />
+        {/* Industry grid */}
+        <motion.div
+          variants={gridContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto"
+        >
+          {industries.map(({ name, icon }) => (
+            <motion.div key={name} variants={gridItem} className="group relative">
+              <div className="relative flex aspect-[4/3] flex-col items-center justify-center gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-500 group-hover:-translate-y-2 group-hover:border-[#00A693]/40 group-hover:shadow-[0_20px_50px_-12px_rgba(0,166,147,0.35)]">
+                {/* gradient wash on hover */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#00A693]/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                {/* icon badge */}
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-[#00A693]/20 bg-gradient-to-br from-[#00A693]/20 to-[#00A693]/5 text-[#00A693] transition-transform duration-500 group-hover:scale-110">
+                  {icon}
+                  <div className="absolute inset-0 -z-10 rounded-2xl bg-[#00A693]/30 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-70" />
                 </div>
 
-                <div className="p-6">
-                  <p className="text-sm text-[#00A693] font-semibold mb-2 tracking-wide">
-                    {project.category}
-                  </p>
-
-                  <h3 className="text-xl font-bold text-gray-100 mb-2">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-gray-300 text-sm mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
-
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-100 mb-2">
-                      Key Results:
-                    </h4>
-                    <ul className="space-y-1 text-sm">
-                      {project.results.slice(0, 2).map((res, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-center text-gray-300"
-                        >
-                          <ArrowRight className="h-4 w-4 mr-2 text-[#00A693]" />
-                          {res}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.slice(0, 3).map((tag, idx) => (
-                      <div
-                        key={idx}
-                        className="px-3 font-semibold py-1 rounded-full text-xs border border-[#00A693] text-[#00A693] bg-[#00A693]/10"
-                      >
-                        {tag}
-                      </div>
-                    ))}
-                  </div>
-
-                  <button className="w-full cursor-pointer flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-600 text-gray-200 font-bold hover:bg-[#00A693] hover:text-white hover:border-[#00A693] transition-all duration-300 shadow-sm hover:shadow-[0_6px_20px_rgba(0,166,147,0.35)]">
-                    View Case Study
-                    <ExternalLink className="h-4 w-4" />
-                  </button>
-                </div>
+                <h3 className="relative text-sm sm:text-base md:text-lg font-semibold text-center text-gray-100 transition-colors duration-300 group-hover:text-white">
+                  {name}
+                </h3>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Closing line */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mt-14 text-center"
+        >
+          <p className="text-gray-400 text-sm sm:text-base">
+            Don't see your industry? We work with local service businesses of
+            every kind.
+          </p>
+          <Link
+            to="/services"
+            className="mt-5 inline-flex items-center gap-2 rounded-xl border border-[#00A693] px-6 py-3 font-semibold text-[#00A693] transition-all duration-300 hover:bg-[#00A693] hover:text-white hover:shadow-[0_6px_20px_rgba(0,166,147,0.35)]"
+          >
+            Explore Our Services <ArrowRight className="h-4 w-4" />
+          </Link>
+        </motion.div>
       </div>
     </section>
 
