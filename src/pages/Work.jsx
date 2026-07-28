@@ -13,6 +13,7 @@ import {
   HeartPulse,
   Trash2,
   Building2,
+  Sparkles,
 } from "lucide-react";
 import { useCountUp } from "../hooks/counte";
 import { useRef } from "react";
@@ -32,6 +33,7 @@ const industries = [
   { name: "Assisted Living", icon: <HeartPulse className={iconClass} strokeWidth={1.75} /> },
   { name: "Junk Removal", icon: <Trash2 className={iconClass} strokeWidth={1.75} /> },
   { name: "Real Estate", icon: <Building2 className={iconClass} strokeWidth={1.75} /> },
+  { name: "Auto Detailing", icon: <Sparkles className={iconClass} strokeWidth={1.75} /> },
 ];
 
 const gridContainer = {
