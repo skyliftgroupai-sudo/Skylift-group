@@ -15,8 +15,9 @@
   <link rel="preload" as="image" href="/assets/bg-hero.webp" fetchpriority="high" />
 
 
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://www.skyliftgroup.com/" />
+  <!-- Canonical URL is set per-page at runtime by the useSeo hook (src/hooks/useSeo.jsx).
+       Do NOT hardcode a homepage canonical here — it makes Google treat every route as a
+       duplicate of the homepage and suppresses indexing of all other pages. -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="V3qPjcDtjrSsBQu1t4pWiYQbJGDqd9zEWI5JM9nclhw" />
