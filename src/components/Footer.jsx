@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Linkedin, Instagram, Mail, MapPin, PhoneCall } from "lucide-react";
+import { Facebook, Linkedin, Mail, MapPin, PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const Footer = () => {
 
   const socialLinks = [
-    { icon: Facebook, label: "Facebook", to: "/" },
-    { icon: Twitter, label: "Twitter", to: "/" },
-    { icon: Linkedin, label: "LinkedIn", to: "/" },
-    { icon: Instagram, label: "Instagram", to: "/" },
+    { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/share/199LNKDqTT/" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/sky-lift-group/" },
   ];
 
   return (
@@ -150,10 +148,12 @@ export const Footer = () => {
         >
           <h3 className="mb-4 font-bold text-lg text-white">Follow Us</h3>
           <div className="flex gap-4 mt-2">
-            {socialLinks.map(({ icon: Icon, label, to }, idx) => (
-              <Link
+            {socialLinks.map(({ icon: Icon, label, href }, idx) => (
+              <a
                 key={idx}
-                to={to}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={label}
                 className="
         w-10 h-10 flex items-center justify-center
@@ -164,7 +164,7 @@ export const Footer = () => {
       "
               >
                 <Icon className="w-5 h-5" aria-hidden="true" />
-              </Link>
+              </a>
             ))}
           </div>
         </motion.div>
