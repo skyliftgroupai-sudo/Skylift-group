@@ -11,12 +11,12 @@ import FAQSection from "./Faq";
 import Counter from "./Counter";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
 
 
 const Home = () => {
 
-  useSeo(pageSeo("/"));
+  useSeo(seoFor("/"));
 
   return (
     <div className="flex flex-col">

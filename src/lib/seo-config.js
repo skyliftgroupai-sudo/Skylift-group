@@ -21,12 +21,12 @@ export const routeSeo = {
       "Sky Lift Group helps home service businesses get more leads with AI chatbots, missed-call text back, SMS marketing, ads, and local SEO. Book a free call.",
   },
   "/about-us": {
-    title: "About Sky Lift Group | AI Marketing for Home Services",
+    title: "About Our AI Marketing Agency | Sky Lift Group",
     description:
       "Sky Lift Group is an AI automation and marketing agency for home service businesses. Meet the team and see how we turn missed leads into booked jobs.",
   },
   "/services": {
-    title: "Services | Sky Lift Group AI Marketing Agency",
+    title: "AI Marketing Services for Contractors | Sky Lift Group",
     description:
       "AI chatbots, missed-call text back, SMS marketing, lead capture, Google Ads, and local SEO built for HVAC, plumbing, and roofing companies.",
   },
@@ -36,12 +36,12 @@ export const routeSeo = {
       "AI marketing and automation for roofing, plumbing, HVAC, electrical, junk removal, spray foam, and general contracting businesses across the US.",
   },
   "/blog": {
-    title: "Blog | AI Marketing & Local SEO Tips | Sky Lift Group",
+    title: "AI Marketing & Local SEO Blog | Sky Lift Group",
     description:
       "Practical guides on SMS marketing, local SEO, Google Business Profile, AI lead capture, and automation for home service business owners.",
   },
   "/contact": {
-    title: "Contact Sky Lift Group | Free Marketing Consultation",
+    title: "Contact Us for a Free Strategy Call | Sky Lift Group",
     description:
       "Talk to Sky Lift Group about growing your home service business with AI automation and marketing. Free strategy consultation, no pressure.",
   },
@@ -141,7 +141,7 @@ export const routeSeo = {
       "The terms that apply when you use the Sky Lift Group website and services.",
   },
   "/faq": {
-    title: "FAQ | AI Marketing for Home Services | Sky Lift Group",
+    title: "AI Marketing FAQ for Home Services | Sky Lift Group",
     description:
       "Answers to common questions about AI chatbots, missed-call text back, SMS marketing, ads, and pricing for home service businesses.",
   },

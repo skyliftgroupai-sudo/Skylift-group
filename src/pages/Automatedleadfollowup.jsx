@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -41,31 +42,15 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "What is automated lead follow-up?",
-        a: "It's a system that automatically nurtures and engages leads through email, SMS, and other channels based on their behavior, ensuring no prospect is forgotten and every lead gets timely attention.",
-    },
-    {
-        q: "How quickly will leads start receiving follow-ups?",
-        a: "Follow-ups can be triggered instantly the moment a lead comes in, with sequences continuing over days or weeks based on the strategy we design for your business.",
-    },
-    {
-        q: "Can the system integrate with my existing CRM?",
-        a: "Yes. Our automation seamlessly integrates with most major CRMs and marketing platforms, ensuring smooth data flow and a unified view of every lead.",
-    },
-    {
-        q: "What kind of results can I expect?",
-        a: "Most clients see a significant lift in lead-to-customer conversion rates within the first 30 to 60 days, along with reduced manual workload and faster sales cycles.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/lead-follow-up"];
 
 
 const AutomatedLeadFollowUp = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/lead-follow-up"));
+    useSeo(seoFor("/services/lead-follow-up"));
 
 
     return (

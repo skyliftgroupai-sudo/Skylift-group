@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -42,31 +43,15 @@ const services = [
 ];
 
 
-const faqs = [
-    {
-        q: "Which platforms do your TikTok Ads run on?",
-        a: "Our TikTok Ads run on TikTok feeds, stories, and in-feed video placements to maximize reach and engagement.",
-    },
-    {
-        q: "Do you handle ad creatives and copy?",
-        a: "Yes. We create engaging TikTok videos, captions, and multiple variations to test and improve campaign performance.",
-    },
-    {
-        q: "How do you track conversions and results?",
-        a: "We set up TikTok Pixel, conversion events, and detailed analytics to track leads, purchases, and ROI accurately.",
-    },
-    {
-        q: "How long does it take to see results?",
-        a: "Most campaigns generate insights within 2–3 weeks, with optimization improving engagement and conversions over time.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/tiktok-ads"];
 
 
 const TikTokdas = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/tiktok-ads"));
+    useSeo(seoFor("/services/tiktok-ads"));
 
 
     return (

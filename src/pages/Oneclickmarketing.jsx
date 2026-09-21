@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -41,31 +42,15 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "What are one click marketing campaigns?",
-        a: "They are pre-built, fully automated marketing campaigns you can launch instantly with a single click. We design the strategy, content, and targeting so you can deploy professional campaigns in seconds.",
-    },
-    {
-        q: "Which channels do these campaigns cover?",
-        a: "Our one click campaigns can be deployed across email, SMS, WhatsApp, social media, and other channels simultaneously, ensuring maximum reach with minimal effort.",
-    },
-    {
-        q: "Can I customize the campaigns for my brand?",
-        a: "Absolutely. Every template is fully customizable with your branding, voice, and specific offers, so each campaign feels uniquely yours while still launching in just one click.",
-    },
-    {
-        q: "How quickly can I see results?",
-        a: "Most clients see engagement within hours of launching a campaign, with measurable conversions and ROI typically visible within the first week of deployment.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/one-click-campaigns"];
 
 
 const OneClickMarketing = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/one-click-campaigns"));
+    useSeo(seoFor("/services/one-click-campaigns"));
 
 
     return (

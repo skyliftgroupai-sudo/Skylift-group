@@ -48,7 +48,14 @@ for (const file of files) {
     .replace(/<script[\s\S]*?<\/script>/gi, "")
     .replace(/<style[\s\S]*?<\/style>/gi, "")
     .replace(/<[^>]+>/g, " ")
-    .replace(/&[a-z]+;/gi, " ")
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&nbsp;/g, " ")
     .replace(/\s+/g, " ")
     .trim();
   const words = text ? text.split(" ").length : 0;
@@ -58,21 +65,69 @@ for (const file of files) {
 
   const ld = [...head.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
   const ldTypes = [];
+  const declaredIds = new Set();
+  const referencedIds = new Set();
+  const faqPairs = [];
+
   ld.forEach((raw, i) => {
+    let parsed;
     try {
-      const parsed = JSON.parse(raw.replace(/\\u003c/g, "<"));
-      const walk = (n) => {
-        if (!n || typeof n !== "object") return;
-        if (Array.isArray(n)) return n.forEach(walk);
-        if (n["@type"]) ldTypes.push([].concat(n["@type"]).join("/"));
-        if (n["@graph"]) walk(n["@graph"]);
-      };
-      walk(parsed);
-      if (!parsed["@context"]) add("CRITICAL", route, `JSON-LD block ${i} has no @context`);
+      parsed = JSON.parse(raw.replace(/\\u003c/g, "<"));
     } catch (e) {
       add("CRITICAL", route, `JSON-LD block ${i} is not valid JSON: ${e.message}`);
+      return;
     }
+    if (!parsed["@context"]) add("CRITICAL", route, `JSON-LD block ${i} has no @context`);
+
+    const walk = (n, parentKey) => {
+      if (!n || typeof n !== "object") return;
+      if (Array.isArray(n)) return n.forEach((x) => walk(x, parentKey));
+
+      const keys = Object.keys(n);
+      // { "@id": "..." } on its own is a reference to a node defined elsewhere.
+      if (keys.length === 1 && keys[0] === "@id") {
+        referencedIds.add(n["@id"]);
+        return;
+      }
+      if (n["@type"]) {
+        if (parentKey === "@graph" || parentKey === "@root") {
+          ldTypes.push([].concat(n["@type"]).join("/"));
+        }
+        if (n["@id"]) declaredIds.add(n["@id"]);
+      }
+      if (n["@type"] === "Question") {
+        faqPairs.push({ q: n.name, a: n.acceptedAnswer && n.acceptedAnswer.text });
+      }
+      for (const [k, v] of Object.entries(n)) walk(v, k === "@graph" ? "@graph" : k);
+    };
+    walk(parsed, "@root");
   });
+
+  // Duplicate @type in one page's graph means the same entity described twice.
+  const typeCounts = ldTypes.reduce((a, t) => ((a[t] = (a[t] || 0) + 1), a), {});
+  for (const [t, n] of Object.entries(typeCounts)) {
+    if (n > 1 && ["Organization", "WebSite", "ProfessionalService", "FAQPage", "BreadcrumbList", "BlogPosting"].includes(t)) {
+      add("CRITICAL", route, `schema declares ${n} ${t} nodes — duplicate entity definitions conflict`);
+    }
+  }
+
+  // An @id that is referenced but never defined is a dangling pointer.
+  for (const id of referencedIds) {
+    if (!declaredIds.has(id)) add("HIGH", route, `schema references @id ${id} which no node on this page defines`);
+  }
+
+  // Google requires FAQ schema to describe text the visitor can actually see.
+  const visibleText = text.replace(/\s+/g, " ");
+  for (const pair of faqPairs) {
+    if (!pair.q || !pair.a) {
+      add("CRITICAL", route, `FAQ schema entry is missing a question or answer`);
+      continue;
+    }
+    const needle = pair.a.replace(/\s+/g, " ").slice(0, 60);
+    if (needle && !visibleText.includes(needle)) {
+      add("CRITICAL", route, `FAQ schema answer is not visible on the page: "${pair.q}"`);
+    }
+  }
 
   pages.push({ route, title, desc, canonical, robots, h1s, h2s, words, imgs, links, ldTypes });
 }

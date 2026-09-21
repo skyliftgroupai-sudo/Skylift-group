@@ -153,12 +153,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
 import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
 
 const PrivacyPolicy = () => {
-    useSeo(pageSeo("/privacy-policy"));
+    useSeo(seoFor("/privacy-policy"));
 
     return (
         <section className="relative py-20 bg-[#0a0a0a] overflow-hidden">

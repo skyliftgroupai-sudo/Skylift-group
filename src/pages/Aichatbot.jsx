@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -41,31 +42,15 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "What is an AI chatbot?",
-        a: "An AI chatbot is an intelligent virtual assistant that uses artificial intelligence to chat with website visitors and customers, answer questions, capture leads, and provide support automatically.",
-    },
-    {
-        q: "Where can I deploy an AI chatbot?",
-        a: "Our AI chatbots can be deployed on your website, WhatsApp, Facebook Messenger, Instagram, Telegram, and most other messaging platforms, providing consistent support across every channel.",
-    },
-    {
-        q: "Will the chatbot understand my business?",
-        a: "Yes. We train your chatbot on your specific business information, FAQs, products, and brand voice, ensuring it provides accurate and on-brand responses to every customer.",
-    },
-    {
-        q: "How much does an AI chatbot save me?",
-        a: "Most businesses cut customer support costs by 40 to 60 percent while handling 3 to 5 times more conversations, improving customer satisfaction and freeing up staff for higher-value tasks.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/ai-chatbots"];
 
 
 const AIChatbot = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/ai-chatbots"));
+    useSeo(seoFor("/services/ai-chatbots"));
 
 
     return (

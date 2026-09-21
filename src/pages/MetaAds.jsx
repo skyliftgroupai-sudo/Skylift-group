@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -42,31 +43,15 @@ const services = [
 ];
 
 
-const faqs = [
-    {
-        q: "Which platforms do your Meta Ads run on?",
-        a: "Our Meta Ads run across Facebook, Instagram, Messenger, and Meta Audience Network to maximize reach and performance.",
-    },
-    {
-        q: "Do you handle ad creatives and copy?",
-        a: "Yes. We design visuals, write ad copy, and create multiple variations to test and improve performance.",
-    },
-    {
-        q: "How do you track conversions and results?",
-        a: "We set up Meta Pixel, event tracking, and conversion funnels to measure leads, purchases, and ROI accurately.",
-    },
-    {
-        q: "How long does it take to see results?",
-        a: "Most campaigns start generating insights within the first 2–3 weeks, with consistent optimization improving results over time.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/meta-ads"];
 
 
 const MetaAds = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/meta-ads"));
+    useSeo(seoFor("/services/meta-ads"));
 
 
     return (

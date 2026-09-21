@@ -3,45 +3,16 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const Faq = () => {
     const [active, setActive] = useState(null);
 
-    const faqs = [
-        {
-            question: "What services does Sky Lift Group provide?",
-            answer:
-                "We provide AI chatbots, AI voice agents, workflow automation, SEO, PPC advertising, social media management, and high-converting web design solutions."
-        },
-        {
-            question: "How do AI chatbots help my business?",
-            answer:
-                "AI chatbots automate customer support, capture leads 24/7, answer queries instantly, and improve user engagement without increasing staffing costs."
-        },
-        {
-            question: "What is an AI Work Agent?",
-            answer:
-                "An AI Work Agent automates repetitive business processes like follow-ups, scheduling, CRM updates, and workflow management to improve efficiency."
-        },
-        {
-            question: "Do you offer custom automation solutions?",
-            answer:
-                "Yes. We build tailored AI automation systems based on your business goals, tools, and operational structure."
-        },
-        {
-            question: "How long does it take to see marketing results?",
-            answer:
-                "SEO results typically take 2–4 months, while PPC and paid campaigns can generate results immediately depending on budget and targeting."
-        },
-        {
-            question: "Is my business data secure?",
-            answer:
-                "Absolutely. We implement secure hosting, encryption, and privacy-first AI architecture to protect your business and customer data."
-        }
-    ];
+    // Shared with the FAQPage schema for this route — see src/lib/service-faqs.js.
+    const faqs = routeFaqs["/faq"];
 
-    useSeo(pageSeo("/faq"));
+    useSeo(seoFor("/faq"));
 
     return (
         <section className="relative py-28 bg-[#0a0a0a] overflow-hidden">
@@ -95,7 +66,7 @@ const Faq = () => {
                                 aria-controls={`faq-answer-${index}`}
                             >
                                 <h2 className="text-lg font-semibold text-white">
-                                    {faq.question}
+                                    {faq.q}
                                 </h2>
 
                                 <ChevronDown
@@ -116,7 +87,7 @@ const Faq = () => {
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                             >
-                                <p className="px-6 pb-6 text-gray-400">{faq.answer}</p>
+                                <p className="px-6 pb-6 text-gray-400">{faq.a}</p>
                             </motion.div>
                         </motion.div>
                     ))}

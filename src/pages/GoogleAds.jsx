@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -41,31 +42,15 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "Where do your Google Ads run?",
-        a: "Our campaigns appear on Google Search, Display Network, YouTube, Gmail, and Discovery placements, reaching users when they’re most engaged.",
-    },
-    {
-        q: "Do you create ad copy and visuals?",
-        a: "Absolutely. We craft attention-grabbing copy, responsive ads, and visual creatives tailored to your audience to drive action.",
-    },
-    {
-        q: "How do you measure performance?",
-        a: "We implement Google Ads conversion tracking, Analytics, and event tracking to monitor clicks, leads, and revenue precisely.",
-    },
-    {
-        q: "When can I expect results?",
-        a: "Insights usually appear within 2–3 weeks, and continuous optimization ensures improved performance over time.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/google-ads"];
 
 
 const Googleads = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/google-ads"));
+    useSeo(seoFor("/services/google-ads"));
 
 
     return (

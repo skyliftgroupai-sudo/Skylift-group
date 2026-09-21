@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -41,31 +42,15 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "How do your services deliver 5-star results?",
-        a: "We combine data-driven strategies, premium ad creative, and continuous optimization to ensure measurable results and high client satisfaction.",
-    },
-    {
-        q: "Do you handle ad creatives and copy?",
-        a: "Yes. Every ad we create is designed to convert, backed by best practices and client feedback to maintain our 5-star reputation.",
-    },
-    {
-        q: "How is performance tracked?",
-        a: "With Google Ads conversion tracking, Analytics, and event monitoring, every click, lead, and sale is accurately measured for transparent reporting.",
-    },
-    {
-        q: "How soon can I expect results?",
-        a: "Most campaigns deliver insights within 2–3 weeks, with ongoing optimization to ensure top-tier results and client satisfaction.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/reviews"];
 
 
 const FivestarReviews = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/reviews"));
+    useSeo(seoFor("/services/reviews"));
 
 
     return (

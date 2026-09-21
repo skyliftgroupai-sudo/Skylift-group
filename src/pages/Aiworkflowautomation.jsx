@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -41,31 +42,15 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "What is AI workflow automation?",
-        a: "AI workflow automation uses artificial intelligence to handle repetitive tasks, connect systems, and execute business processes automatically, saving time and reducing human error.",
-    },
-    {
-        q: "Which tasks can be automated with AI?",
-        a: "Almost any repetitive task including data entry, email responses, lead routing, scheduling, document processing, customer onboarding, and reporting can be fully automated using AI.",
-    },
-    {
-        q: "How long does setup take?",
-        a: "Most AI workflows are designed and deployed within 2 to 4 weeks, depending on complexity. We work closely with you to ensure smooth integration with your existing tools.",
-    },
-    {
-        q: "Will AI replace my employees?",
-        a: "No. AI workflow automation handles repetitive, time-consuming tasks so your team can focus on creative, strategic, and customer-facing work that drives real business value.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/ai-workflows"];
 
 
 const AIWorkflowAutomation = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/ai-workflows"));
+    useSeo(seoFor("/services/ai-workflows"));
 
 
     return (

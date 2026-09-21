@@ -52,50 +52,11 @@
     content="Sky Lift Group helps home service businesses get more leads with AI chatbots, missed-call text back, SMS marketing, ads, and local SEO." />
   <meta name="twitter:image" content="https://www.skyliftgroup.com/og-image.png" />
 
-  <!-- Site-wide Organization + WebSite schema.
-       "name" is the brand Google should associate with the site and must match
-       the H1, the About page, the footer and every directory profile character
-       for character. It previously read "Skylift Group", which is the spelling
-       that collides with unrelated lift-equipment companies in search results.
-       "legalName" is the registered entity, Sky Lift LLC, which is deliberately
-       different from the brand — that is what legalName is for. -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://www.skyliftgroup.com/#organization",
-          "name": "Sky Lift Group",
-          "legalName": "Sky Lift LLC",
-          "alternateName": "Sky Lift",
-          "description": "Sky Lift Group is an AI automation and marketing agency for home service businesses, providing AI chatbots, missed-call text back, SMS marketing, lead capture, ads, and local SEO.",
-          "url": "https://www.skyliftgroup.com",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.skyliftgroup.com/assets/sky-lift-logo.webp"
-          },
-          "email": "hello@skyliftgroup.com",
-          "areaServed": {
-            "@type": "Country",
-            "name": "United States"
-          },
-          "sameAs": [
-            "https://www.facebook.com/share/199LNKDqTT/",
-            "https://www.linkedin.com/company/sky-lift-group/"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://www.skyliftgroup.com/#website",
-          "url": "https://www.skyliftgroup.com",
-          "name": "Sky Lift Group",
-          "publisher": { "@id": "https://www.skyliftgroup.com/#organization" },
-          "inLanguage": "en-US"
-        }
-      ]
-    }
-  </script>
+  <!-- No JSON-LD here on purpose. Every block is built in src/lib/schema.js and
+       baked into each page by scripts/prerender.mjs as a single @graph, so the
+       Organization entity has exactly one definition per page and @id references
+       always resolve. A second hardcoded copy here would duplicate it. -->
+
 
   <title>Sky Lift Group</title>
 </head>

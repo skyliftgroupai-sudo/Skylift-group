@@ -2,10 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
 
 const Schedule = () => {
-  useSeo(pageSeo("/book"));
+  useSeo(seoFor("/book"));
 
   return (
     <section

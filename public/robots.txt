@@ -50,3 +50,6 @@ User-agent: meta-externalagent
 Allow: /
 
 Sitemap: https://www.skyliftgroup.com/sitemap.xml
+
+# Plain-language description of the business, its services and key URLs,
+# for AI assistants that read it: https://www.skyliftgroup.com/llms.txt

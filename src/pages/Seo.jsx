@@ -14,7 +14,8 @@ import SliderBar from "./Sliderbar";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -50,30 +51,14 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "How long does SEO take to show results?",
-        a: "SEO is a long-term strategy. You can typically see improvements within 3-6 months depending on competition.",
-    },
-    {
-        q: "Do you provide monthly reports?",
-        a: "Yes, we deliver detailed monthly reports covering rankings, traffic, and progress.",
-    },
-    {
-        q: "Can you help with local SEO?",
-        a: "Absolutely. We optimize Google Business Profile, local keywords, and maps visibility for your business.",
-    },
-    {
-        q: "Do you offer SEO for e-commerce websites?",
-        a: "Yes. We optimize product pages, category pages, and integrate structured data to improve search visibility.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/seo"];
 
 const Seo = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/seo"));
+    useSeo(seoFor("/services/seo"));
 
     return (
         <div className="w-full">

@@ -14,7 +14,8 @@ import SliderBar from "./Sliderbar";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 
 const services = [
@@ -51,24 +52,8 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "What is the typical development timeline?",
-        a: "The timeline varies based on complexity, but most projects are completed within 1–4 weeks.",
-    },
-    {
-        q: "Do you offer post-launch support?",
-        a: "Yes. We provide maintenance plans that include updates, monitoring, and security enhancements.",
-    },
-    {
-        q: "Will my website be optimized for SEO?",
-        a: "Yes. Every site is developed with modern SEO structure, clean markup, and fast performance.",
-    },
-    {
-        q: "Can you develop advanced or custom features?",
-        a: "Yes. We build custom modules, integrations, and tailored functionality based on your goals.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/web-design"];
 
 const Designweb = () => {
 
@@ -78,7 +63,7 @@ const Designweb = () => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
-    useSeo(pageSeo("/services/web-design"));
+    useSeo(seoFor("/services/web-design"));
 
     return (
         <div className="w-full">

@@ -19,7 +19,7 @@ import { useCountUp } from "../hooks/counte";
 import { useRef } from "react";
 import CTASection from "./CtaSection";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
 
 const iconClass = "h-8 w-8";
 const industries = [
@@ -59,7 +59,7 @@ const Work = () => {
     { value: 95, suffix: "%", label: "Client Retention" }
   ];
 
-  useSeo(pageSeo("/work"));
+  useSeo(seoFor("/work"));
 
 return (
   <div className="flex flex-col bg-[#0a0a0a] text-gray-100"> {/* main background and text color */}

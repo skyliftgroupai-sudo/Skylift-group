@@ -6,7 +6,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -42,30 +43,14 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "Which platforms do you manage?",
-        a: "We manage Facebook, Instagram, LinkedIn, Twitter, TikTok, and YouTube depending on your target audience.",
-    },
-    {
-        q: "Do you create content for our social accounts?",
-        a: "Yes, we provide graphics, videos, stories, and captions tailored to your brand voice.",
-    },
-    {
-        q: "Do you run paid ad campaigns?",
-        a: "Absolutely. We create, monitor, and optimize ad campaigns to maximize ROI and conversions.",
-    },
-    {
-        q: "Will I get performance reports?",
-        a: "Yes, detailed monthly reports show audience growth, engagement, reach, and ad performance.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/social-media"];
 
 const SocialMediaMarketing = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/social-media"));
+    useSeo(seoFor("/services/social-media"));
 
     return (
         <div className="w-full">

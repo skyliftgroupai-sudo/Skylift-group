@@ -6,7 +6,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -42,30 +43,14 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "How long does Local SEO take to show results?",
-        a: "Local SEO typically shows measurable improvements within 2-4 months, depending on competition and location.",
-    },
-    {
-        q: "Do you optimize for both Google and Apple Maps?",
-        a: "Yes, we ensure your business is accurately listed and visible on both Google Maps and Apple Maps.",
-    },
-    {
-        q: "Can you help with local reviews and reputation management?",
-        a: "Absolutely. We monitor reviews, respond professionally, and implement strategies to improve your ratings.",
-    },
-    {
-        q: "Do you provide local SEO performance reports?",
-        a: "Yes, detailed monthly reports track visibility, traffic, keyword rankings, and map impressions.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/local-maps"];
 
 const LocalMapOptimization = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/local-maps"));
+    useSeo(seoFor("/services/local-maps"));
 
     return (
         <div className="w-full">

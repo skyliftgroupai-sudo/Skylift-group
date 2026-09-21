@@ -6,7 +6,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -42,30 +43,14 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "Do you provide SEO-optimized content?",
-        a: "Yes, all content is written with SEO best practices in mind to improve search engine visibility.",
-    },
-    {
-        q: "Can you handle social media content?",
-        a: "Absolutely, we create posts, captions, and graphics tailored to your social media platforms.",
-    },
-    {
-        q: "Do you offer content strategy services?",
-        a: "Yes, we help plan and structure content to align with your marketing goals and audience needs.",
-    },
-    {
-        q: "How do you ensure content quality?",
-        a: "Our team of professional writers researches thoroughly and edits rigorously to maintain high-quality standards.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/content-writing"];
 
 const ContentWritingServices = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/content-writing"));
+    useSeo(seoFor("/services/content-writing"));
 
     return (
         <div className="w-full">

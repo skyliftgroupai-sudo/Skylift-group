@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -41,31 +42,15 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "What are AI voice agents?",
-        a: "AI voice agents are intelligent virtual assistants that can make and receive phone calls, hold natural conversations, qualify leads, book appointments, and provide customer support automatically.",
-    },
-    {
-        q: "How human do AI voice agents sound?",
-        a: "Modern AI voice agents sound remarkably human, with natural intonation, pauses, and emotional cues. Most callers cannot distinguish them from a real human representative.",
-    },
-    {
-        q: "Can AI voice agents handle complex conversations?",
-        a: "Yes. Our AI agents are trained to handle complex multi-step conversations, answer specific questions about your business, and intelligently transfer calls to human staff when needed.",
-    },
-    {
-        q: "How much can I save with AI voice agents?",
-        a: "Most clients reduce call center costs by 50 to 70 percent while increasing call answer rates to nearly 100 percent, ensuring no lead or customer inquiry goes unanswered.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/ai-voice-agents"];
 
 
 const AIVoiceAgents = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/ai-voice-agents"));
+    useSeo(seoFor("/services/ai-voice-agents"));
 
 
     return (

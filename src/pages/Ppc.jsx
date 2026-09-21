@@ -6,7 +6,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
     {
@@ -42,30 +43,14 @@ const services = [
     },
 ];
 
-const faqs = [
-    {
-        q: "Which platforms do you manage PPC campaigns on?",
-        a: "We run campaigns on Google Ads, Microsoft Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, and more depending on your audience.",
-    },
-    {
-        q: "Do you handle ad creation and creatives?",
-        a: "Yes, we create ad copies, banners, videos, and other creatives to boost engagement and conversions.",
-    },
-    {
-        q: "Can you optimize campaigns for better ROI?",
-        a: "Absolutely. We continuously monitor, adjust bids, and optimize targeting to maximize results.",
-    },
-    {
-        q: "Do you provide reports for PPC campaigns?",
-        a: "Yes, detailed performance reports track clicks, conversions, costs, and ROI to help you make informed decisions.",
-    },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/ppc-management"];
 
 const PPCManagement = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo(pageSeo("/services/ppc-management"));
+    useSeo(seoFor("/services/ppc-management"));
 
     return (
         <div className="w-full">

@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
-import { getAllPosts, SITE_URL } from "../lib/posts";
+import { seoFor } from "../lib/schema";
+import { getAllPosts } from "../lib/posts";
 
 function formatDate(iso) {
   // Parse as a local date to avoid the UTC-midnight off-by-one day shift.
@@ -20,23 +20,7 @@ const Blog = () => {
   const posts = getAllPosts();
   const [featured, ...rest] = posts;
 
-  useSeo(
-    pageSeo("/blog", {
-      jsonLd: {
-        "@context": "https://schema.org",
-        "@type": "Blog",
-        name: "Sky Lift Group Blog",
-        url: `${SITE_URL}/blog`,
-        description:
-          "Practical guides on SMS marketing, local SEO, Google Business Profile, AI lead capture, and automation for home service business owners.",
-        publisher: {
-          "@type": "Organization",
-          name: "Sky Lift Group",
-          url: SITE_URL,
-        },
-      },
-    })
-  );
+  useSeo(seoFor("/blog"));
 
   return (
     <div className="w-full bg-[#0a0a0a] text-gray-100">

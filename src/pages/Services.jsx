@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
 import OurService from "./OurServices";
 import CTASection from "./CtaSection";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 export default function ServicesAttractive() {
 
-  useSeo(pageSeo("/services"));
+  useSeo(seoFor("/services"));
 
 
   useEffect(() => {

@@ -5,12 +5,12 @@ import CTASection from "./CtaSection";
 import SliderBar from "./Sliderbar";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
 import CeoMessage from "../components/CEO";
 
 export default function AboutUs() {
 
-    useSeo(pageSeo("/about-us"));
+    useSeo(seoFor("/about-us"));
 
     return (
         <div className="w-full overflow-hidden bg-[#0a0a0a]">
@@ -35,7 +35,7 @@ export default function AboutUs() {
                     transition={{ duration: 1 }}
                     className="relative text-white text-lg md:text-xl mt-4 text-center max-w-xl"
                 >
-                    Helping brands rise with creativity, strategy and measurable growth.
+                    We build the AI lead capture, follow-up and advertising systems that turn a home service business’s missed calls and cold leads into booked jobs.
                 </motion.p>
             </section>
             {/* <SliderBar /> */}

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Facebook, Linkedin, Mail, MapPin, PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
+import { ORG_DESCRIPTION } from "../lib/schema";
 
 export const Footer = () => {
 
@@ -36,7 +37,7 @@ export const Footer = () => {
             </Link>
           </div>
           <p className="text-gray-300 text-md font-medium leading-relaxed">
-            Empowering businesses through AI-driven digital marketing strategies that deliver clear, measurable results.
+            {ORG_DESCRIPTION}
           </p>
         </motion.div>
 

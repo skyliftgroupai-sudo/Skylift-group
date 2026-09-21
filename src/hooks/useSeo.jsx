@@ -67,13 +67,19 @@ export default function useSeo({
             setMetaByName("twitter:card", "summary_large_image");
         }
 
-        // Inject page-specific JSON-LD, tagged so we can clean it up on unmount
-        // and never collide with the site-wide Organization schema in index.html.
+        // The prerenderer already baked this route's JSON-LD into the HTML and
+        // tagged it data-seo-jsonld. Only clear it when there is a replacement
+        // graph to put in its place: a page that passes no jsonLd must keep the
+        // prerendered block, or hydration would strip the schema out of the DOM
+        // that Google's renderer sees.
+        const blocks = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean);
         const injected = [];
-        if (jsonLd) {
-            const blocks = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+
+        if (blocks.length) {
+            document
+                .querySelectorAll("script[data-seo-jsonld]")
+                .forEach((el) => el.remove());
             for (const block of blocks) {
-                if (!block) continue;
                 const script = document.createElement("script");
                 script.type = "application/ld+json";
                 script.setAttribute("data-seo-jsonld", "true");

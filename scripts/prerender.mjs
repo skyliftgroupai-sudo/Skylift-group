@@ -23,7 +23,8 @@ import { dirname, join } from "node:path";
 import { createElement } from "react";
 import { prerender } from "react-dom/static";
 import { staticRoutes } from "./seo-routes.js";
-import { parseFrontmatter } from "../src/lib/frontmatter.js";
+import { parseFrontmatter, extractFaqs } from "../src/lib/frontmatter.js";
+import { schemaForRoute, blogPostingSchema } from "../src/lib/schema.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -70,13 +71,16 @@ async function renderRoute(url) {
 }
 
 function jsonLdScript(blocks) {
-  const list = blocks.filter(Boolean);
+  // schemaForRoute returns one @graph object; accept either that or an array.
+  const list = (Array.isArray(blocks) ? blocks : [blocks]).filter(Boolean);
   if (!list.length) return "";
   // Escaped so a "</script>" inside any string value cannot break out of the tag.
   return list
     .map(
       (b) =>
-        `<script type="application/ld+json">${JSON.stringify(b).replace(
+        // data-seo-jsonld lets useSeo replace this block on client-side
+        // navigation instead of appending a second, stale one.
+        `<script type="application/ld+json" data-seo-jsonld="true">${JSON.stringify(b).replace(
           /</g,
           "\\u003c"
         )}</script>`
@@ -84,7 +88,7 @@ function jsonLdScript(blocks) {
     .join("\n  ");
 }
 
-function buildHtml({ path, title, description, image, noindex = false, body = "", jsonLd = [] }) {
+function buildHtml({ path, title, description, image, noindex = false, body = "", jsonLd = null }) {
   const url = `${SITE}${path === "/" ? "/" : path}`;
   const og = image ? (image.startsWith("http") ? image : `${SITE}${image}`) : DEFAULT_OG;
   let html = template;
@@ -180,6 +184,7 @@ let emptyBodies = [];
 
 async function emit(path, meta) {
   const body = await renderRoute(path);
+  meta = { jsonLd: schemaForRoute(path), ...meta };
   // A route that renders to almost nothing means the static render silently
   // failed. Better to know at build time than to ship another blank page.
   if (body.replace(/<[^>]+>/g, "").trim().length < 200 && !meta.noindex) {
@@ -216,10 +221,21 @@ if (existsSync(blogDir)) {
   for (const file of readdirSync(blogDir).filter((f) => f.endsWith(".md"))) {
     const { data } = parseFrontmatter(readFileSync(join(blogDir, file), "utf8"));
     const slug = data.slug || file.replace(/\.md$/, "");
+    const { data: fm, content } = parseFrontmatter(readFileSync(join(blogDir, file), "utf8"));
     await emit(`/blog/${slug}`, {
       title: `${data.seoTitle || data.title || "Blog"} | Sky Lift Group`,
       description: data.description || data.excerpt || "",
       image: data.image,
+      jsonLd: blogPostingSchema({
+        slug,
+        title: fm.title || "",
+        description: fm.description || fm.excerpt || "",
+        image: fm.image,
+        date: fm.date,
+        dateModified: fm.dateModified,
+        tags: Array.isArray(fm.tags) ? fm.tags : [],
+        faqs: extractFaqs(content),
+      }),
     });
   }
 }

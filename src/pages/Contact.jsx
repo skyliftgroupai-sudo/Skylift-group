@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 import SliderBar from "./Sliderbar";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
 
 const Contact = () => {
 
 
-  useSeo(pageSeo("/contact"));
+  useSeo(seoFor("/contact"));
 
 
   return (

@@ -7,6 +7,7 @@ import useSeo from "../hooks/useSeo";
 import NotFound from "../components/Notfound";
 import CTASection from "./CtaSection";
 import { getPostBySlug, getRelatedPosts, SITE_URL } from "../lib/posts";
+import { blogPostingSchema } from "../lib/schema";
 
 function formatDate(iso) {
   // Parse as a local date to avoid the UTC-midnight off-by-one day shift.
@@ -105,57 +106,13 @@ const BlogPostView = ({ post }) => {
   const canonical = `${SITE_URL}/blog/${post.slug}`;
   const related = getRelatedPosts(post.slug, 3);
 
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    image: `${SITE_URL}${post.image}`,
-    datePublished: post.date,
-    dateModified: post.date,
-    author: { "@type": "Organization", name: post.author, url: SITE_URL },
-    publisher: {
-      "@type": "Organization",
-      name: "Sky Lift Group",
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/assets/sky-lift.webp`,
-      },
-    },
-    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
-    keywords: post.tags.join(", "),
-  };
-
-  const faqSchema =
-    post.faqs.length > 0
-      ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: post.faqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
-        }
-      : null;
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-      { "@type": "ListItem", position: 3, name: post.title, item: canonical },
-    ],
-  };
-
   useSeo({
     title: `${post.seoTitle} | Sky Lift Group`,
     description: post.description,
     canonical,
     image: post.image,
     type: "article",
-    jsonLd: [articleSchema, faqSchema, breadcrumbSchema].filter(Boolean),
+    jsonLd: blogPostingSchema(post),
   });
 
   return (

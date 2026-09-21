@@ -5,7 +5,8 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
-import { pageSeo } from "../lib/seo-config";
+import { seoFor } from "../lib/schema";
+import { routeFaqs } from "../lib/service-faqs";
 
 const services = [
   {
@@ -41,31 +42,15 @@ const services = [
   },
 ];
 
-const faqs = [
-  {
-    q: "How does the missed call text-back service work?",
-    a: "When a customer calls and you can't answer, our system instantly sends them a personalized SMS, keeping them engaged and giving you a chance to convert that missed call into a customer.",
-  },
-  {
-    q: "How quickly are text messages sent?",
-    a: "Messages are sent within seconds of a missed call, ensuring your customer receives an immediate response while your business is still fresh in their mind.",
-  },
-  {
-    q: "Can the messages be customized for my business?",
-    a: "Absolutely. We tailor every text-back message to match your brand voice, services, and customer needs to maximize engagement and conversions.",
-  },
-  {
-    q: "Will I lose leads if I'm unavailable?",
-    a: "No. Our automated system ensures every missed call is followed up instantly, so you never lose a potential customer due to being busy or after hours.",
-  },
-];
+// Shared with the FAQPage schema emitted for this route — see src/lib/service-faqs.js.
+const faqs = routeFaqs["/services/missed-call-text-back"];
 
 
 const MissedCall = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-  useSeo(pageSeo("/services/missed-call-text-back"));
+  useSeo(seoFor("/services/missed-call-text-back"));
 
 
   return (
