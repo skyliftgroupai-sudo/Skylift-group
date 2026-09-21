@@ -120,6 +120,16 @@ export const routeSeo = {
     description:
       "AI chatbots that capture and qualify website leads 24/7 for HVAC, plumbing, and roofing companies. See a live demo on a free strategy call.",
   },
+  "/services/database-reactivation": {
+    title: "Database Reactivation Campaigns | Sky Lift Group",
+    description:
+      "Turn past customers into booked jobs. Reactivation campaigns for HVAC and plumbing companies using the list you already own. Book a free call.",
+  },
+  "/services/sms-marketing": {
+    title: "SMS Marketing for Home Services | Sky Lift Group",
+    description:
+      "Text message marketing built for contractors: missed-call replies, appointment reminders, and review requests. A2P 10DLC handled. Book a free call.",
+  },
   "/services/missed-call-text-back": {
     title: "Missed Call Text Back for Home Services | Sky Lift Group",
     description:

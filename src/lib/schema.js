@@ -38,6 +38,8 @@ export const SERVICES = [
   { path: "/services/ai-chatbots", name: "AI Chatbots for Home Service Businesses" },
   { path: "/services/lead-follow-up", name: "AI Lead Capture and Automated Follow-Up" },
   { path: "/services/missed-call-text-back", name: "Missed Call Text Back" },
+  { path: "/services/sms-marketing", name: "SMS and Text Message Marketing for Home Services" },
+  { path: "/services/database-reactivation", name: "Database Reactivation Campaigns for HVAC and Plumbing" },
   { path: "/services/one-click-campaigns", name: "SMS and Email Marketing Campaigns" },
   { path: "/services/ai-voice-agents", name: "AI Voice Agents and Appointment Booking" },
   { path: "/services/ai-workflows", name: "AI Workflow Automation" },

@@ -29,6 +29,8 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsConditions = lazy(() => import("./pages/TermsCondition"));
 const Faq = lazy(() => import("./pages/Faqs"));
 const MissedCall = lazy(() => import("./pages/MissedCall"));
+const SmsMarketing = lazy(() => import("./pages/SmsMarketing"));
+const DatabaseReactivation = lazy(() => import("./pages/DatabaseReactivation"));
 const AutomatedLeadFollowUp = lazy(() => import("./pages/Automatedleadfollowup"));
 const OneClickMarketing = lazy(() => import("./pages/Oneclickmarketing"));
 const AIWorkflowAutomation = lazy(() => import("./pages/Aiworkflowautomation"));
@@ -59,6 +61,8 @@ export const AppRoutes = () => (
       <Route path="/services/ai-workflows" element={<AIWorkflowAutomation />} />
       <Route path="/services/ai-voice-agents" element={<AIVoiceAgents />} />
       <Route path="/services/ai-chatbots" element={<AIChatbot />} />
+      <Route path="/services/sms-marketing" element={<SmsMarketing />} />
+      <Route path="/services/database-reactivation" element={<DatabaseReactivation />} />
       <Route path="/services/missed-call-text-back" element={<MissedCall />} />
       <Route path="/services/lead-follow-up" element={<AutomatedLeadFollowUp />} />
       <Route path="/blog" element={<Blog />} />

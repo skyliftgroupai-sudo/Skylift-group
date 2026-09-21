@@ -330,4 +330,68 @@ export const routeFaqs = {
                   "Absolutely. We implement secure hosting, encryption, and privacy-first AI architecture to protect your business and customer data."
           }
       ],
+  "/services/database-reactivation": [
+      {
+          q: "What is a database reactivation campaign?",
+          a: "It is a structured outreach sequence — usually text and email — sent to past customers who have not booked in a year or more, offering a specific, timely reason to come back such as a seasonal tune-up. Because these people already know and trust you, it is normally the fastest source of booked jobs available to a contractor with an existing customer list.",
+      },
+      {
+          q: "How big does my customer list need to be?",
+          a: "A few hundred past customers is enough to be worth running. Smaller lists still work but produce fewer jobs in absolute terms. What matters more than size is how recent and how complete the records are — a list with phone numbers and service history outperforms a larger list of names and emails alone.",
+      },
+      {
+          q: "Can I text past customers who never opted in to marketing?",
+          a: "Not automatically. Past customers gave you their number for service, which is not the same as consent to marketing messages. We check what consent exists, suppress anyone who opted out, and structure the campaign to stay within US texting rules. This is not legal advice and you should confirm your obligations with counsel.",
+      },
+      {
+          q: "How soon will I see booked jobs?",
+          a: "Reactivation is the fastest channel we run because the audience already knows you. Most campaigns produce replies within hours of the first batch going out. Whether those replies become booked jobs depends on how quickly someone answers them, which is why we set up the reply inbox and booking handoff before sending.",
+      },
+      {
+          q: "What data do you need from my CRM?",
+          a: "Name, phone, email where you have it, the service performed and the date. Most field service platforms export this in a few clicks. If your records live in spreadsheets or somewhere less structured, we can work with that too.",
+      },
+      {
+          q: "What if the campaign books more work than I can handle?",
+          a: "That is a real risk and we plan around it. We size each batch to your actual crew capacity rather than sending to the whole list at once. Booking a customer and then making them wait three weeks damages the relationship you just rebuilt.",
+      },
+      {
+          q: "How often should reactivation campaigns run?",
+          a: "Ahead of each season rather than once. There is always a cohort of customers who have drifted past the point where they would have called on their own, so a list that is worked on a schedule keeps producing instead of being exhausted in a single send.",
+      },
+  ],
+  "/services/sms-marketing": [
+      {
+          q: "Is text message marketing legal for home service businesses?",
+          a: "Yes, with conditions. US rules require express written consent before you send marketing texts, a clear opt-out in your messages, prompt handling of opt-outs, and registration of your business with the carriers through A2P 10DLC. We set consent capture and opt-out handling up as part of the build. This is not legal advice, and you should confirm your own obligations with counsel.",
+      },
+      {
+          q: "What is A2P 10DLC and do I need it?",
+          a: "A2P 10DLC is the registration US carriers require for businesses sending texts from a standard 10-digit number. Without it your messages get filtered or blocked outright, including the appointment confirmations you depend on. We handle the brand registration, campaign setup and use-case approval before any message goes out.",
+      },
+      {
+          q: "Can customers text back my existing business number?",
+          a: "Yes. We text-enable the number you already use, so customers text the number on your truck and your website. Replies land in a shared inbox your office can see and answer, with the full conversation history, rather than on one person's personal cell phone.",
+      },
+      {
+          q: "Which text messages should a contractor send first?",
+          a: "Missed-call text back, before anything else. A call that comes in while your crew is on a job gets an automatic reply within about a minute, which stops that caller from dialing the next company on their list. After that, appointment confirmations and day-before reminders, then review requests after completed jobs.",
+      },
+      {
+          q: "Will texting customers annoy them?",
+          a: "Not if the messages are tied to something that actually happened. A confirmation for an appointment they booked, a reply to a call they made, or a reminder before a visit are all expected. Promotional blasts to people who never opted in are what generate complaints, and those also get your number filtered by carriers.",
+      },
+      {
+          q: "How is this different from missed call text back?",
+          a: "Missed-call text back is one message in a larger system. SMS marketing covers the full set: missed-call replies, appointment confirmations and reminders, technician en-route notifications, review requests, seasonal maintenance reminders, and reactivation campaigns to past customers. Most businesses start with missed-call text back and add the rest.",
+      },
+      {
+          q: "Do I need a separate phone line or app for this?",
+          a: "No. Your existing business line gets text-enabled and everything runs through one shared inbox. Nothing on your trucks, business cards or website needs to change.",
+      },
+      {
+          q: "How quickly can text message marketing be set up?",
+          a: "The build itself is quick. The gating item is A2P 10DLC registration, which carriers process on their own timeline and can take several business days. We start that first so the rest of the setup finishes alongside it.",
+      },
+  ],
 };

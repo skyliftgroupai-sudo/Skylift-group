@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "audit:seo": "node scripts/audit-seo.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "test:smoke": "node scripts/smoke-test.mjs / /services /services/missed-call-text-back /services/ai-chatbots /faq /blog /about-us /contact /work /book"
+    "test:smoke": "node scripts/smoke-test.mjs / /services /services/sms-marketing /services/database-reactivation /services/missed-call-text-back /services/ai-chatbots /faq /blog /about-us /contact /work /book"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

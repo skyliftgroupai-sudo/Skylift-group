@@ -158,6 +158,8 @@ export const Header = () => {
                                                     <ul className="space-y-4">
                                                         <MegaItem icon={<Code2 />} label="Functional Website" to="/services/web-design" />
                                                         <MegaItem icon={<Star />} label="5-Star Reviews" to="/services/reviews" />
+                                                        <MegaItem icon={<MessageCircle />} label="SMS & Text Marketing" to="/services/sms-marketing" />
+                                                        <MegaItem icon={<Zap />} label="Database Reactivation" to="/services/database-reactivation" />
                                                         <MegaItem icon={<PhoneMissed />} label="Missed Call Text Back" to="/services/missed-call-text-back" />
                                                         <MegaItem icon={<MessageCircle />} label="Automated Lead Follow-Up" to="/services/lead-follow-up" />
                                                         <MegaItem icon={<Zap />} label="One-Click Marketing Campaigns" to="/services/one-click-campaigns" />
