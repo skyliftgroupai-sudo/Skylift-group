@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import useSeo from "../hooks/useSeo";
@@ -91,10 +91,12 @@ const Faq = () => {
                             <button
                                 onClick={() => setActive(active === index ? null : index)}
                                 className="w-full flex justify-between items-center p-6 text-left"
+                                aria-expanded={active === index}
+                                aria-controls={`faq-answer-${index}`}
                             >
-                                <span className="text-lg font-semibold text-white">
+                                <h2 className="text-lg font-semibold text-white">
                                     {faq.question}
-                                </span>
+                                </h2>
 
                                 <ChevronDown
                                     className={`text-[#00A693] transition-transform duration-300 cursor-pointer ${active === index ? "rotate-180" : ""
@@ -102,19 +104,20 @@ const Faq = () => {
                                 />
                             </button>
 
-                            <AnimatePresence>
-                                {active === index && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="px-6 pb-6 text-gray-400"
-                                    >
-                                        {faq.answer}
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                            {/* The answer stays mounted and is collapsed with height, not
+                                unmounted. Conditionally rendering it meant the answers were
+                                absent from the HTML entirely — crawlers and AI answer engines
+                                saw six questions and no answers, and FAQ schema would have
+                                described text that was not on the page. */}
+                            <motion.div
+                                id={`faq-answer-${index}`}
+                                initial={false}
+                                animate={{ height: active === index ? "auto" : 0, opacity: active === index ? 1 : 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="overflow-hidden"
+                            >
+                                <p className="px-6 pb-6 text-gray-400">{faq.answer}</p>
+                            </motion.div>
                         </motion.div>
                     ))}
                 </div>

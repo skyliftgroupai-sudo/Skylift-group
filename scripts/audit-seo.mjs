@@ -1,84 +1,183 @@
-// Audits the prerendered HTML in dist/ — the exact bytes Googlebot fetches before
-// it runs any JavaScript. Flags canonical mismatches, over-length or duplicate
-// titles and descriptions, and missing tags.
-//
-//   npm run build && node scripts/audit-seo.mjs
+// Crawls the built output in dist/ the way a search engine would: raw HTML only,
+// no JavaScript. Reports the things that actually stop a page from being indexed
+// or ranked. Run with `npm run audit:seo` after `npm run build`.
 
-import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join, relative, dirname } from "node:path";
+import { readFileSync, existsSync } from "node:fs";
+import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
 const SITE = "https://www.skyliftgroup.com";
 
-function walk(dir, out = []) {
-  for (const entry of readdirSync(dir)) {
-    const full = join(dir, entry);
-    if (statSync(full).isDirectory()) {
-      if (entry !== "assets") walk(full, out);
-    } else if (entry === "index.html" || entry === "404.html") {
-      out.push(full);
-    }
-  }
-  return out;
+if (!existsSync(dist)) {
+  console.error("dist/ not found — run `npm run build` first.");
+  process.exit(1);
 }
 
-const grab = (html, re) => {
-  const m = re.exec(html);
+const files = execSync(`find ${dist} -name "*.html"`).toString().trim().split("\n").sort();
+const pages = [];
+const issues = [];
+const add = (sev, route, msg) => issues.push({ sev, route, msg });
+
+function attr(tag, name) {
+  const m = tag.match(new RegExp(`${name}=["']([^"']*)["']`, "i"));
   return m ? m[1] : "";
-};
-
-const rows = walk(dist).map((file) => {
-  const html = readFileSync(file, "utf8");
-  const rel = relative(dist, file).split("\\").join("/");
-  const url = "/" + rel.replace(/index\.html$/, "").replace(/\/$/, "");
-  return {
-    url: url === "/" ? "/" : url,
-    title: grab(html, /<title>([^<]*)<\/title>/i),
-    canonical: grab(html, /rel="canonical" href="([^"]*)"/i),
-    description: grab(html, /name="description" content="([^"]*)"/i),
-    ogUrl: grab(html, /property="og:url" content="([^"]*)"/i),
-    ogImage: grab(html, /property="og:image" content="([^"]*)"/i),
-    robots: grab(html, /name="robots" content="([^"]*)"/i),
-  };
-});
-
-const titleCounts = new Map();
-const descCounts = new Map();
-for (const r of rows) {
-  titleCounts.set(r.title, (titleCounts.get(r.title) || 0) + 1);
-  descCounts.set(r.description, (descCounts.get(r.description) || 0) + 1);
 }
 
-let problems = 0;
-console.log("      TLEN DLEN  URL");
-for (const r of rows.sort((a, b) => a.url.localeCompare(b.url))) {
-  const isNoindex = Boolean(r.robots);
-  const expected = SITE + (r.url === "/" ? "/" : r.url);
-  const flags = [];
+for (const file of files) {
+  const html = readFileSync(file, "utf8");
+  const route = file.replace(dist, "").replace(/\/index\.html$/, "") || "/";
+  if (route === "/googlee8ada53be5805e5a.html") continue; // Search Console verification file
 
-  if (!isNoindex) {
-    if (r.canonical !== expected) flags.push(`CANONICAL="${r.canonical}"`);
-    if (r.ogUrl !== expected) flags.push(`OG:URL="${r.ogUrl}"`);
-  } else if (r.canonical) {
-    flags.push("NOINDEX PAGE STILL HAS A CANONICAL");
+  const head = (html.match(/<head[\s\S]*?<\/head>/i) || [""])[0];
+  const body = (html.match(/<div id="root">[\s\S]*<\/div>/i) || [""])[0];
+
+  const title = (head.match(/<title>([\s\S]*?)<\/title>/i) || [])[1] || "";
+  const desc = attr((head.match(/<meta\s+name="description"[^>]*>/i) || [""])[0], "content");
+  const canonical = attr((head.match(/<link\s+rel="canonical"[^>]*>/i) || [""])[0], "href");
+  const robots = attr((head.match(/<meta\s+name="robots"[^>]*>/i) || [""])[0], "content");
+
+  const h1s = [...body.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/gi)].map((m) =>
+    m[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim()
+  );
+  const h2s = [...body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)].length;
+
+  const text = body
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&[a-z]+;/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const words = text ? text.split(" ").length : 0;
+
+  const imgs = [...body.matchAll(/<img[^>]*>/gi)].map((m) => m[0]);
+  const links = [...body.matchAll(/<a[^>]*href="([^"]*)"[^>]*>/gi)].map((m) => m[1]);
+
+  const ld = [...head.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
+  const ldTypes = [];
+  ld.forEach((raw, i) => {
+    try {
+      const parsed = JSON.parse(raw.replace(/\\u003c/g, "<"));
+      const walk = (n) => {
+        if (!n || typeof n !== "object") return;
+        if (Array.isArray(n)) return n.forEach(walk);
+        if (n["@type"]) ldTypes.push([].concat(n["@type"]).join("/"));
+        if (n["@graph"]) walk(n["@graph"]);
+      };
+      walk(parsed);
+      if (!parsed["@context"]) add("CRITICAL", route, `JSON-LD block ${i} has no @context`);
+    } catch (e) {
+      add("CRITICAL", route, `JSON-LD block ${i} is not valid JSON: ${e.message}`);
+    }
+  });
+
+  pages.push({ route, title, desc, canonical, robots, h1s, h2s, words, imgs, links, ldTypes });
+}
+
+const byRoute = new Map(pages.map((p) => [p.route, p]));
+const titles = new Map();
+const descs = new Map();
+for (const p of pages) {
+  titles.set(p.title, (titles.get(p.title) || 0) + 1);
+  descs.set(p.desc, (descs.get(p.desc) || 0) + 1);
+}
+
+for (const p of pages) {
+  const indexable = !/noindex/i.test(p.robots);
+
+  if (!p.title) add("CRITICAL", p.route, "no <title>");
+  else if (p.title.length > 60) add("MEDIUM", p.route, `title is ${p.title.length} chars (>60, will truncate)`);
+  if (titles.get(p.title) > 1) add("HIGH", p.route, "duplicate <title> shared with another page");
+
+  if (!p.desc) add("HIGH", p.route, "no meta description");
+  else if (p.desc.length > 155) add("MEDIUM", p.route, `meta description is ${p.desc.length} chars (>155)`);
+  if (descs.get(p.desc) > 1) add("HIGH", p.route, "duplicate meta description shared with another page");
+
+  if (indexable) {
+    const expected = `${SITE}${p.route === "/" ? "/" : p.route}`;
+    if (!p.canonical) add("CRITICAL", p.route, "no canonical");
+    else if (p.canonical !== expected) add("CRITICAL", p.route, `canonical points to ${p.canonical}, not itself`);
   }
-  if (!r.title) flags.push("NO TITLE");
-  else if (r.title.length > 60) flags.push("TITLE OVER 60");
-  if (!r.description) flags.push("NO DESCRIPTION");
-  else if (r.description.length > 155) flags.push("DESCRIPTION OVER 155");
-  if (!r.ogImage) flags.push("NO OG:IMAGE");
-  if (titleCounts.get(r.title) > 1) flags.push("DUPLICATE TITLE");
-  if (descCounts.get(r.description) > 1) flags.push("DUPLICATE DESCRIPTION");
 
-  if (flags.length) problems++;
+  if (p.h1s.length === 0) add("HIGH", p.route, "no <h1> in the server-rendered HTML");
+  else if (p.h1s.length > 1) add("MEDIUM", p.route, `${p.h1s.length} <h1> tags: ${p.h1s.join(" | ").slice(0, 120)}`);
+
+  if (indexable && p.words < 300) add("HIGH", p.route, `thin: only ${p.words} words of rendered text`);
+
+  for (const img of p.imgs) {
+    const src = attr(img, "src");
+    if (!/alt=/i.test(img)) add("MEDIUM", p.route, `image missing alt: ${src}`);
+    // An <img> with an explicit height utility (h-full inside a sized box, h-[350px], h-48)
+    // already has its box settled before the file loads, so it cannot shift layout.
+    const sized = /\b(h-full|h-\[|h-\d)/.test(attr(img, "class"));
+    if (!sized && (!attr(img, "width") || !attr(img, "height")))
+      add("MEDIUM", p.route, `image has no width/height and no fixed height (layout shift): ${src}`);
+    if (/\.(png|jpe?g)(\?|$)/i.test(src)) add("LOW", p.route, `image not served as WebP/AVIF: ${src}`);
+  }
+
+  // Internal links that point at a route with no built page.
+  for (const href of p.links) {
+    if (!href.startsWith("/") || href.startsWith("//")) continue;
+    const clean = href.split("#")[0].split("?")[0].replace(/\/$/, "") || "/";
+    if (/\.(webp|png|jpe?g|svg|pdf|xml|txt|ico)$/i.test(clean)) continue;
+    if (!byRoute.has(clean)) add("HIGH", p.route, `internal link to a page that does not exist: ${href}`);
+  }
+}
+
+// Orphan check: an indexable page nothing else links to.
+const linkedTo = new Set();
+for (const p of pages) {
+  for (const href of p.links) {
+    if (!href.startsWith("/")) continue;
+    const clean = href.split("#")[0].split("?")[0].replace(/\/$/, "") || "/";
+    if (clean !== p.route) linkedTo.add(clean);
+  }
+}
+for (const p of pages) {
+  if (/noindex/i.test(p.robots) || p.route === "/") continue;
+  if (!linkedTo.has(p.route)) add("HIGH", p.route, "orphan: no other page links to it");
+}
+
+// Sitemap agreement.
+const sitemap = readFileSync(join(root, "public", "sitemap.xml"), "utf8");
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+for (const url of sitemapUrls) {
+  const r = url.replace(SITE, "").replace(/\/$/, "") || "/";
+  if (!byRoute.has(r)) add("CRITICAL", r, "in sitemap.xml but no page was built for it");
+  else if (/noindex/i.test(byRoute.get(r).robots)) add("CRITICAL", r, "in sitemap.xml but marked noindex");
+}
+for (const p of pages) {
+  if (/noindex/i.test(p.robots)) continue;
+  const url = `${SITE}${p.route === "/" ? "/" : p.route}`;
+  if (!sitemapUrls.includes(url)) add("HIGH", p.route, "indexable but missing from sitemap.xml");
+}
+
+// ---- report ----
+const order = { CRITICAL: 0, HIGH: 1, MEDIUM: 2, LOW: 3 };
+issues.sort((a, b) => order[a.sev] - order[b.sev] || a.route.localeCompare(b.route));
+
+console.log(`\nPAGE INVENTORY (${pages.length} pages, raw HTML with no JavaScript)\n`);
+console.log("route".padEnd(56), "words".padStart(6), "h1".padStart(3), "h2".padStart(3), "imgs".padStart(5), " schema");
+for (const p of pages.sort((a, b) => a.route.localeCompare(b.route))) {
   console.log(
-    `${flags.length ? "FLAG " : "ok   "} ${String(r.title.length).padStart(4)} ${String(
-      r.description.length
-    ).padStart(4)}  ${r.url}${flags.length ? "\n         << " + flags.join("; ") : ""}`
+    p.route.padEnd(56),
+    String(p.words).padStart(6),
+    String(p.h1s.length).padStart(3),
+    String(p.h2s).padStart(3),
+    String(p.imgs.length).padStart(5),
+    " " + (p.ldTypes.join(",") || "none")
   );
 }
 
-console.log(`\n${rows.length} pages, ${problems} with problems.`);
-process.exit(problems ? 1 : 0);
+const counts = issues.reduce((a, i) => ((a[i.sev] = (a[i.sev] || 0) + 1), a), {});
+console.log(
+  `\nISSUES: ${issues.length} total — ` +
+    ["CRITICAL", "HIGH", "MEDIUM", "LOW"].map((s) => `${counts[s] || 0} ${s.toLowerCase()}`).join(", ") +
+    "\n"
+);
+for (const i of issues) console.log(`[${i.sev}] ${i.route} — ${i.msg}`);
+
+process.exit(counts.CRITICAL ? 1 : 0);

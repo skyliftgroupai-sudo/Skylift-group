@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Several sections animate in from `x: 40`, which parks the element 40px to the
+   right of its final position until it scrolls into view. On a phone that is
+   enough to create a horizontal scrollbar and trip Google's mobile-usability
+   check. `clip` rather than `hidden` on purpose: `hidden` would turn the page
+   into a scroll container and break the sticky header. */
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
 /* html {
   scroll-behavior: smooth;
 }

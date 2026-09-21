@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const faqs1 = [
@@ -66,6 +66,8 @@ export default function FAQQuoteSection() {
                                         setOpenIndex(openIndex === index ? null : index)
                                     }
                                     className="w-full flex justify-between items-center p-5 text-left text-white font-medium hover:bg-white/5 transition"
+                                    aria-expanded={openIndex === index}
+                                    aria-controls={`home-faq-answer-${index}`}
                                 >
                                     {faq.question}
                                     <ChevronDown
@@ -74,19 +76,23 @@ export default function FAQQuoteSection() {
                                     />
                                 </button>
 
-                                <AnimatePresence>
-                                    {openIndex === index && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.3 }}
-                                            className="px-5 py-5 pb-5 text-gray-300 border-t border-white/10"
-                                        >
-                                            {faq.answer}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                {/* Collapsed with height rather than unmounted, so the
+                                    answer text is present in the HTML for crawlers that do
+                                    not click. */}
+                                <motion.div
+                                    id={`home-faq-answer-${index}`}
+                                    initial={false}
+                                    animate={{
+                                        height: openIndex === index ? "auto" : 0,
+                                        opacity: openIndex === index ? 1 : 0,
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                    className="overflow-hidden"
+                                >
+                                    <p className="px-5 py-5 pb-5 text-gray-300 border-t border-white/10">
+                                        {faq.answer}
+                                    </p>
+                                </motion.div>
                             </motion.div>
                         ))}
                     </div>
