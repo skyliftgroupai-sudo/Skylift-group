@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Workflow, Cpu, GitBranch, Zap, Settings, TrendingUp, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
@@ -252,20 +252,23 @@ const AIWorkflowAutomation = () => {
                                                 } group-hover:text-[#008d7c]`}
                                         />
                                     </div>
-                                    <AnimatePresence>
-                                        {openIndex === index && (
-                                            <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.3 }}
-                                            >
-                                                <div className="mt-4 border-t border-gray-700 pt-3">
+                                    {/* Always mounted, collapsed by height. Rendering the answer only while
+                                        open kept it out of the HTML entirely, so crawlers and AI
+                                        answer engines saw the question and no answer. */}
+                                    <motion.div
+                                        id={`faq-answer-${index}`}
+                                        initial={false}
+                                        animate={{
+                                            height: openIndex === index ? "auto" : 0,
+                                            opacity: openIndex === index ? 1 : 0,
+                                        }}
+                                        transition={{ duration: 0.3 }}
+                                        className="overflow-hidden"
+                                    >
+                                        <div className="mt-4 border-t border-gray-700 pt-3">
                                                     <p className="text-gray-300 text-md leading-relaxed">{item.a}</p>
                                                 </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
+                                    </motion.div>
                                 </motion.div>
                             ))}
                         </div>

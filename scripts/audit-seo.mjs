@@ -155,6 +155,21 @@ for (const p of pages) {
   if (!sitemapUrls.includes(url)) add("HIGH", p.route, "indexable but missing from sitemap.xml");
 }
 
+// Source-level guard for the defect that made three separate FAQ sections
+// invisible to crawlers: an answer rendered only while its accordion item is
+// open never exists in the HTML at all. Word counts do not catch it, because
+// the surrounding page is still long enough to pass.
+const pageFiles = execSync(`find ${join(root, "src")} -name "*.jsx"`).toString().trim().split("\n");
+for (const file of pageFiles) {
+  const src = readFileSync(file, "utf8");
+  const rel = file.replace(root + "/", "");
+  // <AnimatePresence>{open === i && ( ... )}</AnimatePresence> around answer text.
+  const conditional = /<AnimatePresence>[\s\S]{0,200}?(?:openIndex|active|activeIndex|isOpen)\s*===\s*\w+\s*&&\s*\(/.exec(src);
+  if (conditional) {
+    add("HIGH", rel, "FAQ answer is conditionally mounted — the text will not exist in the HTML crawlers see. Collapse it with height instead.");
+  }
+}
+
 // ---- report ----
 const order = { CRITICAL: 0, HIGH: 1, MEDIUM: 2, LOW: 3 };
 issues.sort((a, b) => order[a.sev] - order[b.sev] || a.route.localeCompare(b.route));
