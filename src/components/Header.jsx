@@ -15,6 +15,9 @@ import {
     MessageCircle,
     Zap,
     Phone,
+    Globe,
+    Users,
+    PenLine,
 } from "lucide-react";
 
 export const Header = () => {
@@ -111,13 +114,21 @@ export const Header = () => {
                                         {label} <ChevronDown className="w-4 h-4" />
                                     </Link>
 
-                                    {isServicesOpen && (
-                                        <div
-                                            className="absolute left-1/2 top-full mt-6 w-[900px] -translate-x-1/2 rounded-2xl
-               bg-[#0a0a0a] border border-white/10 shadow-2xl p-8 z-50"
-                                            onMouseEnter={() => setIsServicesOpen(true)}
-                                            onMouseLeave={() => setIsServicesOpen(false)}
-                                        >
+                                    {/* Always in the DOM, shown and hidden with CSS.
+                                        Unmounting it meant these were the only links to ten of
+                                        the sixteen service pages and none of them existed in the
+                                        HTML a crawler sees — which is why Search Console listed
+                                        those pages as "Discovered - currently not indexed".
+                                        Rendered always, every page now links to every service. */}
+                                    <div
+                                        className={`absolute left-1/2 top-full mt-6 w-[900px] -translate-x-1/2 rounded-2xl
+               bg-[#0a0a0a] border border-white/10 shadow-2xl p-8 z-50 transition-opacity duration-200 ${isServicesOpen
+                                                ? "opacity-100 visible"
+                                                : "opacity-0 invisible pointer-events-none"
+                                            }`}
+                                        onMouseEnter={() => setIsServicesOpen(true)}
+                                        onMouseLeave={() => setIsServicesOpen(false)}
+                                    >
                                             <div className="grid grid-cols-3 gap-10">
 
                                                 {/* MARKETING SERVICES */}
@@ -127,10 +138,14 @@ export const Header = () => {
                                                     </h4>
 
                                                     <ul className="space-y-4">
+                                                        <MegaItem icon={<Chrome />} label="Google Ads" to="/services/google-ads" />
                                                         <MegaItem icon={<Facebook />} label="Meta Ads" to="/services/meta-ads" />
                                                         <MegaItem icon={<Music2 />} label="TikTok Ads" to="/services/tiktok-ads" />
+                                                        <MegaItem icon={<Zap />} label="PPC Management" to="/services/ppc-management" />
                                                         <MegaItem icon={<Search />} label="SEO" to="/services/seo" />
-                                                        <MegaItem icon={<Chrome />} label="Google Ads" to="/services/google-ads" />
+                                                        <MegaItem icon={<Globe />} label="Google Business Profile" to="/services/local-maps" />
+                                                        <MegaItem icon={<Users />} label="Social Media" to="/services/social-media" />
+                                                        <MegaItem icon={<PenLine />} label="Content Writing" to="/services/content-writing" />
                                                     </ul>
                                                 </div>
 
@@ -174,8 +189,7 @@ export const Header = () => {
                                                 </div>
 
                                             </div>
-                                        </div>
-                                    )}
+                                    </div>
 
                                 </div>
                             ) : (

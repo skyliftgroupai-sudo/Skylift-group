@@ -191,9 +191,26 @@ for (const p of pages) {
     if (clean !== p.route) linkedTo.add(clean);
   }
 }
+// Count inbound links, not just presence. A page reachable from one other page
+// is not an orphan but is still starved of crawl signal — that is precisely the
+// state Search Console reports as "Discovered - currently not indexed", and a
+// pure orphan check reports it as fine.
+const inboundCounts = new Map();
+for (const p of pages) {
+  const seen = new Set();
+  for (const href of p.links) {
+    if (!href.startsWith("/") || href.startsWith("//")) continue;
+    const clean = href.split("#")[0].split("?")[0].replace(/\/$/, "") || "/";
+    if (clean === p.route) continue;
+    seen.add(clean);
+  }
+  for (const target of seen) inboundCounts.set(target, (inboundCounts.get(target) || 0) + 1);
+}
 for (const p of pages) {
   if (/noindex/i.test(p.robots) || p.route === "/") continue;
-  if (!linkedTo.has(p.route)) add("HIGH", p.route, "orphan: no other page links to it");
+  const inbound = inboundCounts.get(p.route) || 0;
+  if (inbound === 0) add("HIGH", p.route, "orphan: no other page links to it");
+  else if (inbound < 3) add("HIGH", p.route, `under-linked: only ${inbound} page(s) link to it`);
 }
 
 // Sitemap agreement.
