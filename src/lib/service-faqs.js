@@ -12,6 +12,22 @@
 export const routeFaqs = {
   "/services/ai-chatbots": [
       {
+          q: "Will the chatbot give customers wrong information?",
+          a: "It is scoped so it cannot. We define what it should never attempt — pricing complex jobs, diagnosing problems it cannot see, promising appointment times it cannot verify — and those become handoffs to a person rather than confident-sounding guesses.",
+      },
+      {
+          q: "Can it book appointments directly?",
+          a: "Yes, when connected to your calendar. For simpler, well-defined jobs that works well. For complex work that needs a site visit, it captures the details and hands off to your team instead.",
+      },
+      {
+          q: "How long does it take to set up?",
+          a: "The build is fast. The part that takes time is gathering accurate information about your services, service area, pricing structure and the jobs you decline, because a bot trained on vague inputs gives vague answers.",
+      },
+      {
+          q: "Does it replace answering the phone?",
+          a: "No. Plenty of homeowners, especially in emergencies, want to call. The chatbot covers website visitors; missed call text back and an AI voice agent cover callers. They reach different people and work best together.",
+      },
+      {
           q: "What is an AI chatbot?",
           a: "An AI chatbot is an intelligent virtual assistant that uses artificial intelligence to chat with website visitors and customers, answer questions, capture leads, and provide support automatically.",
       },
@@ -29,6 +45,22 @@ export const routeFaqs = {
       },
   ],
   "/services/ai-voice-agents": [
+      {
+          q: "Will callers know they are talking to an AI?",
+          a: "Many will, and the agent does not pretend otherwise if asked. What matters to a caller is getting an answer and a booked time rather than voicemail. Anyone who asks for a person is transferred immediately.",
+      },
+      {
+          q: "What happens in a real emergency?",
+          a: "It escalates. A caller describing gas, water near electrical, or anything urgent gets routed to a person with the conversation summary attached, rather than being walked through a booking flow.",
+      },
+      {
+          q: "Can it check my real availability?",
+          a: "Yes. It connects to your calendar, so the times it offers are times you can actually service. That is the difference between a booked appointment and a promise that someone will call back.",
+      },
+      {
+          q: "How is this different from an answering service?",
+          a: "An answering service takes a message; the customer still waits for a callback. A voice agent completes the booking during the call. It also handles simultaneous calls, so a storm spike does not produce a queue, and the cost does not scale per call.",
+      },
       {
           q: "What are AI voice agents?",
           a: "AI voice agents are intelligent virtual assistants that can make and receive phone calls, hold natural conversations, qualify leads, book appointments, and provide customer support automatically.",
@@ -65,6 +97,22 @@ export const routeFaqs = {
       },
   ],
   "/services/lead-follow-up": [
+      {
+          q: "Will automated follow-up annoy my leads?",
+          a: "Not if it is paced properly. A planned sequence spread over several days is normal business follow-up and most people expect it. What generates complaints is a barrage, which is exactly what we avoid.",
+      },
+      {
+          q: "Does this replace my CRM?",
+          a: "No. It feeds your CRM. We work with the system you already use rather than asking you to migrate, and the conversation history and source attribution land where your team already works.",
+      },
+      {
+          q: "What counts as a lead source?",
+          a: "Website forms, website chat, phone calls, Google and Facebook lead forms, and any other channel where inquiries arrive. The point is that they all land in one place so nothing is missed because it came through a channel nobody checks.",
+      },
+      {
+          q: "How do I know which marketing is actually working?",
+          a: "Because leads are tracked from source through to booked job rather than to form submission. That usually changes where the ad budget goes, since the channel producing the most leads is often not the one producing the most work.",
+      },
       {
           q: "What is automated lead follow-up?",
           a: "It's a system that automatically nurtures and engages leads through email, SMS, and other channels based on their behavior, ensuring no prospect is forgotten and every lead gets timely attention.",
@@ -120,6 +168,22 @@ export const routeFaqs = {
   ],
   "/services/google-ads": [
       {
+          q: "How much should a contractor budget for Google Ads?",
+          a: "It depends on your market, your trade and how competitive your area is — clicks in HVAC and plumbing are expensive because the jobs are valuable. Rather than quote a number that would be a guess, we look at your service area and the current cost of the keywords that matter before recommending a budget.",
+      },
+      {
+          q: "How soon do calls start coming in?",
+          a: "Usually within days of launch, which is the main advantage over SEO. Getting the account efficient takes longer, because negative keywords and bid adjustments improve with real data from your own traffic.",
+      },
+      {
+          q: "Why are negative keywords so important?",
+          a: "Because home service searches attract a lot of irrelevant traffic — people looking for DIY instructions, replacement parts, job vacancies and training courses. Each of those clicks costs the same as a real customer. Excluding them is where most of the savings come from.",
+      },
+      {
+          q: "Should I run ads or do SEO?",
+          a: "Both, in that order of urgency. Ads produce calls now but stop the moment you stop paying. Local SEO and your Google Business Profile keep producing, but take months. Ads buy you time while the organic side builds.",
+      },
+      {
           q: "Where do your Google Ads run?",
           a: "Our campaigns appear on Google Search, Display Network, YouTube, Gmail, and Discovery placements, reaching users when they’re most engaged.",
       },
@@ -137,6 +201,22 @@ export const routeFaqs = {
       },
   ],
   "/services/local-maps": [
+      {
+          q: "How long does it take to rank in the map pack?",
+          a: "It varies by how competitive your area is and what state your profile is in. Category and information fixes can show effects within weeks. Review velocity and citation consistency work over months. Anyone promising a specific timeframe is guessing.",
+      },
+      {
+          q: "Do I need a physical address to rank locally?",
+          a: "No. A service-area business can rank without displaying an address, as long as the profile is configured correctly for how you actually operate. Getting that configuration wrong is a common and quiet cap on visibility.",
+      },
+      {
+          q: "How many reviews do I need?",
+          a: "There is no threshold number. What matters more is recency and consistency — a steady flow of recent reviews signals an active business, while a large number from years ago signals the opposite. That is why we automate the request rather than relying on anyone remembering to ask.",
+      },
+      {
+          q: "A competitor has keywords stuffed in their business name. Should I?",
+          a: "No. Keyword-stuffing the name field violates Google's guidelines and is one of the most commonly reported violations, with suspension as the penalty. The better response is reporting it, since removing their advantage costs you nothing and risks nothing.",
+      },
       {
           q: "How long does Local SEO take to show results?",
           a: "Local SEO typically shows measurable improvements within 2-4 months, depending on competition and location.",
@@ -173,6 +253,22 @@ export const routeFaqs = {
       },
   ],
   "/services/missed-call-text-back": [
+      {
+          q: "How fast does the text actually go out?",
+          a: "Within about a minute of the missed call. That speed is the entire mechanism — the text has to reach the caller before they dial the next company on their search results, which is usually within a few minutes.",
+      },
+      {
+          q: "Do I need a new phone number?",
+          a: "No. Your existing business line gets text-enabled, so customers text the number already on your trucks, your website and your business cards. Nothing about how you advertise has to change.",
+      },
+      {
+          q: "What happens when the customer texts back?",
+          a: "The reply goes to a shared inbox your office can see and answer, with the full conversation history attached. It does not land on one person's personal phone where it can sit unread while they are on a job.",
+      },
+      {
+          q: "Does this work outside business hours?",
+          a: "Yes, and that is often where it earns the most. Evening and weekend calls tend to be the urgent, higher-value jobs, and they are the ones most likely to go unanswered without it.",
+      },
     {
       q: "How does the missed call text-back service work?",
       a: "When a customer calls and you can't answer, our system instantly sends them a personalized SMS, keeping them engaged and giving you a chance to convert that missed call into a customer.",

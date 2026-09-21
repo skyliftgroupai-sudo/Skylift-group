@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
+import ServiceLongform from "../components/ServiceLongform";
+import longform from "../content/services/local-maps";
 
 const services = [
     {
@@ -192,6 +194,8 @@ const LocalMapOptimization = () => {
                     ))}
                 </div>
             </motion.section>
+
+            <ServiceLongform content={longform} />
 
             {/* FAQ SECTION */}
             <motion.section
