@@ -5,6 +5,7 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const services = [
     {
@@ -64,12 +65,7 @@ const AIVoiceAgents = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo({
-        title: "AI Voice Agents Services | Sky Lift Group",
-        description:
-            "Sky Lift Group delivers intelligent AI voice agents that handle calls 24/7, qualify leads, book appointments, and provide premium customer support.",
-        canonical: "https://www.skyliftgroup.com/services/ai-voice-agents"
-    });
+    useSeo(pageSeo("/services/ai-voice-agents"));
 
 
     return (
@@ -77,7 +73,7 @@ const AIVoiceAgents = () => {
             {/* HERO SECTION */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/aivoice.png")` }}
+                style={{ backgroundImage: `url("/assets/aivoice.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -283,7 +279,12 @@ const AIVoiceAgents = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/voice.png" alt="AI Voice Agents" className="rounded-2xl shadow-lg w-full h-full object-cover" />
+                            <img src="/assets/voice.webp" alt="AI Voice Agents" className="rounded-2xl shadow-lg w-full h-full object-cover"
+          width={1200}
+          height={1512}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>

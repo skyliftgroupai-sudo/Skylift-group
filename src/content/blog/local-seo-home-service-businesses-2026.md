@@ -1,14 +1,14 @@
 ---
 title: "Local SEO for Home Service Businesses: What Actually Moves the Needle in 2026"
-seoTitle: "Local SEO for Home Service Businesses in 2026"
+seoTitle: "Local SEO for Home Services in 2026"
 slug: "local-seo-home-service-businesses-2026"
-description: "Most local SEO advice is generic. Here's what actually affects rankings for HVAC, plumbing, roofing, and contracting businesses in a specific service area."
+description: "Most local SEO advice is generic. Here's what actually moves rankings for HVAC, plumbing, roofing, and contracting businesses in one service area."
 excerpt: "A map pack of three businesses gets most of the calls. Here's what actually decides who's in it — and what to fix first."
 category: "Local SEO"
 tags: ["Local SEO", "Google Business Profile", "Home Service Marketing", "Reviews"]
 date: "2026-07-29"
 author: "Sky Lift Group"
-image: "/assets/maps-bg.jpeg"
+image: "/assets/maps-bg.webp"
 imageAlt: "Google map pack results for local home service businesses on a phone"
 ---
 

@@ -1,14 +1,14 @@
 ---
 title: "How to Get More 5-Star Reviews Without Awkwardly Asking Every Customer"
-seoTitle: "Get More 5-Star Reviews Without Awkwardly Asking"
+seoTitle: "How to Get More 5-Star Google Reviews"
 slug: "automated-review-generation-home-service-business"
-description: "A practical, automated approach to generating consistent reviews for HVAC, plumbing, and contracting businesses — without relying on your team to remember to ask."
+description: "An automated way to generate steady 5-star reviews for HVAC, plumbing, and contracting businesses, without relying on your crew to remember to ask."
 excerpt: "\"We hope customers remember\" isn't a system. Here's how automated review requests actually work — and why timing matters more than you'd think."
 category: "Google Business Profile"
 tags: ["Reviews", "Google Business Profile", "CRM Automation", "Home Service Marketing"]
 date: "2026-07-29"
 author: "Sky Lift Group"
-image: "/assets/five-star.jpg"
+image: "/assets/five-star.webp"
 imageAlt: "Five-star Google review being left by a happy home service customer on a phone"
 ---
 

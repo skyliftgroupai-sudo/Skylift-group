@@ -1,14 +1,14 @@
 ---
 title: "Google Business Profile Optimization for Home Service Businesses (2026 Guide)"
-seoTitle: "Google Business Profile Optimization for Home Services"
+seoTitle: "Google Business Profile Optimization"
 slug: "google-business-profile-optimization-home-service-businesses"
-description: "Optimize your Google Business Profile to win the Map Pack and more local leads. The complete 2026 GBP checklist for HVAC, roofing, plumbing and home services."
+description: "Win the Google Map Pack and more local leads. The 2026 GBP checklist for HVAC, roofing, plumbing, and home service businesses."
 excerpt: "The Map Pack decides whether your phone rings. Here's the complete 2026 playbook for ranking your Google Business Profile as a home service business."
 category: "Google Business Profile"
 tags: ["Local SEO", "Google Business Profile", "Home Service Marketing", "Lead Generation"]
 date: "2026-07-28"
 author: "Sky Lift Group"
-image: "/assets/maps-bg.jpeg"
+image: "/assets/maps-bg.webp"
 imageAlt: "Home service contractor optimizing their Google Business Profile to rank in the local Map Pack"
 ---
 

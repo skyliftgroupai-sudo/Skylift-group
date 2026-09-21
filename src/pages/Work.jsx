@@ -19,6 +19,7 @@ import { useCountUp } from "../hooks/counte";
 import { useRef } from "react";
 import CTASection from "./CtaSection";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const iconClass = "h-8 w-8";
 const industries = [
@@ -58,12 +59,7 @@ const Work = () => {
     { value: 95, suffix: "%", label: "Client Retention" }
   ];
 
-  useSeo({
-    title: "Industries We Serve | Sky Lift Group – AI Marketing for Local Business",
-    description:
-      "Sky Lift Group delivers AI-powered marketing and automation for roofing, plumbing, electrical, moving, real estate, senior care, and more local service industries.",
-    canonical: "https://www.skyliftgroup.com/work"
-  });
+  useSeo(pageSeo("/work"));
 
 return (
   <div className="flex flex-col bg-[#0a0a0a] text-gray-100"> {/* main background and text color */}
@@ -71,7 +67,7 @@ return (
     {/* Hero Section */}
     <section
       className="relative w-full min-h-[70vh] md:min-h-[88vh] flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat px-4"
-      style={{ backgroundImage: `url("/assets/our-work.jpeg")` }}
+      style={{ backgroundImage: `url("/assets/our-work.webp")` }}
     >
       <div className="absolute inset-0 bg-black/50" />
 

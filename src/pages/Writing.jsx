@@ -6,6 +6,7 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const services = [
     {
@@ -64,12 +65,7 @@ const ContentWritingServices = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo({
-        title: "Content Writing Services | Sky Lift Group",
-        description:
-            "Sky Lift Group offers professional content writing services to create high-quality, engaging, and SEO-friendly content that attracts and converts your audience.",
-        canonical: "https://www.skyliftgroup.com/services/content-writing"
-    });
+    useSeo(pageSeo("/services/content-writing"));
 
     return (
         <div className="w-full">
@@ -77,7 +73,7 @@ const ContentWritingServices = () => {
             {/* HERO SECTION */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/writing-bg.jpg")` }}
+                style={{ backgroundImage: `url("/assets/writing-bg.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -275,7 +271,12 @@ const ContentWritingServices = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/writing-side.jpeg" alt="Content Writing Services" className="rounded-2xl shadow-lg" />
+                            <img src="/assets/writing-side.webp" alt="Content Writing Services" className="rounded-2xl shadow-lg"
+          width={500}
+          height={335}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>

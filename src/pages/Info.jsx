@@ -32,7 +32,7 @@ const Info = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <motion.h1
+        <motion.h2
           variants={itemVariants}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
         >
@@ -40,7 +40,7 @@ const Info = () => {
           <span className="text-[#00A693]">
             it’s engineered with data, AI, and strategy.
           </span>
-        </motion.h1>
+        </motion.h2>
 
         <motion.p
           variants={itemVariants}

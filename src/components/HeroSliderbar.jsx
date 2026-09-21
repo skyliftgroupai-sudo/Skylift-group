@@ -55,12 +55,12 @@ export const HeroSlider = () => {
         <div key={index}>
           <div className="flex flex-col items-center text-center space-y-8 max-w-6xl mx-auto">
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.15)]">
               {slide.title}
               <span className="block text-[#00A693] neon-text">
                 {slide.highlight}
               </span>
-            </h1>
+            </h2>
 
             <p className="text-lg md:text-xl text-gray-200">
               {slide.description}

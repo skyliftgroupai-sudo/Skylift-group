@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const Faq = () => {
     const [active, setActive] = useState(null);
@@ -40,12 +41,7 @@ const Faq = () => {
         }
     ];
 
-    useSeo({
-        title: "FAQ | Sky Lift Group – AI Automation & Digital Marketing Questions",
-        description:
-            "Find answers about AI chatbots, voice agents, automation systems, SEO, PPC, and digital marketing services offered by Sky Lift Group.",
-        canonical: "https://www.skyliftgroup.com/faq"
-    });
+    useSeo(pageSeo("/faq"));
 
     return (
         <section className="relative py-28 bg-[#0a0a0a] overflow-hidden">

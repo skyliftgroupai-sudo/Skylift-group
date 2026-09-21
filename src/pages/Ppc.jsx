@@ -6,6 +6,7 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const services = [
     {
@@ -64,19 +65,14 @@ const PPCManagement = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo({
-        title: "PPC Management Services | Sky Lift Group",
-        description:
-            "Sky Lift Group provides professional PPC management services to optimize your ad campaigns, maximize ROI, and drive targeted traffic to your website.",
-        canonical: "https://www.skyliftgroup.com/services/ppc-management"
-    });
+    useSeo(pageSeo("/services/ppc-management"));
 
     return (
         <div className="w-full">
             {/* HERO SECTION */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/ppc-side.jpg")` }}
+                style={{ backgroundImage: `url("/assets/ppc-side.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -274,7 +270,12 @@ const PPCManagement = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/ppc-bg.jpg" alt="PPC Management Services" className="rounded-2xl shadow-lg" />
+                            <img src="/assets/ppc-bg.webp" alt="PPC Management Services" className="rounded-2xl shadow-lg"
+          width={1500}
+          height={844}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>

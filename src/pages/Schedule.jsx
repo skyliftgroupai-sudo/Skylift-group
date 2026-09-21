@@ -1,8 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const Schedule = () => {
+  useSeo(pageSeo("/book"));
+
   return (
     <section
       style={{
@@ -21,7 +25,7 @@ const Schedule = () => {
           textAlign: "center",
         }}
       >
-        <h2
+        <h1
           style={{
             color: "#00A693",
             fontSize: "36px",
@@ -29,8 +33,8 @@ const Schedule = () => {
             fontWeight: "bold",
           }}
         >
-          Sky Lift Group
-        </h2>
+          Book a Free Strategy Call with Sky Lift Group
+        </h1>
 
         <p
           style={{

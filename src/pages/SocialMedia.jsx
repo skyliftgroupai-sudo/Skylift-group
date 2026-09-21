@@ -6,6 +6,7 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const services = [
     {
@@ -64,19 +65,14 @@ const SocialMediaMarketing = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo({
-        title: "Social Media Marketing | Sky Lift Group",
-        description:
-            "Sky Lift Group offers expert social media marketing services to increase brand awareness, engage your audience, and drive business growth across platforms like Facebook, Instagram, LinkedIn, and more.",
-        canonical: "https://www.skyliftgroup.com/services/social-media"
-    });
+    useSeo(pageSeo("/services/social-media"));
 
     return (
         <div className="w-full">
             {/* HERO SECTION */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/socialmedia-bg.jpg")` }}
+                style={{ backgroundImage: `url("/assets/socialmedia-bg.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -275,7 +271,12 @@ const SocialMediaMarketing = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/social-side.avif" alt="Social Media Marketing Services" className="rounded-2xl shadow-lg" />
+                            <img src="/assets/social-side.avif" alt="Social Media Marketing Services" className="rounded-2xl shadow-lg"
+          width={2000}
+          height={1228}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 import { getAllPosts, SITE_URL } from "../lib/posts";
 
 function formatDate(iso) {
@@ -19,25 +20,23 @@ const Blog = () => {
   const posts = getAllPosts();
   const [featured, ...rest] = posts;
 
-  useSeo({
-    title: "Blog | AI Marketing & Local SEO Tips | Sky Lift Group",
-    description:
-      "Actionable guides on local SEO, Google Business Profile, AI marketing, lead generation, and automation for home service and local businesses.",
-    canonical: `${SITE_URL}/blog`,
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      name: "Sky Lift Group Blog",
-      url: `${SITE_URL}/blog`,
-      description:
-        "Actionable guides on local SEO, Google Business Profile, AI marketing, lead generation, and automation for local businesses.",
-      publisher: {
-        "@type": "Organization",
-        name: "Sky Lift Group",
-        url: SITE_URL,
+  useSeo(
+    pageSeo("/blog", {
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        name: "Sky Lift Group Blog",
+        url: `${SITE_URL}/blog`,
+        description:
+          "Practical guides on SMS marketing, local SEO, Google Business Profile, AI lead capture, and automation for home service business owners.",
+        publisher: {
+          "@type": "Organization",
+          name: "Sky Lift Group",
+          url: SITE_URL,
+        },
       },
-    },
-  });
+    })
+  );
 
   return (
     <div className="w-full bg-[#0a0a0a] text-gray-100">
@@ -97,8 +96,7 @@ const Blog = () => {
                   <img
                     src={featured.image}
                     alt={featured.imageAlt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" decoding="async" loading="lazy" />
                 </div>
                 <div className="p-8 md:p-10">
                   <span className="inline-block text-xs font-semibold tracking-wide text-[#00A693] border border-[#00A693]/40 rounded-full px-3 py-1">
@@ -143,8 +141,7 @@ const Blog = () => {
                       <img
                         src={post.image}
                         alt={post.imageAlt}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" decoding="async" loading="lazy" />
                     </div>
                     <div className="p-6 flex flex-col flex-1">
                       <span className="text-xs font-semibold tracking-wide text-[#00A693]">

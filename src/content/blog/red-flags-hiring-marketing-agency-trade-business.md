@@ -1,14 +1,14 @@
 ---
 title: "7 Red Flags to Watch For Before Hiring a Marketing Agency for Your Trade Business"
-seoTitle: "7 Red Flags Before Hiring a Marketing Agency"
+seoTitle: "7 Red Flags: Hiring a Marketing Agency"
 slug: "red-flags-hiring-marketing-agency-trade-business"
-description: "Not every marketing agency is built for home service businesses. Here are the specific red flags that predict a bad fit, and what to check before signing a contract."
+description: "Not every marketing agency fits a home service business. The red flags that predict a bad fit, and what to check before you sign a contract."
 excerpt: "Long contract, vague deliverables, vanity-metric reports — sound familiar? 7 specific red flags to check before hiring a marketing agency for your trade business."
 category: "Digital Marketing Tips"
 tags: ["Small Business Growth", "Digital Marketing Tips", "Home Service Marketing"]
 date: "2026-07-29"
 author: "Sky Lift Group"
-image: "/assets/analytics.jpg"
+image: "/assets/analytics.webp"
 imageAlt: "Business owner reviewing a marketing agency report to spot red flags before signing"
 ---
 

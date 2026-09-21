@@ -41,7 +41,7 @@ function setTag(html, regex, replacement) {
   return html.replace("</head>", `  ${replacement}\n</head>`);
 }
 
-function buildHtml({ path, title, description, image }) {
+function buildHtml({ path, title, description, image, noindex = false }) {
   const url = `${SITE}${path === "/" ? "/" : path}`;
   const og = image ? (image.startsWith("http") ? image : `${SITE}${image}`) : DEFAULT_OG;
   let html = template;
@@ -52,11 +52,19 @@ function buildHtml({ path, title, description, image }) {
     /<meta\s+name=["']description["'][\s\S]*?>/i,
     `<meta name="description" content="${esc(description)}" />`
   );
-  html = setTag(
-    html,
-    /<link\s+rel=["']canonical["'][\s\S]*?>/i,
-    `<link rel="canonical" href="${esc(url)}" />`
-  );
+  // The 404 page must never claim a canonical — a canonical on an error page is
+  // exactly what made every bad URL look like a duplicate of the homepage.
+  html = noindex
+    ? setTag(
+        html,
+        /<link\s+rel=["']canonical["'][\s\S]*?>/i,
+        `<meta name="robots" content="noindex, follow" />`
+      )
+    : setTag(
+        html,
+        /<link\s+rel=["']canonical["'][\s\S]*?>/i,
+        `<link rel="canonical" href="${esc(url)}" />`
+      );
   html = setTag(
     html,
     /<meta\s+property=["']og:title["'][\s\S]*?>/i,
@@ -88,6 +96,23 @@ function writeRoute(path, html) {
   writeFileSync(target, html);
 }
 
+// Guard: vercel.json no longer rewrites unknown paths to the SPA shell, so a route
+// that exists in App.jsx but has no prerendered file would 404 in production.
+// Fail the build loudly instead of shipping a dead page.
+const appSource = readFileSync(join(root, "src", "App.jsx"), "utf8");
+const appRoutes = [...appSource.matchAll(/path="([^"]+)"/g)]
+  .map((m) => m[1])
+  .filter((p) => p !== "*" && !p.includes(":")); // "*" and /blog/:slug are handled separately
+const uncovered = appRoutes.filter((p) => !(p in staticRoutes));
+if (uncovered.length) {
+  console.error(
+    `[prerender] These App.jsx routes have no entry in src/lib/seo-config.js and would 404:\n  ${uncovered.join(
+      "\n  "
+    )}`
+  );
+  process.exit(1);
+}
+
 let count = 0;
 
 // Static routes
@@ -95,6 +120,20 @@ for (const [path, meta] of Object.entries(staticRoutes)) {
   writeRoute(path, buildHtml({ path, ...meta }));
   count++;
 }
+
+// 404 page. Vercel serves dist/404.html with a real HTTP 404 for anything that
+// does not match a file, which is what stops Google logging bad URLs as soft 404s
+// or as duplicates of the homepage.
+writeFileSync(
+  join(dist, "404.html"),
+  buildHtml({
+    path: "/404",
+    title: "Page Not Found | Sky Lift Group",
+    description: "The page you are looking for does not exist or has been moved.",
+    noindex: true,
+  })
+);
+count++;
 
 // Blog posts (from frontmatter)
 const blogDir = join(root, "src", "content", "blog");

@@ -1,14 +1,14 @@
 ---
 title: "Is Text Message Marketing Worth It for Home Service Businesses?"
-seoTitle: "Is Text Message Marketing Worth It for Home Services?"
+seoTitle: "Is SMS Marketing Worth It for Contractors?"
 slug: "text-message-marketing-home-service-business"
-description: "SMS open rates dwarf email, but text marketing doesn't fit every home service business. Here's when it works, when it backfires, and how to set it up right."
+description: "SMS open rates beat email, but texting doesn't fit every home service business. When it works, when it backfires, and how to set it up right."
 excerpt: "Text marketing works — until it doesn't. Here's where SMS genuinely helps a service business, where it backfires, and the compliance piece most skip."
 category: "CRM Automation"
 tags: ["SMS Marketing", "CRM Automation", "Home Service Marketing", "Lead Generation"]
 date: "2026-07-29"
 author: "Sky Lift Group"
-image: "/assets/missed-call.png"
+image: "/assets/missed-call.webp"
 imageAlt: "Home service business sending an appointment reminder text message to a customer"
 ---
 

@@ -119,7 +119,7 @@ const BlogPostView = ({ post }) => {
       name: "Sky Lift Group",
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/assets/sky-lift.png`,
+        url: `${SITE_URL}/assets/sky-lift.webp`,
       },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
@@ -163,10 +163,14 @@ const BlogPostView = ({ post }) => {
       {/* HERO */}
       <section className="relative w-full">
         <div className="h-[42vh] md:h-[52vh] w-full overflow-hidden">
+          {/* The post hero is the LCP element on an article page, so it loads
+              eagerly at high priority while every other image on the page lazies. */}
           <img
             src={post.image}
             alt={post.imageAlt}
             className="w-full h-full object-cover"
+            fetchPriority="high"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-black/40" />
         </div>
@@ -241,8 +245,7 @@ const BlogPostView = ({ post }) => {
                   <img
                     src={r.image}
                     alt={r.imageAlt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" decoding="async" loading="lazy" />
                 </div>
                 <div className="p-5">
                   <span className="text-xs font-semibold text-[#00A693]">

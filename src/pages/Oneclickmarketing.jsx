@@ -5,6 +5,7 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const services = [
     {
@@ -64,12 +65,7 @@ const OneClickMarketing = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo({
-        title: "One Click Marketing Campaigns | Sky Lift Group",
-        description:
-            "Sky Lift Group delivers powerful one click marketing campaigns across email, SMS, and social channels that drive instant engagement and measurable results.",
-        canonical: "https://www.skyliftgroup.com/services/one-click-campaigns"
-    });
+    useSeo(pageSeo("/services/one-click-campaigns"));
 
 
     return (
@@ -77,7 +73,7 @@ const OneClickMarketing = () => {
             {/* HERO SECTION */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/marketing.png")` }}
+                style={{ backgroundImage: `url("/assets/marketing.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -285,7 +281,12 @@ const OneClickMarketing = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/marketing-service.png" alt="One Click Marketing Campaigns" className="rounded-2xl shadow-lg w-full h-full object-cover" />
+                            <img src="/assets/marketing-service.webp" alt="One Click Marketing Campaigns" className="rounded-2xl shadow-lg w-full h-full object-cover"
+          width={1200}
+          height={675}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>

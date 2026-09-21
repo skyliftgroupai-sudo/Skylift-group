@@ -5,6 +5,7 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const services = [
     {
@@ -64,12 +65,7 @@ const AIChatbot = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo({
-        title: "AI Chatbot Services | Sky Lift Group",
-        description:
-            "Sky Lift Group delivers smart AI chatbots that engage customers 24/7, capture leads, and provide instant support across web, WhatsApp, and messaging platforms.",
-        canonical: "https://www.skyliftgroup.com/services/ai-chatbot"
-    });
+    useSeo(pageSeo("/services/ai-chatbots"));
 
 
     return (
@@ -77,7 +73,7 @@ const AIChatbot = () => {
             {/* HERO SECTION */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/chat.png")` }}
+                style={{ backgroundImage: `url("/assets/chat.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -283,7 +279,12 @@ const AIChatbot = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/Chatbot.png" alt="AI Chatbot Solutions" className="rounded-2xl shadow-lg w-full h-full object-cover" />
+                            <img src="/assets/Chatbot.webp" alt="AI Chatbot Solutions" className="rounded-2xl shadow-lg w-full h-full object-cover"
+          width={1536}
+          height={1028}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>

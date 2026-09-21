@@ -21,10 +21,14 @@ export default function CeoMessage() {
                         <div className="absolute -inset-4 bg-gradient-to-br from-[#00A693] to-[#11b9a6] rounded-3xl blur-2xl opacity-30" />
                         <div className="relative overflow-hidden rounded-3xl shadow-2xl border border-white/10">
                             <img
-                                src="/assets/CEO.png"
-                                alt="CEO of Skylift Group"
+                                src="/assets/CEO.webp"
+                                alt="CEO of Sky Lift Group"
                                 className="w-full h-[500px] object-cover"
-                            />
+          width={810}
+          height={1195}
+          loading="lazy"
+          decoding="async"
+        />
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
                                 <h3 className="text-white text-2xl font-bold">Eric Williams</h3>
                                 <p className="text-[#00A693] font-medium">Founder & Chief Executive Officer</p>
@@ -60,7 +64,7 @@ export default function CeoMessage() {
                             Leadership With <span className="text-[#00A693]">Purpose</span>
                         </motion.h2>
                         <p className="text-gray-300 leading-8 text-lg mb-4">
-                            At <span className="text-[#00A693] font-semibold">Skylift Group</span>, we believe every brand has a story worth telling and a future worth building. As CEO, my mission is to ensure our team brings that vision to life for every client we serve.
+                            At <span className="text-[#00A693] font-semibold">Sky Lift Group</span>, we believe every brand has a story worth telling and a future worth building. As CEO, my mission is to ensure our team brings that vision to life for every client we serve.
                         </p>
                         <p className="text-gray-300 leading-8 text-lg">
                             We don't just chase trends, we set them. Our work is driven by curiosity, shaped by strategy and measured by the real impact we create for the businesses who trust us.
@@ -96,7 +100,7 @@ export default function CeoMessage() {
 
                         <div className="space-y-5 text-gray-300 leading-8 text-base md:text-lg">
                             <p>
-                                When we started <span className="text-[#00A693] font-semibold">Skylift Group</span>, the goal was simple, build an agency that treats every client like a partner and every project like a promise. Years later, that principle still guides every decision we make.
+                                When we started <span className="text-[#00A693] font-semibold">Sky Lift Group</span>, the goal was simple, build an agency that treats every client like a partner and every project like a promise. Years later, that principle still guides every decision we make.
                             </p>
                             <p>
                                 The digital world moves fast. Algorithms change, platforms evolve and audience behavior shifts almost overnight. In this environment, businesses need more than a service provider, they need a team that listens closely, thinks strategically and executes with care.
@@ -112,7 +116,7 @@ export default function CeoMessage() {
                         {/* Signature */}
                         <div className="mt-10 pt-6 border-t border-white/10">
                             <p className="text-[#00A693] text-2xl font-bold italic mb-1">Eric Williams</p>
-                            <p className="text-gray-400 text-sm">Founder & CEO, Skylift Group</p>
+                            <p className="text-gray-400 text-sm">Founder & CEO, Sky Lift Group</p>
                         </div>
                     </motion.div>
                 </div>
@@ -142,7 +146,7 @@ export default function CeoMessage() {
                             Behind every successful campaign is a team obsessed with the details. As <span className="text-[#00A693] font-semibold">Co-Founder</span>, I focus on the people, systems and processes that turn bold ideas into real, measurable outcomes.
                         </p>
                         <p className="text-gray-300 leading-8 text-lg">
-                            Strategy means little without execution. My role is to make sure the brilliant thinking that happens at Skylift Group reaches the world, on time, on brand and beyond expectations.
+                            Strategy means little without execution. My role is to make sure the brilliant thinking that happens at Sky Lift Group reaches the world, on time, on brand and beyond expectations.
                         </p>
                     </motion.div>
 
@@ -157,10 +161,14 @@ export default function CeoMessage() {
                         <div className="absolute -inset-4 bg-gradient-to-bl from-[#00A693] to-[#11b9a6] rounded-3xl blur-2xl opacity-30" />
                         <div className="relative overflow-hidden rounded-3xl shadow-2xl border border-white/10">
                             <img
-                                src="/assets/co-founder.jpeg"
-                                alt="Co-Founder of Skylift Group"
+                                src="/assets/co-founder.webp"
+                                alt="Co-Founder of Sky Lift Group"
                                 className="w-full h-[500px] object-cover"
-                            />
+          width={842}
+          height={865}
+          loading="lazy"
+          decoding="async"
+        />
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
                                 <h3 className="text-white text-2xl font-bold">Jason Roy</h3>
                                 <p className="text-[#00A693] font-medium">Co-Founder & Chief Operating Officer</p>
@@ -208,7 +216,7 @@ export default function CeoMessage() {
 
                         <div className="space-y-5 text-gray-300 leading-8 text-base md:text-lg">
                             <p>
-                                Eric and I built <span className="text-[#00A693] font-semibold">Skylift Group</span> around a shared belief, that great work comes from great people who care deeply about the outcome. Vision sets our direction, but disciplined execution is what gets us there.
+                                Eric and I built <span className="text-[#00A693] font-semibold">Sky Lift Group</span> around a shared belief, that great work comes from great people who care deeply about the outcome. Vision sets our direction, but disciplined execution is what gets us there.
                             </p>
                             <p>
                                 Every project that comes through our doors is treated with the same rigor, whether it is a startup finding its voice or an established brand reaching for its next level. We sweat the details so our clients never have to.
@@ -224,7 +232,7 @@ export default function CeoMessage() {
                         {/* Signature */}
                         <div className="mt-10 pt-6 border-t border-white/10">
                             <p className="text-[#00A693] text-2xl font-bold italic mb-1">Jason Roy</p>
-                            <p className="text-gray-400 text-sm">Co-Founder & COO, Skylift Group</p>
+                            <p className="text-gray-400 text-sm">Co-Founder & COO, Sky Lift Group</p>
                         </div>
                     </motion.div>
                 </div>

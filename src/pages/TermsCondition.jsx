@@ -150,17 +150,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
 
 const TermsConditions = () => {
 
-  useSeo({
-    title: "Terms & Conditions | Sky Lift Group – AI & Digital Services Agreement",
-    description:
-      "Review the Terms & Conditions for Sky Lift Group’s AI chatbots, automation systems, SEO, PPC, and digital marketing services.",
-    canonical: "https://www.skyliftgroup.com/terms-conditions"
-  });
+  useSeo(pageSeo("/terms-conditions"));
 
   return (
     <section className="relative py-20 bg-[#0a0a0a] overflow-hidden">

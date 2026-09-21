@@ -14,6 +14,7 @@ import SliderBar from "./Sliderbar";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const services = [
     {
@@ -72,19 +73,14 @@ const Seo = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo({
-        title: "SEO & Digital Marketing Services | Sky Lift Group",
-        description:
-            "Sky Lift Group provides expert SEO and digital marketing services to improve website rankings, drive traffic, and grow your business online.",
-        canonical: "https://www.skyliftgroup.com/services/seo"
-    });
+    useSeo(pageSeo("/services/seo"));
 
     return (
         <div className="w-full">
             {/* HERO SECTION */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/seo.jpg")` }}
+                style={{ backgroundImage: `url("/assets/seo.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -274,7 +270,12 @@ const Seo = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/seo-side.jpg" alt="Seo" className="rounded-2xl shadow-lg" />
+                            <img src="/assets/seo-side.webp" alt="Seo" className="rounded-2xl shadow-lg"
+          width={612}
+          height={375}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>

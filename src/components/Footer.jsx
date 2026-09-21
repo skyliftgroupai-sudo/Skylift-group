@@ -25,10 +25,14 @@ export const Footer = () => {
           <div className="flex items-center gap-3">
             <Link to='/'>
               <img
-                src="/assets/skyliftlogo.png"
+                src="/assets/skyliftlogo.webp"
                 alt="Sky Lift Group"
                 className="h-auto w-40 object-cover"
-              />
+          width={612}
+          height={408}
+          loading="lazy"
+          decoding="async"
+        />
             </Link>
           </div>
           <p className="text-gray-300 text-md font-medium leading-relaxed">

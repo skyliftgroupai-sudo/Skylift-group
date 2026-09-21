@@ -74,11 +74,14 @@ export const Header = () => {
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-3">
                         <img
-                            src="/assets/skyliftlogo.png"
+                            src="/assets/skyliftlogo.webp"
                             alt="Sky Lift Group"
                             className={`w-44 object-contain transition-all duration-300
     ${scrolled ? "opacity-100" : "opacity-90"}
   `}
+                            width={612}
+                            height={408}
+                            decoding="async"
                         />
                     </Link>
 
@@ -230,7 +233,14 @@ export const Header = () => {
                     className={`md:hidden fixed top-0 left-0 h-screen w-full bg-white z-50 transform transition-transform duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
                 >
                     <div className="flex items-center justify-between p-2 border-b">
-                        <img src="/assets/sky-lift-logo.png" className="w-32 h-[32] object-contain" />
+                        <img
+                            src="/assets/sky-lift-logo.webp"
+                            alt="Sky Lift Group"
+                            className="w-32 h-auto object-contain"
+                            width={1536}
+                            height={1024}
+                            decoding="async"
+                        />
                         <button
                             onClick={() => setIsMenuOpen(false)}
                             className="text-red-500 hover:text-[#00A693] transition cursor-pointer"

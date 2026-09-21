@@ -5,6 +5,7 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const services = [
     {
@@ -64,12 +65,7 @@ const AIWorkflowAutomation = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo({
-        title: "AI Workflow Automation Services | Sky Lift Group",
-        description:
-            "Sky Lift Group delivers intelligent AI workflow automation that streamlines processes, eliminates manual tasks, and scales your business with smart automation.",
-        canonical: "https://www.skyliftgroup.com/services/ai-workflows"
-    });
+    useSeo(pageSeo("/services/ai-workflows"));
 
 
     return (
@@ -77,7 +73,7 @@ const AIWorkflowAutomation = () => {
             {/* HERO SECTION */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/aiworkflow.png")` }}
+                style={{ backgroundImage: `url("/assets/aiworkflow.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -283,7 +279,12 @@ const AIWorkflowAutomation = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/workflowai.png" alt="AI Workflow Automation" className="rounded-2xl shadow-lg w-full h-full object-cover" />
+                            <img src="/assets/workflowai.webp" alt="AI Workflow Automation" className="rounded-2xl shadow-lg w-full h-full object-cover"
+          width={1200}
+          height={1500}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>

@@ -2,24 +2,19 @@ import { motion } from "framer-motion";
 import { Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 import SliderBar from "./Sliderbar";
 import useSeo from "../hooks/useSeo";
-import "flag-icons/css/flag-icons.min.css";
+import { pageSeo } from "../lib/seo-config";
 
 const Contact = () => {
 
 
-  useSeo({
-    title: "Contact Us | Sky Lift Group – Get in Touch",
-    description:
-      "Get in touch with Sky Lift Group. Contact us for inquiries about digital marketing, SEO, web design, PPC, and social media services to grow your business.",
-    canonical: "https://www.skyliftgroup.com/contact"
-  });
+  useSeo(pageSeo("/contact"));
 
 
   return (
     <div className="flex flex-col">
       <section
         className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url("/assets/contact.jpg")` }}
+        style={{ backgroundImage: `url("/assets/contact.webp")` }}
       >
         <div className="absolute inset-0 bg-black/50" />
 

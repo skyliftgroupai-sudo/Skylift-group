@@ -5,22 +5,18 @@ import CTASection from "./CtaSection";
 import SliderBar from "./Sliderbar";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 import CeoMessage from "../components/CEO";
 
 export default function AboutUs() {
 
-    useSeo({
-        title: "About Us | Sky Lift Group – Digital Marketing Experts",
-        description:
-            "Learn about Sky Lift Group, a results-driven digital marketing agency helping brands grow through SEO, social media, PPC, and web design.",
-        canonical: "https://www.skyliftgroup.com/about"
-    });
+    useSeo(pageSeo("/about-us"));
 
     return (
         <div className="w-full overflow-hidden bg-[#0a0a0a]">
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/servicebgimg.jpg")` }}
+                style={{ backgroundImage: `url("/assets/servicebgimg.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/80" />
 
@@ -30,7 +26,7 @@ export default function AboutUs() {
                     transition={{ duration: 0.8 }}
                     className="relative text-white text-4xl md:text-6xl font-bold text-center"
                 >
-                    About Skylift Group
+                    About Sky Lift Group — AI Marketing for Home Service Businesses
                 </motion.h1>
 
                 <motion.p
@@ -64,7 +60,7 @@ export default function AboutUs() {
                         >
                             Our Story
                         </motion.h2>
-                        <span className="text-[#00A693] text-semibold">Skylift Group</span> began with a simple idea: support businesses with smart digital
+                        <span className="text-[#00A693] text-semibold">Sky Lift Group</span> began with a simple idea: support businesses with smart digital
                         solutions that actually make a difference. What started as a small team grew into
                         a full-service agency trusted by clients worldwide. Our focus is on real results,
                         clear communication and long-term success.
@@ -72,7 +68,7 @@ export default function AboutUs() {
 
                     {/* Image */}
                     <motion.img
-                        src="/assets/ourstory.jpg"
+                        src="/assets/ourstory.webp"
                         alt="Our Story"
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}

@@ -11,16 +11,12 @@ import FAQSection from "./Faq";
 import Counter from "./Counter";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 
 const Home = () => {
 
-  useSeo({
-    title: "Sky Lift Group – Digital Marketing, SEO & Web Solutions",
-    description:
-      "Sky Lift Group provides expert digital marketing, SEO, web design, PPC, and social media solutions to help businesses grow online.",
-    canonical: "https://www.skyliftgroup.com/"
-  });
+  useSeo(pageSeo("/"));
 
   return (
     <div className="flex flex-col">
@@ -33,6 +29,7 @@ const Home = () => {
           width={1920}
           height={1080}
           className="absolute inset-0 w-full h-full object-cover -z-10"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-black/80 -z-10"></div>
 
@@ -43,6 +40,14 @@ const Home = () => {
         </div> */}
 
         <div className="container mx-auto px-6 py-20 z-10">
+          {/* The page's single H1. The rotating carousel headlines below it are H2s:
+              react-slick clones slides for the infinite loop, so an H1 in there
+              shipped six H1s to Googlebot and left the page with no clear topic.
+              This line also states the entity plainly, which is what separates
+              "Sky Lift Group" from the unrelated "skylift" lift-equipment results. */}
+          <h1 className="text-center text-base md:text-lg font-semibold tracking-wide text-[#00A693] mb-8">
+            Sky Lift Group — AI Automation and Marketing Agency for Home Service Businesses
+          </h1>
           <motion.div
             className="space-y-6"
             initial={{ opacity: 0, x: -40 }}

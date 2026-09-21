@@ -5,6 +5,7 @@ import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 const services = [
     {
@@ -64,12 +65,7 @@ const FivestarReviews = () => {
     const [openIndex, setOpenIndex] = useState(null);
     const toggleFAQ = (index) => setOpenIndex(openIndex === index ? null : index);
 
-    useSeo({
-        title: "Five Star views Services | Sky Lift Group",
-        description:
-            "Sky Lift Group delivers high-performing Meta Ads campaigns on Facebook and Instagram to drive leads, sales, and scalable growth.",
-        canonical: "https://www.skyliftgroup.com/services/review"
-    });
+    useSeo(pageSeo("/services/reviews"));
 
 
     return (
@@ -77,7 +73,7 @@ const FivestarReviews = () => {
             {/* HERO SECTION */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/five-bg.jpeg")` }}
+                style={{ backgroundImage: `url("/assets/five-bg.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -285,7 +281,12 @@ const FivestarReviews = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/five-star.jpg" alt="TikTok ADs" className="rounded-2xl shadow-lg" />
+                            <img src="/assets/five-star.webp" alt="TikTok ADs" className="rounded-2xl shadow-lg"
+          width={612}
+          height={308}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>

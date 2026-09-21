@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 import OurService from "./OurServices";
 import CTASection from "./CtaSection";
 import { useEffect } from "react";
@@ -8,12 +9,7 @@ import { useEffect } from "react";
 
 export default function ServicesAttractive() {
 
-  useSeo({
-    title: "AI Automation Services | Sky Lift Group – Chatbots, Voice Agents & Smart Marketing",
-    description:
-      "Sky Lift Group provides AI chatbots, AI voice agents, workflow automation, SEO, PPC, and smart digital marketing solutions that help businesses generate leads, automate operations, and scale revenue.",
-    canonical: "https://www.skyliftgroup.com/services"
-  });
+  useSeo(pageSeo("/services"));
 
 
   useEffect(() => {

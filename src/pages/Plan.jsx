@@ -18,7 +18,11 @@ export default function Plan() {
               src="/assets/plan-mainimg.avif"
               alt="Charts and graphs"
               className="w-full h-64 md:h-80 object-cover rounded-2xl brightness-75 contrast-110"
-            />
+          width={900}
+          height={600}
+          loading="lazy"
+          decoding="async"
+        />
           </motion.div>
 
           <motion.div
@@ -32,7 +36,11 @@ export default function Plan() {
               src="/assets/plan-rightsmall.avif"
               alt="Creative marketing team brainstorming"
               className="w-full h-48 object-cover rounded-2xl brightness-75 contrast-110"
-            />
+          width={800}
+          height={600}
+          loading="lazy"
+          decoding="async"
+        />
           </motion.div>
 
           <motion.div
@@ -46,7 +54,11 @@ export default function Plan() {
               src="/assets/plan-leftsmall.avif"
               alt="Digital marketing strategy meeting"
               className="w-full h-48 object-cover rounded-2xl brightness-75 contrast-110"
-            />
+          width={800}
+          height={533}
+          loading="lazy"
+          decoding="async"
+        />
           </motion.div>
         </div>
 

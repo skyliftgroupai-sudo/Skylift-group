@@ -14,6 +14,7 @@ import SliderBar from "./Sliderbar";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
+import { pageSeo } from "../lib/seo-config";
 
 
 const services = [
@@ -77,19 +78,14 @@ const Designweb = () => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
-    useSeo({
-        title: "Website Design & Development | Sky Lift Group",
-        description:
-            "Sky Lift Group provides professional website design and development services to create stunning, responsive, and SEO-friendly websites that drive business growth.",
-        canonical: "https://www.skyliftgroup.com/services/web-design"
-    });
+    useSeo(pageSeo("/services/web-design"));
 
     return (
         <div className="w-full">
             {/* SECTION 1 */}
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/web-design.jpg")` }}
+                style={{ backgroundImage: `url("/assets/web-design.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/70" />
 
@@ -281,7 +277,12 @@ const Designweb = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/web-side.jpg" alt="web-development" className="rounded-2xl shadow-lg" />
+                            <img src="/assets/web-side.webp" alt="web-development" className="rounded-2xl shadow-lg"
+          width={1254}
+          height={836}
+          loading="lazy"
+          decoding="async"
+        />
                         </div>
                     </motion.div>
                 </div>
