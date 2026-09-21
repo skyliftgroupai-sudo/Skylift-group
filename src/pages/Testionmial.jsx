@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Slider from "react-slick";
 import { Star, User, UserCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { testimonials } from "../lib/testimonials";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -23,20 +24,15 @@ export default function Testimonials() {
     ],
   };
 
-  const reviews = [
-    { name: "Oliver Bennett", review: "Great experience. The service was fast, clear, and delivered exactly what I needed." },
-    { name: "Andrew Collins", review: "Professional and reliable. My project turned out better than I expected." },
-    { name: "Rebecca Morgan", review: "Outstanding quality and attention to detail. Highly recommended!" },
-    { name: "Thomas Reed", review: "Very smooth experience. The communication was clear and everything was on time." },
-    { name: "Hannah Walker", review: "Excellent work. The results were even better than what I had in mind." },
-    { name: "Matthew Brooks", review: "Fast delivery and amazing quality. I’ll definitely come back again." },
-  ];
 
 
   // Fix slick slider re-render issue on resize
   useEffect(() => {
     setTimeout(() => window.dispatchEvent(new Event("resize")), 300);
   }, []);
+
+  // No real testimonials yet — show nothing rather than invented ones.
+  if (testimonials.length === 0) return null;
 
   return (
     <section className="relative py-15 sm:py-18 overflow-hidden bg-[#0a0a0a]">
@@ -68,7 +64,7 @@ export default function Testimonials() {
       {/* Slider */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <Slider {...sliderSettings}>
-          {reviews.map((r, i) => (
+          {testimonials.map((r, i) => (
             <div key={i} className="px-3 sm:px-4 cursor-grab">
               <motion.div
                 className="relative group bg-white/5 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/10 
@@ -84,6 +80,12 @@ export default function Testimonials() {
                   </div>
                   <div>
                     <h3 className="text-white text-base sm:text-lg font-semibold">{r.name}</h3>
+                    {r.business && (
+                      <p className="text-gray-400 text-xs sm:text-sm">
+                        {r.business}
+                        {r.location ? ` — ${r.location}` : ""}
+                      </p>
+                    )}
                     <div className="flex text-[#00A693] mt-1">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-current" />
@@ -92,7 +94,7 @@ export default function Testimonials() {
                   </div>
                 </div>
 
-                <p className="text-gray-300 text-sm sm:text-base leading-relaxed">{r.review}</p>
+                <p className="text-gray-300 text-sm sm:text-base leading-relaxed">{r.quote}</p>
               </motion.div>
             </div>
           ))}

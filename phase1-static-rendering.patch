@@ -1,0 +1,1157 @@
+From ca2fe8fbbd7239de2bb745184d37d73c4b107617 Mon Sep 17 00:00:00 2001
+From: Sky Lift Group <usamash1010@gmail.com>
+Date: Mon, 21 Sep 2026 22:13:18 +0000
+Subject: [PATCH] Phase 1: render every page to static HTML, fix FAQ and mobile
+ defects
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The site shipped as a client-only SPA: every route's HTML was ~5.9KB of head
+tags wrapped around an empty <div id="root">. Google can render JavaScript but
+queues it, and most AI/answer-engine crawlers (GPTBot, ClaudeBot, PerplexityBot)
+do not render it at all — so to them all 31 pages were blank. That is the
+largest single reason pages sat crawled-but-not-indexed.
+
+Static rendering
+- Extract the route table into src/routes.jsx so the browser app and the build
+  share one copy and cannot drift.
+- Add src/entry-server.jsx (StaticRouter) and render every route at build time
+  with React 19's prerender(), which resolves the lazy() route chunks instead of
+  emitting Suspense fallbacks. The rendered markup is written into #root.
+- Keep react/react-dom external in the SSR build. Bundling them produced a
+  second React copy and "invalid hook call"; leaving the CJS deps external
+  produced a module namespace object where a component was expected, which made
+  the render fail silently and fall back to a blank page. noExternal + an
+  explicit React external is the combination that works.
+- The prerender step now fails the build if any route renders with no
+  meaningful content, so a blank page cannot ship again unnoticed.
+
+Result: pages now serve 242-2449 words of real HTML with no JavaScript.
+
+FAQ answers were invisible to crawlers
+- /faq and the homepage FAQ section only mounted an answer while its accordion
+  item was open, so the HTML contained six questions and zero answers. Answers
+  are now always in the DOM and collapsed by height. /faq went from 164 to 275
+  rendered words, and FAQ schema (Phase 2) will now describe text that is
+  actually on the page.
+- Accordion buttons got aria-expanded/aria-controls, and the /faq questions are
+  now h2 rather than span.
+
+Mobile
+- Sections animating in from `x: 40` sat 40px right of the viewport until
+  scrolled into view, giving /contact and several service pages a horizontal
+  scrollbar on a phone. html/body now use overflow-x: clip — clip rather than
+  hidden so the page does not become a scroll container and break the sticky
+  header.
+
+Duplicate host
+- skylift-group.vercel.app served the entire site on a second hostname with no
+  redirect. It now 308s to the canonical www host, same as the apex already did.
+
+Tooling
+- scripts/audit-seo.mjs rewritten to crawl dist/ with no JavaScript and report
+  titles, descriptions, canonicals, h1s, word counts, schema, broken internal
+  links, orphans and sitemap disagreement, failing on anything critical.
+- scripts/smoke-test.mjs added: loads routes in Chromium at desktop and phone
+  widths and checks hydration, h1 count, horizontal overflow and JSON-LD
+  parsing. Run with `npm run test:smoke`.
+- Maintenance page moved back to a lazy import so it stays out of the main
+  bundle while maintenance mode is off.
+
+Verified: audit reports 0 critical / 0 broken links / 0 orphans / 0 duplicate
+titles or descriptions; 20/20 page loads clean across desktop and mobile.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_015xizi4WA8RADiKoubjWVa3
+---
+ package.json           |   5 +-
+ public/rss.xml         |   2 +-
+ scripts/audit-seo.mjs  | 231 +++++++++++++++++++++++++++++------------
+ scripts/prerender.mjs  | 124 ++++++++++++++++++----
+ scripts/smoke-test.mjs |  90 ++++++++++++++++
+ src/App.jsx            |  77 ++------------
+ src/entry-server.jsx   |  25 +++++
+ src/index.css          |  11 ++
+ src/pages/Faq.jsx      |  34 +++---
+ src/pages/Faqs.jsx     |  35 ++++---
+ src/routes.jsx         |  73 +++++++++++++
+ vercel.json            |  88 +++++++++++++---
+ vite.config.js         |  11 ++
+ 13 files changed, 601 insertions(+), 205 deletions(-)
+ create mode 100644 scripts/smoke-test.mjs
+ create mode 100644 src/entry-server.jsx
+ create mode 100644 src/routes.jsx
+
+diff --git a/package.json b/package.json
+index 8480f94..0fe0c54 100644
+--- a/package.json
++++ b/package.json
+@@ -6,11 +6,12 @@
+   "scripts": {
+     "dev": "vite",
+     "generate:seo": "node scripts/generate-seo-files.mjs",
+-    "build": "node scripts/generate-seo-files.mjs && vite build && node scripts/prerender.mjs",
++    "build": "node scripts/generate-seo-files.mjs && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+     "lint": "eslint .",
+     "preview": "vite preview",
+     "audit:seo": "node scripts/audit-seo.mjs",
+-    "optimize:images": "node scripts/optimize-images.mjs"
++    "optimize:images": "node scripts/optimize-images.mjs",
++    "test:smoke": "node scripts/smoke-test.mjs / /services /services/missed-call-text-back /services/ai-chatbots /faq /blog /about-us /contact /work /book"
+   },
+   "dependencies": {
+     "@hookform/resolvers": "^5.2.2",
+diff --git a/public/rss.xml b/public/rss.xml
+index 1e5456b..8234d9e 100644
+--- a/public/rss.xml
++++ b/public/rss.xml
+@@ -6,7 +6,7 @@
+     <description>AI marketing, local SEO, and lead generation guides for local and home service businesses.</description>
+     <language>en-us</language>
+     <atom:link href="https://www.skyliftgroup.com/rss.xml" rel="self" type="application/rss+xml" />
+-    <lastBuildDate>Mon, 21 Sep 2026 18:50:19 GMT</lastBuildDate>
++    <lastBuildDate>Mon, 21 Sep 2026 22:12:03 GMT</lastBuildDate>
+     <item>
+       <title>Is Text Message Marketing Worth It for Home Service Businesses?</title>
+       <link>https://www.skyliftgroup.com/blog/text-message-marketing-home-service-business</link>
+diff --git a/scripts/audit-seo.mjs b/scripts/audit-seo.mjs
+index 4abce3a..c80d602 100644
+--- a/scripts/audit-seo.mjs
++++ b/scripts/audit-seo.mjs
+@@ -1,84 +1,183 @@
+-// Audits the prerendered HTML in dist/ — the exact bytes Googlebot fetches before
+-// it runs any JavaScript. Flags canonical mismatches, over-length or duplicate
+-// titles and descriptions, and missing tags.
+-//
+-//   npm run build && node scripts/audit-seo.mjs
+-
+-import { readFileSync, readdirSync, statSync } from "node:fs";
+-import { join, relative, dirname } from "node:path";
++// Crawls the built output in dist/ the way a search engine would: raw HTML only,
++// no JavaScript. Reports the things that actually stop a page from being indexed
++// or ranked. Run with `npm run audit:seo` after `npm run build`.
++
++import { readFileSync, existsSync } from "node:fs";
++import { execSync } from "node:child_process";
+ import { fileURLToPath } from "node:url";
++import { dirname, join } from "node:path";
+ 
+ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+ const dist = join(root, "dist");
+ const SITE = "https://www.skyliftgroup.com";
+ 
+-function walk(dir, out = []) {
+-  for (const entry of readdirSync(dir)) {
+-    const full = join(dir, entry);
+-    if (statSync(full).isDirectory()) {
+-      if (entry !== "assets") walk(full, out);
+-    } else if (entry === "index.html" || entry === "404.html") {
+-      out.push(full);
+-    }
+-  }
+-  return out;
++if (!existsSync(dist)) {
++  console.error("dist/ not found — run `npm run build` first.");
++  process.exit(1);
+ }
+ 
+-const grab = (html, re) => {
+-  const m = re.exec(html);
++const files = execSync(`find ${dist} -name "*.html"`).toString().trim().split("\n").sort();
++const pages = [];
++const issues = [];
++const add = (sev, route, msg) => issues.push({ sev, route, msg });
++
++function attr(tag, name) {
++  const m = tag.match(new RegExp(`${name}=["']([^"']*)["']`, "i"));
+   return m ? m[1] : "";
+-};
++}
+ 
+-const rows = walk(dist).map((file) => {
++for (const file of files) {
+   const html = readFileSync(file, "utf8");
+-  const rel = relative(dist, file).split("\\").join("/");
+-  const url = "/" + rel.replace(/index\.html$/, "").replace(/\/$/, "");
+-  return {
+-    url: url === "/" ? "/" : url,
+-    title: grab(html, /<title>([^<]*)<\/title>/i),
+-    canonical: grab(html, /rel="canonical" href="([^"]*)"/i),
+-    description: grab(html, /name="description" content="([^"]*)"/i),
+-    ogUrl: grab(html, /property="og:url" content="([^"]*)"/i),
+-    ogImage: grab(html, /property="og:image" content="([^"]*)"/i),
+-    robots: grab(html, /name="robots" content="([^"]*)"/i),
+-  };
+-});
+-
+-const titleCounts = new Map();
+-const descCounts = new Map();
+-for (const r of rows) {
+-  titleCounts.set(r.title, (titleCounts.get(r.title) || 0) + 1);
+-  descCounts.set(r.description, (descCounts.get(r.description) || 0) + 1);
++  const route = file.replace(dist, "").replace(/\/index\.html$/, "") || "/";
++  if (route === "/googlee8ada53be5805e5a.html") continue; // Search Console verification file
++
++  const head = (html.match(/<head[\s\S]*?<\/head>/i) || [""])[0];
++  const body = (html.match(/<div id="root">[\s\S]*<\/div>/i) || [""])[0];
++
++  const title = (head.match(/<title>([\s\S]*?)<\/title>/i) || [])[1] || "";
++  const desc = attr((head.match(/<meta\s+name="description"[^>]*>/i) || [""])[0], "content");
++  const canonical = attr((head.match(/<link\s+rel="canonical"[^>]*>/i) || [""])[0], "href");
++  const robots = attr((head.match(/<meta\s+name="robots"[^>]*>/i) || [""])[0], "content");
++
++  const h1s = [...body.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/gi)].map((m) =>
++    m[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim()
++  );
++  const h2s = [...body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)].length;
++
++  const text = body
++    .replace(/<script[\s\S]*?<\/script>/gi, "")
++    .replace(/<style[\s\S]*?<\/style>/gi, "")
++    .replace(/<[^>]+>/g, " ")
++    .replace(/&[a-z]+;/gi, " ")
++    .replace(/\s+/g, " ")
++    .trim();
++  const words = text ? text.split(" ").length : 0;
++
++  const imgs = [...body.matchAll(/<img[^>]*>/gi)].map((m) => m[0]);
++  const links = [...body.matchAll(/<a[^>]*href="([^"]*)"[^>]*>/gi)].map((m) => m[1]);
++
++  const ld = [...head.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]);
++  const ldTypes = [];
++  ld.forEach((raw, i) => {
++    try {
++      const parsed = JSON.parse(raw.replace(/\\u003c/g, "<"));
++      const walk = (n) => {
++        if (!n || typeof n !== "object") return;
++        if (Array.isArray(n)) return n.forEach(walk);
++        if (n["@type"]) ldTypes.push([].concat(n["@type"]).join("/"));
++        if (n["@graph"]) walk(n["@graph"]);
++      };
++      walk(parsed);
++      if (!parsed["@context"]) add("CRITICAL", route, `JSON-LD block ${i} has no @context`);
++    } catch (e) {
++      add("CRITICAL", route, `JSON-LD block ${i} is not valid JSON: ${e.message}`);
++    }
++  });
++
++  pages.push({ route, title, desc, canonical, robots, h1s, h2s, words, imgs, links, ldTypes });
++}
++
++const byRoute = new Map(pages.map((p) => [p.route, p]));
++const titles = new Map();
++const descs = new Map();
++for (const p of pages) {
++  titles.set(p.title, (titles.get(p.title) || 0) + 1);
++  descs.set(p.desc, (descs.get(p.desc) || 0) + 1);
++}
++
++for (const p of pages) {
++  const indexable = !/noindex/i.test(p.robots);
++
++  if (!p.title) add("CRITICAL", p.route, "no <title>");
++  else if (p.title.length > 60) add("MEDIUM", p.route, `title is ${p.title.length} chars (>60, will truncate)`);
++  if (titles.get(p.title) > 1) add("HIGH", p.route, "duplicate <title> shared with another page");
++
++  if (!p.desc) add("HIGH", p.route, "no meta description");
++  else if (p.desc.length > 155) add("MEDIUM", p.route, `meta description is ${p.desc.length} chars (>155)`);
++  if (descs.get(p.desc) > 1) add("HIGH", p.route, "duplicate meta description shared with another page");
++
++  if (indexable) {
++    const expected = `${SITE}${p.route === "/" ? "/" : p.route}`;
++    if (!p.canonical) add("CRITICAL", p.route, "no canonical");
++    else if (p.canonical !== expected) add("CRITICAL", p.route, `canonical points to ${p.canonical}, not itself`);
++  }
++
++  if (p.h1s.length === 0) add("HIGH", p.route, "no <h1> in the server-rendered HTML");
++  else if (p.h1s.length > 1) add("MEDIUM", p.route, `${p.h1s.length} <h1> tags: ${p.h1s.join(" | ").slice(0, 120)}`);
++
++  if (indexable && p.words < 300) add("HIGH", p.route, `thin: only ${p.words} words of rendered text`);
++
++  for (const img of p.imgs) {
++    const src = attr(img, "src");
++    if (!/alt=/i.test(img)) add("MEDIUM", p.route, `image missing alt: ${src}`);
++    // An <img> with an explicit height utility (h-full inside a sized box, h-[350px], h-48)
++    // already has its box settled before the file loads, so it cannot shift layout.
++    const sized = /\b(h-full|h-\[|h-\d)/.test(attr(img, "class"));
++    if (!sized && (!attr(img, "width") || !attr(img, "height")))
++      add("MEDIUM", p.route, `image has no width/height and no fixed height (layout shift): ${src}`);
++    if (/\.(png|jpe?g)(\?|$)/i.test(src)) add("LOW", p.route, `image not served as WebP/AVIF: ${src}`);
++  }
++
++  // Internal links that point at a route with no built page.
++  for (const href of p.links) {
++    if (!href.startsWith("/") || href.startsWith("//")) continue;
++    const clean = href.split("#")[0].split("?")[0].replace(/\/$/, "") || "/";
++    if (/\.(webp|png|jpe?g|svg|pdf|xml|txt|ico)$/i.test(clean)) continue;
++    if (!byRoute.has(clean)) add("HIGH", p.route, `internal link to a page that does not exist: ${href}`);
++  }
+ }
+ 
+-let problems = 0;
+-console.log("      TLEN DLEN  URL");
+-for (const r of rows.sort((a, b) => a.url.localeCompare(b.url))) {
+-  const isNoindex = Boolean(r.robots);
+-  const expected = SITE + (r.url === "/" ? "/" : r.url);
+-  const flags = [];
+-
+-  if (!isNoindex) {
+-    if (r.canonical !== expected) flags.push(`CANONICAL="${r.canonical}"`);
+-    if (r.ogUrl !== expected) flags.push(`OG:URL="${r.ogUrl}"`);
+-  } else if (r.canonical) {
+-    flags.push("NOINDEX PAGE STILL HAS A CANONICAL");
++// Orphan check: an indexable page nothing else links to.
++const linkedTo = new Set();
++for (const p of pages) {
++  for (const href of p.links) {
++    if (!href.startsWith("/")) continue;
++    const clean = href.split("#")[0].split("?")[0].replace(/\/$/, "") || "/";
++    if (clean !== p.route) linkedTo.add(clean);
+   }
+-  if (!r.title) flags.push("NO TITLE");
+-  else if (r.title.length > 60) flags.push("TITLE OVER 60");
+-  if (!r.description) flags.push("NO DESCRIPTION");
+-  else if (r.description.length > 155) flags.push("DESCRIPTION OVER 155");
+-  if (!r.ogImage) flags.push("NO OG:IMAGE");
+-  if (titleCounts.get(r.title) > 1) flags.push("DUPLICATE TITLE");
+-  if (descCounts.get(r.description) > 1) flags.push("DUPLICATE DESCRIPTION");
+-
+-  if (flags.length) problems++;
++}
++for (const p of pages) {
++  if (/noindex/i.test(p.robots) || p.route === "/") continue;
++  if (!linkedTo.has(p.route)) add("HIGH", p.route, "orphan: no other page links to it");
++}
++
++// Sitemap agreement.
++const sitemap = readFileSync(join(root, "public", "sitemap.xml"), "utf8");
++const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
++for (const url of sitemapUrls) {
++  const r = url.replace(SITE, "").replace(/\/$/, "") || "/";
++  if (!byRoute.has(r)) add("CRITICAL", r, "in sitemap.xml but no page was built for it");
++  else if (/noindex/i.test(byRoute.get(r).robots)) add("CRITICAL", r, "in sitemap.xml but marked noindex");
++}
++for (const p of pages) {
++  if (/noindex/i.test(p.robots)) continue;
++  const url = `${SITE}${p.route === "/" ? "/" : p.route}`;
++  if (!sitemapUrls.includes(url)) add("HIGH", p.route, "indexable but missing from sitemap.xml");
++}
++
++// ---- report ----
++const order = { CRITICAL: 0, HIGH: 1, MEDIUM: 2, LOW: 3 };
++issues.sort((a, b) => order[a.sev] - order[b.sev] || a.route.localeCompare(b.route));
++
++console.log(`\nPAGE INVENTORY (${pages.length} pages, raw HTML with no JavaScript)\n`);
++console.log("route".padEnd(56), "words".padStart(6), "h1".padStart(3), "h2".padStart(3), "imgs".padStart(5), " schema");
++for (const p of pages.sort((a, b) => a.route.localeCompare(b.route))) {
+   console.log(
+-    `${flags.length ? "FLAG " : "ok   "} ${String(r.title.length).padStart(4)} ${String(
+-      r.description.length
+-    ).padStart(4)}  ${r.url}${flags.length ? "\n         << " + flags.join("; ") : ""}`
++    p.route.padEnd(56),
++    String(p.words).padStart(6),
++    String(p.h1s.length).padStart(3),
++    String(p.h2s).padStart(3),
++    String(p.imgs.length).padStart(5),
++    " " + (p.ldTypes.join(",") || "none")
+   );
+ }
+ 
+-console.log(`\n${rows.length} pages, ${problems} with problems.`);
+-process.exit(problems ? 1 : 0);
++const counts = issues.reduce((a, i) => ((a[i.sev] = (a[i.sev] || 0) + 1), a), {});
++console.log(
++  `\nISSUES: ${issues.length} total — ` +
++    ["CRITICAL", "HIGH", "MEDIUM", "LOW"].map((s) => `${counts[s] || 0} ${s.toLowerCase()}`).join(", ") +
++    "\n"
++);
++for (const i of issues) console.log(`[${i.sev}] ${i.route} — ${i.msg}`);
++
++process.exit(counts.CRITICAL ? 1 : 0);
+diff --git a/scripts/prerender.mjs b/scripts/prerender.mjs
+index 6568339..71ed7bd 100644
+--- a/scripts/prerender.mjs
++++ b/scripts/prerender.mjs
+@@ -1,22 +1,34 @@
+-// Post-build prerender: writes a static HTML file per route with a UNIQUE
+-// <title>, meta description, canonical, and Open Graph tags baked into the raw
+-// HTML. This is what lets Google index every page as a distinct page instead of
+-// treating them all as duplicates of the homepage.
++// Post-build static render.
+ //
+-// The React app still hydrates normally on top of each file (same #root + script
+-// tags), so behavior is unchanged for users — only the crawlable head differs.
+-// Vercel's catch-all rewrite is a fallback, so these static files are served
+-// first for known routes; unknown routes still fall through to the SPA.
++// Two things happen here, and the second one is the whole point:
++//
++//   1. Every route gets a UNIQUE <title>, meta description, canonical and Open
++//      Graph block baked into the raw HTML.
++//   2. Every route's ACTUAL PAGE CONTENT is rendered to HTML and written into
++//      <div id="root">.
++//
++// Step 2 exists because a Vite SPA ships `<div id="root"></div>` and nothing
++// else. Google will eventually render the JavaScript, but rendering is queued
++// and deferred, which is a large part of why pages sat "crawled, not indexed".
++// The AI/answer-engine crawlers (GPTBot, ClaudeBot, PerplexityBot and friends)
++// mostly do not run JavaScript at all, so to them every page on the site was
++// blank. Rendering at build time removes both problems at once.
++//
++// The React app still hydrates on top of each file, so behavior for real users
++// is unchanged.
+ 
+ import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+ import { fileURLToPath } from "node:url";
+ import { dirname, join } from "node:path";
++import { createElement } from "react";
++import { prerender } from "react-dom/static";
+ import { staticRoutes } from "./seo-routes.js";
+ import { parseFrontmatter } from "../src/lib/frontmatter.js";
+ 
+ const __dirname = dirname(fileURLToPath(import.meta.url));
+ const root = join(__dirname, "..");
+ const dist = join(root, "dist");
++const distSsr = join(root, "dist-ssr");
+ const SITE = "https://www.skyliftgroup.com";
+ const DEFAULT_OG = `${SITE}/og-image.png`;
+ 
+@@ -24,7 +36,13 @@ if (!existsSync(join(dist, "index.html"))) {
+   console.error("[prerender] dist/index.html not found — run vite build first.");
+   process.exit(1);
+ }
++if (!existsSync(join(distSsr, "entry-server.js"))) {
++  console.error("[prerender] dist-ssr/entry-server.js not found — run the --ssr build first.");
++  process.exit(1);
++}
++
+ const template = readFileSync(join(dist, "index.html"), "utf8");
++const { ServerApp } = await import(join(distSsr, "entry-server.js"));
+ 
+ function esc(str = "") {
+   return String(str)
+@@ -41,7 +59,32 @@ function setTag(html, regex, replacement) {
+   return html.replace("</head>", `  ${replacement}\n</head>`);
+ }
+ 
+-function buildHtml({ path, title, description, image, noindex = false }) {
++// Render one route's React tree to HTML. `prerender` (React 19's static API) is
++// used rather than renderToString because the route components are lazy() — it
++// waits for every Suspense boundary to resolve instead of emitting fallbacks.
++async function renderRoute(url) {
++  const { prelude } = await prerender(createElement(ServerApp, { url }));
++  const chunks = [];
++  for await (const chunk of prelude) chunks.push(Buffer.from(chunk));
++  return Buffer.concat(chunks).toString("utf8");
++}
++
++function jsonLdScript(blocks) {
++  const list = blocks.filter(Boolean);
++  if (!list.length) return "";
++  // Escaped so a "</script>" inside any string value cannot break out of the tag.
++  return list
++    .map(
++      (b) =>
++        `<script type="application/ld+json">${JSON.stringify(b).replace(
++          /</g,
++          "\\u003c"
++        )}</script>`
++    )
++    .join("\n  ");
++}
++
++function buildHtml({ path, title, description, image, noindex = false, body = "", jsonLd = [] }) {
+   const url = `${SITE}${path === "/" ? "/" : path}`;
+   const og = image ? (image.startsWith("http") ? image : `${SITE}${image}`) : DEFAULT_OG;
+   let html = template;
+@@ -85,7 +128,26 @@ function buildHtml({ path, title, description, image, noindex = false }) {
+     /<meta\s+property=["']og:image["'][\s\S]*?>/i,
+     `<meta property="og:image" content="${esc(og)}" />`
+   );
+-  return html;
++  html = setTag(
++    html,
++    /<meta\s+name=["']twitter:title["'][\s\S]*?>/i,
++    `<meta name="twitter:title" content="${esc(title)}" />`
++  );
++  html = setTag(
++    html,
++    /<meta\s+name=["']twitter:description["'][\s\S]*?>/i,
++    `<meta name="twitter:description" content="${esc(description)}" />`
++  );
++  html = setTag(
++    html,
++    /<meta\s+name=["']twitter:image["'][\s\S]*?>/i,
++    `<meta name="twitter:image" content="${esc(og)}" />`
++  );
++
++  const extraLd = jsonLdScript(jsonLd);
++  if (extraLd) html = html.replace("</head>", `  ${extraLd}\n</head>`);
++
++  return html.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
+ }
+ 
+ function writeRoute(path, html) {
+@@ -97,16 +159,16 @@ function writeRoute(path, html) {
+ }
+ 
+ // Guard: vercel.json no longer rewrites unknown paths to the SPA shell, so a route
+-// that exists in App.jsx but has no prerendered file would 404 in production.
+-// Fail the build loudly instead of shipping a dead page.
+-const appSource = readFileSync(join(root, "src", "App.jsx"), "utf8");
+-const appRoutes = [...appSource.matchAll(/path="([^"]+)"/g)]
++// that exists in the route table but has no prerendered file would 404 in
++// production. Fail the build loudly instead of shipping a dead page.
++const routeSource = readFileSync(join(root, "src", "routes.jsx"), "utf8");
++const appRoutes = [...routeSource.matchAll(/path="([^"]+)"/g)]
+   .map((m) => m[1])
+   .filter((p) => p !== "*" && !p.includes(":")); // "*" and /blog/:slug are handled separately
+ const uncovered = appRoutes.filter((p) => !(p in staticRoutes));
+ if (uncovered.length) {
+   console.error(
+-    `[prerender] These App.jsx routes have no entry in src/lib/seo-config.js and would 404:\n  ${uncovered.join(
++    `[prerender] These routes have no entry in src/lib/seo-config.js and would 404:\n  ${uncovered.join(
+       "\n  "
+     )}`
+   );
+@@ -114,16 +176,28 @@ if (uncovered.length) {
+ }
+ 
+ let count = 0;
++let emptyBodies = [];
++
++async function emit(path, meta) {
++  const body = await renderRoute(path);
++  // A route that renders to almost nothing means the static render silently
++  // failed. Better to know at build time than to ship another blank page.
++  if (body.replace(/<[^>]+>/g, "").trim().length < 200 && !meta.noindex) {
++    emptyBodies.push(path);
++  }
++  writeRoute(path, buildHtml({ path, ...meta, body }));
++  count++;
++}
+ 
+ // Static routes
+ for (const [path, meta] of Object.entries(staticRoutes)) {
+-  writeRoute(path, buildHtml({ path, ...meta }));
+-  count++;
++  await emit(path, meta);
+ }
+ 
+ // 404 page. Vercel serves dist/404.html with a real HTTP 404 for anything that
+ // does not match a file, which is what stops Google logging bad URLs as soft 404s
+ // or as duplicates of the homepage.
++const notFoundBody = await renderRoute("/__not-found__");
+ writeFileSync(
+   join(dist, "404.html"),
+   buildHtml({
+@@ -131,6 +205,7 @@ writeFileSync(
+     title: "Page Not Found | Sky Lift Group",
+     description: "The page you are looking for does not exist or has been moved.",
+     noindex: true,
++    body: notFoundBody,
+   })
+ );
+ count++;
+@@ -141,14 +216,19 @@ if (existsSync(blogDir)) {
+   for (const file of readdirSync(blogDir).filter((f) => f.endsWith(".md"))) {
+     const { data } = parseFrontmatter(readFileSync(join(blogDir, file), "utf8"));
+     const slug = data.slug || file.replace(/\.md$/, "");
+-    writeRoute(`/blog/${slug}`, buildHtml({
+-      path: `/blog/${slug}`,
++    await emit(`/blog/${slug}`, {
+       title: `${data.seoTitle || data.title || "Blog"} | Sky Lift Group`,
+       description: data.description || data.excerpt || "",
+       image: data.image,
+-    }));
+-    count++;
++    });
+   }
+ }
+ 
+-console.log(`[prerender] Wrote ${count} static HTML pages with unique SEO tags.`);
++if (emptyBodies.length) {
++  console.error(
++    `[prerender] These routes rendered with no meaningful content:\n  ${emptyBodies.join("\n  ")}`
++  );
++  process.exit(1);
++}
++
++console.log(`[prerender] Wrote ${count} fully rendered static HTML pages.`);
+diff --git a/scripts/smoke-test.mjs b/scripts/smoke-test.mjs
+new file mode 100644
+index 0000000..ac17c58
+--- /dev/null
++++ b/scripts/smoke-test.mjs
+@@ -0,0 +1,90 @@
++import { chromium } from "playwright";
++import { createServer } from "node:http";
++import { readFileSync, existsSync, statSync, globSync } from "node:fs";
++import { join, extname, dirname } from "node:path";
++import { fileURLToPath } from "node:url";
++
++const dist = join(dirname(fileURLToPath(import.meta.url)), "..", "dist");
++const mime = { ".html":"text/html", ".js":"text/javascript", ".css":"text/css", ".webp":"image/webp",
++  ".png":"image/png", ".jpg":"image/jpeg", ".jpeg":"image/jpeg", ".svg":"image/svg+xml",
++  ".ico":"image/x-icon", ".gif":"image/gif", ".xml":"application/xml", ".txt":"text/plain", ".avif":"image/avif" };
++
++// Optional verification tool — not part of `npm run build`, and Playwright is
++// deliberately not a dependency so it never has to install on a deploy:
++//   npm i -D playwright   (a preinstalled Chromium is picked up automatically)
++//
++// Loads every route the way a phone and a desktop would, checks the page
++// hydrates without errors, has exactly one h1, does not scroll sideways, and
++// that every JSON-LD block on the page parses. Run after `npm run build`.
++//
++// Mimics Vercel: cleanUrls + trailingSlash:false + 404.html fallback.
++const server = createServer((req, res) => {
++  const url = decodeURIComponent(req.url.split("?")[0]);
++  const candidates = [join(dist, url), join(dist, url, "index.html"), join(dist, url + ".html")];
++  for (const c of candidates) {
++    if (existsSync(c) && statSync(c).isFile()) {
++      res.writeHead(200, { "Content-Type": mime[extname(c)] || "application/octet-stream" });
++      return res.end(readFileSync(c));
++    }
++  }
++  res.writeHead(404, { "Content-Type": "text/html" });
++  res.end(readFileSync(join(dist, "404.html")));
++});
++await new Promise((r) => server.listen(4178, r));
++
++const routes = process.argv.slice(2);
++// Use a pre-installed Chromium when one is present (CI images ship one and
++// `npx playwright install` is not always available); otherwise fall back to
++// whatever Playwright resolves on its own.
++const preinstalled = globSync("/opt/pw-browsers/chromium-*/chrome-linux/chrome")[0];
++const browser = await chromium.launch(preinstalled ? { executablePath: preinstalled } : {});
++const results = [];
++
++for (const viewport of [{ name: "desktop", width: 1440, height: 900 }, { name: "mobile", width: 390, height: 844 }]) {
++  const ctx = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height } });
++  for (const route of routes) {
++    const page = await ctx.newPage();
++    const errors = [];
++    page.on("console", (m) => { if (m.type() === "error") errors.push(m.text().slice(0, 160)); });
++    page.on("pageerror", (e) => errors.push("PAGEERROR: " + e.message.slice(0, 160)));
++    // Third-party chat/booking widgets are not part of what we are verifying.
++    await page.route("**://widgets.leadconnectorhq.com/**", (r) => r.abort());
++    await page.route("**://link.msgsndr.com/**", (r) => r.abort());
++    await page.goto(`http://localhost:4178${route}`, { waitUntil: "networkidle", timeout: 30000 });
++    const overflow = await page.evaluate(() =>
++      document.documentElement.scrollWidth - document.documentElement.clientWidth
++    );
++    const h1 = await page.evaluate(() => document.querySelectorAll("h1").length);
++    const title = await page.title();
++    const canonical = await page.evaluate(() => document.querySelector("link[rel=canonical]")?.href || "");
++    const ld = await page.evaluate(() =>
++      [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => {
++        try { JSON.parse(s.textContent); return "ok"; } catch (e) { return "BAD:" + e.message; }
++      })
++    );
++    const hydrationErrors = errors.filter((e) => /hydrat|did not match|Minified React error #(418|423|425)/i.test(e));
++    results.push({ viewport: viewport.name, route, overflow, h1, title, canonical, ld: ld.join(","), errors, hydrationErrors });
++    await page.close();
++  }
++  await ctx.close();
++}
++await browser.close();
++server.close();
++
++let bad = 0;
++for (const r of results) {
++  const flags = [];
++  if (r.overflow > 0) flags.push(`H-SCROLL +${r.overflow}px`);
++  if (r.h1 !== 1) flags.push(`${r.h1} h1`);
++  if (r.hydrationErrors.length) flags.push("HYDRATION: " + r.hydrationErrors[0]);
++  if (r.ld.includes("BAD")) flags.push("BAD JSON-LD");
++  const other = r.errors
++    .filter((e) => !r.hydrationErrors.includes(e))
++    // Noise from the third-party widgets we deliberately blocked, and from the
++    // 404 route, which is supposed to 404.
++    .filter((e) => !/ERR_FAILED|status of 404/.test(e));
++  if (other.length) flags.push("console: " + other[0]);
++  if (flags.length) bad++;
++  console.log(`${flags.length ? "FAIL" : " ok "} [${r.viewport.padEnd(7)}] ${r.route.padEnd(50)} ld=[${r.ld}] ${flags.join(" | ")}`);
++}
++console.log(`\n${results.length - bad}/${results.length} page loads clean`);
+diff --git a/src/App.jsx b/src/App.jsx
+index 591420e..f9f5c08 100644
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,41 +1,12 @@
+-import { lazy, Suspense } from "react";
++import { Suspense, lazy } from "react";
+ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+-import { BrowserRouter, Routes, Route } from "react-router-dom";
+-import { Layout } from "./components/Layout";
++import { BrowserRouter } from "react-router-dom";
+ import ScrollToTop from "./components/Scrolltotop";
+-import Home from "./pages/Home";
+ 
+-// Home stays in the main bundle — it is the most-hit route and the LCP target.
+-// Every other route is split out, so a visitor landing on one service page no
+-// longer downloads the JavaScript for all twenty-odd of them first.
+-const Services = lazy(() => import("./pages/Services"));
+-const Work = lazy(() => import("./pages/Work"));
+-const Contact = lazy(() => import("./pages/Contact"));
+-const AboutUs = lazy(() => import("./pages/Aboutus"));
+-const Seo = lazy(() => import("./pages/Seo"));
+-const Localmap = lazy(() => import("./pages/LocalMaps"));
+-const SocialMediaMarketing = lazy(() => import("./pages/SocialMedia"));
+-const PPCManagement = lazy(() => import("./pages/Ppc"));
+-const ContentWritingServices = lazy(() => import("./pages/Writing"));
+-const Designweb = lazy(() => import("./pages/Designdevelopment"));
+-const NotFound = lazy(() => import("./components/Notfound"));
+-const MetaAds = lazy(() => import("./pages/MetaAds"));
+-const TikTokdas = lazy(() => import("./pages/TikTok-ads"));
+-const Googleads = lazy(() => import("./pages/GoogleAds"));
+-const FivestarReviews = lazy(() => import("./pages/FivestarReviews"));
+-const Schedule = lazy(() => import("./pages/Schedule"));
+-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+-const TermsConditions = lazy(() => import("./pages/TermsCondition"));
+-const Faq = lazy(() => import("./pages/Faqs"));
+-const MissedCall = lazy(() => import("./pages/MissedCall"));
+-const AutomatedLeadFollowUp = lazy(() => import("./pages/Automatedleadfollowup"));
+-const OneClickMarketing = lazy(() => import("./pages/Oneclickmarketing"));
+-const AIWorkflowAutomation = lazy(() => import("./pages/Aiworkflowautomation"));
+-const AIVoiceAgents = lazy(() => import("./pages/Aivoiceagents"));
+-const AIChatbot = lazy(() => import("./pages/Aichatbot"));
++import { AppRoutes } from "./routes";
++
++// Split out so the maintenance screen never ships in the main bundle while it is off.
+ const Maintenance = lazy(() => import("./pages/Maintenance"));
+-const Blog = lazy(() => import("./pages/Blog"));
+-const BlogPost = lazy(() => import("./pages/BlogPost"));
+ 
+ const queryClient = new QueryClient();
+ 
+@@ -50,43 +21,7 @@ const App = () => (
+     <BrowserRouter>
+       <ScrollToTop />
+       <Suspense fallback={<RouteFallback />}>
+-        <Routes>
+-          {MAINTENANCE_MODE ? (
+-            // Catch ALL routes and show maintenance page
+-            <Route path="*" element={<Maintenance />} />
+-          ) : (
+-            <Route element={<Layout />}>
+-              <Route path="/" element={<Home />} />
+-              <Route path="/services" element={<Services />} />
+-              <Route path="/work" element={<Work />} />
+-              <Route path="/contact" element={<Contact />} />
+-              <Route path="/about-us" element={<AboutUs />} />
+-              <Route path="/services/web-design" element={<Designweb />} />
+-              <Route path="/services/seo" element={<Seo />} />
+-              <Route path="/services/local-maps" element={<Localmap />} />
+-              <Route path="/services/social-media" element={<SocialMediaMarketing />} />
+-              <Route path="/services/ppc-management" element={<PPCManagement />} />
+-              <Route path="/services/content-writing" element={<ContentWritingServices />} />
+-              <Route path="/services/meta-ads" element={<MetaAds />} />
+-              <Route path="/services/one-click-campaigns" element={<OneClickMarketing />} />
+-              <Route path="/services/tiktok-ads" element={<TikTokdas />} />
+-              <Route path="/services/google-ads" element={<Googleads />} />
+-              <Route path="/services/reviews" element={<FivestarReviews />} />
+-              <Route path="/services/ai-workflows" element={<AIWorkflowAutomation />} />
+-              <Route path="/services/ai-voice-agents" element={<AIVoiceAgents />} />
+-              <Route path="/services/ai-chatbots" element={<AIChatbot />} />
+-              <Route path="/services/missed-call-text-back" element={<MissedCall />} />
+-              <Route path="/services/lead-follow-up" element={<AutomatedLeadFollowUp />} />
+-              <Route path="/blog" element={<Blog />} />
+-              <Route path="/blog/:slug" element={<BlogPost />} />
+-              <Route path="/book" element={<Schedule />} />
+-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+-              <Route path="/terms-conditions" element={<TermsConditions />} />
+-              <Route path="/faq" element={<Faq />} />
+-              <Route path="*" element={<NotFound />} />
+-            </Route>
+-          )}
+-        </Routes>
++        {MAINTENANCE_MODE ? <Maintenance /> : <AppRoutes />}
+       </Suspense>
+     </BrowserRouter>
+   </QueryClientProvider>
+diff --git a/src/entry-server.jsx b/src/entry-server.jsx
+new file mode 100644
+index 0000000..bbad6ec
+--- /dev/null
++++ b/src/entry-server.jsx
+@@ -0,0 +1,25 @@
++// Static-render entry. scripts/render-ssr.mjs imports this to turn every route
++// into real HTML before deploy, so crawlers that do not run JavaScript — which
++// is most AI/answer-engine crawlers, and Google on its first pass — receive the
++// page's actual copy instead of an empty <div id="root">.
++import { Suspense } from "react";
++import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
++import { StaticRouter } from "react-router-dom";
++import { AppRoutes } from "./routes";
++
++const RouteFallback = () => <div className="min-h-screen bg-[#0a0a0a]" />;
++
++// No ScrollToTop here: it only touches window in an effect, which never runs
++// during a static render, and leaving it out keeps the server tree minimal.
++export function ServerApp({ url }) {
++  const queryClient = new QueryClient();
++  return (
++    <QueryClientProvider client={queryClient}>
++      <StaticRouter location={url}>
++        <Suspense fallback={<RouteFallback />}>
++          <AppRoutes />
++        </Suspense>
++      </StaticRouter>
++    </QueryClientProvider>
++  );
++}
+diff --git a/src/index.css b/src/index.css
+index ac055d3..d7aa3b3 100644
+--- a/src/index.css
++++ b/src/index.css
+@@ -1,5 +1,16 @@
+ @import "tailwindcss";
+ 
++/* Several sections animate in from `x: 40`, which parks the element 40px to the
++   right of its final position until it scrolls into view. On a phone that is
++   enough to create a horizontal scrollbar and trip Google's mobile-usability
++   check. `clip` rather than `hidden` on purpose: `hidden` would turn the page
++   into a scroll container and break the sticky header. */
++html,
++body {
++  overflow-x: clip;
++  max-width: 100%;
++}
++
+ /* html {
+   scroll-behavior: smooth;
+ }
+diff --git a/src/pages/Faq.jsx b/src/pages/Faq.jsx
+index f20fdec..3ba498c 100644
+--- a/src/pages/Faq.jsx
++++ b/src/pages/Faq.jsx
+@@ -1,5 +1,5 @@
+ import { useState } from "react";
+-import { motion, AnimatePresence } from "framer-motion";
++import { motion } from "framer-motion";
+ import { ChevronDown } from "lucide-react";
+ 
+ const faqs1 = [
+@@ -66,6 +66,8 @@ export default function FAQQuoteSection() {
+                                         setOpenIndex(openIndex === index ? null : index)
+                                     }
+                                     className="w-full flex justify-between items-center p-5 text-left text-white font-medium hover:bg-white/5 transition"
++                                    aria-expanded={openIndex === index}
++                                    aria-controls={`home-faq-answer-${index}`}
+                                 >
+                                     {faq.question}
+                                     <ChevronDown
+@@ -74,19 +76,23 @@ export default function FAQQuoteSection() {
+                                     />
+                                 </button>
+ 
+-                                <AnimatePresence>
+-                                    {openIndex === index && (
+-                                        <motion.div
+-                                            initial={{ height: 0, opacity: 0 }}
+-                                            animate={{ height: "auto", opacity: 1 }}
+-                                            exit={{ height: 0, opacity: 0 }}
+-                                            transition={{ duration: 0.3 }}
+-                                            className="px-5 py-5 pb-5 text-gray-300 border-t border-white/10"
+-                                        >
+-                                            {faq.answer}
+-                                        </motion.div>
+-                                    )}
+-                                </AnimatePresence>
++                                {/* Collapsed with height rather than unmounted, so the
++                                    answer text is present in the HTML for crawlers that do
++                                    not click. */}
++                                <motion.div
++                                    id={`home-faq-answer-${index}`}
++                                    initial={false}
++                                    animate={{
++                                        height: openIndex === index ? "auto" : 0,
++                                        opacity: openIndex === index ? 1 : 0,
++                                    }}
++                                    transition={{ duration: 0.3 }}
++                                    className="overflow-hidden"
++                                >
++                                    <p className="px-5 py-5 pb-5 text-gray-300 border-t border-white/10">
++                                        {faq.answer}
++                                    </p>
++                                </motion.div>
+                             </motion.div>
+                         ))}
+                     </div>
+diff --git a/src/pages/Faqs.jsx b/src/pages/Faqs.jsx
+index 85930db..17ed2df 100644
+--- a/src/pages/Faqs.jsx
++++ b/src/pages/Faqs.jsx
+@@ -1,5 +1,5 @@
+ import React, { useState } from "react";
+-import { motion, AnimatePresence } from "framer-motion";
++import { motion } from "framer-motion";
+ import { Link } from "react-router-dom";
+ import { ChevronDown } from "lucide-react";
+ import useSeo from "../hooks/useSeo";
+@@ -91,10 +91,12 @@ const Faq = () => {
+                             <button
+                                 onClick={() => setActive(active === index ? null : index)}
+                                 className="w-full flex justify-between items-center p-6 text-left"
++                                aria-expanded={active === index}
++                                aria-controls={`faq-answer-${index}`}
+                             >
+-                                <span className="text-lg font-semibold text-white">
++                                <h2 className="text-lg font-semibold text-white">
+                                     {faq.question}
+-                                </span>
++                                </h2>
+ 
+                                 <ChevronDown
+                                     className={`text-[#00A693] transition-transform duration-300 cursor-pointer ${active === index ? "rotate-180" : ""
+@@ -102,19 +104,20 @@ const Faq = () => {
+                                 />
+                             </button>
+ 
+-                            <AnimatePresence>
+-                                {active === index && (
+-                                    <motion.div
+-                                        initial={{ height: 0, opacity: 0 }}
+-                                        animate={{ height: "auto", opacity: 1 }}
+-                                        exit={{ height: 0, opacity: 0 }}
+-                                        transition={{ duration: 0.3 }}
+-                                        className="px-6 pb-6 text-gray-400"
+-                                    >
+-                                        {faq.answer}
+-                                    </motion.div>
+-                                )}
+-                            </AnimatePresence>
++                            {/* The answer stays mounted and is collapsed with height, not
++                                unmounted. Conditionally rendering it meant the answers were
++                                absent from the HTML entirely — crawlers and AI answer engines
++                                saw six questions and no answers, and FAQ schema would have
++                                described text that was not on the page. */}
++                            <motion.div
++                                id={`faq-answer-${index}`}
++                                initial={false}
++                                animate={{ height: active === index ? "auto" : 0, opacity: active === index ? 1 : 0 }}
++                                transition={{ duration: 0.3 }}
++                                className="overflow-hidden"
++                            >
++                                <p className="px-6 pb-6 text-gray-400">{faq.answer}</p>
++                            </motion.div>
+                         </motion.div>
+                     ))}
+                 </div>
+diff --git a/src/routes.jsx b/src/routes.jsx
+new file mode 100644
+index 0000000..92bdc6f
+--- /dev/null
++++ b/src/routes.jsx
+@@ -0,0 +1,73 @@
++// Route table shared by the browser app (src/App.jsx) and the static renderer
++// (scripts/render-ssr.mjs). Keeping one copy is what guarantees the HTML that
++// Googlebot and the AI crawlers receive is the same tree React hydrates.
++import { lazy } from "react";
++import { Routes, Route } from "react-router-dom";
++import { Layout } from "./components/Layout";
++import Home from "./pages/Home";
++
++// Home stays in the main bundle — it is the most-hit route and the LCP target.
++// Every other route is split out, so a visitor landing on one service page no
++// longer downloads the JavaScript for all twenty-odd of them first.
++const Services = lazy(() => import("./pages/Services"));
++const Work = lazy(() => import("./pages/Work"));
++const Contact = lazy(() => import("./pages/Contact"));
++const AboutUs = lazy(() => import("./pages/Aboutus"));
++const Seo = lazy(() => import("./pages/Seo"));
++const Localmap = lazy(() => import("./pages/LocalMaps"));
++const SocialMediaMarketing = lazy(() => import("./pages/SocialMedia"));
++const PPCManagement = lazy(() => import("./pages/Ppc"));
++const ContentWritingServices = lazy(() => import("./pages/Writing"));
++const Designweb = lazy(() => import("./pages/Designdevelopment"));
++const NotFound = lazy(() => import("./components/Notfound"));
++const MetaAds = lazy(() => import("./pages/MetaAds"));
++const TikTokdas = lazy(() => import("./pages/TikTok-ads"));
++const Googleads = lazy(() => import("./pages/GoogleAds"));
++const FivestarReviews = lazy(() => import("./pages/FivestarReviews"));
++const Schedule = lazy(() => import("./pages/Schedule"));
++const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
++const TermsConditions = lazy(() => import("./pages/TermsCondition"));
++const Faq = lazy(() => import("./pages/Faqs"));
++const MissedCall = lazy(() => import("./pages/MissedCall"));
++const AutomatedLeadFollowUp = lazy(() => import("./pages/Automatedleadfollowup"));
++const OneClickMarketing = lazy(() => import("./pages/Oneclickmarketing"));
++const AIWorkflowAutomation = lazy(() => import("./pages/Aiworkflowautomation"));
++const AIVoiceAgents = lazy(() => import("./pages/Aivoiceagents"));
++const AIChatbot = lazy(() => import("./pages/Aichatbot"));
++const Blog = lazy(() => import("./pages/Blog"));
++const BlogPost = lazy(() => import("./pages/BlogPost"));
++
++export const AppRoutes = () => (
++  <Routes>
++    <Route element={<Layout />}>
++      <Route path="/" element={<Home />} />
++      <Route path="/services" element={<Services />} />
++      <Route path="/work" element={<Work />} />
++      <Route path="/contact" element={<Contact />} />
++      <Route path="/about-us" element={<AboutUs />} />
++      <Route path="/services/web-design" element={<Designweb />} />
++      <Route path="/services/seo" element={<Seo />} />
++      <Route path="/services/local-maps" element={<Localmap />} />
++      <Route path="/services/social-media" element={<SocialMediaMarketing />} />
++      <Route path="/services/ppc-management" element={<PPCManagement />} />
++      <Route path="/services/content-writing" element={<ContentWritingServices />} />
++      <Route path="/services/meta-ads" element={<MetaAds />} />
++      <Route path="/services/one-click-campaigns" element={<OneClickMarketing />} />
++      <Route path="/services/tiktok-ads" element={<TikTokdas />} />
++      <Route path="/services/google-ads" element={<Googleads />} />
++      <Route path="/services/reviews" element={<FivestarReviews />} />
++      <Route path="/services/ai-workflows" element={<AIWorkflowAutomation />} />
++      <Route path="/services/ai-voice-agents" element={<AIVoiceAgents />} />
++      <Route path="/services/ai-chatbots" element={<AIChatbot />} />
++      <Route path="/services/missed-call-text-back" element={<MissedCall />} />
++      <Route path="/services/lead-follow-up" element={<AutomatedLeadFollowUp />} />
++      <Route path="/blog" element={<Blog />} />
++      <Route path="/blog/:slug" element={<BlogPost />} />
++      <Route path="/book" element={<Schedule />} />
++      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
++      <Route path="/terms-conditions" element={<TermsConditions />} />
++      <Route path="/faq" element={<Faq />} />
++      <Route path="*" element={<NotFound />} />
++    </Route>
++  </Routes>
++);
+diff --git a/vercel.json b/vercel.json
+index b0aa1b0..0472a0c 100644
+--- a/vercel.json
++++ b/vercel.json
+@@ -4,32 +4,94 @@
+   "redirects": [
+     {
+       "source": "/(.*)",
+-      "has": [{ "type": "host", "value": "skyliftgroup.com" }],
++      "has": [
++        {
++          "type": "host",
++          "value": "skyliftgroup.com"
++        }
++      ],
+       "destination": "https://www.skyliftgroup.com/$1",
+       "permanent": true
+     },
+-    { "source": "/about", "destination": "/about-us", "permanent": true },
+-    { "source": "/services/ai-chatbot", "destination": "/services/ai-chatbots", "permanent": true },
+-    { "source": "/services/review", "destination": "/services/reviews", "permanent": true },
+-    { "source": "/home", "destination": "/", "permanent": true },
+-    { "source": "/contact-us", "destination": "/contact", "permanent": true },
+-    { "source": "/terms", "destination": "/terms-conditions", "permanent": true },
+-    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
+-    { "source": "/faqs", "destination": "/faq", "permanent": true },
+-    { "source": "/blogs", "destination": "/blog", "permanent": true },
+-    { "source": "/blogs/:slug", "destination": "/blog/:slug", "permanent": true }
++    {
++      "source": "/(.*)",
++      "has": [
++        {
++          "type": "host",
++          "value": "skylift-group.vercel.app"
++        }
++      ],
++      "destination": "https://www.skyliftgroup.com/$1",
++      "permanent": true
++    },
++    {
++      "source": "/about",
++      "destination": "/about-us",
++      "permanent": true
++    },
++    {
++      "source": "/services/ai-chatbot",
++      "destination": "/services/ai-chatbots",
++      "permanent": true
++    },
++    {
++      "source": "/services/review",
++      "destination": "/services/reviews",
++      "permanent": true
++    },
++    {
++      "source": "/home",
++      "destination": "/",
++      "permanent": true
++    },
++    {
++      "source": "/contact-us",
++      "destination": "/contact",
++      "permanent": true
++    },
++    {
++      "source": "/terms",
++      "destination": "/terms-conditions",
++      "permanent": true
++    },
++    {
++      "source": "/privacy",
++      "destination": "/privacy-policy",
++      "permanent": true
++    },
++    {
++      "source": "/faqs",
++      "destination": "/faq",
++      "permanent": true
++    },
++    {
++      "source": "/blogs",
++      "destination": "/blog",
++      "permanent": true
++    },
++    {
++      "source": "/blogs/:slug",
++      "destination": "/blog/:slug",
++      "permanent": true
++    }
+   ],
+   "headers": [
+     {
+       "source": "/assets/(.*)",
+       "headers": [
+-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
++        {
++          "key": "Cache-Control",
++          "value": "public, max-age=31536000, immutable"
++        }
+       ]
+     },
+     {
+       "source": "/(.*)\\.(webp|png|jpg|jpeg|avif|svg|ico|woff2)",
+       "headers": [
+-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
++        {
++          "key": "Cache-Control",
++          "value": "public, max-age=31536000, immutable"
++        }
+       ]
+     }
+   ]
+diff --git a/vite.config.js b/vite.config.js
+index 3052e4c..6d2de61 100644
+--- a/vite.config.js
++++ b/vite.config.js
+@@ -19,6 +19,17 @@ export default defineConfig({
+   build: {
+     cssCodeSplit: true,
+   },
++  // Bundle dependencies into the server build instead of leaving them as bare
++  // Node imports. Several of them (react-slick, slick-carousel) are CommonJS,
++  // and the ESM default-interop Node applies to those hands back a module
++  // namespace object where a component is expected, which crashes the static
++  // render and silently falls back to an empty page.
++  ssr: {
++    // React itself must stay external so the SSR bundle shares one copy with
++    // react-dom/static; bundling it produces two Reacts and "invalid hook call".
++    external: ["react", "react-dom", "react/jsx-runtime"],
++    noExternal: true,
++  },
+   server: {
+     historyApiFallback: true,
+   },
+-- 
+2.43.0
+
