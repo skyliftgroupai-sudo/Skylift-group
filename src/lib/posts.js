@@ -23,6 +23,9 @@ function build() {
       category: data.category || "Digital Marketing",
       tags: Array.isArray(data.tags) ? data.tags : [],
       date: data.date || "1970-01-01",
+      // Only set when a post has genuinely been revised, so Article schema does
+      // not claim a freshness that did not happen.
+      dateModified: data.dateModified || data.date || "1970-01-01",
       author: data.author || "Sky Lift Group",
       image: data.image || "/og-image.png",
       imageAlt: data.imageAlt || data.title || "Sky Lift Group",

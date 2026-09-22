@@ -123,7 +123,10 @@ for (const file of files) {
       add("CRITICAL", route, `FAQ schema entry is missing a question or answer`);
       continue;
     }
-    const needle = pair.a.replace(/\s+/g, " ").slice(0, 60);
+    // Compare the whole answer, not a prefix. A 60-character sample passed a
+    // FAQ whose schema text contained raw markdown link syntax further in,
+    // which is exactly the mismatch this check exists to catch.
+    const needle = pair.a.replace(/\s+/g, " ").trim();
     if (needle && !visibleText.includes(needle)) {
       add("CRITICAL", route, `FAQ schema answer is not visible on the page: "${pair.q}"`);
     }

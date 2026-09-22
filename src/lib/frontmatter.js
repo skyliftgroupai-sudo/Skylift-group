@@ -43,6 +43,19 @@ export function parseFrontmatter(raw) {
   return { data, content: body.trim() };
 }
 
+// FAQ text goes into FAQPage schema, which Google requires to match the text a
+// visitor can actually see. The page renders markdown, so "[SMS marketing](/x)"
+// displays as "SMS marketing" — putting the raw markdown in the schema would
+// describe text that is not on the page.
+function stripMarkdown(text) {
+  return String(text)
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1") // links -> label
+    .replace(/\*\*([^*]+)\*\*/g, "$1") // bold
+    .replace(/(^|\W)_([^_]+)_(\W|$)/g, "$1$2$3") // underscore italics
+    .replace(/`([^`]+)`/g, "$1") // inline code
+    .trim();
+}
+
 // Pull the FAQ pairs out of the article body so we can emit FAQPage schema.
 // Convention: an "## ... FAQ ..." (or "Frequently Asked Questions") H2,
 // followed by "### question" headings, each answered by the text beneath it.
@@ -68,11 +81,24 @@ export function extractFaqs(content) {
 
     if (!inFaq) continue;
 
+    // A horizontal rule ends the FAQ block. Without this, everything after the
+    // last question — a rule, a closing CTA — was appended to that question's
+    // answer and emitted as FAQ schema, describing text no visitor sees as part
+    // of the answer.
+    if (/^(-{3,}|\*{3,}|_{3,})\s*$/.test(line.trim())) {
+      inFaq = false;
+      if (current) {
+        faqs.push(current);
+        current = null;
+      }
+      continue;
+    }
+
     if (h3) {
       if (current) faqs.push(current);
-      current = { q: h3[1].trim(), a: "" };
+      current = { q: stripMarkdown(h3[1]), a: "" };
     } else if (current && line.trim()) {
-      current.a += (current.a ? " " : "") + line.trim();
+      current.a += (current.a ? " " : "") + stripMarkdown(line);
     }
   }
 
