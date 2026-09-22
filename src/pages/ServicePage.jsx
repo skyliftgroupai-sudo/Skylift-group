@@ -6,109 +6,44 @@
 // shape in one component means every page gets the same structure, the same
 // heading hierarchy and the same schema wiring — and a fix to any of it applies
 // everywhere at once.
+//
+// The h1, the hero subline, every section body and every FAQ still come from
+// the content object and src/lib/service-faqs.js untouched. The redesign
+// changed how they are presented, not a word of what they say.
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ChevronDown, ArrowRight } from "lucide-react";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
-import CTASection from "./CtaSection";
+import PageHero from "../components/PageHero";
+import FinalCta from "../components/home/FinalCta";
+import ServiceFaq from "../components/service/ServiceFaq";
 import {
   DirectAnswer,
   ServiceSections,
   RelatedServices,
-} from "../components/ServiceSections";
-
-const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 },
-};
+} from "../components/service/ServiceBody";
 
 export default function ServicePage({ content }) {
-  const [openFaq, setOpenFaq] = useState(null);
   const faqs = routeFaqs[content.route] || [];
 
   useSeo(seoFor(content.route, { image: content.heroImage }));
 
   return (
-    <div className="w-full bg-[#0a0a0a] text-gray-100">
-      {/* HERO */}
-      <section
-        className="relative w-full min-h-[70vh] flex flex-col items-center justify-center bg-cover bg-center px-6 py-24"
-        style={{ backgroundImage: `url("${content.heroImage}")` }}
-      >
-        <div className="absolute inset-0 bg-black/75" />
-        <div className="relative max-w-4xl mx-auto text-center">
-          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
-            {content.h1}
-          </h1>
-          <p className="text-gray-200 text-base sm:text-lg md:text-xl mt-6 max-w-3xl mx-auto leading-relaxed">
-            {content.heroSub}
-          </p>
-          <Link
-            to="/book"
-            className="mt-10 inline-flex items-center gap-2 rounded-full bg-[#00A693] px-8 py-4 font-semibold text-white transition hover:bg-[#00947F]"
-          >
-            Book a Free Strategy Call <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
+    <div className="w-full">
+      <PageHero
+        eyebrow="Service"
+        title={content.h1}
+        subtitle={content.heroSub}
+        primaryCta={{ to: "/book", label: "Book a Free Strategy Call" }}
+        secondaryCta={{ to: "/services", label: "All Services" }}
+      />
 
       <DirectAnswer text={content.directAnswer} />
       <ServiceSections sections={content.sections} />
-
-      {/* FAQ — answers stay mounted and collapse by height so the text exists in
-          the HTML, which is also what the FAQPage schema for this route asserts. */}
-      {faqs.length > 0 && (
-        <section className="px-6 py-16 bg-[#0a0a0a]">
-          <motion.div {...fadeUp} className="max-w-4xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <div
-                  key={i}
-                  className="rounded-xl border border-white/10 bg-white/[0.03] overflow-hidden transition hover:border-[#00A693]/40"
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between gap-4 p-5 text-left"
-                    aria-expanded={openFaq === i}
-                    aria-controls={`svc-faq-${i}`}
-                  >
-                    <h3 className="font-semibold text-white text-[1.05rem]">{faq.q}</h3>
-                    <ChevronDown
-                      className={`h-5 w-5 shrink-0 text-[#00A693] transition-transform duration-300 ${
-                        openFaq === i ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                  <motion.div
-                    id={`svc-faq-${i}`}
-                    initial={false}
-                    animate={{ height: openFaq === i ? "auto" : 0, opacity: openFaq === i ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <p className="px-5 pb-5 text-gray-300 leading-relaxed border-t border-white/10 pt-4">
-                      {faq.a}
-                    </p>
-                  </motion.div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
-      )}
-
+      <ServiceFaq faqs={faqs} />
       <RelatedServices related={content.related} />
 
-      <CTASection />
+      <FinalCta />
     </div>
   );
 }

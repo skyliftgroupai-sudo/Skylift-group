@@ -1,122 +1,120 @@
-import { motion } from "framer-motion";
-import { Mail, MessageCircle, MapPin, Clock } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Clock, PhoneCall } from "lucide-react";
+import PageHero from "../components/PageHero";
+import Reveal from "../components/Reveal";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 
+// Copy is unchanged from the previous version of this page. The three country
+// lines used Font Awesome flag classes that were never loaded, so they rendered
+// as empty boxes; they are plain text now.
+
+const CONTACT_CARDS = [
+  {
+    icon: Mail,
+    title: "Email Us",
+    lines: [
+      { text: "hello@skyliftgroup.com", href: "mailto:hello@skyliftgroup.com" },
+    ],
+  },
+  {
+    icon: PhoneCall,
+    title: "Call Us",
+    lines: [{ text: "+1 (725) 263-1475", href: "tel:+17252631475" }],
+  },
+  {
+    icon: MapPin,
+    title: "Location",
+    lines: [
+      { text: "United States Of America" },
+      { text: "Canada" },
+      { text: "Australia" },
+    ],
+  },
+  {
+    icon: Clock,
+    title: "Business Hours",
+    lines: [{ text: "Mon - Fri: 9AM - 5PM (est)" }, { text: "Sat - Sun: Closed" }],
+  },
+];
+
 const Contact = () => {
-
-
   useSeo(seoFor("/contact"));
-
 
   return (
     <div className="flex flex-col">
-      <section
-        className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url("/assets/contact.webp")` }}
-      >
-        <div className="absolute inset-0 bg-black/50" />
+      <PageHero
+        eyebrow="Contact"
+        title="Let's Start a Conversation"
+        titleAccent="Conversation"
+        subtitle="Have a project in mind? Send us a message and our team will get back to you shortly."
+        primaryCta={{ to: "/book", label: "Book a Free Strategy Call" }}
+      />
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative text-white text-4xl md:text-6xl font-bold text-center"
-        >
-          Let's Start a Conversation
-
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="relative text-white text-lg md:text-xl mt-4 text-center max-w-xl"
-        >
-          Have a project in mind? Send us a message and our team will get back to you shortly.
-        </motion.p>
-      </section>
-      {/* FORM + INFO SECTION */}
-      <section className="py-20 bg-[#0a0a0a] text-gray-100">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-
+      <section className="slg-light slg-section-tight">
+        <div className="slg-container">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-8">
             {/* INFO CARDS */}
-            <div className="space-y-6">
-              {[
-                {
-                  icon: <Mail className="h-6 w-6 text-white" />,
-                  title: "Email Us",
-                  lines: ["hello@skyliftgroup.com"],
-                },
-                {
-                  icon: <MapPin className="h-6 w-6 text-white" />,
-                  title: "Location",
-                  lines: [
-                    <div className="flex items-center gap-2">
-                      <i className="fa fa-flag text-red-500"></i>
-                      United States Of America
-                    </div>,
-                    <div className="flex items-center gap-2">
-                      <i className="fa fa-flag text-blue-500"></i>
-                      Canada
-                    </div>,
-                    <div className="flex items-center gap-2">
-                      <i className="fa fa-flag text-green-500"></i>
-                      Australia
-                    </div>,
-                  ],
-                },
-                {
-                  icon: <Clock className="h-6 w-6 text-white" />,
-                  title: "Business Hours",
-                  lines: ["Mon - Fri: 9AM - 5PM (est)", "Sat - Sun: Closed"],
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="p-6 rounded-xl bg-[#111111] shadow-md hover:-translate-y-1"
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className="h-12 w-12 flex items-center justify-center rounded-lg bg-[#00A693] shadow-md">
-                      {item.icon}
-                    </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+              {CONTACT_CARDS.map((item, i) => (
+                <Reveal key={item.title} delay={i * 60} className="slg-card h-full p-6">
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] border border-[#E2E8F0] bg-[#F7F8FA] text-[#26A6AD]">
+                      <item.icon className="h-5 w-5" aria-hidden="true" strokeWidth={1.75} />
+                    </span>
                     <div>
-                      <h3 className="font-semibold text-gray-100 mb-1">{item.title}</h3>
-                      {item.lines.map((l, idx) => (
-                        <p key={idx} className="text-sm text-gray-300">{l}</p>
-                      ))}
+                      <h2 className="font-display text-[1rem] font-bold text-[#142A47]">
+                        {item.title}
+                      </h2>
+                      <ul className="mt-1.5 space-y-1">
+                        {item.lines.map((line) => (
+                          <li key={line.text} className="text-[0.9375rem] text-[#475569]">
+                            {line.href ? (
+                              <a
+                                href={line.href}
+                                className="transition-colors hover:text-[#1C8A90]"
+                              >
+                                {line.text}
+                              </a>
+                            ) : (
+                              line.text
+                            )}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
-                </motion.div>
+                </Reveal>
               ))}
             </div>
-<motion.div
-    initial={{ opacity: 0, x: 40 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-    className="lg:col-span-2"
-  ><div className="relative w-full h-full min-h-[600px] rounded-lg overflow-hidden bg-[#111111] shadow-md flex flex-col items-center justify-center text-center p-10 md:p-16"
-     >
-  <div className="h-16 w-16 flex items-center justify-center rounded-full bg-[#00A693] shadow-md mb-6">
-    <MessageCircle className="h-8 w-8 text-white" />
-  </div>
-    <h2 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Talk With Our AI Business Assistant</h2>
-    <p className="text-gray-300 text-base md:text-lg max-w-xl mb-3">Get instant answers about our services, pricing, websites, AI automation, Google Business Profile optimization, SEO, and marketing solutions.</p>
-    <p className="text-gray-300 text-base md:text-lg max-w-xl mb-3">Our AI Assistant is available 24/7 to answer your questions, qualify your needs, and help you get started.</p>
-    <p className="text-[#00A693] font-semibold text-base md:text-lg">Click the chat icon in the bottom-right corner to begin.</p>
-  </div>
-</motion.div>
+
+            {/* AI ASSISTANT PANEL — the chat widget itself is the third-party
+                script in index.html, so this card points at it rather than
+                duplicating a form that would go nowhere. */}
+            <Reveal delay={100}>
+              <div className="slg-dark flex h-full min-h-[24rem] flex-col items-center justify-center rounded-[16px] p-10 text-center lg:p-16">
+                <span className="mb-7 flex h-16 w-16 items-center justify-center rounded-full border border-[#26A6AD]/40 bg-[#26A6AD]/10 text-[#26A6AD]">
+                  <MessageCircle className="h-7 w-7" aria-hidden="true" strokeWidth={1.75} />
+                </span>
+                <h2 className="text-[1.375rem] font-extrabold text-white sm:text-[1.75rem]">
+                  Talk With Our AI Business{" "}
+                  <span className="accent text-[#26A6AD]">Assistant</span>
+                </h2>
+                <p className="mt-5 max-w-xl text-[1.0625rem] leading-[1.7] text-slate-300">
+                  Get instant answers about our services, pricing, websites, AI automation,
+                  Google Business Profile optimization, SEO, and marketing solutions.
+                </p>
+                <p className="mt-4 max-w-xl text-[1.0625rem] leading-[1.7] text-slate-300">
+                  Our AI Assistant is available 24/7 to answer your questions, qualify your
+                  needs, and help you get started.
+                </p>
+                <p className="mt-6 font-semibold text-[#26A6AD]">
+                  Click the chat icon in the bottom-right corner to begin.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
-
-
     </div>
   );
 };

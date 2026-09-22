@@ -58,6 +58,49 @@
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Metric-matched fallbacks.
+   font-display:swap paints text in a system font first and swaps when the real
+   one lands. If the two have different metrics the paragraph rewraps at that
+   moment and everything under it jumps — measured at CLS 0.079 on /contact and
+   0.041 on /about-us before these existed.
+
+   Each rule below takes the local face the browser would have used anyway and
+   overrides its metrics so it occupies almost exactly the space the web font
+   will. The numbers are measured, not guessed: the ratio of the two fonts'
+   advance width over the same sample string, and the web font's own ascent and
+   descent divided by that ratio. Liberation Sans and Liberation Serif stand in
+   for Arial and Times New Roman when measuring, being metric-compatible with
+   them.
+
+   If local() resolves to nothing the whole @font-face is dropped and the next
+   family in the stack is used, so this can only help. */
+@font-face {
+  font-family: "Plus Jakarta Sans Fallback";
+  src: local("Arial"), local("Liberation Sans"), local("Helvetica");
+  size-adjust: 103.33%;
+  ascent-override: 100.45%;
+  descent-override: 21.48%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("Liberation Sans"), local("Helvetica");
+  size-adjust: 106.48%;
+  ascent-override: 90.98%;
+  descent-override: 22.65%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Serif Fallback";
+  src: local("Times New Roman"), local("Liberation Serif"), local("Times");
+  size-adjust: 86.76%;
+  ascent-override: 114.11%;
+  descent-override: 35.73%;
+  line-gap-override: 0%;
+}
+
 @theme {
   /* Palette */
   --color-ink: #0b1220; /* dark sections: hero, footer, final CTA */
@@ -74,11 +117,12 @@
   --color-line-dark: rgba(255, 255, 255, 0.1); /* borders on dark */
 
   /* Type */
-  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, sans-serif;
-  --font-accent: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-display: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback",
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-accent: "Instrument Serif", "Instrument Serif Fallback", Georgia,
+    "Times New Roman", serif;
 
   /* Radius, on the 4px step the brief asks for */
   --radius-card: 16px;
