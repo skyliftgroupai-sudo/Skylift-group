@@ -212,8 +212,12 @@ for (const p of pages) {
 for (const p of pages) {
   if (/noindex/i.test(p.robots) || p.route === "/") continue;
   const inbound = inboundCounts.get(p.route) || 0;
+  // A paginated listing is reachable from its siblings by design — page 2 of a
+  // two-page archive legitimately has one inbound link.
+  const isPagination = /\/page\/\d+$/.test(p.route);
   if (inbound === 0) add("HIGH", p.route, "orphan: no other page links to it");
-  else if (inbound < 3) add("HIGH", p.route, `under-linked: only ${inbound} page(s) link to it`);
+  else if (inbound < 3 && !isPagination)
+    add("HIGH", p.route, `under-linked: only ${inbound} page(s) link to it`);
 }
 
 // Sitemap agreement.

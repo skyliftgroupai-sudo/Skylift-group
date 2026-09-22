@@ -102,17 +102,28 @@ export function blogIndexRoutes(posts) {
 /** Title and description for a blog index route, used by the prerenderer and the page. */
 export function blogIndexSeo(route) {
   const suffix = route.page > 1 ? ` — Page ${route.page}` : "";
+  // Page 2 onwards needs its own description. Repeating the root's gives two
+  // URLs the same meta description, which the audit flags as a duplicate and
+  // which gives a search engine no reason to treat them as distinct.
+  const pageNote = route.page > 1 ? ` Page ${route.page} of our archive.` : "";
+
   if (route.kind === "category") {
     return {
       title: `${route.category.name} Articles${suffix} | Sky Lift Group`,
-      description: `${route.category.name} guides for home service business owners — practical articles on winning and keeping more local customers.`,
+      description:
+        `${route.category.name} guides for home service business owners — practical articles on winning and keeping more local customers.${pageNote}`.slice(
+          0,
+          155
+        ),
     };
   }
   return {
-    title: route.page > 1
-      ? `AI Marketing & Local SEO Blog — Page ${route.page} | Sky Lift Group`
-      : "AI Marketing & Local SEO Blog | Sky Lift Group",
-    description:
-      "Practical guides on SMS marketing, local SEO, Google Business Profile, AI lead capture, and automation for home service business owners.",
+    title:
+      route.page > 1
+        ? `AI Marketing & Local SEO Blog — Page ${route.page} | Sky Lift Group`
+        : "AI Marketing & Local SEO Blog | Sky Lift Group",
+    description: route.page > 1
+      ? `More guides on SMS marketing, local SEO, Google Business Profile and AI lead capture for home service businesses.${pageNote}`
+      : "Practical guides on SMS marketing, local SEO, Google Business Profile, AI lead capture, and automation for home service business owners.",
   };
 }

@@ -72,7 +72,7 @@ Responding within the window before they dial the next company — which is a fe
 
 This works because it inverts the problem. Instead of needing a person available at the exact moment the phone rings, you need a person available sometime in the next hour to work through replies. That is a much easier staffing problem.
 
-For businesses with higher call volume, an [AI voice agent](/services/ai-voice-agents) goes further — it answers the call, qualifies the job, checks real calendar availability and books the appointment during the conversation. The caller hangs up with a confirmed time rather than a promise.
+For businesses with higher call volume, an [AI voice agent](/blog/can-ai-answer-the-phone-for-my-business) goes further — it answers the call, qualifies the job, checks real calendar availability and books the appointment during the conversation. The caller hangs up with a confirmed time rather than a promise.
 
 Neither replaces answering your phone. They cover the calls you were going to lose entirely.
 
