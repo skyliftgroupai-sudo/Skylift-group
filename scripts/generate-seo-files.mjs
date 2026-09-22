@@ -7,6 +7,7 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { parseFrontmatter } from "../src/lib/frontmatter.js";
+import { blogIndexRoutes } from "../src/lib/blog-taxonomy.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -135,6 +136,15 @@ function buildSitemap(posts) {
     const lastmod = lastModified(sources);
     urls.push(
       `  <url>\n    <loc>${SITE}${r.path}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority}</priority>\n  </url>`
+    );
+  }
+
+  // Category and pagination pages. Listing them keeps them discoverable even
+  // before Google walks the pagination links.
+  for (const route of blogIndexRoutes(posts)) {
+    if (route.path === "/blog") continue; // already in staticRoutes
+    urls.push(
+      `  <url>\n    <loc>${SITE}${route.path}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.5</priority>\n  </url>`
     );
   }
 

@@ -66,6 +66,9 @@ export const AppRoutes = () => (
       <Route path="/services/missed-call-text-back" element={<MissedCall />} />
       <Route path="/services/lead-follow-up" element={<AutomatedLeadFollowUp />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/page/:page" element={<Blog />} />
+      <Route path="/blog/category/:slug" element={<Blog />} />
+      <Route path="/blog/category/:slug/page/:page" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/book" element={<Schedule />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />

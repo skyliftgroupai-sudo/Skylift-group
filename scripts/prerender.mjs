@@ -25,6 +25,7 @@ import { prerender } from "react-dom/static";
 import { staticRoutes } from "./seo-routes.js";
 import { parseFrontmatter, extractFaqs } from "../src/lib/frontmatter.js";
 import { schemaForRoute, blogPostingSchema } from "../src/lib/schema.js";
+import { blogIndexRoutes, blogIndexSeo } from "../src/lib/blog-taxonomy.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -169,7 +170,9 @@ const routeSource = readFileSync(join(root, "src", "routes.jsx"), "utf8");
 const appRoutes = [...routeSource.matchAll(/path="([^"]+)"/g)]
   .map((m) => m[1])
   .filter((p) => p !== "*" && !p.includes(":")); // "*" and /blog/:slug are handled separately
-const uncovered = appRoutes.filter((p) => !(p in staticRoutes));
+const uncovered = appRoutes.filter(
+  (p) => !(p in staticRoutes) && !p.startsWith("/blog/page") && !p.startsWith("/blog/category")
+);
 if (uncovered.length) {
   console.error(
     `[prerender] These routes have no entry in src/lib/seo-config.js and would 404:\n  ${uncovered.join(
@@ -214,6 +217,21 @@ writeFileSync(
   })
 );
 count++;
+
+// Blog index, category and pagination pages. These have to be real files: the
+// pagination is anchor tags rather than a load-more button precisely so a
+// crawler can walk them, which only helps if the URLs actually resolve.
+const blogDirForIndex = join(root, "src", "content", "blog");
+const allPosts = existsSync(blogDirForIndex)
+  ? readdirSync(blogDirForIndex)
+      .filter((f) => f.endsWith(".md"))
+      .map((f) => parseFrontmatter(readFileSync(join(blogDirForIndex, f), "utf8")).data)
+  : [];
+
+for (const route of blogIndexRoutes(allPosts)) {
+  if (route.path === "/blog") continue; // already emitted from staticRoutes
+  await emit(route.path, blogIndexSeo(route));
+}
 
 // Blog posts (from frontmatter)
 const blogDir = join(root, "src", "content", "blog");

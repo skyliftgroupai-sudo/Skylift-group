@@ -6,7 +6,12 @@ import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import useSeo from "../hooks/useSeo";
 import NotFound from "../components/Notfound";
 import CTASection from "./CtaSection";
-import { getPostBySlug, getRelatedPosts, SITE_URL } from "../lib/posts";
+import { getAllPosts, getPostBySlug, getRelatedPosts, SITE_URL } from "../lib/posts";
+import {
+  MIN_POSTS_PER_CATEGORY,
+  categorySlug,
+  postsInCategory,
+} from "../lib/blog-taxonomy";
 import { blogPostingSchema } from "../lib/schema";
 
 function formatDate(iso) {
@@ -104,6 +109,8 @@ const BlogPost = () => {
 
 const BlogPostView = ({ post }) => {
   const canonical = `${SITE_URL}/blog/${post.slug}`;
+  const categoryHasPage =
+    postsInCategory(getAllPosts(), categorySlug(post.category)).length >= MIN_POSTS_PER_CATEGORY;
   const related = getRelatedPosts(post.slug, 3);
 
   useSeo({
@@ -141,9 +148,21 @@ const BlogPostView = ({ post }) => {
               <ArrowLeft size={15} /> Back to Blog
             </Link>
             <div>
-              <span className="inline-block text-xs font-semibold tracking-wide text-[#00A693] border border-[#00A693]/40 rounded-full px-3 py-1">
-                {post.category}
-              </span>
+              {/* Links to the category listing when that listing exists, which
+                  gives every category page an inbound link from each of its
+                  posts rather than only from the blog index. */}
+              {categoryHasPage ? (
+                <Link
+                  to={`/blog/category/${categorySlug(post.category)}`}
+                  className="inline-block text-xs font-semibold tracking-wide text-[#00A693] border border-[#00A693]/40 rounded-full px-3 py-1 transition hover:bg-[#00A693]/15"
+                >
+                  {post.category}
+                </Link>
+              ) : (
+                <span className="inline-block text-xs font-semibold tracking-wide text-[#00A693] border border-[#00A693]/40 rounded-full px-3 py-1">
+                  {post.category}
+                </span>
+              )}
             </div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}

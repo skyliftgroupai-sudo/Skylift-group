@@ -1,9 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { getAllPosts } from "../lib/posts";
+import {
+  MIN_POSTS_PER_CATEGORY,
+  categoryIntro,
+  categoriesFrom,
+  categorySlug,
+  postsInCategory,
+  pageCount,
+  postsOnPage,
+  blogIndexSeo,
+} from "../lib/blog-taxonomy";
 
 function formatDate(iso) {
   // Parse as a local date to avoid the UTC-midnight off-by-one day shift.
@@ -17,10 +27,36 @@ function formatDate(iso) {
 }
 
 const Blog = () => {
-  const posts = getAllPosts();
-  const [featured, ...rest] = posts;
+  const all = getAllPosts();
+  const { slug: catSlug, page: pageParam } = useParams();
+  const page = Math.max(1, parseInt(pageParam || "1", 10) || 1);
 
-  useSeo(seoFor("/blog"));
+  // Only categories with enough posts to be worth a page of their own get a
+  // link here, matching what the prerenderer actually builds.
+  const categories = categoriesFrom(all).filter((c) => c.count >= MIN_POSTS_PER_CATEGORY);
+  const activeCategory = catSlug ? categories.find((c) => c.slug === catSlug) : null;
+  const posts = catSlug ? postsInCategory(all, catSlug) : all;
+
+  const totalPages = pageCount(posts.length);
+  const visible = postsOnPage(posts, page);
+
+  // Only the first page of the unfiltered index gets a featured card. On page 2
+  // or inside a category it would repeat a post that already appears in the grid.
+  const isRoot = !catSlug && page === 1;
+  const featured = isRoot ? visible[0] : null;
+  const rest = isRoot ? visible.slice(1) : visible;
+
+  const basePath = catSlug ? `/blog/category/${catSlug}` : "/blog";
+  const pageUrl = (n) => (n === 1 ? basePath : `${basePath}/page/${n}`);
+
+  const route = activeCategory
+    ? { kind: "category", page, category: activeCategory }
+    : { kind: "index", page };
+  useSeo({
+    ...seoFor("/blog"),
+    ...blogIndexSeo(route),
+    canonical: `https://www.skyliftgroup.com${pageUrl(page)}`,
+  });
 
   return (
     <div className="w-full bg-[#0a0a0a] text-gray-100">
@@ -56,6 +92,55 @@ const Blog = () => {
           </motion.p>
         </div>
       </section>
+
+      {/* CATEGORIES — real links, so a crawler can reach every category listing
+          and the posts filed under it. */}
+      {categories.length > 0 && (
+        <nav className="max-w-6xl mx-auto px-6 md:px-8 pb-10" aria-label="Blog categories">
+          <ul className="flex flex-wrap justify-center gap-3">
+            <li>
+              <Link
+                to="/blog"
+                className={`inline-block rounded-full border px-4 py-2 text-sm transition ${
+                  !catSlug
+                    ? "border-[#00A693] bg-[#00A693]/15 text-[#00A693]"
+                    : "border-white/15 text-gray-300 hover:border-[#00A693]/50 hover:text-[#00A693]"
+                }`}
+              >
+                All articles
+              </Link>
+            </li>
+            {categories.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  to={`/blog/category/${c.slug}`}
+                  className={`inline-block rounded-full border px-4 py-2 text-sm transition ${
+                    catSlug === c.slug
+                      ? "border-[#00A693] bg-[#00A693]/15 text-[#00A693]"
+                      : "border-white/15 text-gray-300 hover:border-[#00A693]/50 hover:text-[#00A693]"
+                  }`}
+                >
+                  {c.name} ({c.count})
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {activeCategory && (
+        <div className="max-w-6xl mx-auto px-6 md:px-8 pb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-white">
+            {activeCategory.name}
+            {page > 1 ? ` — Page ${page}` : ""}
+          </h2>
+          {categoryIntro(activeCategory.slug) && (
+            <p className="mt-4 max-w-2xl mx-auto text-gray-300 leading-relaxed">
+              {categoryIntro(activeCategory.slug)}
+            </p>
+          )}
+        </div>
+      )}
 
       {posts.length === 0 ? (
         <section className="py-24 text-center text-gray-400">
@@ -150,6 +235,46 @@ const Blog = () => {
                 </motion.article>
               ))}
             </div>
+          )}
+
+          {/* PAGINATION — anchor tags with real hrefs, not a load-more button.
+              A button is invisible to a crawler, which would leave older posts
+              reachable only from the sitemap. */}
+          {totalPages > 1 && (
+            <nav className="mt-16 flex flex-wrap items-center justify-center gap-3" aria-label="Pagination">
+              {page > 1 && (
+                <Link
+                  to={pageUrl(page - 1)}
+                  rel="prev"
+                  className="rounded-lg border border-white/15 px-4 py-2 text-sm text-gray-300 transition hover:border-[#00A693]/50 hover:text-[#00A693]"
+                >
+                  Previous
+                </Link>
+              )}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                <Link
+                  key={n}
+                  to={pageUrl(n)}
+                  aria-current={n === page ? "page" : undefined}
+                  className={`rounded-lg border px-4 py-2 text-sm transition ${
+                    n === page
+                      ? "border-[#00A693] bg-[#00A693]/15 text-[#00A693]"
+                      : "border-white/15 text-gray-300 hover:border-[#00A693]/50 hover:text-[#00A693]"
+                  }`}
+                >
+                  {n}
+                </Link>
+              ))}
+              {page < totalPages && (
+                <Link
+                  to={pageUrl(page + 1)}
+                  rel="next"
+                  className="rounded-lg border border-white/15 px-4 py-2 text-sm text-gray-300 transition hover:border-[#00A693]/50 hover:text-[#00A693]"
+                >
+                  Next
+                </Link>
+              )}
+            </nav>
           )}
         </div>
       )}
