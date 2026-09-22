@@ -7,7 +7,6 @@
 // also why it is the kind of page other people link to.
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Check, ChevronDown, Info } from "lucide-react";
 import useSeo from "../hooks/useSeo";
@@ -15,15 +14,9 @@ import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
 import { SECTIONS, TOTAL_ITEMS } from "../lib/sms-compliance-items";
 import FinalCta from "../components/home/FinalCta";
+import Reveal from "../components/Reveal";
 
 const STORAGE_KEY = "slg-sms-compliance-v1";
-
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 },
-};
 
 export default function SmsComplianceChecklist() {
   // Starts empty so the server render and the first client render match. What
@@ -123,8 +116,8 @@ export default function SmsComplianceChecklist() {
           {SECTIONS.map((section) => {
             const sectionDone = section.items.filter((i) => checked[i.id]).length;
             return (
-              <motion.div
-                {...fadeUp}
+              <Reveal as="div"
+               
                 key={section.id}
                 className="rounded-[16px] border border-[#E2E8F0] bg-white p-6 sm:p-8"
               >
@@ -174,7 +167,7 @@ export default function SmsComplianceChecklist() {
                     );
                   })}
                 </ul>
-              </motion.div>
+              </Reveal>
             );
           })}
         </div>
@@ -182,7 +175,7 @@ export default function SmsComplianceChecklist() {
 
       {/* CONTENT */}
       <section className="px-6 py-10">
-        <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+        <Reveal as="div" className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-6">
             What happens when this is not in place
           </h2>
@@ -208,11 +201,11 @@ export default function SmsComplianceChecklist() {
             feels spammed by a contractor they used once does not just opt out. They
             remember, and they mention it.
           </p>
-        </motion.div>
+        </Reveal>
       </section>
 
       <section className="px-6 py-10">
-        <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+        <Reveal as="div" className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-6">
             Where to start if none of this is in place
           </h2>
@@ -244,12 +237,12 @@ export default function SmsComplianceChecklist() {
             where text consent is not documented, and build the consented list
             deliberately rather than assuming you already have one.
           </p>
-        </motion.div>
+        </Reveal>
       </section>
 
       {faqs.length > 0 && (
         <section className="px-6 py-10">
-          <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+          <Reveal as="div" className="max-w-3xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-8">
               Frequently Asked Questions
             </h2>
@@ -272,26 +265,26 @@ export default function SmsComplianceChecklist() {
                       }`}
                     />
                   </button>
-                  <motion.div
+                  <div
                     id={`sms-faq-${i}`}
-                    initial={false}
-                    animate={{ height: openFaq === i ? "auto" : 0, opacity: openFaq === i ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
+                    className="grid transition-[grid-template-rows] duration-300 ease-out"
+                    style={{ gridTemplateRows: openFaq === i ? "1fr" : "0fr" }}
                   >
+                    <div className="overflow-hidden">
                     <p className="px-5 pb-5 pt-4 text-[#475569] leading-relaxed border-t border-[#E2E8F0]">
                       {faq.a}
                     </p>
-                  </motion.div>
+                  </div>
+                  </div>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </Reveal>
         </section>
       )}
 
       <section className="px-6 pb-12">
-        <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
+        <Reveal as="div" className="max-w-3xl mx-auto text-center">
           <Link
             to="/book"
             className="btn btn-primary"
@@ -308,7 +301,7 @@ export default function SmsComplianceChecklist() {
             </Link>{" "}
             build.
           </p>
-        </motion.div>
+        </Reveal>
       </section>
 
       <FinalCta />

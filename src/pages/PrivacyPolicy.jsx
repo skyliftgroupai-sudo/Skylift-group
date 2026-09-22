@@ -1,9 +1,9 @@
 import React from "react";
-import { motion } from "framer-motion";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
+import Reveal from "../components/Reveal";
 
 const PrivacyPolicy = () => {
     useSeo(seoFor("/privacy-policy"));
@@ -15,12 +15,8 @@ const PrivacyPolicy = () => {
             <div className="slg-legal mx-auto px-6">
 
                 {/* Header */}
-                <motion.div
+                <Reveal as="div"
                     className="text-center mb-14"
-                    initial={{ opacity: 0, y: -40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                    viewport={{ once: true }}
                 >
                     <span className="slg-chip mb-6">
                         Privacy Policy
@@ -34,7 +30,7 @@ const PrivacyPolicy = () => {
                         We are committed to protecting your information while delivering
                         high-performance digital marketing and AI-powered solutions.
                     </p>
-                </motion.div>
+                </Reveal>
 
                 <div className="space-y-12">
 
@@ -181,12 +177,8 @@ Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky 
                 </div>
 
                 {/* CTA */}
-                <motion.div
+                <Reveal as="div"
                     className="text-center mt-24"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
                 >
                     <h3 className="font-display text-[1.375rem] font-extrabold text-[#142A47] sm:text-[1.75rem] mb-8">
                         Questions About Our Privacy Policy?
@@ -198,7 +190,7 @@ Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky 
                     >
                         Contact Sky Lift Group
                     </Link>
-                </motion.div>
+                </Reveal>
 
             </div>
         </section>

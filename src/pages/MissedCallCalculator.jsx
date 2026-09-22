@@ -8,13 +8,13 @@
 // behind a result — a number you can check is one you can act on.
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
 import FinalCta from "../components/home/FinalCta";
+import Reveal from "../components/Reveal";
 
 const WEEKS_PER_YEAR = 52;
 
@@ -32,13 +32,6 @@ function clean(value, { min = 0, max = Infinity }) {
   if (!Number.isFinite(n)) return min;
   return Math.min(Math.max(n, min), max);
 }
-
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 },
-};
 
 function Field({ label, hint, prefix, suffix, value, onChange, min, max, step }) {
   return (
@@ -179,7 +172,7 @@ export default function MissedCallCalculator() {
 
       {/* CONTENT */}
       <section className="px-6 pb-4">
-        <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+        <Reveal as="div" className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-6">
             Why a missed call costs a full job rather than a fraction of one
           </h2>
@@ -201,11 +194,11 @@ export default function MissedCallCalculator() {
             on a job, and evenings and weekends when the calls are often most urgent and
             most valuable.
           </p>
-        </motion.div>
+        </Reveal>
       </section>
 
       <section className="px-6 py-12">
-        <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+        <Reveal as="div" className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-6">
             How to get a booking rate you can trust
           </h2>
@@ -240,11 +233,11 @@ export default function MissedCallCalculator() {
               </li>
             ))}
           </ol>
-        </motion.div>
+        </Reveal>
       </section>
 
       <section className="px-6 py-12">
-        <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+        <Reveal as="div" className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-6">
             What to do about the number
           </h2>
@@ -276,12 +269,12 @@ export default function MissedCallCalculator() {
             budget. Paying for a click and then not answering the phone is the most
             expensive mistake available.
           </p>
-        </motion.div>
+        </Reveal>
       </section>
 
       {faqs.length > 0 && (
         <section className="px-6 py-12">
-          <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+          <Reveal as="div" className="max-w-3xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-8">
               Frequently Asked Questions
             </h2>
@@ -304,26 +297,26 @@ export default function MissedCallCalculator() {
                       }`}
                     />
                   </button>
-                  <motion.div
+                  <div
                     id={`calc-faq-${i}`}
-                    initial={false}
-                    animate={{ height: openFaq === i ? "auto" : 0, opacity: openFaq === i ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
+                    className="grid transition-[grid-template-rows] duration-300 ease-out"
+                    style={{ gridTemplateRows: openFaq === i ? "1fr" : "0fr" }}
                   >
+                    <div className="overflow-hidden">
                     <p className="px-5 pb-5 pt-4 text-[#475569] leading-relaxed border-t border-[#E2E8F0]">
                       {faq.a}
                     </p>
-                  </motion.div>
+                  </div>
+                  </div>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </Reveal>
         </section>
       )}
 
       <section className="px-6 pb-12">
-        <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
+        <Reveal as="div" className="max-w-3xl mx-auto text-center">
           <Link
             to="/book"
             className="btn btn-primary"
@@ -340,7 +333,7 @@ export default function MissedCallCalculator() {
             </Link>
             .
           </p>
-        </motion.div>
+        </Reveal>
       </section>
 
       <FinalCta />

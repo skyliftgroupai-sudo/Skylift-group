@@ -1,6 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { Quote, Linkedin, Twitter, Mail, Target, TrendingUp, Heart, Sparkles } from "lucide-react";
+import Reveal from "./Reveal";
 
 export default function CeoMessage() {
 
@@ -11,11 +11,7 @@ export default function CeoMessage() {
             <section className="slg-container py-16 lg:py-20">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* CEO Image */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                    <Reveal as="div"
                         className="relative"
                     >
                                                 <div className="relative overflow-hidden rounded-[16px] shadow-2xl border border-white/10">
@@ -44,42 +40,30 @@ export default function CeoMessage() {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </Reveal>
 
                     {/* CEO Intro Text */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                    <Reveal as="div"
                     >
-                        <motion.h2
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.7 }}
+                        <Reveal as="h2"
                             className="text-3xl md:text-4xl font-bold text-white mb-6"
                         >
                             Leadership With <span className="text-[#26A6AD]">Purpose</span>
-                        </motion.h2>
+                        </Reveal>
                         <p className="text-gray-300 leading-8 text-lg mb-4">
                             At <span className="text-[#26A6AD] font-semibold">Sky Lift Group</span>, we believe every brand has a story worth telling and a future worth building. As CEO, my mission is to ensure our team brings that vision to life for every client we serve.
                         </p>
                         <p className="text-gray-300 leading-8 text-lg">
                             We don't just chase trends, we set them. Our work is driven by curiosity, shaped by strategy and measured by the real impact we create for the businesses who trust us.
                         </p>
-                    </motion.div>
+                    </Reveal>
                 </div>
             </section>
 
             {/* The Message Section */}
             <section className="bg-[#0B1220] pb-16 px-6 lg:pb-20">
                 <div className="mx-auto max-w-4xl">
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                    <Reveal as="div"
                         className="relative p-8 md:p-12 bg-[#142A47] rounded-[16px] shadow-md border border-white/10"
                     >
                         {/* Quote Icon */}
@@ -87,15 +71,11 @@ export default function CeoMessage() {
                             <Quote size={30} className="text-white" />
                         </div>
 
-                        <motion.h2
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.7 }}
+                        <Reveal as="h2"
                             className="text-2xl md:text-3xl font-bold text-white mb-6 mt-4"
                         >
                             A Personal Note To Our Clients & Partners
-                        </motion.h2>
+                        </Reveal>
 
                         <div className="space-y-5 text-gray-300 leading-8 text-base md:text-lg">
                             <p>
@@ -117,7 +97,7 @@ export default function CeoMessage() {
                             <p className="text-[#26A6AD] text-2xl font-bold italic mb-1">Eric Williams</p>
                             <p className="text-gray-400 text-sm">Founder & CEO, Sky Lift Group</p>
                         </div>
-                    </motion.div>
+                    </Reveal>
                 </div>
             </section>
 
@@ -125,36 +105,24 @@ export default function CeoMessage() {
             <section className="slg-container py-16 lg:py-20">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Co-Founder Intro Text (left on desktop, below image on mobile) */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                    <Reveal as="div"
                         className="order-2 md:order-1"
                     >
-                        <motion.h2
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.7 }}
+                        <Reveal as="h2"
                             className="text-3xl md:text-4xl font-bold text-white mb-6"
                         >
                             Driven By <span className="text-[#26A6AD]">Craft</span>
-                        </motion.h2>
+                        </Reveal>
                         <p className="text-gray-300 leading-8 text-lg mb-4">
                             Behind every successful campaign is a team obsessed with the details. As <span className="text-[#26A6AD] font-semibold">Co-Founder</span>, I focus on the people, systems and processes that turn bold ideas into real, measurable outcomes.
                         </p>
                         <p className="text-gray-300 leading-8 text-lg">
                             Strategy means little without execution. My role is to make sure the brilliant thinking that happens at Sky Lift Group reaches the world, on time, on brand and beyond expectations.
                         </p>
-                    </motion.div>
+                    </Reveal>
 
                     {/* Co-Founder Image (right on desktop, top on mobile) */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                    <Reveal as="div"
                         className="relative order-1 md:order-2"
                     >
                                                 <div className="relative overflow-hidden rounded-[16px] shadow-2xl border border-white/10">
@@ -183,18 +151,14 @@ export default function CeoMessage() {
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </Reveal>
                 </div>
             </section>
 
             {/* Co-Founder Message Section */}
             <section className="bg-[#0B1220] pb-16 px-6 lg:pb-20">
                 <div className="mx-auto max-w-4xl">
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                    <Reveal as="div"
                         className="relative p-8 md:p-12 bg-[#142A47] rounded-[16px] shadow-md border border-white/10"
                     >
                         {/* Quote Icon */}
@@ -202,15 +166,11 @@ export default function CeoMessage() {
                             <Quote size={30} className="text-white" />
                         </div>
 
-                        <motion.h2
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.7 }}
+                        <Reveal as="h2"
                             className="text-2xl md:text-3xl font-bold text-white mb-6 mt-4"
                         >
                             Where Vision Meets Execution
-                        </motion.h2>
+                        </Reveal>
 
                         <div className="space-y-5 text-gray-300 leading-8 text-base md:text-lg">
                             <p>
@@ -232,7 +192,7 @@ export default function CeoMessage() {
                             <p className="text-[#26A6AD] text-2xl font-bold italic mb-1">Jason Roy</p>
                             <p className="text-gray-400 text-sm">Co-Founder & COO, Sky Lift Group</p>
                         </div>
-                    </motion.div>
+                    </Reveal>
                 </div>
             </section>
         </div>
