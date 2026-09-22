@@ -18,26 +18,29 @@ import { HERO } from "../../lib/home-content";
 export default function Hero() {
   return (
     <section className="slg-dark relative overflow-hidden">
-      {/* Background photograph, unchanged, dimmed much further than before so
-          the type carries the section instead of competing with it. Explicit
-          width/height and the preload in index.html keep this the LCP element
-          with no layout shift. */}
-      <img
-        src="/assets/bg-hero.webp"
-        alt=""
-        aria-hidden="true"
-        fetchPriority="high"
-        width={1920}
-        height={1080}
-        decoding="async"
-        className="absolute inset-0 h-full w-full object-cover opacity-[0.18]"
-      />
+      {/* No hero photograph.
+          bg-hero.webp was 95KB, it sat at 18% opacity behind the headline where
+          it read as texture rather than as a picture, and because its preload
+          lived in the shared index.html template every one of the other fifty
+          pages downloaded it too without ever using it. It was also the largest
+          contentful paint on this page, so the headline could not paint until
+          it arrived. Two CSS gradients give the same depth for nothing, and the
+          LCP element is now the h1 itself. */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 0%, rgba(38,166,173,0.18) 0%, rgba(11,18,32,0.75) 45%, #0B1220 85%)",
+            "radial-gradient(120% 90% at 50% 0%, rgba(38,166,173,0.20) 0%, rgba(20,42,71,0.55) 40%, #0B1220 80%)",
         }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 opacity-[0.35]"
+        style={{
+          background:
+            "radial-gradient(70% 50% at 85% 15%, rgba(244,188,63,0.10) 0%, rgba(11,18,32,0) 70%)",
+        }}
+        aria-hidden="true"
       />
 
       <div className="slg-container relative slg-section">
