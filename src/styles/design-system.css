@@ -1,0 +1,355 @@
+/* ---------------------------------------------------------------------------
+   Sky Lift Group design system
+   ---------------------------------------------------------------------------
+   One place for the palette, the type scale and the handful of component
+   classes the redesigned pages share. Everything here is plain CSS plus
+   Tailwind 4's @theme, so the tokens are available both as CSS variables
+   (var(--color-teal)) and as Tailwind utilities (bg-teal, font-display).
+
+   Rules this file encodes, from the brief:
+     - Yellow (#F4BC3F) is ONLY ever a primary CTA button. Never text, never a
+       border, never an icon. The only .btn-primary rule below is the one place
+       it appears, which is what keeps that promise enforceable.
+     - Headings are Plus Jakarta Sans at -0.02em; body is Inter at 17-18px with
+       a 1.7 line-height; Instrument Serif italic is reserved for one accented
+       word in a major headline.
+     - Motion is opacity and transform only, and is switched off entirely under
+       prefers-reduced-motion. Nothing is ever hidden from a crawler: the
+       reveal styles only apply once the inline script in index.html has set
+       .js on <html>, so the static HTML renders fully visible.
+--------------------------------------------------------------------------- */
+
+/* Self-hosted latin subsets. Serving them from our own origin removes the DNS
+   lookup, TLS handshake and extra round trip that fonts.gstatic.com costs, and
+   lets index.html preload the two files used above the fold. font-display:swap
+   means text paints immediately in the fallback and never blocks LCP.
+   Plus Jakarta Sans and Inter are variable fonts, so one file covers every
+   weight we use. */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/instrument-serif-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  /* Palette */
+  --color-ink: #0b1220; /* dark sections: hero, footer, final CTA */
+  --color-ink-soft: #111a2c; /* cards and wells on top of ink */
+  --color-navy: #142a47; /* cards on dark, headings on light */
+  --color-teal: #26a6ad; /* links, icons, accents */
+  --color-teal-dark: #1c8a90; /* hover state for teal on light */
+  --color-teal-soft: #e6f5f6; /* teal tint for badges on light */
+  --color-yellow: #f4bc3f; /* PRIMARY CTA BUTTONS ONLY */
+  --color-yellow-dark: #e0a821; /* CTA hover */
+  --color-surface: #f7f8fa; /* light section background */
+  --color-body: #475569; /* body text on light */
+  --color-line: #e2e8f0; /* borders on light */
+  --color-line-dark: rgba(255, 255, 255, 0.1); /* borders on dark */
+
+  /* Type */
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --font-accent: "Instrument Serif", Georgia, "Times New Roman", serif;
+
+  /* Radius, on the 4px step the brief asks for */
+  --radius-card: 16px;
+  --radius-control: 12px;
+
+  /* Soft shadows. Deliberately low-contrast — the 1px border does the work. */
+  --shadow-soft: 0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-lift: 0 2px 4px rgba(15, 23, 42, 0.05),
+    0 16px 40px rgba(15, 23, 42, 0.1);
+}
+
+/* --- Base ---------------------------------------------------------------- */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-body);
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* The single accent face. One word per major headline, italic, never a whole
+   line — that is the whole reason it exists. */
+.accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Keyboard focus has to stay obvious on both the dark and the light sections. */
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --- Layout -------------------------------------------------------------- */
+
+.slg-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Section rhythm: 96px on mobile through to 128px on desktop. */
+.slg-section {
+  padding-block: 72px;
+}
+
+@media (min-width: 768px) {
+  .slg-section {
+    padding-block: 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .slg-section {
+    padding-block: 128px;
+  }
+}
+
+.slg-section-tight {
+  padding-block: 56px;
+}
+
+@media (min-width: 1024px) {
+  .slg-section-tight {
+    padding-block: 72px;
+  }
+}
+
+/* --- Surfaces ------------------------------------------------------------ */
+
+.slg-dark {
+  background-color: var(--color-ink);
+  color: #e2e8f0;
+}
+
+.slg-light {
+  background-color: var(--color-surface);
+  color: var(--color-body);
+}
+
+.slg-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.slg-card-link:hover {
+  border-color: rgba(38, 166, 173, 0.45);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+/* Card on a dark section: navy fill, hairline border, no shadow (it would be
+   invisible anyway and only costs paint time). */
+.slg-card-dark {
+  background-color: var(--color-navy);
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-card);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.slg-card-dark-link:hover {
+  border-color: rgba(38, 166, 173, 0.55);
+  transform: translateY(-2px);
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  padding: 16px 28px;
+  border-radius: var(--radius-control);
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+/* The only place yellow appears anywhere in the system. */
+.btn-primary {
+  background-color: var(--color-yellow);
+  color: var(--color-ink);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-yellow-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(244, 188, 63, 0.28);
+}
+
+/* Ghost button on a dark section. */
+.btn-ghost {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-teal);
+  color: var(--color-teal);
+}
+
+/* Ghost button on a light section. */
+.btn-ghost-light {
+  background-color: #ffffff;
+  color: var(--color-navy);
+  border-color: var(--color-line);
+}
+
+.btn-ghost-light:hover {
+  border-color: var(--color-teal);
+  color: var(--color-teal-dark);
+}
+
+/* --- Eyebrow / badge ----------------------------------------------------- */
+
+.slg-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+}
+
+.slg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  background-color: var(--color-teal-soft);
+  border: 1px solid rgba(38, 166, 173, 0.25);
+}
+
+.slg-chip-dark {
+  color: var(--color-teal);
+  background-color: rgba(38, 166, 173, 0.12);
+  border-color: rgba(38, 166, 173, 0.32);
+}
+
+/* --- Scroll reveal ------------------------------------------------------- */
+/*
+   The static HTML has no `js` class on <html>, so .reveal is fully visible to
+   any crawler, to a reader with JavaScript off, and in the prerendered output.
+   The inline script in index.html adds `js` before first paint, which is what
+   arms the hidden start state, so there is no flash of visible content either.
+   Only opacity and transform animate, so nothing here can shift layout.
+*/
+.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Prose --------------------------------------------------------------- */
+/* Article measure for the blog. 70ch is the brief's number. */
+.slg-prose {
+  max-width: 70ch;
+}

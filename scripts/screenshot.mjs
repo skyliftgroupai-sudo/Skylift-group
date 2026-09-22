@@ -40,17 +40,25 @@ for (const vp of [{ name: "desktop", width: 1440, height: 900 }, { name: "mobile
     await page.route("**://widgets.leadconnectorhq.com/**", (r) => r.abort());
     await page.route("**://link.msgsndr.com/**", (r) => r.abort());
     await page.goto(`http://localhost:4179${route}`, { waitUntil: "networkidle", timeout: 40000 });
-    // Scroll the whole page so every whileInView section has animated in, then
-    // return to the top before the capture.
+    // Scroll the whole page so every scroll-reveal section has animated in,
+    // then return to the top. IntersectionObserver callbacks are async, so the
+    // steps are deliberately small and unhurried — a faster pass leaves whole
+    // sections still at opacity 0 in the capture.
     await page.evaluate(async () => {
-      const step = window.innerHeight * 0.8;
+      const step = window.innerHeight * 0.5;
       for (let y = 0; y < document.body.scrollHeight; y += step) {
         window.scrollTo(0, y);
-        await new Promise((r) => setTimeout(r, 120));
+        await new Promise((r) => setTimeout(r, 250));
       }
       window.scrollTo(0, 0);
-      await new Promise((r) => setTimeout(r, 400));
+      await new Promise((r) => setTimeout(r, 900));
     });
+    const stragglers = await page.evaluate(
+      () => document.querySelectorAll(".reveal:not(.is-visible)").length
+    );
+    if (stragglers > 0) {
+      console.warn(`  ! ${route} (${vp.name}): ${stragglers} reveal blocks never became visible`);
+    }
     const slug = route === "/" ? "home" : route.replace(/^\//, "").replace(/\//g, "-");
     const file = join(outDir, `${slug}-${vp.name}.png`);
     await page.screenshot({ path: file, fullPage: true });

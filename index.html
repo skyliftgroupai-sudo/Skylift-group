@@ -14,6 +14,21 @@
   <link rel="preload" as="image" href="/assets/services.webp" fetchpriority="high" />
   <link rel="preload" as="image" href="/assets/bg-hero.webp" fetchpriority="high" />
 
+  <!-- The two faces used above the fold, self-hosted so there is no extra DNS
+       lookup or TLS handshake to fonts.gstatic.com before text can paint. Both
+       are declared font-display:swap in src/styles/design-system.css, so a
+       slow font never blocks LCP. Instrument Serif is not preloaded on
+       purpose: it styles one word and can arrive late without hurting. -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin />
+
+  <!-- Arms the scroll-reveal styles before first paint. The hidden start state
+       in design-system.css is scoped to html.js, so the static HTML a crawler
+       fetches renders every section fully visible, and a reader with
+       JavaScript off sees the whole page. Setting the class here rather than
+       in React means no flash of content that then hides itself. -->
+  <script>document.documentElement.classList.add("js");</script>
+
 
   <!-- No canonical here on purpose. scripts/prerender.mjs inserts a self-referencing
        canonical into each generated page, and useSeo re-applies it after hydration.
