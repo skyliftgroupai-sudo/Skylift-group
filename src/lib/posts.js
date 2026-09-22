@@ -53,15 +53,26 @@ export function getPostBySlug(slug) {
 export function getRelatedPosts(slug, limit = 3) {
   const current = getPostBySlug(slug);
   if (!current) return allPosts.slice(0, limit);
+
+  // Score by topical overlap rather than category alone. Matching only on
+  // category meant the tie-break fell through to publication date, so older
+  // posts were almost never surfaced — which left them with one inbound link
+  // and starved of exactly the crawl signal internal linking is meant to give.
+  const tagsOf = (p) => new Set((p.tags || []).map((t) => t.toLowerCase()));
+  const currentTags = tagsOf(current);
+
   return allPosts
     .filter((p) => p.slug !== slug)
-    .sort((a, b) => {
-      const aShared = a.category === current.category ? 1 : 0;
-      const bShared = b.category === current.category ? 1 : 0;
-      return bShared - aShared;
+    .map((p) => {
+      let score = p.category === current.category ? 3 : 0;
+      for (const t of tagsOf(p)) if (currentTags.has(t)) score += 1;
+      return { post: p, score };
     })
-    .slice(0, limit);
+    .sort((a, b) => b.score - a.score || (a.post.date < b.post.date ? 1 : -1))
+    .slice(0, limit)
+    .map((x) => x.post);
 }
+
 
 export function getAllCategories() {
   return [...new Set(allPosts.map((p) => p.category))].sort();

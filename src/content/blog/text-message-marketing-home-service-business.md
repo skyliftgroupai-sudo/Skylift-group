@@ -73,7 +73,7 @@ This is the part most articles skip, and it is the part that carries real conseq
 
 **Every marketing message needs a clear opt-out**, and opt-outs have to be honored promptly. STOP, UNSUBSCRIBE and the common variants should be processed automatically rather than depending on someone noticing.
 
-**Your business must be registered through A2P 10DLC.** This is the registration US carriers require for businesses texting from a standard 10-digit number. Unregistered traffic gets filtered or blocked outright. Registration involves a brand record, a campaign record and a use-case approval, and carriers process it on their own timeline — typically several business days, sometimes longer.
+**Your business must be registered through [A2P 10DLC](/blog/a2p-10dlc-registration-contractors).** This is the registration US carriers require for businesses texting from a standard 10-digit number. Unregistered traffic gets filtered or blocked outright. Registration involves a brand record, a campaign record and a use-case approval, and carriers process it on their own timeline — typically several business days, sometimes longer.
 
 **Quiet hours matter.** Sending marketing messages late at night is both a compliance issue and a fast way to generate complaints.
 
