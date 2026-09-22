@@ -140,6 +140,11 @@ export const routeSeo = {
     description:
       "Automated lead follow-up that responds in seconds and nurtures every inquiry into a booked job for home service businesses.",
   },
+  "/tools/missed-call-calculator": {
+    title: "Missed Call Revenue Calculator | Sky Lift Group",
+    description:
+      "Work out what unanswered calls cost your home service business, using your own numbers. Free calculator, no email required, arithmetic shown.",
+  },
   "/privacy-policy": {
     title: "Privacy Policy | Sky Lift Group",
     description:

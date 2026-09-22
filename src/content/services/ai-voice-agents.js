@@ -54,6 +54,7 @@ export default {
     },
   ],
   related: [
+    { to: "/tools/missed-call-calculator", label: "Missed Call Revenue Calculator", note: "Work out what unanswered calls cost you, using your own numbers." },
     { to: "/services/missed-call-text-back", label: "Missed Call Text Back", note: "The text-based version, for callers who hang up." },
     { to: "/services/ai-chatbots", label: "AI Chatbots", note: "The same coverage for website visitors." },
     { to: "/services/lead-follow-up", label: "AI Lead Capture & Follow-Up", note: "Following up the calls that did not book." },

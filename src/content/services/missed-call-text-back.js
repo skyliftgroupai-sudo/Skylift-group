@@ -53,6 +53,7 @@ export default {
     },
   ],
   related: [
+    { to: "/tools/missed-call-calculator", label: "Missed Call Revenue Calculator", note: "Work out what unanswered calls cost you, using your own numbers." },
     { to: "/services/sms-marketing", label: "SMS & Text Message Marketing", note: "The full set of messages beyond the missed-call reply." },
     { to: "/services/lead-follow-up", label: "AI Lead Capture & Follow-Up", note: "What happens to the lead after the first reply." },
     { to: "/services/ai-voice-agents", label: "AI Voice Agents", note: "For callers who would rather talk than text." },

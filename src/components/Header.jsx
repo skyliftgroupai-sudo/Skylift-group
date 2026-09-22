@@ -180,14 +180,25 @@ export const Header = () => {
                                                         </ul>
                                                     </div>
 
-                                                    <Link
-                                                        to="/services"
-                                                        className="mt-8 inline-flex items-center justify-center gap-2
+                                                    <div className="mt-8 space-y-3">
+                                                        <Link
+                                                            to="/tools/missed-call-calculator"
+                                                            className="block rounded-xl border border-white/15 px-4 py-3 text-sm text-gray-200 transition hover:border-[#00A693]/60 hover:text-[#00A693]"
+                                                        >
+                                                            <span className="font-semibold">Free: Missed Call Calculator</span>
+                                                            <span className="mt-0.5 block text-xs text-gray-400">
+                                                                What unanswered calls cost you
+                                                            </span>
+                                                        </Link>
+                                                        <Link
+                                                            to="/services"
+                                                            className="inline-flex w-full items-center justify-center gap-2
                      rounded-xl border border-[#00A693] text-[#00A693] px-6 py-3
                     transition"
-                                                    >
-                                                        All Services <ArrowRight className="h-4 w-4" />
-                                                    </Link>
+                                                        >
+                                                            All Services <ArrowRight className="h-4 w-4" />
+                                                        </Link>
+                                                    </div>
                                                 </div>
 
                                             </div>

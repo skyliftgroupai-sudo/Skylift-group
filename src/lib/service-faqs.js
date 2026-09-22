@@ -426,6 +426,32 @@ export const routeFaqs = {
                   "Absolutely. We implement secure hosting, encryption, and privacy-first AI architecture to protect your business and customer data."
           }
       ],
+  "/tools/missed-call-calculator": [
+      {
+          q: "How many calls does a typical contractor miss?",
+          a: "There is no reliable industry figure, and any specific percentage you see quoted is usually marketing material rather than research. That is why this calculator asks for your own number instead of supplying one. Most phone systems report missed calls; if yours does not, count for two weeks and halve it.",
+      },
+      {
+          q: "What booking rate should I use?",
+          a: "Your own. The 30% the calculator starts with is an arbitrary placeholder, not a benchmark. Whoever answers your phone usually has a rough sense of what share of inbound calls become work, and that estimate beats any published figure.",
+      },
+      {
+          q: "Does this account for calls that were never going to be jobs?",
+          a: "Yes, through the booking rate. Sales calls, wrong numbers and suppliers are part of why that percentage is well below 100. If a third of your inbound calls are not customers, your booking rate reflects that and the result comes down accordingly.",
+      },
+      {
+          q: "Why does it assume 52 weeks rather than adjusting for my season?",
+          a: "To keep the arithmetic checkable. Seasonal trades miss more calls during peaks, so an annual figure built from a typical week is conservative for them. If your business is heavily seasonal, run it twice — once with a peak week and once with a quiet one — and treat the truth as sitting between them.",
+      },
+      {
+          q: "Is a missed call really a lost job?",
+          a: "Often, yes. Most people no longer leave voicemails for businesses; they hang up and call the next result. That is why the calculation treats a missed call as a whole job at risk rather than a fraction of one — the acquisition cost was already spent when the phone rang.",
+      },
+      {
+          q: "What is the fastest way to reduce this number?",
+          a: "Responding automatically inside the few minutes that decide the job. Missed call text back sends the caller a text within about a minute, before they dial the next company. It shifts the problem from needing someone available the second the phone rings to working through replies within the hour.",
+      },
+  ],
   "/services/database-reactivation": [
       {
           q: "What is a database reactivation campaign?",

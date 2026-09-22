@@ -34,7 +34,7 @@ Use your own numbers. Industry averages are useless here because a drain clearin
 
 **Step three: estimate what share of callers would have booked.** Your office manager usually knows roughly what proportion of inbound calls turn into work. If nobody knows, be conservative.
 
-**Step four: multiply.** Missed calls × average job value × booking rate.
+**Step four: multiply.** Missed calls × average job value × booking rate. Our [missed call revenue calculator](/tools/missed-call-calculator) does this for you and shows the arithmetic, so you can check it rather than trust it.
 
 Do it monthly rather than weekly — the number is more useful when it is comparable to what you spend on marketing each month.
 

@@ -55,6 +55,7 @@ export default {
   ],
   related: [
     { to: "/services/local-maps", label: "Google Business Profile Optimization", note: "The free listing your ads appear above." },
+    { to: "/tools/missed-call-calculator", label: "Missed Call Revenue Calculator", note: "Work out what unanswered calls cost you, using your own numbers." },
     { to: "/services/missed-call-text-back", label: "Missed Call Text Back", note: "Set this up before scaling ad spend." },
     { to: "/services/lead-follow-up", label: "AI Lead Capture & Follow-Up", note: "Handling the leads ads generate." },
     { to: "/services/seo", label: "Local SEO", note: "The channel that keeps producing when ads stop." },

@@ -114,7 +114,7 @@ Some can, if you give them calendar access. It is worth asking, because a servic
 
 ### Which is cheaper for a small contractor?
 
-It depends on volume. Answering services bill per call, so low steady volume can be cheaper. Text back is usually flat, which wins during seasonal spikes — and spikes are when you miss the most calls. Work it out against your own busiest month, not your average one.
+It depends on volume. Answering services bill per call, so low steady volume can be cheaper. Text back is usually flat, which wins during seasonal spikes — and spikes are when you miss the most calls. Work it out against your own busiest month, not your average one — the [missed call calculator](/tools/missed-call-calculator) will give you the revenue side of that comparison.
 
 ---
 
