@@ -191,6 +191,15 @@ export const Header = () => {
                                                             </span>
                                                         </Link>
                                                         <Link
+                                                            to="/tools/sms-compliance-checklist"
+                                                            className="block rounded-xl border border-white/15 px-4 py-3 text-sm text-gray-200 transition hover:border-[#00A693]/60 hover:text-[#00A693]"
+                                                        >
+                                                            <span className="font-semibold">Free: Texting Compliance Checklist</span>
+                                                            <span className="mt-0.5 block text-xs text-gray-400">
+                                                                A2P 10DLC, consent and opt-outs
+                                                            </span>
+                                                        </Link>
+                                                        <Link
                                                             to="/services"
                                                             className="inline-flex w-full items-center justify-center gap-2
                      rounded-xl border border-[#00A693] text-[#00A693] px-6 py-3

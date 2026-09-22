@@ -426,6 +426,32 @@ export const routeFaqs = {
                   "Absolutely. We implement secure hosting, encryption, and privacy-first AI architecture to protect your business and customer data."
           }
       ],
+  "/tools/sms-compliance-checklist": [
+      {
+          q: "Is this legal advice?",
+          a: "No. Sky Lift Group is a marketing agency, not a law firm. This checklist describes the operational steps we put in place when setting up business texting and covers the parts commonly missed. It does not interpret statutes or account for your situation — confirm your obligations with your own counsel.",
+      },
+      {
+          q: "Do I need A2P 10DLC registration and consent, or just one?",
+          a: "Both. They are separate requirements and satisfying one does nothing for the other. Registration is a carrier requirement about whether your messages get delivered. Consent is a legal requirement about whether you may send to a particular person. You can be fully registered and still be in breach.",
+      },
+      {
+          q: "Does this apply if I only send appointment reminders?",
+          a: "Registration does, because the requirement is about how the message is sent rather than what it says. Consent rules are lighter for transactional messages tied to a job the customer booked than for marketing, but the carrier registration applies either way.",
+      },
+      {
+          q: "What is the most commonly missed item on this list?",
+          a: "Automatic opt-out handling, followed by consent records. Both tend to be done manually until the day they are needed at scale. A missed opt-out is both a compliance problem and a complaint, and complaints damage the carrier standing your transactional messages depend on.",
+      },
+      {
+          q: "Can I text customers whose numbers are already in my CRM?",
+          a: "For messages about a job they booked, generally yes. For marketing, a phone number given for service is not consent to promotional texts. Where consent is not documented, email is on safer footing and is the natural channel for inviting people to opt in to texts.",
+      },
+      {
+          q: "Is my progress on this checklist saved?",
+          a: "In your own browser only. Nothing is sent to us and nothing is stored on our side. If you clear your browser data or open the page elsewhere, the ticks will not follow.",
+      },
+  ],
   "/tools/missed-call-calculator": [
       {
           q: "How many calls does a typical contractor miss?",

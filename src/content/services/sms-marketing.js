@@ -107,6 +107,7 @@ export default {
 
   related: [
     { to: "/services/missed-call-text-back", label: "Missed Call Text Back", note: "The message we set up first for most trades businesses." },
+    { to: "/tools/sms-compliance-checklist", label: "Texting Compliance Checklist", note: "The 21 steps to have in place before you text customers." },
     { to: "/services/database-reactivation", label: "Database Reactivation Campaigns", note: "Turning a dormant customer list into booked jobs." },
     { to: "/services/lead-follow-up", label: "AI Lead Capture & Follow-Up", note: "What happens to a lead after the first text." },
     { to: "/services/reviews", label: "Review Generation", note: "Automated review requests sent by text." },

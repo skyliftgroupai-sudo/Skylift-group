@@ -140,6 +140,11 @@ export const routeSeo = {
     description:
       "Automated lead follow-up that responds in seconds and nurtures every inquiry into a booked job for home service businesses.",
   },
+  "/tools/sms-compliance-checklist": {
+    title: "Text Message Compliance Checklist | Sky Lift Group",
+    description:
+      "21 things to have in place before texting customers: A2P 10DLC, consent, opt-outs and records. Free checklist for contractors, no email required.",
+  },
   "/tools/missed-call-calculator": {
     title: "Missed Call Revenue Calculator | Sky Lift Group",
     description:

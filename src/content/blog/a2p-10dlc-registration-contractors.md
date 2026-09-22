@@ -102,7 +102,7 @@ Plenty of contractors have been sending texts from a business line for years wit
 
 **Sort out consent at the same time.** If you have been texting without a documented opt-in, registration is the natural moment to add consent capture to your booking process and start keeping records.
 
-The honest summary: registration is administrative work that produces no visible improvement when it goes well. The return is that your messages keep arriving as you grow, which is invisible right up until it is not.
+Our [texting compliance checklist](/tools/sms-compliance-checklist) covers all of this as a list you can work through. The honest summary: registration is administrative work that produces no visible improvement when it goes well. The return is that your messages keep arriving as you grow, which is invisible right up until it is not.
 
 ## Frequently Asked Questions
 

@@ -92,7 +92,7 @@ Put it where you already collect phone numbers, which is more places than most c
 
 Then keep the records. Whatever system you use should store when consent was given and what the customer agreed to. If you ever need to demonstrate it, a spreadsheet of numbers with no provenance will not help you.
 
-None of this is complicated. It is just easy to skip, and the cost of skipping it shows up later.
+None of this is complicated. It is just easy to skip, and the cost of skipping it shows up later — our [texting compliance checklist](/tools/sms-compliance-checklist) lists every step so nothing gets missed.
 
 ## What about email instead?
 

@@ -31,6 +31,7 @@ const Faq = lazy(() => import("./pages/Faqs"));
 const MissedCall = lazy(() => import("./pages/MissedCall"));
 const SmsMarketing = lazy(() => import("./pages/SmsMarketing"));
 const MissedCallCalculator = lazy(() => import("./pages/MissedCallCalculator"));
+const SmsComplianceChecklist = lazy(() => import("./pages/SmsComplianceChecklist"));
 const DatabaseReactivation = lazy(() => import("./pages/DatabaseReactivation"));
 const AutomatedLeadFollowUp = lazy(() => import("./pages/Automatedleadfollowup"));
 const OneClickMarketing = lazy(() => import("./pages/Oneclickmarketing"));
@@ -72,6 +73,7 @@ export const AppRoutes = () => (
       <Route path="/blog/category/:slug/page/:page" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/tools/missed-call-calculator" element={<MissedCallCalculator />} />
+      <Route path="/tools/sms-compliance-checklist" element={<SmsComplianceChecklist />} />
       <Route path="/book" element={<Schedule />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms-conditions" element={<TermsConditions />} />
