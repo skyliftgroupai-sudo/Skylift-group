@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StaticRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
 
-const RouteFallback = () => <div className="min-h-screen bg-[#0a0a0a]" />;
+const RouteFallback = () => <div className="min-h-screen bg-[#0B1220]" />;
 
 // No ScrollToTop here: it only touches window in an effect, which never runs
 // during a static render, and leaving it out keeps the server tree minimal.

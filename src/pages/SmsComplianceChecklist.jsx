@@ -14,7 +14,7 @@ import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
 import { SECTIONS, TOTAL_ITEMS } from "../lib/sms-compliance-items";
-import CTASection from "./CtaSection";
+import FinalCta from "../components/home/FinalCta";
 
 const STORAGE_KEY = "slg-sms-compliance-v1";
 
@@ -60,13 +60,13 @@ export default function SmsComplianceChecklist() {
   const pct = Math.round((done / TOTAL_ITEMS) * 100);
 
   return (
-    <div className="w-full bg-[#0a0a0a] text-gray-100">
-      <section className="px-6 pt-20 pb-8">
+    <div className="w-full slg-light">
+      <section className="slg-dark px-6 pt-16 pb-14 lg:pt-20 lg:pb-16">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+          <h1 className="text-[1.875rem] font-extrabold text-white sm:text-[2.25rem] lg:text-[2.75rem]">
             Text Message Compliance Checklist for Home Service Businesses
           </h1>
-          <p className="mt-5 text-lg text-gray-300 leading-relaxed">
+          <p className="mt-6 text-[1.0625rem] leading-[1.7] text-slate-300">
             The 21 things that need to be in place before a US contractor texts
             customers — carrier registration, consent, opt-outs and records — in plain
             language, with no email required.
@@ -77,12 +77,12 @@ export default function SmsComplianceChecklist() {
       {/* Disclaimer sits above the checklist, not in the footer. A page about
           compliance that buries its own limitation is not being straight. */}
       <section className="px-6 pb-8">
-        <div className="max-w-3xl mx-auto rounded-2xl border border-[#F4BC3F]/40 bg-[#F4BC3F]/[0.07] p-6">
+        <div className="max-w-3xl mx-auto rounded-[16px] border border-[#F4BC3F]/40 bg-[#F4BC3F]/[0.07] p-6">
           <div className="flex gap-3">
             <Info className="h-5 w-5 shrink-0 text-[#F4BC3F] mt-0.5" />
             <div>
-              <h2 className="font-semibold text-white mb-2">This is not legal advice</h2>
-              <p className="text-gray-300 leading-relaxed text-[0.97rem]">
+              <h2 className="font-bold text-[#142A47] mb-2">This is not legal advice</h2>
+              <p className="text-[#475569] leading-relaxed text-[0.97rem]">
                 Sky Lift Group is a marketing agency, not a law firm. This checklist
                 describes the operational steps we put in place when we set up business
                 texting, and it covers the parts that are commonly missed. It does not
@@ -99,14 +99,14 @@ export default function SmsComplianceChecklist() {
       <section className="px-6 pb-6">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-baseline justify-between mb-2">
-            <span className="text-sm font-semibold text-white">
+            <span className="text-sm font-bold text-[#142A47]">
               {done} of {TOTAL_ITEMS} complete
             </span>
-            <span className="text-sm text-gray-400">{pct}%</span>
+            <span className="text-sm text-[#64748B]">{pct}%</span>
           </div>
           <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
             <div
-              className="h-full rounded-full bg-[#00A693] transition-all duration-300"
+              className="h-full rounded-full bg-[#26A6AD] transition-all duration-300"
               style={{ width: `${pct}%` }}
             />
           </div>
@@ -126,17 +126,17 @@ export default function SmsComplianceChecklist() {
               <motion.div
                 {...fadeUp}
                 key={section.id}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8"
+                className="rounded-[16px] border border-[#E2E8F0] bg-white p-6 sm:p-8"
               >
                 <div className="flex items-start justify-between gap-4 mb-3">
-                  <h2 className="text-xl sm:text-2xl font-bold text-white">
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-[#142A47]">
                     {section.title}
                   </h2>
-                  <span className="shrink-0 text-sm text-gray-400 tabular-nums">
+                  <span className="shrink-0 text-sm text-[#64748B] tabular-nums">
                     {sectionDone}/{section.items.length}
                   </span>
                 </div>
-                <p className="text-gray-300 leading-relaxed mb-6">{section.summary}</p>
+                <p className="text-[#475569] leading-relaxed mb-6">{section.summary}</p>
 
                 <ul className="space-y-4">
                   {section.items.map((item) => {
@@ -151,8 +151,8 @@ export default function SmsComplianceChecklist() {
                           <span
                             className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border transition ${
                               isOn
-                                ? "border-[#00A693] bg-[#00A693]"
-                                : "border-white/25 group-hover:border-[#00A693]/60"
+                                ? "border-[#26A6AD] bg-[#26A6AD]"
+                                : "border-[#CBD5E1] group-hover:border-[#26A6AD]/70"
                             }`}
                           >
                             {isOn && <Check className="h-3.5 w-3.5 text-[#0a0a0a]" />}
@@ -160,12 +160,12 @@ export default function SmsComplianceChecklist() {
                           <span>
                             <span
                               className={`block font-semibold transition ${
-                                isOn ? "text-gray-400 line-through" : "text-white"
+                                isOn ? "text-[#94A3B8] line-through" : "text-[#142A47]"
                               }`}
                             >
                               {item.label}
                             </span>
-                            <span className="mt-1 block text-[0.95rem] leading-relaxed text-gray-400">
+                            <span className="mt-1 block text-[0.95rem] leading-relaxed text-[#64748B]">
                               {item.detail}
                             </span>
                           </span>
@@ -183,28 +183,28 @@ export default function SmsComplianceChecklist() {
       {/* CONTENT */}
       <section className="px-6 py-10">
         <motion.div {...fadeUp} className="max-w-3xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-6">
             What happens when this is not in place
           </h2>
-          <p className="text-gray-300 leading-relaxed text-[1.05rem] mb-5">
+          <p className="text-[#475569] leading-relaxed text-[1.05rem] mb-5">
             Three separate consequences, and most contractors only think about the first.
           </p>
-          <p className="text-gray-300 leading-relaxed text-[1.05rem] mb-5">
-            <strong className="text-white">Legal exposure.</strong> US texting rules carry
+          <p className="text-[#475569] leading-relaxed text-[1.05rem] mb-5">
+            <strong className="font-semibold text-[#142A47]">Legal exposure.</strong> US texting rules carry
             statutory damages per message, and class actions exist in this area. For a
             business with a few thousand contacts, the arithmetic gets alarming quickly.
             This is the one to discuss with your counsel.
           </p>
-          <p className="text-gray-300 leading-relaxed text-[1.05rem] mb-5">
-            <strong className="text-white">Carrier filtering.</strong> This is the sleeper.
+          <p className="text-[#475569] leading-relaxed text-[1.05rem] mb-5">
+            <strong className="font-semibold text-[#142A47]">Carrier filtering.</strong> This is the sleeper.
             Complaints and unregistered traffic damage your sending reputation, and once
             carriers start filtering your number, the first thing to break is the
             transactional messaging you depend on — appointment confirmations, reminders,
             missed-call replies. Businesses expect the legal risk and are blindsided by
             the day the reminders silently stop arriving.
           </p>
-          <p className="text-gray-300 leading-relaxed text-[1.05rem]">
-            <strong className="text-white">Customer relationships.</strong> A homeowner who
+          <p className="text-[#475569] leading-relaxed text-[1.05rem]">
+            <strong className="font-semibold text-[#142A47]">Customer relationships.</strong> A homeowner who
             feels spammed by a contractor they used once does not just opt out. They
             remember, and they mention it.
           </p>
@@ -213,14 +213,14 @@ export default function SmsComplianceChecklist() {
 
       <section className="px-6 py-10">
         <motion.div {...fadeUp} className="max-w-3xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-6">
             Where to start if none of this is in place
           </h2>
-          <p className="text-gray-300 leading-relaxed text-[1.05rem] mb-5">
+          <p className="text-[#475569] leading-relaxed text-[1.05rem] mb-5">
             Start the{" "}
             <Link
               to="/blog/a2p-10dlc-registration-contractors"
-              className="text-[#00A693] underline underline-offset-2"
+              className="text-[#1C8A90] underline underline-offset-2"
             >
               A2P 10DLC registration
             </Link>{" "}
@@ -228,15 +228,15 @@ export default function SmsComplianceChecklist() {
             process it on their own schedule — so everything else can be built while it
             runs. Treating it as a final step is the most common sequencing mistake.
           </p>
-          <p className="text-gray-300 leading-relaxed text-[1.05rem] mb-5">
+          <p className="text-[#475569] leading-relaxed text-[1.05rem] mb-5">
             Then add consent capture at every point you collect a phone number, and switch
             opt-out handling from manual to automatic. Those two cover most of the risk.
           </p>
-          <p className="text-gray-300 leading-relaxed text-[1.05rem]">
+          <p className="text-[#475569] leading-relaxed text-[1.05rem]">
             For the customer list you already have, the honest position is that{" "}
             <Link
               to="/blog/text-customers-who-never-opted-in"
-              className="text-[#00A693] underline underline-offset-2"
+              className="text-[#1C8A90] underline underline-offset-2"
             >
               possessing a phone number is not consent to market to it
             </Link>
@@ -250,14 +250,14 @@ export default function SmsComplianceChecklist() {
       {faqs.length > 0 && (
         <section className="px-6 py-10">
           <motion.div {...fadeUp} className="max-w-3xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#142A47] mb-8">
               Frequently Asked Questions
             </h2>
             <div className="space-y-4">
               {faqs.map((faq, i) => (
                 <div
                   key={i}
-                  className="rounded-xl border border-white/10 bg-white/[0.03] overflow-hidden transition hover:border-[#00A693]/40"
+                  className="rounded-[12px] border border-[#E2E8F0] bg-white overflow-hidden transition hover:border-[#26A6AD]/45"
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -265,9 +265,9 @@ export default function SmsComplianceChecklist() {
                     aria-expanded={openFaq === i}
                     aria-controls={`sms-faq-${i}`}
                   >
-                    <h3 className="font-semibold text-white text-[1.05rem]">{faq.q}</h3>
+                    <h3 className="font-bold text-[#142A47] text-[1.05rem]">{faq.q}</h3>
                     <ChevronDown
-                      className={`h-5 w-5 shrink-0 text-[#00A693] transition-transform duration-300 ${
+                      className={`h-5 w-5 shrink-0 text-[#1C8A90] transition-transform duration-300 ${
                         openFaq === i ? "rotate-180" : ""
                       }`}
                     />
@@ -279,7 +279,7 @@ export default function SmsComplianceChecklist() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <p className="px-5 pb-5 pt-4 text-gray-300 leading-relaxed border-t border-white/10">
+                    <p className="px-5 pb-5 pt-4 text-[#475569] leading-relaxed border-t border-[#E2E8F0]">
                       {faq.a}
                     </p>
                   </motion.div>
@@ -294,15 +294,15 @@ export default function SmsComplianceChecklist() {
         <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
           <Link
             to="/book"
-            className="inline-flex items-center gap-2 rounded-full bg-[#00A693] px-8 py-4 font-semibold text-white transition hover:bg-[#00947F]"
+            className="btn btn-primary"
           >
             Have us set this up properly <ArrowRight className="h-4 w-4" />
           </Link>
-          <p className="mt-4 text-gray-400 text-sm">
+          <p className="mt-4 text-[#64748B] text-sm">
             Registration, consent capture and opt-out handling are part of every{" "}
             <Link
               to="/services/sms-marketing"
-              className="text-[#00A693] underline underline-offset-2"
+              className="text-[#1C8A90] underline underline-offset-2"
             >
               SMS marketing
             </Link>{" "}
@@ -311,7 +311,7 @@ export default function SmsComplianceChecklist() {
         </motion.div>
       </section>
 
-      <CTASection />
+      <FinalCta />
     </div>
   );
 }

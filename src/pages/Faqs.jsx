@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
+import PageHero from "../components/PageHero";
+import Reveal from "../components/Reveal";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
 
 const Faq = () => {
-    const [active, setActive] = useState(null);
+    const [active, setActive] = useState(0);
 
     // Shared with the FAQPage schema for this route — see src/lib/service-faqs.js.
     const faqs = routeFaqs["/faq"];
@@ -15,105 +16,76 @@ const Faq = () => {
     useSeo(seoFor("/faq"));
 
     return (
-        <section className="relative py-28 bg-[#0a0a0a] overflow-hidden">
+        <div className="w-full">
+            <PageHero
+                eyebrow="Frequently Asked Questions"
+                title="Everything You Need To Know"
+                titleAccent="To Know"
+                subtitle="Answers about our AI automation, digital marketing, and smart growth systems."
+                primaryCta={{ to: "/book", label: "Book a Free Strategy Call" }}
+            />
 
-            {/* Background Glow */}
-            <div className="absolute -top-32 -left-32 w-[600px] h-[600px] bg-[#00A693]/20 rounded-full blur-[140px]"></div>
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#00A693]/10 rounded-full blur-[120px]"></div>
+            <section className="slg-light slg-section-tight">
+                <div className="slg-container">
+                    <div className="mx-auto max-w-3xl space-y-3">
+                        {faqs.map((faq, index) => {
+                            const isOpen = active === index;
+                            return (
+                                <Reveal key={index} delay={(index % 3) * 50} className="slg-card overflow-hidden">
+                                    {/* The questions are h2s, as they were before the
+                                        redesign — this page's only job is these answers,
+                                        so they sit one level under the h1. */}
+                                    <h2>
+                                        <button
+                                            type="button"
+                                            onClick={() => setActive(isOpen ? null : index)}
+                                            aria-expanded={isOpen}
+                                            aria-controls={`faq-answer-${index}`}
+                                            className="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left font-display text-[1.0625rem] font-bold text-[#142A47]"
+                                        >
+                                            {faq.q}
+                                            <ChevronDown
+                                                className={`h-5 w-5 shrink-0 text-[#26A6AD] transition-transform duration-300 ${
+                                                    isOpen ? "rotate-180" : ""
+                                                }`}
+                                                aria-hidden="true"
+                                            />
+                                        </button>
+                                    </h2>
 
-            <div className="relative max-w-4xl mx-auto px-6 z-10">
+                                    {/* The answer stays mounted and is collapsed by row
+                                        height, not unmounted. Conditionally rendering it
+                                        meant the answers were absent from the HTML entirely
+                                        — crawlers and AI answer engines saw six questions
+                                        and no answers, and the FAQ schema described text
+                                        that was not on the page. */}
+                                    <div
+                                        id={`faq-answer-${index}`}
+                                        className="grid transition-[grid-template-rows] duration-300 ease-out"
+                                        style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                                    >
+                                        <div className="overflow-hidden">
+                                            <p className="border-t border-[#E2E8F0] px-6 py-5 text-[0.9375rem] leading-[1.75] text-[#475569]">
+                                                {faq.a}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Reveal>
+                            );
+                        })}
+                    </div>
 
-                {/* Header */}
-                <motion.div
-                    className="text-center mb-20"
-                    initial={{ opacity: 0, y: -40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                >
-                    <span className="inline-block bg-[#00A693]/20 text-[#00A693] px-6 py-2 rounded-full text-sm font-semibold mb-6 border border-[#00A693]/40 backdrop-blur-md">
-                        Frequently Asked Questions
-                    </span>
-
-                    <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
-                        Everything You Need
-                        <span className="bg-gradient-to-r from-[#00A693] to-teal-300 bg-clip-text text-transparent">
-                            {" "}To Know
-                        </span>
-                    </h1>
-
-                    <p className="max-w-2xl mx-auto mt-6 text-lg text-gray-400">
-                        Answers about our AI automation, digital marketing,
-                        and smart growth systems.
-                    </p>
-                </motion.div>
-
-                {/* FAQ Accordion */}
-                <div className="space-y-6 ">
-                    {faqs.map((faq, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            viewport={{ once: true }}
-                            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden hover:border-[#00A693]/50 transition-all duration-500"
-                        >
-                            <button
-                                onClick={() => setActive(active === index ? null : index)}
-                                className="w-full flex justify-between items-center p-6 text-left"
-                                aria-expanded={active === index}
-                                aria-controls={`faq-answer-${index}`}
-                            >
-                                <h2 className="text-lg font-semibold text-white">
-                                    {faq.q}
-                                </h2>
-
-                                <ChevronDown
-                                    className={`text-[#00A693] transition-transform duration-300 cursor-pointer ${active === index ? "rotate-180" : ""
-                                        }`}
-                                />
-                            </button>
-
-                            {/* The answer stays mounted and is collapsed with height, not
-                                unmounted. Conditionally rendering it meant the answers were
-                                absent from the HTML entirely — crawlers and AI answer engines
-                                saw six questions and no answers, and FAQ schema would have
-                                described text that was not on the page. */}
-                            <motion.div
-                                id={`faq-answer-${index}`}
-                                initial={false}
-                                animate={{ height: active === index ? "auto" : 0, opacity: active === index ? 1 : 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="overflow-hidden"
-                            >
-                                <p className="px-6 pb-6 text-gray-400">{faq.a}</p>
-                            </motion.div>
-                        </motion.div>
-                    ))}
+                    <Reveal className="mt-14 text-center">
+                        <h3 className="font-display text-[1.375rem] font-extrabold text-[#142A47] sm:text-[1.75rem]">
+                            Still Have Questions?
+                        </h3>
+                        <Link to="/contact" className="btn btn-primary mt-7">
+                            Contact Sky Lift Group
+                        </Link>
+                    </Reveal>
                 </div>
-
-                {/* CTA Section */}
-                <motion.div
-                    className="text-center mt-24"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                >
-                    <h3 className="text-3xl font-bold text-white mb-8">
-                        Still Have Questions?
-                    </h3>
-
-                    <Link
-                        to="/contact"
-                        className="inline-block px-12 py-4 bg-[#00A693] text-white font-semibold rounded-2xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_#00A69380]"
-                    >
-                        Contact Sky Lift Group
-                    </Link>
-                </motion.div>
-            </div>
-        </section>
+            </section>
+        </div>
     );
 };
 

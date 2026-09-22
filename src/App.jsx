@@ -14,7 +14,7 @@ const queryClient = new QueryClient();
 const MAINTENANCE_MODE = false;
 
 // Matches the page background so a chunk load never flashes white.
-const RouteFallback = () => <div className="min-h-screen bg-[#0a0a0a]" />;
+const RouteFallback = () => <div className="min-h-screen bg-[#0B1220]" />;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

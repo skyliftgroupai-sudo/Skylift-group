@@ -1,46 +1,32 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 
-const NotFound = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
-      <div className="text-center max-w-xl">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-[120px] font-bold text-[#00A693]"
-        >
-          404
-        </motion.h1>
-
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">
-          Page not found
-        </h2>
-
-        <p className="text-gray-600 mb-8">
-          The page you are looking for does not exist or has been moved.
-          Let’s get you back on track.
-        </p>
-
-        <div className="flex justify-center gap-4">
-          <Link
-            to="/"
-            className="px-6 py-3 rounded-lg bg-[#00A693] text-white font-medium hover:opacity-90 transition"
-          >
-            Go to Home
-          </Link>
-
-          <Link
-            to="/contact"
-            className="px-6 py-3 rounded-lg border border-[#00A693] text-[#00A693] font-medium hover:bg-[#00A693] hover:text-white transition"
-          >
-            Contact Us
-          </Link>
-        </div>
+const NotFound = () => (
+  <div className="slg-light flex min-h-[70vh] items-center justify-center px-6 py-24">
+    <div className="mx-auto max-w-xl text-center">
+      {/* "404" stays the h1 and "Page not found" stays the h2, as they were.
+          A number is a poor h1 and this would read better the other way round,
+          but changing it is a content decision, not a visual one, and this
+          redesign does not make those on its own. */}
+      <h1 className="font-display text-[5rem] font-extrabold leading-none text-[#26A6AD] sm:text-[7rem]">
+        404
+      </h1>
+      <h2 className="mt-4 text-[1.5rem] font-extrabold text-[#142A47] sm:text-[1.875rem]">
+        Page not found
+      </h2>
+      <p className="mt-5 text-[1.0625rem] leading-[1.7] text-[#475569]">
+        The page you are looking for does not exist or has been moved. Let’s get
+        you back on track.
+      </p>
+      <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <Link to="/" className="btn btn-primary w-full sm:w-auto">
+          Go to Home
+        </Link>
+        <Link to="/contact" className="btn btn-ghost-light w-full sm:w-auto">
+          Contact Us
+        </Link>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default NotFound;

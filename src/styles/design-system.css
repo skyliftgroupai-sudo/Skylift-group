@@ -392,6 +392,62 @@ h6,
   }
 }
 
+/* --- Legal pages --------------------------------------------------------- */
+/* The privacy policy and terms are long prose with no per-element styling.
+   Scoping the rules here keeps those two files as content and nothing else. */
+.slg-legal {
+  max-width: 76ch;
+  color: var(--color-body);
+}
+
+.slg-legal h2 {
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.slg-legal > *:first-child h2,
+.slg-legal > div > *:first-child h2 {
+  margin-top: 0;
+}
+
+.slg-legal h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.slg-legal p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.slg-legal ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.slg-legal li {
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+}
+
+.slg-legal a {
+  color: var(--color-teal-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.slg-legal strong {
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
 /* --- Prose --------------------------------------------------------------- */
 /* Article measure for the blog. 70ch is the brief's number. */
 .slg-prose {

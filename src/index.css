@@ -83,12 +83,6 @@ select.input-dark option {
 }
 
 
-.services-hero {
-  background-image: url("/assets/services.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
 
 @keyframes neonPulse {
