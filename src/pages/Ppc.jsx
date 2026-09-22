@@ -1,7 +1,6 @@
 import { use, useState } from "react";
 import { ChevronDown, BarChart2, TrendingUp, Zap, Settings, Search, Users } from "lucide-react";
 import { motion } from "framer-motion";
-import SliderBar from "./Sliderbar";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
@@ -80,7 +79,6 @@ const PPCManagement = () => {
                 </motion.p>
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* STRATEGY SECTION */}
             <motion.section

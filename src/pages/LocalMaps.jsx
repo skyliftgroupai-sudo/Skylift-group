@@ -1,7 +1,6 @@
 import { use, useState } from "react";
 import { ChevronDown, MapPin, Search, Settings, BarChart2, Users, Zap } from "lucide-react";
 import { motion } from "framer-motion";
-import SliderBar from "./Sliderbar";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
@@ -83,7 +82,6 @@ const LocalMapOptimization = () => {
                 </motion.p>
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* STRATEGY SECTION */}
             <motion.section

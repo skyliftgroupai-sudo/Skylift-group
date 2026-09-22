@@ -10,7 +10,6 @@ import {
     Settings,
     Zap
 } from "lucide-react";
-import SliderBar from "./Sliderbar";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
@@ -88,7 +87,6 @@ const Seo = () => {
                 </motion.p>
             </section>
 
-            {/* <SliderBar /> */}
             <motion.section
                 className="relative py-20 md:py-24 overflow-hidden bg-[#0a0a0a]"
                 initial={{ opacity: 0, y: 40 }}

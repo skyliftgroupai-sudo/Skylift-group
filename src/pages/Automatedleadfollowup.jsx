@@ -85,7 +85,6 @@ const AutomatedLeadFollowUp = () => {
 
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* STRATEGY SECTION */}
             <motion.section

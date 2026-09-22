@@ -2,13 +2,11 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HeroSlider } from "../components/HeroSliderbar";
 import Info from "../pages/Info"
-import SliderBar from "./Sliderbar";
 import Plan from "./Plan";
 import FocusPoints from "./Focus";
 import WhatWeOffer from "./WhatWeOffer";
 import CTASection from "./CtaSection";
 import FAQSection from "./Faq";
-import Counter from "./Counter";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
@@ -59,14 +57,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* <SliderBar /> */}
       <Info />
       <Plan />
       <FocusPoints />
       <WhatWeOffer />
       <CTASection />
       {/* <FAQSection /> */}
-      <Counter />
       <Testimonials />
     </div>
   );

@@ -84,7 +84,6 @@ const TikTokdas = () => {
 
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* STRATEGY SECTION */}
             <motion.section

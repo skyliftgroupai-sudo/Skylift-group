@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Lightbulb, Target, Users, ShieldCheck, Award } from "lucide-react";
 import CTASection from "./CtaSection";
-import SliderBar from "./Sliderbar";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
@@ -38,7 +37,6 @@ export default function AboutUs() {
                     We build the AI lead capture, follow-up and advertising systems that turn a home service business’s missed calls and cold leads into booked jobs.
                 </motion.p>
             </section>
-            {/* <SliderBar /> */}
 
             {/* Our Story */}
             <section className="max-w-6xl mx-auto px-4 py-16 ">

@@ -83,7 +83,6 @@ const FivestarReviews = () => {
 
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* STRATEGY SECTION */}
             <motion.section

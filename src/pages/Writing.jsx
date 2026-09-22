@@ -1,7 +1,6 @@
 import { use, useState } from "react";
 import { ChevronDown, PenTool, FileText, Users, Zap, BarChart2, Settings } from "lucide-react";
 import { motion } from "framer-motion";
-import SliderBar from "./Sliderbar";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
@@ -81,7 +80,6 @@ const ContentWritingServices = () => {
                 </motion.p>
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* STRATEGY SECTION */}
             <motion.section

@@ -83,7 +83,6 @@ const OneClickMarketing = () => {
 
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* STRATEGY SECTION */}
             <motion.section

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Mail, MessageCircle, MapPin, Clock } from "lucide-react";
-import SliderBar from "./Sliderbar";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 
@@ -37,7 +36,6 @@ const Contact = () => {
           Have a project in mind? Send us a message and our team will get back to you shortly.
         </motion.p>
       </section>
-      {/* <SliderBar /> */}
       {/* FORM + INFO SECTION */}
       <section className="py-20 bg-[#0a0a0a] text-gray-100">
         <div className="container mx-auto px-4">

@@ -84,7 +84,6 @@ const Googleads = () => {
                 </motion.p>
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* STRATEGY SECTION */}
             <motion.section

@@ -85,7 +85,6 @@ const MetaAds = () => {
 
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* STRATEGY SECTION */}
             <motion.section

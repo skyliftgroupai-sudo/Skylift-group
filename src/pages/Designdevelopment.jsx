@@ -10,7 +10,6 @@ import {
     Code2,
     Wrench
 } from "lucide-react";
-import SliderBar from "./Sliderbar";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
@@ -93,7 +92,6 @@ const Designweb = () => {
                 </motion.p>
             </section>
 
-            {/* <SliderBar /> */}
 
             {/* SECTION 2 — Web Maintenance */}
             <motion.section

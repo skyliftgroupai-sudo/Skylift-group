@@ -85,7 +85,6 @@ const MissedCall = () => {
 
       </section>
 
-      {/* <SliderBar /> */}
 
       {/* STRATEGY SECTION */}
       <motion.section
