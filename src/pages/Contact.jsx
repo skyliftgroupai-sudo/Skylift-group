@@ -1,4 +1,4 @@
-import { Mail, MessageCircle, MapPin, Clock, PhoneCall } from "lucide-react";
+import { Mail, MapPin, Clock, PhoneCall, ArrowRight } from "lucide-react";
 import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
 import useSeo from "../hooks/useSeo";
@@ -87,28 +87,40 @@ const Contact = () => {
               ))}
             </div>
 
-            {/* AI ASSISTANT PANEL — the chat widget itself is the third-party
-                script in index.html, so this card points at it rather than
-                duplicating a form that would go nowhere. */}
+            {/* The chat widget that used to sit here is gone, so this panel
+                has to be a way to reach someone rather than a pointer at one.
+                Both buttons are real: a tel: link a phone will dial and a
+                mailto: with the subject prefilled. No form, because there is no
+                endpoint behind one on this site — a form that silently drops
+                what someone typed is worse than no form. */}
             <Reveal delay={100}>
               <div className="slg-dark flex h-full min-h-[24rem] flex-col items-center justify-center rounded-[16px] p-10 text-center lg:p-16">
                 <span className="mb-7 flex h-16 w-16 items-center justify-center rounded-full border border-[#26A6AD]/40 bg-[#26A6AD]/10 text-[#26A6AD]">
-                  <MessageCircle className="h-7 w-7" aria-hidden="true" strokeWidth={1.75} />
+                  <PhoneCall className="h-7 w-7" aria-hidden="true" strokeWidth={1.75} />
                 </span>
                 <h2 className="text-[1.375rem] font-extrabold text-white sm:text-[1.75rem]">
-                  Talk With Our AI Business{" "}
-                  <span className="accent text-[#26A6AD]">Assistant</span>
+                  Talk to a{" "}
+                  <span className="accent text-[#26A6AD]">real</span> person
                 </h2>
                 <p className="mt-5 max-w-xl text-[1.0625rem] leading-[1.7] text-slate-300">
-                  Get instant answers about our services, pricing, websites, AI automation,
-                  Google Business Profile optimization, SEO, and marketing solutions.
+                  Tell us what is happening with your leads and we will tell you
+                  straight whether we can help. No script, no pitch deck.
                 </p>
-                <p className="mt-4 max-w-xl text-[1.0625rem] leading-[1.7] text-slate-300">
-                  Our AI Assistant is available 24/7 to answer your questions, qualify your
-                  needs, and help you get started.
-                </p>
-                <p className="mt-6 font-semibold text-[#26A6AD]">
-                  Click the chat icon in the bottom-right corner to begin.
+                <div className="mt-9 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row">
+                  <a href="tel:+19049069019" className="btn btn-primary w-full sm:w-auto">
+                    <PhoneCall className="h-[18px] w-[18px]" aria-hidden="true" />
+                    Call +1 (904) 906-9019
+                  </a>
+                  <a
+                    href="mailto:info@skyliftllc.com?subject=Website%20enquiry"
+                    className="btn btn-ghost w-full sm:w-auto"
+                  >
+                    Email us
+                    <ArrowRight className="h-[18px] w-[18px]" aria-hidden="true" />
+                  </a>
+                </div>
+                <p className="mt-7 text-sm text-slate-400">
+                  Mon&nbsp;&ndash;&nbsp;Fri, 9AM&nbsp;&ndash;&nbsp;5PM&nbsp;(EST)
                 </p>
               </div>
             </Reveal>
