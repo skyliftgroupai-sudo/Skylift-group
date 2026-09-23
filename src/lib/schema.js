@@ -31,10 +31,16 @@ export const ORG_PHONE = "+1-904-906-9019";
 export const ORG_DESCRIPTION =
   "Sky Lift LLC is an AI automation and marketing agency for home service businesses, providing AI chatbots, missed-call text back, SMS marketing, lead capture, ads, and local SEO.";
 
-export const ORG_SAME_AS = [
-  "https://www.facebook.com/share/199LNKDqTT/",
-  "https://www.linkedin.com/company/sky-lift-group/",
-];
+// sameAs is how Google ties this site to the business's profiles elsewhere and
+// confirms they are one entity. It is empty while the Facebook and LinkedIn
+// pages still say Sky Lift Group: pointing schema at a profile under a
+// different name argues against the identity it is supposed to establish.
+//
+// This matters more here than it normally would. Search Console shows "skylift"
+// queries resolving to unrelated lift-equipment companies, and matching names
+// across the site and the profiles is one of the few signals separating the
+// two. Put the Sky Lift LLC profiles in as soon as they exist.
+export const ORG_SAME_AS = [];
 
 // Every service that has a page, in the order they matter to the business.
 // Drives the ProfessionalService offer catalog and the Service node on each
@@ -77,7 +83,7 @@ function organization() {
     email: ORG_EMAIL,
     telephone: ORG_PHONE,
     areaServed: { "@type": "Country", name: "United States" },
-    sameAs: ORG_SAME_AS,
+    ...(ORG_SAME_AS.length ? { sameAs: ORG_SAME_AS } : {}),
   };
 }
 

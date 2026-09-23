@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { Facebook, Linkedin, Mail, MapPin, PhoneCall } from "lucide-react";
+import { Mail, MapPin, PhoneCall } from "lucide-react";
 import { ORG_DESCRIPTION } from "../lib/schema";
 
-const socialLinks = [
-  { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/share/199LNKDqTT/" },
-  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/sky-lift-group/" },
-];
+// No social buttons here for now. The Facebook page and LinkedIn company page
+// both still carry the old Sky Lift Group branding, and sending visitors from a
+// Sky Lift LLC site to a profile with a different name on it costs more trust
+// than the link is worth. Add the new profiles' URLs back here and to
+// ORG_SAME_AS in src/lib/schema.js together — the schema is what tells Google
+// the site and the profiles are the same business.
 
 const quickLinks = [
   { label: "Home", to: "/" },
@@ -60,20 +62,6 @@ export const Footer = () => (
           <p className="mt-5 max-w-sm text-[0.9375rem] leading-[1.7] text-slate-400">
             {ORG_DESCRIPTION}
           </p>
-          <div className="mt-6 flex gap-3">
-            {socialLinks.map(({ icon: Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-slate-300 transition-colors hover:border-[#26A6AD]/60 hover:text-[#26A6AD]"
-              >
-                <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
-              </a>
-            ))}
-          </div>
         </div>
 
         <div className="lg:col-span-2">

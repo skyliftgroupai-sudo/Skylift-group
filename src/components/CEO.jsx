@@ -1,5 +1,5 @@
 import React from "react";
-import { Quote, Linkedin, Twitter, Mail, Target, TrendingUp, Heart, Sparkles } from "lucide-react";
+import { Quote, Target, TrendingUp, Heart, Sparkles } from "lucide-react";
 import Reveal from "./Reveal";
 
 export default function CeoMessage() {
@@ -27,17 +27,6 @@ export default function CeoMessage() {
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/85 to-transparent px-6 pb-6 pt-20">
                                 <h3 className="text-white text-2xl font-bold">Eric Williams</h3>
                                 <p className="text-[#26A6AD] font-medium">Founder & Chief Executive Officer</p>
-                                <div className="flex gap-3 mt-3">
-                                    <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#26A6AD] flex items-center justify-center transition">
-                                        <Linkedin size={16} className="text-white" />
-                                    </a>
-                                    <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#26A6AD] flex items-center justify-center transition">
-                                        <Twitter size={16} className="text-white" />
-                                    </a>
-                                    <a href="#" className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#26A6AD] flex items-center justify-center transition">
-                                        <Mail size={16} className="text-white" />
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </Reveal>
