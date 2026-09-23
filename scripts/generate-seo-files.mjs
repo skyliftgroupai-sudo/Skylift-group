@@ -2,12 +2,13 @@
 // and every markdown post in src/content/blog. Runs automatically before
 // `vite build` (see package.json), so search engines always see fresh posts.
 
-import { readFileSync, readdirSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync, existsSync, rmSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { parseFrontmatter } from "../src/lib/frontmatter.js";
 import { blogIndexRoutes } from "../src/lib/blog-taxonomy.js";
+import { SITE_INDEXABLE } from "../src/lib/seo-config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -173,8 +174,22 @@ function buildRss(posts) {
 }
 
 const posts = loadPosts();
-writeFileSync(join(root, "public", "sitemap.xml"), buildSitemap(posts));
+
+// A sitemap is a request to index. While every page carries noindex there is
+// nothing to request, and publishing both says two opposite things about the
+// same URLs — which is a conflicting signal, not a neutral one. The file is
+// removed rather than left stale, and reappears on the first build after
+// SITE_INDEXABLE goes true, since it is rebuilt from the routes every time.
+const sitemapPath = join(root, "public", "sitemap.xml");
+if (SITE_INDEXABLE) {
+  writeFileSync(sitemapPath, buildSitemap(posts));
+} else if (existsSync(sitemapPath)) {
+  rmSync(sitemapPath);
+}
+
 writeFileSync(join(root, "public", "rss.xml"), buildRss(posts));
 console.log(
-  `[seo] Generated sitemap.xml (${staticRoutes.length} static + ${posts.length} posts) and rss.xml`
+  SITE_INDEXABLE
+    ? `[seo] Generated sitemap.xml (${staticRoutes.length} static + ${posts.length} posts) and rss.xml`
+    : `[seo] Generated rss.xml. No sitemap: SITE_INDEXABLE is false, so every page is noindex.`
 );

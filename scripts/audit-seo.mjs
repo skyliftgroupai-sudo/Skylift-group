@@ -6,6 +6,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { SITE_INDEXABLE } from "../src/lib/seo-config.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
@@ -220,8 +221,18 @@ for (const p of pages) {
     add("HIGH", p.route, `under-linked: only ${inbound} page(s) link to it`);
 }
 
-// Sitemap agreement.
-const sitemap = readFileSync(join(root, "public", "sitemap.xml"), "utf8");
+// Sitemap agreement. There is deliberately no sitemap while the whole site is
+// noindexed — see SITE_INDEXABLE in src/lib/seo-config.js — so its absence is
+// checked against that flag rather than assumed to be a mistake.
+const sitemapPath = join(root, "public", "sitemap.xml");
+const hasSitemap = existsSync(sitemapPath);
+if (!hasSitemap && SITE_INDEXABLE) {
+  add("CRITICAL", "/", "no sitemap.xml was generated, but the site is indexable");
+}
+if (hasSitemap && !SITE_INDEXABLE) {
+  add("CRITICAL", "/", "sitemap.xml exists while SITE_INDEXABLE is false");
+}
+const sitemap = hasSitemap ? readFileSync(sitemapPath, "utf8") : "";
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 for (const url of sitemapUrls) {
   const r = url.replace(SITE, "").replace(/\/$/, "") || "/";
@@ -232,6 +243,14 @@ for (const p of pages) {
   if (/noindex/i.test(p.robots)) continue;
   const url = `${SITE}${p.route === "/" ? "/" : p.route}`;
   if (!sitemapUrls.includes(url)) add("HIGH", p.route, "indexable but missing from sitemap.xml");
+}
+
+// While the site is meant to be invisible, a page that is missing its noindex
+// is the failure that matters — it is the one page Google would index.
+if (!SITE_INDEXABLE) {
+  for (const p of pages) {
+    if (!/noindex/i.test(p.robots)) add("CRITICAL", p.route, "missing noindex while SITE_INDEXABLE is false");
+  }
 }
 
 // Source-level guard for the defect that made three separate FAQ sections

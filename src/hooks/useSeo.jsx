@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { SITE_INDEXABLE } from "../lib/seo-config";
 
 // Sets a <meta> tag by name, creating it if needed.
 function setMetaByName(name, content) {
@@ -33,6 +34,12 @@ export default function useSeo({
     jsonLd,
 }) {
     useEffect(() => {
+        // Must match what scripts/prerender.mjs baked in. If the static HTML
+        // says noindex and the hydrated page quietly drops it, Google indexes
+        // the rendered version and the tag was wasted — the same failure that
+        // made the prerendered titles pointless before seo-config existed.
+        if (!SITE_INDEXABLE) setMetaByName("robots", "noindex, follow");
+
         if (title) {
             document.title = title;
             setMetaByProperty("og:title", title);

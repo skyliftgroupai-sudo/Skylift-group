@@ -12,6 +12,32 @@
 // Plain ESM with no Vite-only syntax so the Node build scripts can import it too.
 
 export const SITE_URL = "https://www.skyliftllc.com";
+
+/**
+ * Whether this site may appear in search results.
+ *
+ * false right now, on purpose. skyliftllc.com and skyliftgroup.com serve the
+ * same 51 pages — the same services, the same blog posts, the same FAQs — and
+ * only the brand name, the contact details and the design differ. Google
+ * resolves duplicates across two domains by picking one and filtering the
+ * other, and the domain with the history and the backlinks wins. Letting both
+ * compete would mean skyliftgroup.com's rankings being decided page by page
+ * against a copy of itself.
+ *
+ * So this site is fully live and works for anyone sent here directly — ads,
+ * business cards, an email signature — and carries noindex so Google leaves it
+ * alone. skyliftgroup.com is untouched.
+ *
+ * To lift it: set this to true, rebuild, deploy. That is the whole change. Do
+ * it only once this site's copy is genuinely its own, or the duplicate problem
+ * above comes straight back.
+ *
+ * Note the crawler is still ALLOWED in robots.txt while this is false. A
+ * noindex tag only works if the crawler can fetch the page and read it —
+ * blocking it in robots.txt instead leaves the URL eligible to show up as a
+ * bare link with no description, which is the worst of both.
+ */
+export const SITE_INDEXABLE = false;
 export const DEFAULT_OG_IMAGE = "/og-image-sky-lift-llc.png";
 
 export const routeSeo = {

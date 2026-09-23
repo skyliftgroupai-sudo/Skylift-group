@@ -25,6 +25,7 @@ import { prerender } from "react-dom/static";
 import { staticRoutes } from "./seo-routes.js";
 import { parseFrontmatter, extractFaqs } from "../src/lib/frontmatter.js";
 import { schemaForRoute, blogPostingSchema } from "../src/lib/schema.js";
+import { SITE_INDEXABLE } from "../src/lib/seo-config.js";
 import { blogIndexRoutes, blogIndexSeo } from "../src/lib/blog-taxonomy.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -113,6 +114,17 @@ function buildHtml({ path, title, description, image, noindex = false, body = ""
         /<link\s+rel=["']canonical["'][\s\S]*?>/i,
         `<link rel="canonical" href="${esc(url)}" />`
       );
+  // Site-wide noindex while skyliftllc.com duplicates skyliftgroup.com. See
+  // SITE_INDEXABLE in src/lib/seo-config.js for why, and for how to lift it.
+  // "follow" rather than "nofollow": the crawler should still walk the internal
+  // links, it just must not index what it finds.
+  if (!SITE_INDEXABLE && !noindex) {
+    html = setTag(
+      html,
+      /<meta\s+name=["']robots["'][\s\S]*?>/i,
+      `<meta name="robots" content="noindex, follow" />`
+    );
+  }
   html = setTag(
     html,
     /<meta\s+property=["']og:title["'][\s\S]*?>/i,

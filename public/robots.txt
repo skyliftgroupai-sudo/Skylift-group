@@ -1,55 +1,74 @@
 # Sky Lift LLC — https://www.skyliftllc.com
 # AI automation and marketing agency for home service businesses.
+#
+# ---------------------------------------------------------------------------
+# THIS SITE IS DELIBERATELY NOT IN SEARCH RESULTS RIGHT NOW.
+#
+# skyliftllc.com and skyliftgroup.com serve the same 51 pages. Only the brand
+# name, the contact details and the design differ. Two domains with the same
+# content means Google picks one and filters the other, and the domain with the
+# history wins — so letting both compete would put skyliftgroup.com's rankings
+# up against a copy of itself.
+#
+# The way this site is kept out is the <meta name="robots" content="noindex">
+# on every page, NOT a blanket Disallow here. That distinction matters: a
+# crawler has to be allowed to fetch a page before it can read the noindex on
+# it. Blocking Googlebot in robots.txt instead would leave these URLs eligible
+# to appear as bare links with no title and no description, which is worse than
+# either outcome we are choosing between.
+#
+# So: Googlebot and Bingbot are allowed in, and told not to index.
+#
+# To reverse all of this: set SITE_INDEXABLE = true in src/lib/seo-config.js,
+# delete the "while this site is a duplicate" block below, put the Sitemap line
+# back, rebuild and deploy.
+# ---------------------------------------------------------------------------
 
 User-agent: *
 Allow: /
 
-# AI and answer-engine crawlers are explicitly welcome. Being quotable in
-# ChatGPT, Claude, Perplexity and AI Overviews is a traffic channel now, and
-# several of these bots treat "not named" as "do not crawl".
+# --- while this site is a duplicate ----------------------------------------
+# The answer engines are turned away by name. They honour robots.txt, and they
+# are not the ones reading the noindex tag — leaving them on would mean this
+# site being quoted as a second, differently-named source for copy that already
+# exists under the other brand, which is the confusion we are avoiding.
 User-agent: GPTBot
-Allow: /
+Disallow: /
 
 User-agent: OAI-SearchBot
-Allow: /
+Disallow: /
 
 User-agent: ChatGPT-User
-Allow: /
+Disallow: /
 
 User-agent: ClaudeBot
-Allow: /
+Disallow: /
 
 User-agent: Claude-User
-Allow: /
+Disallow: /
 
 User-agent: Claude-SearchBot
-Allow: /
+Disallow: /
 
 User-agent: PerplexityBot
-Allow: /
+Disallow: /
 
 User-agent: Perplexity-User
-Allow: /
+Disallow: /
 
 User-agent: Google-Extended
-Allow: /
-
-User-agent: Applebot
-Allow: /
+Disallow: /
 
 User-agent: Applebot-Extended
-Allow: /
-
-User-agent: Bingbot
-Allow: /
+Disallow: /
 
 User-agent: Amazonbot
-Allow: /
+Disallow: /
 
 User-agent: meta-externalagent
-Allow: /
+Disallow: /
+# --- end duplicate block ----------------------------------------------------
 
-Sitemap: https://www.skyliftllc.com/sitemap.xml
-
-# Plain-language description of the business, its services and key URLs,
-# for AI assistants that read it: https://www.skyliftllc.com/llms.txt
+# No Sitemap line while the site is noindexed: a sitemap is an invitation to
+# index, and this one has nothing to accept. It is still generated and still
+# served at /sitemap.xml, ready for the day the flag flips.
