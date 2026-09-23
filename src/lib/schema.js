@@ -71,9 +71,9 @@ function organization() {
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/assets/sky-lift-logo.webp`,
+      url: `${SITE_URL}/assets/sky-lift-llc-logo-dark.webp`,
     },
-    image: `${SITE_URL}/og-image.png`,
+    image: `${SITE_URL}/og-image-sky-lift-llc.png`,
     email: ORG_EMAIL,
     telephone: ORG_PHONE,
     areaServed: { "@type": "Country", name: "United States" },
@@ -233,7 +233,7 @@ export function blogPostingSchema(post) {
       "@id": `${url}#article`,
       headline: post.title,
       description: post.description,
-      image: post.image ? `${SITE_URL}${post.image}` : `${SITE_URL}/og-image.png`,
+      image: post.image ? `${SITE_URL}${post.image}` : `${SITE_URL}/og-image-sky-lift-llc.png`,
       datePublished: post.date,
       // No separate modified date is tracked yet, so this mirrors publication
       // rather than claiming a freshness that did not happen.

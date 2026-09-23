@@ -48,7 +48,7 @@ export const Footer = () => (
         <div className="col-span-2 lg:col-span-4">
           <Link to="/" aria-label="Sky Lift LLC home">
             <img
-              src="/assets/skyliftlogo.webp"
+              src="/assets/sky-lift-llc-logo-light.webp"
               alt="Sky Lift LLC"
               className="w-[160px] object-contain"
               width={612}

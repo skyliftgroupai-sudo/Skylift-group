@@ -108,7 +108,7 @@ export const Header = () => {
                 <div className="flex h-[72px] items-center justify-between gap-6">
                     <Link to="/" className="flex shrink-0 items-center" aria-label="Sky Lift LLC home">
                         <img
-                            src="/assets/skyliftlogo.webp"
+                            src="/assets/sky-lift-llc-logo-light.webp"
                             alt="Sky Lift LLC"
                             className="w-[150px] object-contain"
                             width={612}
@@ -254,7 +254,7 @@ export const Header = () => {
             >
                 <div className="flex h-[72px] items-center justify-between border-b border-white/10 px-6">
                     <img
-                        src="/assets/skyliftlogo.webp"
+                        src="/assets/sky-lift-llc-logo-light.webp"
                         alt="Sky Lift LLC"
                         className="w-[140px] object-contain"
                         width={612}

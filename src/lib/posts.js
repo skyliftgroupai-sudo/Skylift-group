@@ -27,7 +27,7 @@ function build() {
       // not claim a freshness that did not happen.
       dateModified: data.dateModified || data.date || "1970-01-01",
       author: data.author || "Sky Lift LLC",
-      image: data.image || "/og-image.png",
+      image: data.image || "/og-image-sky-lift-llc.png",
       imageAlt: data.imageAlt || data.title || "Sky Lift LLC",
       content,
       faqs: extractFaqs(content),

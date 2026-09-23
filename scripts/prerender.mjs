@@ -32,7 +32,7 @@ const root = join(__dirname, "..");
 const dist = join(root, "dist");
 const distSsr = join(root, "dist-ssr");
 const SITE = "https://www.skyliftllc.com";
-const DEFAULT_OG = `${SITE}/og-image.png`;
+const DEFAULT_OG = `${SITE}/og-image-sky-lift-llc.png`;
 
 if (!existsSync(join(dist, "index.html"))) {
   console.error("[prerender] dist/index.html not found — run vite build first.");

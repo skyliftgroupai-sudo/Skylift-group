@@ -12,7 +12,7 @@
 // Plain ESM with no Vite-only syntax so the Node build scripts can import it too.
 
 export const SITE_URL = "https://www.skyliftllc.com";
-export const DEFAULT_OG_IMAGE = "/og-image.png";
+export const DEFAULT_OG_IMAGE = "/og-image-sky-lift-llc.png";
 
 export const routeSeo = {
   "/": {
