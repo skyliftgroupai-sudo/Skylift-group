@@ -1,8 +1,8 @@
-# Sky Lift Group — SEO Engagement Report
+# Sky Lift LLC — SEO Engagement Report
 
 **Period:** 21–22 September 2026
 **Branch:** `claude/admiring-euler-03b2hc`, merged to `main`
-**Deployed:** all work is live on https://www.skyliftgroup.com
+**Deployed:** all work is live on https://www.skyliftllc.com
 
 ---
 
@@ -76,7 +76,7 @@ asset files deleted.
 referenced; WebP versions had replaced them. Recoverable from git history
 
 `6fc24b7` **Entity naming** — Organization `legalName` is now "Sky Lift LLC"
-(the registered entity, matching the footer); `name` stays "Sky Lift Group"
+(the registered entity, matching the footer); `name` stays "Sky Lift LLC"
 
 `962b1f8` **FAQ answers hidden on all 16 service pages**
 - The same defect as `/faq`, which I missed on the first pass. Found only by
@@ -101,11 +101,11 @@ referenced; WebP versions had replaced them. Recoverable from git history
 - `src/hooks/useSeo.jsx` — replaces the prerendered block on client navigation
   instead of appending a second one, and only when it has a replacement
 - `src/lib/seo-config.js` — five titles had a doubled pipe or the brand in the
-  wrong position; all titles now keyword-first, one `| Sky Lift Group`, under 60
+  wrong position; all titles now keyword-first, one `| Sky Lift LLC`, under 60
 - `src/components/Footer.jsx` — tagline now renders the same `ORG_DESCRIPTION`
   string the schema uses
 - `scripts/generate-llms.mjs` (new) — `/llms.txt` generated from the live route
-  and post lists. States plainly that Sky Lift Group is a marketing agency and
+  and post lists. States plainly that Sky Lift LLC is a marketing agency and
   not a lift-equipment company
 - `public/robots.txt` — points to `/llms.txt`
 - `scripts/generate-seo-files.mjs` — sitemap `lastmod` now comes from the last
@@ -185,7 +185,7 @@ referenced; WebP versions had replaced them. Recoverable from git history
 ### Blocked by access
 
 **I could not crawl the live site directly.** This environment's egress policy
-blocks `skyliftgroup.com`. Everything was audited against the local build at the
+blocks `skyliftllc.com`. Everything was audited against the local build at the
 deployed commit — byte-identical output — plus spot checks of the live HTML
 through the Vercel API. I could not verify live response headers independently.
 
@@ -244,18 +244,18 @@ identical before this work, unrelated to SEO — but it masks real errors.
 ### Day 1 — new money pages and the confirmed-demand cluster
 
 ```
-https://www.skyliftgroup.com/services/sms-marketing
-https://www.skyliftgroup.com/services/database-reactivation
-https://www.skyliftgroup.com/blog/a2p-10dlc-registration-contractors
-https://www.skyliftgroup.com/blog/text-customers-who-never-opted-in
-https://www.skyliftgroup.com/blog/missed-call-text-back-message-examples
-https://www.skyliftgroup.com/blog/what-missed-calls-cost-contractors
-https://www.skyliftgroup.com/blog/missed-call-text-back-vs-answering-service
-https://www.skyliftgroup.com/blog/get-past-customers-to-book-again
-https://www.skyliftgroup.com/blog/competitor-ranking-above-me-google-maps
-https://www.skyliftgroup.com/blog/wasting-money-google-ads-contractor
-https://www.skyliftgroup.com/blog/can-ai-answer-the-phone-for-my-business
-https://www.skyliftgroup.com/blog/how-many-google-reviews-does-a-contractor-need
+https://www.skyliftllc.com/services/sms-marketing
+https://www.skyliftllc.com/services/database-reactivation
+https://www.skyliftllc.com/blog/a2p-10dlc-registration-contractors
+https://www.skyliftllc.com/blog/text-customers-who-never-opted-in
+https://www.skyliftllc.com/blog/missed-call-text-back-message-examples
+https://www.skyliftllc.com/blog/what-missed-calls-cost-contractors
+https://www.skyliftllc.com/blog/missed-call-text-back-vs-answering-service
+https://www.skyliftllc.com/blog/get-past-customers-to-book-again
+https://www.skyliftllc.com/blog/competitor-ranking-above-me-google-maps
+https://www.skyliftllc.com/blog/wasting-money-google-ads-contractor
+https://www.skyliftllc.com/blog/can-ai-answer-the-phone-for-my-business
+https://www.skyliftllc.com/blog/how-many-google-reviews-does-a-contractor-need
 ```
 
 ### Day 2 — the six expanded service pages
@@ -263,12 +263,12 @@ https://www.skyliftgroup.com/blog/how-many-google-reviews-does-a-contractor-need
 These are already indexed but are substantially different documents now.
 
 ```
-https://www.skyliftgroup.com/services/missed-call-text-back
-https://www.skyliftgroup.com/services/ai-chatbots
-https://www.skyliftgroup.com/services/lead-follow-up
-https://www.skyliftgroup.com/services/google-ads
-https://www.skyliftgroup.com/services/ai-voice-agents
-https://www.skyliftgroup.com/services/local-maps
+https://www.skyliftllc.com/services/missed-call-text-back
+https://www.skyliftllc.com/services/ai-chatbots
+https://www.skyliftllc.com/services/lead-follow-up
+https://www.skyliftllc.com/services/google-ads
+https://www.skyliftllc.com/services/ai-voice-agents
+https://www.skyliftllc.com/services/local-maps
 ```
 
 ### Do not submit
@@ -282,7 +282,7 @@ internally, and they are not worth the quota. Nor any redirecting URL
 
 ## 5. Sitemap
 
-**Ready to resubmit.** `https://www.skyliftgroup.com/sitemap.xml`
+**Ready to resubmit.** `https://www.skyliftllc.com/sitemap.xml`
 
 - 48 URLs, every one returning 200 with a self-referencing canonical and no
   noindex — verified against the build

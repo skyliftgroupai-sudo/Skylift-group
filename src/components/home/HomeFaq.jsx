@@ -26,7 +26,7 @@ export default function HomeFaq() {
               <span className="accent text-[#26A6AD]">Questions</span>
             </h2>
             <p className="mt-5 text-[1.0625rem] leading-[1.7] text-[#475569]">
-              Everything you need to know about working with Sky Lift Group.
+              Everything you need to know about working with Sky Lift LLC.
             </p>
             <Link
               to="/faq"

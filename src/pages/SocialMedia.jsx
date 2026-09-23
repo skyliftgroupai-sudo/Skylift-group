@@ -29,7 +29,7 @@ const intro = {
   paragraphs: [
     [
       "Social media marketing helps your brand reach the right audience, engage followers, and convert them into loyal customers. At ",
-      { b: "Sky Lift Group" },
+      { b: "Sky Lift LLC" },
       ", we create strategies tailored to your business goals.",
     ],
     "From content creation and paid campaigns to influencer collaborations and performance reporting, we cover all aspects of social media marketing.",

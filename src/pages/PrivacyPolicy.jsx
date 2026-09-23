@@ -40,7 +40,7 @@ const PrivacyPolicy = () => {
                             Introduction
                         </h2>
                         <p>
-Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky Lift LLC, referred to as "Sky Lift Group," "we," "us," or "our" throughout this policy.                             This Privacy Policy explains how Sky Lift Group collects, uses,
+Last updated: September 23, 2026. This website (skyliftllc.com) is operated by Sky Lift LLC, referred to as "Sky Lift LLC," "we," "us," or "our" throughout this policy.                             This Privacy Policy explains how Sky Lift LLC collects, uses,
                             processes, and protects your information when you use our website
                             and services. By accessing or using our services, you agree to the
                             collection and use of information in accordance with this policy.
@@ -88,7 +88,7 @@ Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky 
                             Data Protection & Non-Sale of Information
                         </h2>
                         <p>
-                            Sky Lift Group does not sell, rent, trade, or share your personal
+                            Sky Lift LLC does not sell, rent, trade, or share your personal
                             information with third parties for their marketing or promotional
                             purposes. Your information is used strictly to provide and improve
                             our services.
@@ -112,7 +112,7 @@ Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky 
                         </h2>
 
                         <p className="mb-4">
-                            By submitting your information through our website forms, you consent to receive SMS messages from Sky Lift Group related to our services, updates, and customer support. Message frequency may vary based on your interaction with us. Message and data rates may apply depending on your mobile carrier.
+                            By submitting your information through our website forms, you consent to receive SMS messages from Sky Lift LLC related to our services, updates, and customer support. Message frequency may vary based on your interaction with us. Message and data rates may apply depending on your mobile carrier.
                         </p>
 
                         <p className="mb-4">
@@ -161,15 +161,15 @@ Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky 
                         </p>
 
                         <div className="mt-4">
-                            <div>Sky Lift Group</div>
+                            <div>Sky Lift LLC</div>
 
                             <div className="flex items-center gap-2">
                                 <Mail className="text-[#1C8A90]" size={18} />
                                 <a
-                                    href="mailto:hello@skyliftgroup.com"
+                                    href="mailto:info@skyliftllc.com"
                                     className="hover:text-[#1C8A90]"
                                 >
-                                    hello@skyliftgroup.com
+                                    info@skyliftllc.com
                                 </a>
                             </div>
                         </div>
@@ -188,7 +188,7 @@ Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky 
                         to="/contact"
                         className="btn btn-primary"
                     >
-                        Contact Sky Lift Group
+                        Contact Sky Lift LLC
                     </Link>
                 </Reveal>
 

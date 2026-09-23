@@ -21,7 +21,7 @@ export default function FinalCta() {
             <span className="accent text-[#26A6AD]">Next</span> Level
           </h2>
           <p className="mt-6 text-[1.0625rem] leading-[1.7] text-slate-300">
-            At <strong className="text-white">Sky Lift Group</strong>, we craft
+            At <strong className="text-white">Sky Lift LLC</strong>, we craft
             smart, data-driven strategies that grow your audience, boost
             conversions, and help your brand stand out.
           </p>
@@ -37,10 +37,10 @@ export default function FinalCta() {
           <p className="mt-6 text-sm text-slate-400">
             Or email us at{" "}
             <a
-              href="mailto:hello@skyliftgroup.com"
+              href="mailto:info@skyliftllc.com"
               className="text-[#26A6AD] hover:underline"
             >
-              hello@skyliftgroup.com
+              info@skyliftllc.com
             </a>
           </p>
         </Reveal>

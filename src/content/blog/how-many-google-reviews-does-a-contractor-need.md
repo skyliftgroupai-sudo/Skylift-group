@@ -7,7 +7,7 @@ excerpt: "Everyone wants a number. The honest answer is that recency and your lo
 category: "Reviews"
 tags: ["Reviews", "Google Business Profile", "Local SEO", "Home Service Marketing"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/five-bg.webp"
 imageAlt: "Home service business Google reviews displayed on a phone screen"
 ---

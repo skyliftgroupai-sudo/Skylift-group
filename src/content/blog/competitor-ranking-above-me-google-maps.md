@@ -7,7 +7,7 @@ excerpt: "The map pack doesn't rank the best contractor. It ranks the most relev
 category: "Google Business Profile"
 tags: ["Google Business Profile", "Local SEO", "Map Pack", "Home Service Marketing"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/maps-bg.webp"
 imageAlt: "Google Maps search results showing local contractors in the map pack"
 ---

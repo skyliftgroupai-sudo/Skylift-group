@@ -9,7 +9,7 @@ import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
-const SITE = "https://www.skyliftgroup.com";
+const SITE = "https://www.skyliftllc.com";
 
 if (!existsSync(dist)) {
   console.error("dist/ not found — run `npm run build` first.");

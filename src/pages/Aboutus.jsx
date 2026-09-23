@@ -58,7 +58,7 @@ export default function AboutUs() {
         <div className="w-full">
             <PageHero
                 eyebrow="About us"
-                title="About Sky Lift Group — AI Marketing for Home Service Businesses"
+                title="About Sky Lift LLC — AI Marketing for Home Service Businesses"
                 titleAccent="AI Marketing"
                 subtitle="We build the AI lead capture, follow-up and advertising systems that turn a home service business’s missed calls and cold leads into booked jobs."
                 primaryCta={{ to: "/book", label: "Book a Free Strategy Call" }}
@@ -75,7 +75,7 @@ export default function AboutUs() {
                                 Our <span className="accent text-[#26A6AD]">Story</span>
                             </h2>
                             <p className="mt-6 text-[1.0625rem] leading-[1.8] text-[#475569]">
-                                <span className="font-semibold text-[#1C8A90]">Sky Lift Group</span>{" "}
+                                <span className="font-semibold text-[#1C8A90]">Sky Lift LLC</span>{" "}
                                 began with a simple idea: support businesses with smart digital
                                 solutions that actually make a difference. What started as a small
                                 team grew into a full-service agency trusted by clients worldwide.

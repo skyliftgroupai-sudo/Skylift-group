@@ -8,7 +8,7 @@ category: "Digital Marketing Tips"
 tags: ["Agency Selection", "Home Service Marketing", "Digital Marketing Tips"]
 date: "2026-08-04"
 dateModified: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/analytics.webp"
 imageAlt: "Contractor reviewing a marketing agency proposal at a desk"
 ---

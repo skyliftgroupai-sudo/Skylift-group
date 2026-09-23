@@ -8,7 +8,7 @@ category: "Reviews"
 tags: ["Reviews", "Google Business Profile", "Local SEO", "Home Service Marketing"]
 date: "2026-08-04"
 dateModified: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/five-star.webp"
 imageAlt: "Homeowner leaving a five star review for a home service business on a phone"
 ---

@@ -26,7 +26,7 @@ const intro = {
   paragraphs: [
     [
       "In today’s digital world, your website is often the first interaction potential customers have with your brand. At ",
-      { b: "Sky Lift Group" },
+      { b: "Sky Lift LLC" },
       ", we create modern, user-friendly websites that look great and perform even better.",
     ],
     "Whether you’re starting new or redesigning an existing site, we bring your vision to life.",

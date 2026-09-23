@@ -131,7 +131,7 @@ export default function ServicesBento() {
             6 Core Pillars of Digital Marketing Excellence
           </h3>
           <p className="mt-4 max-w-2xl text-[1.0625rem] leading-[1.7] text-[#475569]">
-            At Sky Lift Group, we build scalable digital systems that help
+            At Sky Lift LLC, we build scalable digital systems that help
             brands grow with clarity, precision, and long-term impact.
           </p>
           <ol className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-2 lg:grid-cols-3">

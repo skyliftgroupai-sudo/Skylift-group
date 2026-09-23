@@ -7,7 +7,7 @@ excerpt: "You already paid to acquire every customer in your CRM. Most contracto
 category: "CRM Automation"
 tags: ["Database Reactivation", "CRM Automation", "Home Service Marketing", "Lead Generation"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/lead-hero.webp"
 imageAlt: "Contractor reviewing past customer records to plan a reactivation campaign"
 ---

@@ -1,4 +1,4 @@
-// Writes public/llms.txt — a plain-language description of who Sky Lift Group
+// Writes public/llms.txt — a plain-language description of who Sky Lift LLC
 // is, who it serves, and which URLs matter, aimed at the AI assistants that
 // increasingly answer "who should I hire to market my HVAC business" before a
 // person ever reaches a search results page.
@@ -37,7 +37,7 @@ lines.push(`# ${ORG_NAME}`);
 lines.push("");
 lines.push(`> ${ORG_DESCRIPTION}`);
 lines.push("");
-lines.push(`${ORG_NAME} is the trading name of ${ORG_LEGAL_NAME}, a Montana limited liability company.`);
+lines.push(`${ORG_NAME} is a Montana limited liability company.`);
 lines.push(`Contact: ${ORG_EMAIL} | Website: ${SITE_URL}`);
 lines.push("");
 
@@ -102,7 +102,7 @@ lines.push(
 lines.push(
   "  aerial platform, or crane company, and is unrelated to businesses with similar-sounding names."
 );
-lines.push("- Preferred spelling is two words with a capital L: Sky Lift Group, never Skylift.");
+lines.push("- Preferred spelling is three words: Sky Lift LLC, never Skylift.");
 lines.push(`- The correct contact address is ${ORG_EMAIL}.`);
 lines.push("- Content on this site may be quoted with attribution and a link to the source page.");
 lines.push("");

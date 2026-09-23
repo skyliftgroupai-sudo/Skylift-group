@@ -1,6 +1,6 @@
 import { parseFrontmatter, extractFaqs, readingTime } from "./frontmatter";
 
-export const SITE_URL = "https://www.skyliftgroup.com";
+export const SITE_URL = "https://www.skyliftllc.com";
 
 // Eagerly load every markdown file in /content/blog as a raw string.
 // New posts (added by the daily automation) are picked up automatically.
@@ -26,9 +26,9 @@ function build() {
       // Only set when a post has genuinely been revised, so Article schema does
       // not claim a freshness that did not happen.
       dateModified: data.dateModified || data.date || "1970-01-01",
-      author: data.author || "Sky Lift Group",
+      author: data.author || "Sky Lift LLC",
       image: data.image || "/og-image.png",
-      imageAlt: data.imageAlt || data.title || "Sky Lift Group",
+      imageAlt: data.imageAlt || data.title || "Sky Lift LLC",
       content,
       faqs: extractFaqs(content),
       readingTime: readingTime(content),

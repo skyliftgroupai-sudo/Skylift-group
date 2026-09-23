@@ -28,7 +28,7 @@ const intro = {
   paragraphs: [
     [
       "In the competitive online world, ranking high on search engines is crucial. At ",
-      { b: "Sky Lift Group" },
+      { b: "Sky Lift LLC" },
       ", we use proven SEO strategies to increase your visibility and attract the right audience.",
     ],
     "From optimizing your website’s structure to creating targeted content, our team ensures your business stays ahead in search results.",

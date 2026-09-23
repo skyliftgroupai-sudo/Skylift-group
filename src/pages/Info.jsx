@@ -46,7 +46,7 @@ const Info = () => {
           variants={itemVariants}
           className="text-base sm:text-lg md:text-xl max-w-4xl leading-relaxed text-gray-300"
         >
-          Sky Lift Group helps modern brands grow through AI-powered digital marketing,
+          Sky Lift LLC helps modern brands grow through AI-powered digital marketing,
           intelligent automation, and performance-driven strategies. We turn complex data
           into clear actions, build meaningful digital experiences, and deliver measurable
           results that scale with your business. Every campaign is designed to convert,

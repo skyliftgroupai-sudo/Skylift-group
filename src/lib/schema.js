@@ -20,11 +20,16 @@ export const WEBSITE_ID = `${SITE_URL}/#website`;
 // homepage intro, the About page and the footer, because Search Console shows
 // "skylift" queries resolving to unrelated lift-equipment companies — matching
 // text across the site and the directory profiles is what separates the two.
-export const ORG_NAME = "Sky Lift Group";
+export const ORG_NAME = "Sky Lift LLC";
+// Same string as ORG_NAME since the rebrand: the trading name and the
+// registered name are now one and the same, so schema.org gets legalName and
+// name identical rather than implying a distinction that no longer exists.
 export const ORG_LEGAL_NAME = "Sky Lift LLC";
-export const ORG_EMAIL = "hello@skyliftgroup.com";
+export const ORG_EMAIL = "info@skyliftllc.com";
+// E.164, which is the format schema.org and Google both want.
+export const ORG_PHONE = "+1-904-906-9019";
 export const ORG_DESCRIPTION =
-  "Sky Lift Group is an AI automation and marketing agency for home service businesses, providing AI chatbots, missed-call text back, SMS marketing, lead capture, ads, and local SEO.";
+  "Sky Lift LLC is an AI automation and marketing agency for home service businesses, providing AI chatbots, missed-call text back, SMS marketing, lead capture, ads, and local SEO.";
 
 export const ORG_SAME_AS = [
   "https://www.facebook.com/share/199LNKDqTT/",
@@ -70,6 +75,7 @@ function organization() {
     },
     image: `${SITE_URL}/og-image.png`,
     email: ORG_EMAIL,
+    telephone: ORG_PHONE,
     areaServed: { "@type": "Country", name: "United States" },
     sameAs: ORG_SAME_AS,
   };
@@ -98,12 +104,13 @@ function professionalService() {
     description: ORG_DESCRIPTION,
     url: SITE_URL,
     email: ORG_EMAIL,
+    telephone: ORG_PHONE,
     parentOrganization: { "@id": ORG_ID },
     areaServed: { "@type": "Country", name: "United States" },
     serviceType: "Digital marketing and AI automation for home service businesses",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Sky Lift Group services",
+      name: "Sky Lift LLC services",
       itemListElement: SERVICES.map((s) => ({
         "@type": "Offer",
         itemOffered: {
@@ -159,7 +166,7 @@ function trailFor(path, title) {
   return [home, { name: title, path }];
 }
 
-// Titles carry "| Sky Lift Group" for search results; a breadcrumb should show
+// Titles carry "| Sky Lift LLC" for search results; a breadcrumb should show
 // just the page name.
 function crumbName(path) {
   const entry = routeSeo[path];
@@ -188,7 +195,7 @@ export function schemaForRoute(path, extra = null) {
     nodes.push({
       "@type": "Blog",
       "@id": `${SITE_URL}/blog#blog`,
-      name: "Sky Lift Group Blog",
+      name: "Sky Lift LLC Blog",
       url: `${SITE_URL}/blog`,
       description: routeSeo["/blog"]?.description,
       publisher: { "@id": ORG_ID },

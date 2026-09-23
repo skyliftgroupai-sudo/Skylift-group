@@ -109,7 +109,7 @@ export function blogIndexSeo(route) {
 
   if (route.kind === "category") {
     return {
-      title: `${route.category.name} Articles${suffix} | Sky Lift Group`,
+      title: `${route.category.name} Articles${suffix} | Sky Lift LLC`,
       description:
         `${route.category.name} guides for home service business owners — practical articles on winning and keeping more local customers.${pageNote}`.slice(
           0,
@@ -120,8 +120,8 @@ export function blogIndexSeo(route) {
   return {
     title:
       route.page > 1
-        ? `AI Marketing & Local SEO Blog — Page ${route.page} | Sky Lift Group`
-        : "AI Marketing & Local SEO Blog | Sky Lift Group",
+        ? `AI Marketing & Local SEO Blog — Page ${route.page} | Sky Lift LLC`
+        : "AI Marketing & Local SEO Blog | Sky Lift LLC",
     description: route.page > 1
       ? `More guides on SMS marketing, local SEO, Google Business Profile and AI lead capture for home service businesses.${pageNote}`
       : "Practical guides on SMS marketing, local SEO, Google Business Profile, AI lead capture, and automation for home service business owners.",

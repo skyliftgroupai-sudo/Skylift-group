@@ -1,4 +1,4 @@
-# Sky Lift Group — https://www.skyliftgroup.com
+# Sky Lift LLC — https://www.skyliftllc.com
 # AI automation and marketing agency for home service businesses.
 
 User-agent: *
@@ -49,7 +49,7 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://www.skyliftgroup.com/sitemap.xml
+Sitemap: https://www.skyliftllc.com/sitemap.xml
 
 # Plain-language description of the business, its services and key URLs,
-# for AI assistants that read it: https://www.skyliftgroup.com/llms.txt
+# for AI assistants that read it: https://www.skyliftllc.com/llms.txt

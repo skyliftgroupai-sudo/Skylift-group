@@ -61,13 +61,13 @@ const Blog = () => {
   useSeo({
     ...seoFor("/blog"),
     ...blogIndexSeo(route),
-    canonical: `https://www.skyliftgroup.com${pageUrl(page)}`,
+    canonical: `https://www.skyliftllc.com${pageUrl(page)}`,
   });
 
   return (
     <div className="w-full">
       <PageHero
-        eyebrow="The Sky Lift Group Blog"
+        eyebrow="The Sky Lift LLC Blog"
         title="Grow Your Local Business with AI & SEO"
         titleAccent="AI & SEO"
         subtitle="Practical, no-fluff guides on local SEO, Google Business Profile, AI marketing, lead generation, and automation — written to help home service and local businesses win more customers."

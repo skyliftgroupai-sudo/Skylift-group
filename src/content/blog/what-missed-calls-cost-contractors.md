@@ -7,7 +7,7 @@ excerpt: "Most contractors treat missed calls as unavoidable. Here's how to work
 category: "CRM Automation"
 tags: ["Missed Calls", "Lead Generation", "Home Service Marketing", "CRM Automation"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/missed-hero.webp"
 imageAlt: "Unanswered phone on a work bench while a contractor works on a job"
 ---

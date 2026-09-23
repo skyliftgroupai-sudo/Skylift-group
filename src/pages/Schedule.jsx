@@ -14,7 +14,7 @@ const Schedule = () => {
     <div className="w-full">
       <PageHero
         eyebrow="Book a call"
-        title="Book a Free Strategy Call with Sky Lift Group"
+        title="Book a Free Strategy Call with Sky Lift LLC"
         titleAccent="Free"
         subtitle="Ready to book your appointment? Our AI Assistant makes it quick and easy."
       />

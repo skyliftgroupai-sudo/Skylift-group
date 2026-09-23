@@ -7,7 +7,7 @@ excerpt: "Most missed-call texts fail for the same three reasons. Here's what to
 category: "SMS Marketing"
 tags: ["Missed Calls", "SMS Marketing", "Home Service Marketing", "CRM Automation"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/missed-call.webp"
 imageAlt: "Example of an automatic text message reply to a missed call from a customer"
 ---

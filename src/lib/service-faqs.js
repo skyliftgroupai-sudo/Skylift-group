@@ -396,7 +396,7 @@ export const routeFaqs = {
   ],
   "/faq": [
           {
-              q: "What services does Sky Lift Group provide?",
+              q: "What services does Sky Lift LLC provide?",
               a:
                   "We provide AI chatbots, AI voice agents, workflow automation, SEO, PPC advertising, social media management, and high-converting web design solutions."
           },
@@ -429,7 +429,7 @@ export const routeFaqs = {
   "/tools/sms-compliance-checklist": [
       {
           q: "Is this legal advice?",
-          a: "No. Sky Lift Group is a marketing agency, not a law firm. This checklist describes the operational steps we put in place when setting up business texting and covers the parts commonly missed. It does not interpret statutes or account for your situation — confirm your obligations with your own counsel.",
+          a: "No. Sky Lift LLC is a marketing agency, not a law firm. This checklist describes the operational steps we put in place when setting up business texting and covers the parts commonly missed. It does not interpret statutes or account for your situation — confirm your obligations with your own counsel.",
       },
       {
           q: "Do I need A2P 10DLC registration and consent, or just one?",

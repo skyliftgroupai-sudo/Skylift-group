@@ -29,7 +29,7 @@ const intro = {
   paragraphs: [
     [
       "Meta Ads are one of the most powerful ways to reach your ideal customers at the right moment. At ",
-      { b: "Sky Lift Group" },
+      { b: "Sky Lift LLC" },
       ", we create conversion-focused campaigns that deliver measurable business results.",
     ],
     "From audience research and creative development to advanced optimization and scaling, we manage the full lifecycle of your Facebook and Instagram ad campaigns.",

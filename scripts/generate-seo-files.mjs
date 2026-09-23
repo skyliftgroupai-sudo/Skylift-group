@@ -11,7 +11,7 @@ import { blogIndexRoutes } from "../src/lib/blog-taxonomy.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
-const SITE = "https://www.skyliftgroup.com";
+const SITE = "https://www.skyliftllc.com";
 
 // Static routes mirror src/App.jsx.
 const staticRoutes = [
@@ -169,7 +169,7 @@ function buildRss(posts) {
     })
     .join("\n");
 
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n  <channel>\n    <title>Sky Lift Group Blog</title>\n    <link>${SITE}/blog</link>\n    <description>AI marketing, local SEO, and lead generation guides for local and home service businesses.</description>\n    <language>en-us</language>\n    <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />\n    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>\n${items}\n  </channel>\n</rss>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n  <channel>\n    <title>Sky Lift LLC Blog</title>\n    <link>${SITE}/blog</link>\n    <description>AI marketing, local SEO, and lead generation guides for local and home service businesses.</description>\n    <language>en-us</language>\n    <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />\n    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>\n${items}\n  </channel>\n</rss>\n`;
 }
 
 const posts = loadPosts();

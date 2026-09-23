@@ -44,7 +44,7 @@ const TermsConditions = () => {
             </h2>
             <p>
               These Terms and Conditions apply to all SMS messages sent and received as
-              part of the A2P 10DLC messaging services provided by Sky Lift Group.
+              part of the A2P 10DLC messaging services provided by Sky Lift LLC.
               Your use of this service constitutes acceptance of these terms.
             </p>
           </div>
@@ -54,7 +54,7 @@ const TermsConditions = () => {
             </h2>
             <p>
               You must be at least 18 years old to use our website, services, and to consent to
-              receive SMS/text messages from Sky Lift Group. By using our services or opting in to
+              receive SMS/text messages from Sky Lift LLC. By using our services or opting in to
               receive messages, you represent that you are 18 years of age or older. We do not
               knowingly collect personal information from or provide services to individuals under
               the age of 18.
@@ -65,7 +65,7 @@ const TermsConditions = () => {
               Messaging Consent
             </h2>
             <p>
-              Messages sent by Sky Lift Group may include alerts, reminders, promotional offers,
+              Messages sent by Sky Lift LLC may include alerts, reminders, promotional offers,
               updates, and other relevant communications. Message frequency will vary based on user
               interaction and preferences.
             </p>
@@ -87,7 +87,7 @@ const TermsConditions = () => {
               Opt-Out Instructions
             </h2>
             <p>
-              To stop receiving messages from Sky Lift Group, reply "STOP" to any message at any time. Reply "HELP" for assistance. This will unsubscribe you from SMS communications.
+              To stop receiving messages from Sky Lift LLC, reply "STOP" to any message at any time. Reply "HELP" for assistance. This will unsubscribe you from SMS communications.
             </p>
           </div>
 
@@ -96,7 +96,7 @@ const TermsConditions = () => {
               Message Delivery
             </h2>
             <p>
-              Sky Lift Group does not guarantee message delivery without delays or failures due to factors beyond our control, including network or device limitations.
+              Sky Lift LLC does not guarantee message delivery without delays or failures due to factors beyond our control, including network or device limitations.
             </p>
           </div>
           <div>
@@ -137,10 +137,10 @@ const TermsConditions = () => {
               <div className="flex items-center gap-2">
                 <Mail className="text-[#1C8A90]" size={18} />
 
-                <a href="mailto:hello@skyliftgroup.com"
+                <a href="mailto:info@skyliftllc.com"
                   className="hover:text-[#1C8A90]"
                 >
-                  hello@skyliftgroup.com
+                  info@skyliftllc.com
                 </a>
               </div>
             </div>
@@ -158,7 +158,7 @@ const TermsConditions = () => {
             to="/contact"
             className="btn btn-primary"
           >
-            Contact Sky Lift Group
+            Contact Sky Lift LLC
           </Link>
 
         </Reveal>

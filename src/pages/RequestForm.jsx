@@ -46,7 +46,7 @@ export default function RequestQuoteForm() {
           Request a Free Quote
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Fill out the form below and our team at <strong>Sky Lift Group</strong> will craft a personalized strategy for your business.
+          Fill out the form below and our team at <strong>Sky Lift LLC</strong> will craft a personalized strategy for your business.
         </p>
       </div>
 
@@ -147,7 +147,7 @@ export default function RequestQuoteForm() {
             className="w-5 h-5 text-[#00A693] border-gray-300 rounded focus:ring-2 focus:ring-[#00A693]"
           />
           <span className="text-gray-700 text-sm">
-            I agree to be contacted by the Sky Lift Group team regarding my request.
+            I agree to be contacted by the Sky Lift LLC team regarding my request.
           </span>
         </label>
 

@@ -7,7 +7,7 @@ excerpt: "The Map Pack decides whether your phone rings. Here's the complete 202
 category: "Google Business Profile"
 tags: ["Local SEO", "Google Business Profile", "Home Service Marketing", "Lead Generation"]
 date: "2026-07-28"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/maps-bg.webp"
 imageAlt: "Home service contractor optimizing their Google Business Profile to rank in the local Map Pack"
 ---
@@ -126,7 +126,7 @@ If categories win relevance, **reviews win prominence**. For home service busine
 3. **Automate the ask** so it happens after every completed job instead of whenever someone remembers.
 4. **Never gate or buy reviews.** Incentivized or fake reviews violate Google's policies and can get your profile suspended.
 
-Managing this by hand across dozens of jobs a week is where most contractors fall behind. This is exactly the kind of task worth automating — Sky Lift Group's [review management system](/services/reviews) sends the ask automatically after each job and routes unhappy customers to you privately before they post publicly.
+Managing this by hand across dozens of jobs a week is where most contractors fall behind. This is exactly the kind of task worth automating — Sky Lift LLC's [review management system](/services/reviews) sends the ask automatically after each job and routes unhappy customers to you privately before they post publicly.
 
 ## Google Posts: The Free Feature Almost Nobody Uses
 
@@ -214,6 +214,6 @@ It helps. AI Overviews and assistants pull from consistent, trusted local data, 
 
 ## Ready to Generate More Leads for Your Business?
 
-Sky Lift Group helps local businesses dominate Google Search, optimize their Google Business Profile, build high-converting AI-powered websites, and automate lead generation.
+Sky Lift LLC helps local businesses dominate Google Search, optimize their Google Business Profile, build high-converting AI-powered websites, and automate lead generation.
 
 [Contact us today for a free strategy consultation.](/book)

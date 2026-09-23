@@ -58,7 +58,7 @@ export default function FocusPoints() {
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          At <strong className="text-white">Sky Lift Group</strong>, we build
+          At <strong className="text-white">Sky Lift LLC</strong>, we build
           scalable digital systems that help brands grow with clarity, precision,
           and long-term impact.
         </motion.p>

@@ -31,7 +31,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 const dist = join(root, "dist");
 const distSsr = join(root, "dist-ssr");
-const SITE = "https://www.skyliftgroup.com";
+const SITE = "https://www.skyliftllc.com";
 const DEFAULT_OG = `${SITE}/og-image.png`;
 
 if (!existsSync(join(dist, "index.html"))) {
@@ -210,7 +210,7 @@ writeFileSync(
   join(dist, "404.html"),
   buildHtml({
     path: "/404",
-    title: "Page Not Found | Sky Lift Group",
+    title: "Page Not Found | Sky Lift LLC",
     description: "The page you are looking for does not exist or has been moved.",
     noindex: true,
     body: notFoundBody,
@@ -241,7 +241,7 @@ if (existsSync(blogDir)) {
     const slug = data.slug || file.replace(/\.md$/, "");
     const { data: fm, content } = parseFrontmatter(readFileSync(join(blogDir, file), "utf8"));
     await emit(`/blog/${slug}`, {
-      title: `${data.seoTitle || data.title || "Blog"} | Sky Lift Group`,
+      title: `${data.seoTitle || data.title || "Blog"} | Sky Lift LLC`,
       description: data.description || data.excerpt || "",
       image: data.image,
       jsonLd: blogPostingSchema({

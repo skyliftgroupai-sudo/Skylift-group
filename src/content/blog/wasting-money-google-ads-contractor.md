@@ -7,7 +7,7 @@ excerpt: "Your ads are running, clicks are arriving, and the calendar is empty. 
 category: "Google Ads"
 tags: ["Google Ads", "PPC", "Home Service Marketing", "Lead Generation"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/ppc-bg.webp"
 imageAlt: "Contractor reviewing a Google Ads account performance report"
 ---

@@ -29,7 +29,7 @@ const intro = {
   paragraphs: [
     [
       "Our PPC management services help businesses target the right audience at the right time. At ",
-      { b: "Sky Lift Group" },
+      { b: "Sky Lift LLC" },
       ", we design campaigns to maximize clicks, conversions, and ROI.",
     ],
     "From keyword research and ad creation to bid management and analytics, we optimize every aspect of your PPC campaigns for success.",

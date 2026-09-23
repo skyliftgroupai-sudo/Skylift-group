@@ -76,7 +76,7 @@ export default function SmsComplianceChecklist() {
             <div>
               <h2 className="font-bold text-[#142A47] mb-2">This is not legal advice</h2>
               <p className="text-[#475569] leading-relaxed text-[0.97rem]">
-                Sky Lift Group is a marketing agency, not a law firm. This checklist
+                Sky Lift LLC is a marketing agency, not a law firm. This checklist
                 describes the operational steps we put in place when we set up business
                 texting, and it covers the parts that are commonly missed. It does not
                 interpret statutes, quantify penalties, or account for your specific

@@ -6,7 +6,7 @@ import { HERO } from "../../lib/home-content";
  * Dark hero.
  *
  * The h1 text is byte-for-byte what it was before the redesign — it is the
- * line that separates "Sky Lift Group" the agency from the unrelated
+ * line that separates "Sky Lift LLC" the agency from the unrelated
  * lift-equipment results, so it does not change. What did change is that it is
  * now the visual headline rather than a small line above a rotating carousel.
  *
@@ -50,7 +50,7 @@ export default function Hero() {
           </p>
 
           <h1 className="text-[2rem] leading-[1.12] font-extrabold text-white sm:text-[2.75rem] lg:text-[3.5rem]">
-            Sky Lift Group — AI{" "}
+            Sky Lift LLC — AI{" "}
             <span className="accent text-[#26A6AD]">Automation</span> and
             Marketing Agency for Home Service Businesses
           </h1>

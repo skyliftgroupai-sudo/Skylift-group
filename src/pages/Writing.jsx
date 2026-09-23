@@ -29,7 +29,7 @@ const intro = {
   paragraphs: [
     [
       "Our content writing services help businesses connect with their audience. At ",
-      { b: "Sky Lift Group" },
+      { b: "Sky Lift LLC" },
       ", we create blogs, articles, web pages, and social media content that engages and converts.",
     ],
     "We focus on SEO-friendly content, compelling storytelling, and consistent messaging to ensure your brand stands out.",

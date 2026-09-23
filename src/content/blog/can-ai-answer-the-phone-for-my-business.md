@@ -7,7 +7,7 @@ excerpt: "AI can answer your phone and book the job during the call. Here's what
 category: "AI Automation"
 tags: ["AI Automation", "Missed Calls", "Home Service Marketing", "Lead Generation"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/aivoice.webp"
 imageAlt: "AI voice agent answering a customer call for a home service business"
 ---

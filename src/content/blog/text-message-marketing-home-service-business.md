@@ -8,7 +8,7 @@ category: "SMS Marketing"
 tags: ["SMS Marketing", "CRM Automation", "Home Service Marketing", "Lead Generation"]
 date: "2026-07-29"
 dateModified: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/missed-call.webp"
 imageAlt: "Home service business sending an appointment reminder text message to a customer"
 ---

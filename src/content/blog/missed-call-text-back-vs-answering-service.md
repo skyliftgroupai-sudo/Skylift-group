@@ -7,7 +7,7 @@ excerpt: "An answering service takes a message. A text back starts a conversatio
 category: "CRM Automation"
 tags: ["Missed Calls", "CRM Automation", "Home Service Marketing", "Lead Generation"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/voice.webp"
 imageAlt: "Contractor comparing call handling options for a home service business"
 ---

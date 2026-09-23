@@ -80,7 +80,7 @@ const Faq = () => {
                             Still Have Questions?
                         </h3>
                         <Link to="/contact" className="btn btn-primary mt-7">
-                            Contact Sky Lift Group
+                            Contact Sky Lift LLC
                         </Link>
                     </Reveal>
                 </div>

@@ -1,4 +1,4 @@
-# Keyword Map — Sky Lift Group
+# Keyword Map — Sky Lift LLC
 
 Thirty long-tail questions US home service contractors search, clustered by the
 service page each one supports.

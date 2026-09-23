@@ -163,7 +163,7 @@ const BlogPostView = ({ post }) => {
   }
 
   useSeo({
-    title: `${post.seoTitle} | Sky Lift Group`,
+    title: `${post.seoTitle} | Sky Lift LLC`,
     description: post.description,
     canonical,
     image: post.image,

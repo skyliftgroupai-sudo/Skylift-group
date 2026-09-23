@@ -48,7 +48,7 @@ export default function FAQQuoteSection() {
                         Frequently Asked Questions
                     </h2>
                     <p className="text-gray-400 mb-10">
-                        Everything you need to know about working with Sky Lift Group.
+                        Everything you need to know about working with Sky Lift LLC.
                     </p>
 
                     <div className="space-y-4">
@@ -163,7 +163,7 @@ export default function FAQQuoteSection() {
 
                         <label className="flex items-start gap-3 mt-6 text-gray-400 text-sm">
                             <input type="checkbox" className="accent-[#00A693] mt-1" />
-                            I agree to be contacted by Sky Lift Group regarding my request.
+                            I agree to be contacted by Sky Lift LLC regarding my request.
                         </label>
 
                         <button

@@ -13,13 +13,13 @@ const CONTACT_CARDS = [
     icon: Mail,
     title: "Email Us",
     lines: [
-      { text: "hello@skyliftgroup.com", href: "mailto:hello@skyliftgroup.com" },
+      { text: "info@skyliftllc.com", href: "mailto:info@skyliftllc.com" },
     ],
   },
   {
     icon: PhoneCall,
     title: "Call Us",
-    lines: [{ text: "+1 (725) 263-1475", href: "tel:+17252631475" }],
+    lines: [{ text: "+1 (904) 906-9019", href: "tel:+19049069019" }],
   },
   {
     icon: MapPin,

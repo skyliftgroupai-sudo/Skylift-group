@@ -29,7 +29,7 @@ const intro = {
   paragraphs: [
     [
       "TikTok Ads are one of the fastest-growing ways to reach your ideal customers with short-form video content. At ",
-      { b: "Sky Lift Group" },
+      { b: "Sky Lift LLC" },
       ", we create campaigns optimized for engagement, conversions, and measurable growth.",
     ],
     "From audience research and creative development to advanced optimization and scaling, we handle the full lifecycle of your TikTok ad campaigns.",

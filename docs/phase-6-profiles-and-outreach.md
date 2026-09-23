@@ -2,7 +2,7 @@
 
 Everything here is ready to paste or send. Two rules were applied throughout:
 
-**No invented results.** Sky Lift Group has no published case studies or client
+**No invented results.** Sky Lift LLC has no published case studies or client
 results yet, so nothing below claims any. The positioning is specificity — a
 narrow niche, a clear point of view, and 15 substantial published articles — not
 fabricated numbers. Add real figures when you have them.
@@ -15,21 +15,21 @@ name, address and phone match exactly. Use the block below verbatim, every time.
 ## 0. Canonical NAP — copy this exactly
 
 ```
-Business name:  Sky Lift Group
+Business name:  Sky Lift LLC
 Legal entity:   Sky Lift LLC
 Address:        1001 S Main St STE 500
                 Kalispell, MT 59901
                 United States
-Phone:          +1 (725) 263-1475
-Email:          hello@skyliftgroup.com
-Website:        https://www.skyliftgroup.com
-LinkedIn:       https://www.linkedin.com/company/sky-lift-group/
+Phone:          +1 (904) 906-9019
+Email:          info@skyliftllc.com
+Website:        https://www.skyliftllc.com
+LinkedIn:       https://www.linkedin.com/company/sky-lift-llc/
 Facebook:       https://www.facebook.com/share/199LNKDqTT/
 Founded:        [YEAR — fill in, must match everywhere]
 Team size:      [RANGE — fill in]
 ```
 
-Two things to never vary: the spelling **Sky Lift Group** (two words, capital L —
+Two things to never vary: the spelling **Sky Lift LLC** (two words, capital L —
 "Skylift" is the spelling that collides with lift-equipment companies in search),
 and the phone number format. Pick one format and never change it.
 
@@ -44,13 +44,13 @@ AI automation and marketing for home service businesses
 
 ### Short description (about 150 characters)
 ```
-Sky Lift Group helps HVAC, plumbing and roofing companies capture more of the
+Sky Lift LLC helps HVAC, plumbing and roofing companies capture more of the
 leads they already generate — AI chatbots, missed-call text back and SMS.
 ```
 
 ### Medium description (about 350 characters)
 ```
-Sky Lift Group is an AI automation and marketing agency working only with US
+Sky Lift LLC is an AI automation and marketing agency working only with US
 home service businesses. We build the systems that catch and follow up leads a
 contractor is already generating — missed-call text back, AI chatbots, SMS
 marketing and automated follow-up — alongside Google Ads and local SEO to
@@ -59,7 +59,7 @@ generate more of them.
 
 ### Long description (about 900 characters)
 ```
-Sky Lift Group is an AI automation and marketing agency for US home service
+Sky Lift LLC is an AI automation and marketing agency for US home service
 businesses. We work with HVAC contractors, plumbers, roofers, electricians,
 junk removal companies, spray foam installers and general contractors.
 
@@ -102,7 +102,7 @@ General Contracting · Handyman Services · Auto Detailing
 |---|---|---|
 | **LinkedIn Company Page** | Do first | Free, you control it, and it is already in your Organization schema `sameAs`. Use the medium description. Add the services list as LinkedIn "Specialties". |
 | **Bing Places** | Do first | Free. Bing feeds ChatGPT search, which matters for your AI-visibility goal more than its search share suggests. Mirrors your Google Business Profile. |
-| **Crunchbase** | Do first | Free basic profile, strong entity signal for the brand-collision problem. Use legal name Sky Lift LLC with Sky Lift Group as the brand. |
+| **Crunchbase** | Do first | Free basic profile, strong entity signal for the brand-collision problem. Use legal name Sky Lift LLC with Sky Lift LLC as the brand. |
 | **Clutch** | High | Requires verified client reviews to rank. Do not create the profile until you have at least one client willing to do a Clutch interview — an empty profile ranks nowhere and looks worse than none. |
 | **UpCity** | High | Has a free tier. Asks for service breakdown percentages — estimate honestly. |
 | **DesignRush** | Medium | Paid tiers push hard. The free listing is worth having; do not buy placement yet. |
@@ -151,7 +151,7 @@ providers. Material must be informative and non-promotional.
 > commitment.
 >
 > Usama Shahid
-> Sky Lift Group — skyliftgroup.com
+> Sky Lift LLC — skyliftllc.com
 
 **2. Contractor Magazine** — [Contributor guidelines](https://www.contractormag.com/contributors-guidelines)
 Accepts non-promotional articles, case studies, columns and opinion pieces.
@@ -180,7 +180,7 @@ AI-generated. Write and edit this one yourself.
 > 1,200–1,500 words. Original, written by me, not machine-generated.
 >
 > Usama Shahid
-> Sky Lift Group — skyliftgroup.com
+> Sky Lift LLC — skyliftllc.com
 
 **3. Plumbing & Mechanical (pmmag.com)** — check current contributor page
 **4. PHCP Pros / PHC News (phcppros.com)** — check current contributor page
@@ -206,7 +206,7 @@ AI-generated. Write and edit this one yourself.
 > guidelines?
 >
 > Usama Shahid
-> Sky Lift Group — skyliftgroup.com
+> Sky Lift LLC — skyliftllc.com
 
 ### Podcasts — guest appearances
 
@@ -246,8 +246,8 @@ electrical, roofing. Founder and operator audience.
 > they can run on Monday.
 >
 > Usama Shahid
-> Sky Lift Group — skyliftgroup.com
-> Recent writing: skyliftgroup.com/blog
+> Sky Lift LLC — skyliftllc.com
+> Recent writing: skyliftllc.com/blog
 
 **On personalizing these:** the two bracketed fields are the whole email. A
 pitch that names a real episode and a real point from it gets read; one that
@@ -279,13 +279,13 @@ marketing services. Several publish external contributors.
 > doesn't exist.
 >
 > Recent example of my writing:
-> skyliftgroup.com/blog/what-missed-calls-cost-contractors
+> skyliftllc.com/blog/what-missed-calls-cost-contractors
 >
 > Would a contributed piece be of interest, or is there a partnership route that
 > makes more sense?
 >
 > Usama Shahid
-> Sky Lift Group — skyliftgroup.com
+> Sky Lift LLC — skyliftllc.com
 
 ### Associations and local — citations and speaking
 
@@ -313,7 +313,7 @@ prominence is built from.
 > contributing to member education?
 >
 > Usama Shahid
-> Sky Lift Group — skyliftgroup.com
+> Sky Lift LLC — skyliftllc.com
 
 ### What to avoid
 

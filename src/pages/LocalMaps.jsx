@@ -30,7 +30,7 @@ const intro = {
   paragraphs: [
     [
       "Local search and maps optimization ensures your business gets discovered by nearby customers. At ",
-      { b: "Sky Lift Group" },
+      { b: "Sky Lift LLC" },
       ", we optimize your listings, keywords, and reputation to maximize local visibility.",
     ],
     "Our team focuses on Google My Business, Apple Maps, local keywords, citations, and reviews to help you stay competitive in your area.",

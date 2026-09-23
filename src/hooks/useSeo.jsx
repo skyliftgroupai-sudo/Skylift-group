@@ -61,7 +61,7 @@ export default function useSeo({
         if (image) {
             const absolute = image.startsWith("http")
                 ? image
-                : `https://www.skyliftgroup.com${image}`;
+                : `https://www.skyliftllc.com${image}`;
             setMetaByProperty("og:image", absolute);
             setMetaByName("twitter:image", absolute);
             setMetaByName("twitter:card", "summary_large_image");

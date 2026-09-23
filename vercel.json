@@ -10,7 +10,29 @@
           "value": "skyliftgroup.com"
         }
       ],
-      "destination": "https://www.skyliftgroup.com/$1",
+      "destination": "https://www.skyliftllc.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.skyliftgroup.com"
+        }
+      ],
+      "destination": "https://www.skyliftllc.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "skyliftllc.com"
+        }
+      ],
+      "destination": "https://www.skyliftllc.com/$1",
       "permanent": true
     },
     {
@@ -21,7 +43,7 @@
           "value": "skylift-group.vercel.app"
         }
       ],
-      "destination": "https://www.skyliftgroup.com/$1",
+      "destination": "https://www.skyliftllc.com/$1",
       "permanent": true
     },
     {

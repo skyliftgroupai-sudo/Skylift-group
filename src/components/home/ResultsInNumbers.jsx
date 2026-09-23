@@ -24,7 +24,7 @@ export default function ResultsInNumbers() {
             engineered with data, AI, and strategy.
           </h2>
           <p className="mt-6 text-[1.0625rem] leading-[1.7] text-[#475569]">
-            Sky Lift Group helps modern brands grow through AI-powered digital
+            Sky Lift LLC helps modern brands grow through AI-powered digital
             marketing, intelligent automation, and performance-driven
             strategies. We turn complex data into clear actions, build
             meaningful digital experiences, and deliver measurable results that

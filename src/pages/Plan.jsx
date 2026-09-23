@@ -79,7 +79,7 @@ export default function Plan() {
 
           <div className="space-y-5 text-gray-300 leading-relaxed">
             <p>
-              At <strong className="text-[#00A693]">Sky Lift Group</strong>, growth begins with
+              At <strong className="text-[#00A693]">Sky Lift LLC</strong>, growth begins with
               clarity and execution. We design data-driven strategies tailored to your brand,
               your audience, and your goals — because real results demand precision.
             </p>

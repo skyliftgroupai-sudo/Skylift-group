@@ -8,7 +8,7 @@ category: "Local SEO"
 tags: ["Local SEO", "Google Business Profile", "Home Service Marketing", "Map Pack"]
 date: "2026-07-30"
 dateModified: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/seo.webp"
 imageAlt: "Contractor reviewing local search rankings for a home service business"
 ---

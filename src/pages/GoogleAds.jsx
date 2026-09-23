@@ -31,7 +31,7 @@ const intro = {
   paragraphs: [
     [
       "Google Ads allow you to reach customers at the precise moment they are searching for products and services you offer. At ",
-      { b: "Sky Lift Group" },
+      { b: "Sky Lift LLC" },
       ", we design campaigns to attract high-quality traffic and drive measurable results.",
     ],
     "We handle everything from keyword research and ad creation to testing and scaling, ensuring your campaigns run efficiently and profitably.",

@@ -7,7 +7,7 @@ excerpt: "Unregistered business texts get filtered or blocked — including the 
 category: "SMS Marketing"
 tags: ["SMS Marketing", "Compliance", "Home Service Marketing", "CRM Automation"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/chat.webp"
 imageAlt: "Contractor checking a business text message conversation on a phone"
 ---

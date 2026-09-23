@@ -7,7 +7,7 @@ excerpt: "A customer gave you their number to book a repair. That is not the sam
 category: "SMS Marketing"
 tags: ["SMS Marketing", "Compliance", "Home Service Marketing", "Database Reactivation"]
 date: "2026-09-22"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 image: "/assets/lead.webp"
 imageAlt: "Contractor reviewing a customer contact list before sending text messages"
 ---

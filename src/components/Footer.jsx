@@ -46,10 +46,10 @@ export const Footer = () => (
     <div className="slg-container py-16 lg:py-20">
       <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4 lg:grid-cols-12 lg:gap-x-10">
         <div className="col-span-2 lg:col-span-4">
-          <Link to="/" aria-label="Sky Lift Group home">
+          <Link to="/" aria-label="Sky Lift LLC home">
             <img
               src="/assets/skyliftlogo.webp"
-              alt="Sky Lift Group"
+              alt="Sky Lift LLC"
               className="w-[160px] object-contain"
               width={612}
               height={408}
@@ -125,14 +125,14 @@ export const Footer = () => (
           <ul className="space-y-4 text-[0.9375rem] text-slate-400">
             <li className="flex items-start gap-3">
               <Mail className="mt-1 h-[18px] w-[18px] shrink-0 text-[#26A6AD]" aria-hidden="true" />
-              <a href="mailto:hello@skyliftgroup.com" className="transition-colors hover:text-[#26A6AD]">
-                hello@skyliftgroup.com
+              <a href="mailto:info@skyliftllc.com" className="transition-colors hover:text-[#26A6AD]">
+                info@skyliftllc.com
               </a>
             </li>
             <li className="flex items-start gap-3">
               <PhoneCall className="mt-1 h-[18px] w-[18px] shrink-0 text-[#26A6AD]" aria-hidden="true" />
-              <a href="tel:+17252631475" className="transition-colors hover:text-[#26A6AD]">
-                +1 (725) 263-1475
+              <a href="tel:+19049069019" className="transition-colors hover:text-[#26A6AD]">
+                +1 (904) 906-9019
               </a>
             </li>
             <li className="flex items-start gap-3">
@@ -159,8 +159,7 @@ export const Footer = () => (
     <div className="border-t border-white/10">
       <div className="slg-container flex flex-col items-center justify-between gap-4 py-6 md:flex-row">
         <p className="text-sm text-slate-500">
-          © {new Date().getFullYear()} Sky Lift LLC. All rights reserved. Sky Lift Group is a brand
-          operated by Sky Lift LLC.
+          © {new Date().getFullYear()} Sky Lift LLC. All rights reserved.
         </p>
         <ul className="flex gap-6">
           {legalLinks.map((link) => (

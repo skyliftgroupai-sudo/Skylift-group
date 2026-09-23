@@ -101,13 +101,13 @@ function buildPrompt(topic, titlesToAvoid) {
 - Working title: ${topic.title}
 - Primary keyword: ${topic.primaryKeyword}
 - Category: ${topic.category}
-- Most relevant Sky Lift Group service page to feature: ${topic.serviceLink}`
+- Most relevant Sky Lift LLC service page to feature: ${topic.serviceLink}`
     : `Pick a fresh, high-intent topic (not already covered) in one of these categories:
 Local SEO, Google Business Profile, AI Marketing, AI Automation, Google Ads,
 Meta Ads, Landing Pages, AI Chatbots, CRM Automation, Lead Generation,
 Home Service Marketing, Digital Marketing Tips, Small Business Growth.`;
 
-  return `You are the senior content strategist for Sky Lift Group (https://www.skyliftgroup.com), a digital marketing agency that helps local and home-service businesses (HVAC, roofing, plumbing, electricians, remodelers, tree services, junk removal, movers, auto detailers, medical practices, law firms) generate more leads through AI-powered marketing and automation.
+  return `You are the senior content strategist for Sky Lift LLC (https://www.skyliftllc.com), a digital marketing agency that helps local and home-service businesses (HVAC, roofing, plumbing, electricians, remodelers, tree services, junk removal, movers, auto detailers, medical practices, law firms) generate more leads through AI-powered marketing and automation.
 
 ${topicLine}
 
@@ -119,7 +119,7 @@ Write ONE original, publish-ready blog post. Requirements:
 - Open with a bold one-sentence direct answer (for featured snippets / AI Overviews) before expanding.
 - Use H2 (##), H3 (###), and H4 (####) headings, bullet lists, and at least one Markdown table.
 - Include a "## Frequently Asked Questions" section with 5-6 "### Question" headings, each answered in 2-4 sentences directly under it.
-- Naturally link to 3-5 of these Sky Lift Group service pages using Markdown links with descriptive anchor text:
+- Naturally link to 3-5 of these Sky Lift LLC service pages using Markdown links with descriptive anchor text:
 ${SERVICE_LINKS}
 - End with an H2 "## Ready to Generate More Leads for Your Business?" section, one short paragraph, and this exact CTA link on its own line: [Contact us today for a free strategy consultation.](/book)
 - Do not invent specific statistics, percentages, or study numbers. Speak in directional terms instead.
@@ -135,7 +135,7 @@ excerpt: "One punchy sentence used on blog cards"
 category: "One of the categories above"
 tags: ["Tag One", "Tag Two", "Tag Three"]
 date: "${today}"
-author: "Sky Lift Group"
+author: "Sky Lift LLC"
 imageAlt: "Descriptive alt text for the featured image"
 ---
 

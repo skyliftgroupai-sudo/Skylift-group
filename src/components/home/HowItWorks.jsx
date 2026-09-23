@@ -29,7 +29,7 @@ export default function HowItWorks() {
 
             <div className="mt-7 space-y-5 text-[1.0625rem] leading-[1.7] text-slate-300">
               <p>
-                At <strong className="text-white">Sky Lift Group</strong>,
+                At <strong className="text-white">Sky Lift LLC</strong>,
                 growth begins with clarity and execution. We design data-driven
                 strategies tailored to your brand, your audience, and your goals
                 — because real results demand precision.
