@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
+import ServiceLongform from "../components/ServiceLongform";
+import longform from "../content/services/meta-ads";
 
 const services = [
     {
@@ -197,13 +199,15 @@ const MetaAds = () => {
                                         : "text-[#00A693] border border-[#00A693] hover:bg-[#00A693] hover:text-white"
                                         }`}
                                 >
-                                    Lets Start
+                                    Let's Start
                                 </button>
                             </Link>
                         </motion.div>
                     ))}
                 </div>
             </motion.section>
+
+            <ServiceLongform content={longform} />
 
             {/* FAQ SECTION */}
             <motion.section

@@ -19,6 +19,8 @@ import { useCountUp } from "../hooks/counte";
 import { useRef } from "react";
 import CTASection from "./CtaSection";
 import useSeo from "../hooks/useSeo";
+import { ServiceSections } from "../components/ServiceSections";
+import industryLongform from "../content/industries";
 import { seoFor } from "../lib/schema";
 
 const iconClass = "h-8 w-8";
@@ -199,6 +201,8 @@ return (
         </motion.div>
       </div>
     </section>
+
+    <ServiceSections sections={industryLongform.sections} />
 
     <CTASection />
   </div>

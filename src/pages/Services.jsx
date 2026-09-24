@@ -31,7 +31,7 @@ export default function ServicesAttractive() {
           transition={{ duration: 0.8 }}
           className="relative text-white text-4xl md:text-6xl font-bold text-center"
         >
-          Our Services
+          AI Marketing and Automation Services for Home Service Businesses
         </motion.h1>
 
         <motion.p

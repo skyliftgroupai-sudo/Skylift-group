@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Users, Globe2, Feather, BarChart, Activity, Cpu, ChevronDown } from "lucide-react";
+import { MessageSquare, Star, Clock, ShieldCheck, Repeat, LineChart, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import CTASection from "./CtaSection";
 import Testimonials from "./Testionmial";
@@ -7,38 +7,40 @@ import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
+import ServiceLongform from "../components/ServiceLongform";
+import longform from "../content/services/reviews";
 
 const services = [
     {
-        icon: <Users size={34} />,  // Premium Audience & Keyword Strategy
-        title: "Premium Audience & Keyword Strategy",
-        desc: "We research high-intent audiences and top-performing keywords to target customers who are most likely to convert, ensuring outstanding results.",
+        icon: <MessageSquare size={34} />,  // Automatic review requests by text
+        title: "Automatic Requests by Text",
+        desc: "A short text with a direct link to your Google review form, sent automatically after every completed job, so nobody has to remember to ask.",
         highlight: true,
     },
     {
-        icon: <Globe2 size={34} />,  // Google Search & Display Campaigns
-        title: "Google Search & Display Campaigns",
-        desc: "Expertly managed campaigns across Search, Display, YouTube, and Gmail that deliver measurable clicks, leads, and revenue for our 5-star clients.",
+        icon: <Clock size={34} />,  // Timing tuned to the trade
+        title: "Timed for the Best Response",
+        desc: "Requests go out while the job is fresh but after the technician has left, with one polite reminder to anyone who did not respond. No more than that.",
     },
     {
-        icon: <Feather size={34} />,  // High-Impact Ad Copy & Creatives
-        title: "High-Impact Ad Copy & Creatives",
-        desc: "We craft compelling ad copy and eye-catching visuals that engage your audience and drive conversions that clients rave about.",
+        icon: <Star size={34} />,  // Google Business Profile focus
+        title: "Google Reviews First",
+        desc: "Google carries the most weight for local ranking and for the person comparing two results, so that is where the requests point by default.",
     },
     {
-        icon: <Activity size={34} />,  // Conversion Tracking & Analytics
-        title: "Conversion Tracking & Analytics",
-        desc: "Advanced tracking setup ensures every click, lead, and sale is monitored for maximum ROI and 5-star service transparency.",
+        icon: <ShieldCheck size={34} />,  // Service recovery before it goes public
+        title: "Service Recovery",
+        desc: "Where you want it, unhappy responses route to you privately first so you can fix the problem. Nobody is blocked from reviewing you publicly.",
     },
     {
-        icon: <BarChart size={34} />,  // Continuous Testing & Optimization
-        title: "Continuous Testing & Optimization",
-        desc: "We test ad variations, audience segments, and bidding strategies to improve performance and maintain exceptional client results.",
+        icon: <Repeat size={34} />,  // Monitoring and responses
+        title: "Monitoring & Responses",
+        desc: "New reviews surfaced to you with response drafts, because answering reviews is visible to every future reader deciding whether to call.",
     },
     {
-        icon: <Cpu size={34} />,  // Scaling & Budget Management
-        title: "Scaling & Budget Management",
-        desc: "We scale winning campaigns efficiently while optimizing budgets, delivering premium results for businesses that demand excellence.",
+        icon: <LineChart size={34} />,  // Reporting
+        title: "Reporting You Can Read",
+        desc: "Requests sent, reviews earned and average rating over time, alongside what it is doing to your map pack visibility.",
     },
 ];
 
@@ -68,7 +70,7 @@ const FivestarReviews = () => {
                     transition={{ duration: 0.8 }}
                     className="relative text-white text-4xl md:text-6xl font-bold text-center"
                 >
-                    5-Star Google Ads <br />
+                    5-Star Google Reviews <br />
                     <span className="text-[#00A693]"> That Deliver Results</span>
                 </motion.h1>
 
@@ -78,7 +80,7 @@ const FivestarReviews = () => {
                     transition={{ duration: 1 }}
                     className="relative text-white text-lg md:text-xl mt-4 text-center max-w-xl"
                 >
-                    Our premium Google Ads services are designed to generate high-quality leads, sales, and measurable growth that clients consistently rate 5 stars.
+                    Automated review requests that turn your satisfied customers into recent Google reviews, without anyone having to remember to ask.
                 </motion.p>
 
             </section>
@@ -103,38 +105,38 @@ const FivestarReviews = () => {
                         viewport={{ once: true }}
                     >
                         <p className="text-xs sm:text-sm tracking-wide opacity-80">
-                            RESULTS-DRIVEN GOOGLE ADVERTISING
+                            AUTOMATED REVIEW GENERATION
                         </p>
 
                         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-4 leading-tight">
-                            Smart Campaigns for
-                            <span className="text-[#00A693]"> Measurable Growth</span>
+                            More Recent Reviews,
+                            <span className="text-[#00A693]"> Asked For Automatically</span>
                         </h2>
 
                         <p className="italic text-lg sm:text-xl mt-4">
-                            Maximize your ROI with Google Ads that attract clicks, generate leads, and drive sales.
+                            The customers who were happiest are usually the ones who never got asked. This fixes that.
                         </p>
                         <div className="flex flex-wrap gap-2 sm:gap-3 mt-5">
                             <span className="px-3 py-2 sm:px-4 sm:py-2 bg-white/20 rounded-full text-xs sm:text-sm backdrop-blur">
-                                Premium Keyword Targeting
+                                Text-Based Requests
                             </span>
                             <span className="px-3 py-2 sm:px-4 sm:py-2 bg-white/20 rounded-full text-xs sm:text-sm backdrop-blur">
-                                High-Impact Ad Creatives
+                                Job-Completion Triggers
                             </span>
                             <span className="px-3 py-2 sm:px-4 sm:py-2 bg-white/20 rounded-full text-xs sm:text-sm backdrop-blur">
-                                Search & Display Campaigns
+                                Google Business Profile
                             </span>
                             <span className="px-3 py-2 sm:px-4 sm:py-2 bg-white/20 rounded-full text-xs sm:text-sm backdrop-blur">
-                                YouTube & Gmail Ads
+                                One Polite Reminder
                             </span>
                             <span className="px-3 py-2 sm:px-4 sm:py-2 bg-white/20 rounded-full text-xs sm:text-sm backdrop-blur">
-                                Conversion Tracking
+                                Review Monitoring
                             </span>
                             <span className="px-3 py-2 sm:px-4 sm:py-2 bg-white/20 rounded-full text-xs sm:text-sm backdrop-blur">
-                                Testing & Optimization
+                                Response Drafting
                             </span>
                             <span className="px-3 py-2 sm:px-4 sm:py-2 bg-white/20 rounded-full text-xs sm:text-sm backdrop-blur">
-                                Scaling & Budget Management
+                                Rating Reporting
                             </span>
                         </div>
 
@@ -148,15 +150,15 @@ const FivestarReviews = () => {
                         viewport={{ once: true }}
                     >
                         <p>
-                            Our 5-star Google Ads services help businesses reach customers at the perfect moment with precision targeting, persuasive ads, and measurable results.
+                            Reviews decide two things at once: where you show up in the Google map pack, and whether the person looking at that result calls you or the company listed below you.
                         </p>
 
                         <p>
-                            From strategy and ad creation to tracking and optimization, we manage every aspect of your campaigns to deliver the highest quality outcomes.
+                            The reason most home service businesses have twenty reviews instead of two hundred is not that customers were unhappy. It is that asking is the task that falls off when the next call is waiting.
                         </p>
 
                         <p>
-                            Every campaign is powered by data, tested continuously, and refined to ensure top-tier performance and client satisfaction.
+                            We connect the request to job completion so it happens every time, keep it to one reminder, and never buy, write or incentivize a review.
                         </p>
                     </motion.div>
                 </div>
@@ -193,13 +195,15 @@ const FivestarReviews = () => {
                                         : "text-[#00A693] border border-[#00A693] hover:bg-[#00A693] hover:text-white"
                                         }`}
                                 >
-                                    Lets Start
+                                    Let's Start
                                 </button>
                             </Link>
                         </motion.div>
                     ))}
                 </div>
             </motion.section>
+
+            <ServiceLongform content={longform} />
 
             {/* FAQ SECTION */}
             <motion.section
@@ -268,7 +272,7 @@ const FivestarReviews = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/five-star.webp" alt="TikTok ADs" className="rounded-2xl shadow-lg"
+                            <img src="/assets/five-star.webp" alt="Illustration of five-star customer reviews floating above open hands" className="rounded-2xl shadow-lg"
           width={612}
           height={308}
           loading="lazy"

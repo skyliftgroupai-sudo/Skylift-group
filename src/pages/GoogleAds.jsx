@@ -194,7 +194,7 @@ const Googleads = () => {
                                         : "text-[#00A693] border border-[#00A693] hover:bg-[#00A693] hover:text-white"
                                         }`}
                                 >
-                                    Lets Start
+                                    Let's Start
                                 </button>
                             </Link>
                         </motion.div>
@@ -271,9 +271,9 @@ const Googleads = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/tik-tok.webp" alt="TikTok ADs" className="rounded-2xl shadow-lg"
-          width={390}
-          height={260}
+                            <img src="/assets/analytics.webp" alt="Campaign performance dashboard open on a laptop" className="rounded-2xl shadow-lg"
+          width={800}
+          height={800}
           loading="lazy"
           decoding="async"
         />

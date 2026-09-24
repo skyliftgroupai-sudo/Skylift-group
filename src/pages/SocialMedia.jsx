@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
+import ServiceLongform from "../components/ServiceLongform";
+import longform from "../content/services/social-media";
 
 const services = [
     {
@@ -66,7 +68,7 @@ const SocialMediaMarketing = () => {
                     transition={{ duration: 0.8 }}
                     className="relative text-white text-4xl md:text-6xl font-bold text-center"
                 >
-                    Social Media Marketing
+                    Social Media Management for Home Service Businesses
                 </motion.h1>
 
                 <motion.p
@@ -182,13 +184,15 @@ const SocialMediaMarketing = () => {
                                         : "text-[#00A693] border border-[#00A693] hover:bg-[#00A693] hover:text-white"
                                         }`}
                                 >
-                                    Lets Start
+                                    Let's Start
                                 </button>
                             </Link>
                         </motion.div>
                     ))}
                 </div>
             </motion.section>
+
+            <ServiceLongform content={longform} />
 
             {/* FAQ SECTION */}
             <motion.section

@@ -194,7 +194,7 @@ const AIChatbot = () => {
                                         : "text-[#00A693] border border-[#00A693] hover:bg-[#00A693] hover:text-white"
                                         }`}
                                 >
-                                    Lets Start
+                                    Let's Start
                                 </button>
                             </Link>
                         </motion.div>

@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
+import ServiceLongform from "../components/ServiceLongform";
+import longform from "../content/services/content-writing";
 
 const services = [
     {
@@ -67,7 +69,7 @@ const ContentWritingServices = () => {
                     transition={{ duration: 0.8 }}
                     className="relative text-white text-4xl md:text-6xl font-bold text-center"
                 >
-                    Professional Content Writing
+                    SEO Content Writing for Contractors
                 </motion.h1>
 
                 <motion.p
@@ -182,13 +184,15 @@ const ContentWritingServices = () => {
                                         : "text-[#00A693] border border-[#00A693] hover:bg-[#00A693] hover:text-white"
                                         }`}
                                 >
-                                    Lets Start
+                                    Let's Start
                                 </button>
                             </Link>
                         </motion.div>
                     ))}
                 </div>
             </motion.section>
+
+            <ServiceLongform content={longform} />
 
             {/* FAQ SECTION */}
             <motion.section

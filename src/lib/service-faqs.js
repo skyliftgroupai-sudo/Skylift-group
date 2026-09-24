@@ -80,20 +80,28 @@ export const routeFaqs = {
   ],
   "/services/ai-workflows": [
       {
-          q: "What is AI workflow automation?",
-          a: "AI workflow automation uses artificial intelligence to handle repetitive tasks, connect systems, and execute business processes automatically, saving time and reducing human error.",
+          q: "What counts as an AI workflow?",
+          a: "An automation that handles one repetitive step without a person doing it: answering a new lead within seconds, texting back a missed call, chasing an estimate that went quiet, requesting a review when a job is marked done, and putting the record into your CRM without anyone retyping it.",
       },
       {
-          q: "Which tasks can be automated with AI?",
-          a: "Almost any repetitive task including data entry, email responses, lead routing, scheduling, document processing, customer onboarding, and reporting can be fully automated using AI.",
+          q: "Which automation should I build first?",
+          a: "Usually missed call text back or instant lead response, because that is where most home service businesses lose the most money. We build one, prove it works, then add the next. Systems built all at once tend to get abandoned all at once.",
       },
       {
-          q: "How long does setup take?",
-          a: "Most AI workflows are designed and deployed within 2 to 4 weeks, depending on complexity. We work closely with you to ensure smooth integration with your existing tools.",
+          q: "Will customers know they are talking to an automation?",
+          a: "We do not hide it when someone asks, and every automated conversation has a clear route to a real person. The messages are written to sound like your business rather than like software, but the handoff is always available.",
       },
       {
-          q: "Will AI replace my employees?",
-          a: "No. AI workflow automation handles repetitive, time-consuming tasks so your team can focus on creative, strategic, and customer-facing work that drives real business value.",
+          q: "Does this work with the software I already use?",
+          a: "In most cases, yes. We integrate your phone system, CRM or field service software, calendar and website forms rather than asking you to switch platforms. If something genuinely cannot connect, we will tell you before you commit.",
+      },
+      {
+          q: "Will this replace my office staff?",
+          a: "That is not what it is for. It handles the tasks that were falling through the cracks when your people were busy — the calls at seven in the evening, the follow-up nobody had time for. Judgment work stays with people.",
+      },
+      {
+          q: "What happens if I stop working with you?",
+          a: "You keep the system. It is documented, you can see every automation and read every message it sends, and you can turn any of it off. A setup only we can maintain is a dependency, not a service.",
       },
   ],
   "/services/lead-follow-up": [
@@ -132,38 +140,54 @@ export const routeFaqs = {
   ],
   "/services/web-design": [
       {
-          q: "What is the typical development timeline?",
-          a: "The timeline varies based on complexity, but most projects are completed within 1–4 weeks.",
+          q: "How long does a new website take?",
+          a: "Most home service sites take four to eight weeks from kickoff to launch. The build is rarely the slow part. Waiting on content, photos and feedback is, which is why we agree on those dates up front.",
       },
       {
-          q: "Do you offer post-launch support?",
-          a: "Yes. We provide maintenance plans that include updates, monitoring, and security enhancements.",
+          q: "Will I lose my Google rankings when the site is rebuilt?",
+          a: "Not if the migration is handled properly. Existing URLs are kept wherever they are worth keeping, anything that has to move gets a permanent redirect, and we compare the page inventory before and after. Sites lose rankings in a rebuild almost entirely because nobody did that step.",
       },
       {
-          q: "Will my website be optimized for SEO?",
-          a: "Yes. Every site is developed with modern SEO structure, clean markup, and fast performance.",
+          q: "Do I own the website?",
+          a: "Yes. The domain, the hosting account and the site itself are yours, and you keep all of it if you stop working with us. We will not hold a site hostage to a retainer.",
       },
       {
-          q: "Can you develop advanced or custom features?",
-          a: "Yes. We build custom modules, integrations, and tailored functionality based on your goals.",
+          q: "Can I update the site myself?",
+          a: "Yes. You should be able to change hours, add a service or post photos without filing a request. We set that up and walk your team through it before launch.",
+      },
+      {
+          q: "Do I need a full rebuild, or can my current site be fixed?",
+          a: "Often it can be fixed. If the structure is sound and the content is reasonable, improving speed, adding the missing service pages and cleaning up the conversion path is cheaper and lower risk than starting over. We will tell you which one your site needs before quoting a rebuild.",
+      },
+      {
+          q: "What happens after launch?",
+          a: "Ongoing support for updates, monitoring so problems surface before customers find them, and periodic speed checks. A website is not a project that finishes.",
       },
   ],
   "/services/reviews": [
       {
-          q: "How do your services deliver 5-star results?",
-          a: "We combine data-driven strategies, premium ad creative, and continuous optimization to ensure measurable results and high client satisfaction.",
+          q: "How does the review request actually get sent?",
+          a: "A short text with a direct link to your Google review form, triggered when a job is marked complete in your field service software, or from a simple manual trigger if you do not use one. Nobody has to remember anything.",
       },
       {
-          q: "Do you handle ad creatives and copy?",
-          a: "Yes. Every ad we create is designed to convert, backed by best practices and client feedback to maintain our 5-star reputation.",
+          q: "When is the request sent, and how many times?",
+          a: "Shortly after completion, while the job is fresh but after the technician has left, with one polite reminder to anyone who did not respond. We stop there. A second reminder annoys customers for very little gain.",
       },
       {
-          q: "How is performance tracked?",
-          a: "With Google Ads conversion tracking, Analytics, and event monitoring, every click, lead, and sale is accurately measured for transparent reporting.",
+          q: "Can you write reviews for me?",
+          a: "No. Writing, buying or incentivizing reviews violates Google's policies, it is detectable, and the penalty can be losing the listing entirely. No short-term gain is worth that risk to your business.",
       },
       {
-          q: "How soon can I expect results?",
-          a: "Most campaigns deliver insights within 2–3 weeks, with ongoing optimization to ensure top-tier results and client satisfaction.",
+          q: "Is it okay to offer a discount in exchange for a review?",
+          a: "No. Paying for a review, including with a discount or a gift card, breaks the rules of every major platform and can get reviews removed in bulk. Consistent asking works better than incentives anyway.",
+      },
+      {
+          q: "Can you stop bad reviews from going public?",
+          a: "No, and we would not try. Asking privately how a job went so you can fix a problem before the customer posts is good service and we set that up. Blocking unhappy customers from reviewing you is review gating, and it is against Google's policy.",
+      },
+      {
+          q: "How many reviews do I need?",
+          a: "Enough to be credible against the companies you actually compete with in your area, which usually means looking at the current map pack rather than at a general number. Recency matters as much as total count — fifty reviews from two years ago signal a business that has gone quiet.",
       },
   ],
   "/services/google-ads": [
@@ -236,20 +260,28 @@ export const routeFaqs = {
   ],
   "/services/meta-ads": [
       {
-          q: "Which platforms do your Meta Ads run on?",
-          a: "Our Meta Ads run across Facebook, Instagram, Messenger, and Meta Audience Network to maximize reach and performance.",
+          q: "Do Facebook ads work for home service businesses?",
+          a: "For the right services, yes. They work when demand has to be prompted — maintenance plans before winter, roof inspections after a storm, replacement offers, financing. They work poorly for emergencies, because someone with a burst pipe is searching, not scrolling.",
       },
       {
-          q: "Do you handle ad creatives and copy?",
-          a: "Yes. We design visuals, write ad copy, and create multiple variations to test and improve performance.",
+          q: "Which platforms do these ads run on?",
+          a: "Facebook and Instagram, including feeds, Stories and Reels. We place them where your audience actually is rather than spreading spend across every available surface.",
       },
       {
-          q: "How do you track conversions and results?",
-          a: "We set up Meta Pixel, event tracking, and conversion funnels to measure leads, purchases, and ROI accurately.",
+          q: "What is the best audience to start with?",
+          a: "Almost always the data you already own: your customer list, your website visitors, and lookalikes built from them. These outperform interest targeting built from scratch in most accounts we have worked on.",
       },
       {
-          q: "How long does it take to see results?",
-          a: "Most campaigns start generating insights within the first 2–3 weeks, with consistent optimization improving results over time.",
+          q: "How fast do leads need to be followed up?",
+          a: "Within minutes. Social leads go cold faster than any other source because the person was not trying to buy anything when they filled in the form. We route them straight into automated text and email follow-up so response time is measured in seconds.",
+      },
+      {
+          q: "Where does the ad creative come from?",
+          a: "Photos and short video from your own jobs, with enough variations to learn what works. Stock creative underperforms consistently and it makes the ad look like every other ad in the feed.",
+      },
+      {
+          q: "How do you measure whether it worked?",
+          a: "Cost per qualified lead and cost per booked job. Reach and impressions are not outcomes — if the campaign did not produce inquiries, it did not work however many people saw it.",
       },
   ],
   "/services/missed-call-text-back": [
@@ -288,110 +320,158 @@ export const routeFaqs = {
   ],
   "/services/one-click-campaigns": [
       {
-          q: "What are one click marketing campaigns?",
-          a: "They are pre-built, fully automated marketing campaigns you can launch instantly with a single click. We design the strategy, content, and targeting so you can deploy professional campaigns in seconds.",
+          q: "What is a one-click campaign?",
+          a: "A pre-built offer — the message, the audience segment, the landing page and the follow-up — prepared in advance so you can send it in about two minutes when the schedule looks thin. The point is that building a campaign from scratch takes a week nobody has.",
       },
       {
-          q: "Which channels do these campaigns cover?",
-          a: "Our one click campaigns can be deployed across email, SMS, WhatsApp, social media, and other channels simultaneously, ensuring maximum reach with minimal effort.",
+          q: "Can I text past customers who never opted in to marketing?",
+          a: "Not for marketing messages. Before anything sends we check how each contact entered your list and separate the ones who consented from the ones who did not. Telling you that is more useful than a larger send that puts your business at risk.",
       },
       {
-          q: "Can I customize the campaigns for my brand?",
-          a: "Absolutely. Every template is fully customizable with your branding, voice, and specific offers, so each campaign feels uniquely yours while still launching in just one click.",
+          q: "How often should I send?",
+          a: "Less often than you would think. A list contacted too frequently stops responding, and rebuilding it costs far more than the extra sends were worth. For most trades a handful of well-timed campaigns a year outperforms monthly blasts.",
       },
       {
-          q: "How quickly can I see results?",
-          a: "Most clients see engagement within hours of launching a campaign, with measurable conversions and ROI typically visible within the first week of deployment.",
+          q: "What if a campaign books more work than I can handle?",
+          a: "We size the send to your capacity and can release it in batches. It is better to send to a quarter of the list and book it out than to burn the whole list on a week you cannot service.",
+      },
+      {
+          q: "Which channels do the campaigns use?",
+          a: "Text and email, with the same offer reflected on a landing page. Text gets read, email carries detail, and replies route into your normal follow-up so an interested customer gets a real conversation.",
+      },
+      {
+          q: "How is this different from database reactivation?",
+          a: "Database reactivation is a focused project to win back customers who have gone quiet, usually run once with careful segmentation. One-click campaigns are the ongoing library you send from afterwards, including reactivation sends as one of the options.",
       },
   ],
   "/services/ppc-management": [
       {
-          q: "Which platforms do you manage PPC campaigns on?",
-          a: "We run campaigns on Google Ads, Microsoft Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, and more depending on your audience.",
+          q: "What should I budget for paid search?",
+          a: "It depends on your trade and how competitive your area is — clicks in HVAC and plumbing are expensive because the jobs are valuable. Rather than quote a figure that would be a guess, we look at your service area and current keyword costs before recommending anything.",
       },
       {
-          q: "Do you handle ad creation and creatives?",
-          a: "Yes, we create ad copies, banners, videos, and other creatives to boost engagement and conversions.",
+          q: "Do I own the ad account?",
+          a: "Yes. The account and its full history stay yours, and you keep both if you leave. We will not run your spend inside an agency container you cannot take with you.",
       },
       {
-          q: "Can you optimize campaigns for better ROI?",
-          a: "Absolutely. We continuously monitor, adjust bids, and optimize targeting to maximize results.",
+          q: "How is this different from Local Services Ads?",
+          a: "Local Services Ads are the Google Guaranteed listings above the regular ads, charged per lead rather than per click. Where they are available for your trade they often produce cheaper leads, so we help you get set up and compare the two honestly instead of defaulting to whichever we manage.",
       },
       {
-          q: "Do you provide reports for PPC campaigns?",
-          a: "Yes, detailed performance reports track clicks, conversions, costs, and ROI to help you make informed decisions.",
+          q: "How do you know which calls came from ads?",
+          a: "Call tracking numbers tied to each campaign, with the conversion data fed back into the account so bidding optimizes toward booked work rather than clicks. Without that you cannot tell which half of the budget is working.",
+      },
+      {
+          q: "Why do negative keywords matter so much?",
+          a: "Because without them you pay for searches that will never hire you — people looking for DIY instructions, job listings or training courses. Reviewing the actual search terms every week is the unglamorous work that separates accounts that improve from accounts that plateau.",
+      },
+      {
+          q: "Should I run ads or invest in SEO?",
+          a: "Ads if you need calls this month. SEO so that a year from now you are not renting all of your traffic. Most home service businesses should be doing both, weighted toward whichever gap is more urgent.",
       },
   ],
   "/services/seo": [
       {
-          q: "How long does SEO take to show results?",
-          a: "SEO is a long-term strategy. You can typically see improvements within 3-6 months depending on competition.",
+          q: "How long does local SEO take to show results?",
+          a: "For most home service businesses, early movement shows up in three to six months and meaningful change takes six to twelve. Technical fixes can move things faster, and a site with no service pages at all often sees the largest early gains. Anyone promising results in thirty days is either describing a term nobody searches for or is about to disappoint you.",
       },
       {
-          q: "Do you provide monthly reports?",
-          a: "Yes, we deliver detailed monthly reports covering rankings, traffic, and progress.",
+          q: "Should I do SEO or run ads first?",
+          a: "If you need calls this month, ads. SEO does not produce leads on a schedule you control, and starving a business while you wait for it is bad advice. The usual answer is both: ads for the volume now, SEO so that in a year you are not renting all of your traffic.",
       },
       {
-          q: "Can you help with local SEO?",
-          a: "Absolutely. We optimize Google Business Profile, local keywords, and maps visibility for your business.",
+          q: "How many service pages do I actually need?",
+          a: "One for each job you genuinely want more of. Not one per keyword variation. If you do drain cleaning, water heater replacement and repiping, that is three pages, each written properly, rather than one services page mentioning all three in a list.",
       },
       {
-          q: "Do you offer SEO for e-commerce websites?",
-          a: "Yes. We optimize product pages, category pages, and integrate structured data to improve search visibility.",
+          q: "Do you build a page for every town I serve?",
+          a: "Only where you genuinely work and there is something specific to say about working there. Spinning out fifty near-identical pages with the town name swapped is a well-known pattern that tends not to earn rankings and can drag on the rest of the site.",
+      },
+      {
+          q: "Will you guarantee a number one ranking?",
+          a: "No, and we would be careful with anyone who does. Nobody outside Google controls the ranking. What we can commit to is the work, the reporting, and telling you honestly when something is not working.",
+      },
+      {
+          q: "Do you do SEO for e-commerce or national brands?",
+          a: "Our work is built around local home service businesses, and that is what we are good at. If you sell nationally online, another agency will serve you better and we will say so on the first call.",
       },
   ],
   "/services/social-media": [
       {
+          q: "Will social media actually bring me leads?",
+          a: "Rarely on its own. It is not where demand for home services is created, because nobody decides they need a plumber from a post. What it does is close the gap between a homeowner finding you and calling you, and keep you in front of past customers so the next job comes back to you.",
+      },
+      {
           q: "Which platforms do you manage?",
-          a: "We manage Facebook, Instagram, LinkedIn, Twitter, TikTok, and YouTube depending on your target audience.",
+          a: "Facebook and Instagram for most home service businesses, because that is where homeowners check on local companies. We will tell you if a platform is not worth your time rather than managing it for the sake of the report.",
       },
       {
-          q: "Do you create content for our social accounts?",
-          a: "Yes, we provide graphics, videos, stories, and captions tailored to your brand voice.",
+          q: "Where do the photos come from?",
+          a: "Your jobs. The hardest part of contractor social media is getting pictures off your crews' phones, so we set up a way for them to send photos in seconds. Stock imagery is obvious to anyone looking and it does not build trust.",
       },
       {
-          q: "Do you run paid ad campaigns?",
-          a: "Absolutely. We create, monitor, and optimize ad campaigns to maximize ROI and conversions.",
+          q: "How often do you post?",
+          a: "Enough to look active, which for most trades is a few times a week. Consistency matters more than volume. An account posting twice a week for a year beats one that posted daily for a month and stopped.",
       },
       {
-          q: "Will I get performance reports?",
-          a: "Yes, detailed monthly reports show audience growth, engagement, reach, and ad performance.",
+          q: "Do you respond to comments and messages?",
+          a: "Yes, and we route message inquiries into the same follow-up system as your calls and forms. An unanswered message on a Saturday is a lost job.",
+      },
+      {
+          q: "Do you buy followers or engagement?",
+          a: "No. It is visible to anyone who looks closely, it produces no customers, and it undermines the credibility the account exists to build.",
       },
   ],
   "/services/tiktok-ads": [
       {
-          q: "Which platforms do your TikTok Ads run on?",
-          a: "Our TikTok Ads run on TikTok feeds, stories, and in-feed video placements to maximize reach and engagement.",
+          q: "Do TikTok ads work for home service businesses?",
+          a: "For some. The platform suits visual, transformational work — junk removal, pressure washing, restoration, remodeling — and it is strong for recruiting. It suits emergency HVAC or plumbing repair sold to older homeowners much less well.",
       },
       {
-          q: "Do you handle ad creatives and copy?",
-          a: "Yes. We create engaging TikTok videos, captions, and multiple variations to test and improve campaign performance.",
+          q: "Should I be spending here at all?",
+          a: "Often not yet. If your Google Ads account still has no negative keyword list, or your site has no service pages, that is where the next dollar belongs. We would rather tell you the channel is wrong for you now than take the budget.",
       },
       {
-          q: "How do you track conversions and results?",
-          a: "We set up TikTok Pixel, conversion events, and detailed analytics to track leads, purchases, and ROI accurately.",
+          q: "What do we have to film?",
+          a: "Vertical video shot on a phone, showing real work. Polished commercial-style ads are ignored on this platform — the format punishes anything that looks bought. We direct what to capture on site so it does not become a production project.",
       },
       {
-          q: "How long does it take to see results?",
-          a: "Most campaigns generate insights within 2–3 weeks, with optimization improving engagement and conversions over time.",
+          q: "How much should I test with before deciding?",
+          a: "Enough to test several creative angles rather than one video, at modest spend. Creative is the variable that decides results here, so it is the variable that gets tested. One video failing tells you nothing.",
+      },
+      {
+          q: "Can TikTok help with hiring?",
+          a: "Often more reliably than with customers. Reaching working tradespeople is a genuine strength of the platform, and for many contractors finding techs is harder than finding jobs.",
+      },
+      {
+          q: "How do you report results?",
+          a: "Cost per qualified lead compared against your other channels. Views are not calls. If it loses against paid search, we say so and move the budget.",
       },
   ],
   "/services/content-writing": [
       {
-          q: "Do you provide SEO-optimized content?",
-          a: "Yes, all content is written with SEO best practices in mind to improve search engine visibility.",
+          q: "Do you use AI to write the content?",
+          a: "We use AI tools for research and outlines. We do not publish generated text under your name. Tools do not know what your techs find when they open up a twenty-year-old system, and pages that read like they were generated do not earn trust from a homeowner about to spend real money.",
       },
       {
-          q: "Can you handle social media content?",
-          a: "Absolutely, we create posts, captions, and graphics tailored to your social media platforms.",
+          q: "How long should a service page be?",
+          a: "As long as it takes to answer the question completely and no longer. Some pages need six hundred words, some need two thousand. Padding a page to hit a number makes readers leave in the middle of it, which is worse than being short.",
       },
       {
-          q: "Do you offer content strategy services?",
-          a: "Yes, we help plan and structure content to align with your marketing goals and audience needs.",
+          q: "How much of my time does this take?",
+          a: "Usually one call per batch of pages. The details that make content worth reading come from the people doing the work, so we interview you rather than writing from a template. After that, review and approval.",
       },
       {
-          q: "How do you ensure content quality?",
-          a: "Our team of professional writers researches thoroughly and edits rigorously to maintain high-quality standards.",
+          q: "How often should we publish?",
+          a: "Less often than most agencies suggest. One genuinely useful page a month beats four written to fill a schedule. The right answer depends on how many service pages you are still missing, because those come first.",
+      },
+      {
+          q: "Will the content be original?",
+          a: "Yes, written for your business specifically. We do not duplicate the same paragraph across pages with the service or the town swapped out, and we do not reuse copy between clients.",
+      },
+      {
+          q: "Do you write location pages?",
+          a: "Only for areas you actually serve, and only where there is something specific to say. A page that exists purely to hold a place name does not help you.",
       },
   ],
   "/faq": [

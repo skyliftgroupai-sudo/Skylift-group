@@ -18,6 +18,8 @@ import {
     MessageCircle,
     Zap,
     Phone,
+    MessageSquare,
+    Database,
 } from "lucide-react";
 
 export default function OurService() {
@@ -121,6 +123,18 @@ export default function OurService() {
             link: "/services/one-click-campaigns",
             desc: "Launch complete marketing campaigns instantly with pre-built, proven systems.",
         },
+        {
+            icon: <MessageSquare className="h-7 w-7 text-white" />,
+            title: "SMS Marketing",
+            link: "/services/sms-marketing",
+            desc: "Text message campaigns, reminders and review requests, with consent and A2P 10DLC handled.",
+        },
+        {
+            icon: <Database className="h-7 w-7 text-white" />,
+            title: "Database Reactivation",
+            link: "/services/database-reactivation",
+            desc: "Turn the customer list you already own into booked jobs without buying a single click.",
+        },
     ];
 
 
@@ -195,8 +209,8 @@ export default function OurService() {
                                 to={service.link}
                                 className="inline-flex items-center text-[#00A693] font-medium cursor-pointer"
                             >
-                                Lets Start
-                                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
+                                Explore {service.title}
+                                <ArrowRight className="ml-2 h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-2" />
                             </Link>
 
                             <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-[#00A693]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>

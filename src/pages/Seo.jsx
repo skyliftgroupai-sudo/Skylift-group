@@ -15,6 +15,8 @@ import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
+import ServiceLongform from "../components/ServiceLongform";
+import longform from "../content/services/seo";
 
 const services = [
     {
@@ -74,7 +76,7 @@ const Seo = () => {
                     transition={{ duration: 0.8 }}
                     className="relative text-white text-4xl md:text-6xl font-bold text-center"
                 >
-                    SEO & Digital Marketing
+                    Local SEO for Contractors and Home Service Companies
                 </motion.h1>
 
                 <motion.p
@@ -181,13 +183,15 @@ const Seo = () => {
                                         : "text-[#00A693] border border-[#00A693] hover:bg-[#00A693] hover:text-white"
                                         }`}
                                 >
-                                    Lets Start
+                                    Let's Start
                                 </button>
                             </Link>
                         </motion.div>
                     ))}
                 </div>
             </motion.section>
+
+            <ServiceLongform content={longform} />
 
             {/* FAQ SECTION */}
             <motion.section
@@ -256,7 +260,7 @@ const Seo = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/seo-side.webp" alt="Seo" className="rounded-2xl shadow-lg"
+                            <img src="/assets/seo-side.webp" alt="Illustration of SEO growth, with rising charts rendered above a tablet" className="rounded-2xl shadow-lg"
           width={612}
           height={375}
           loading="lazy"
