@@ -271,9 +271,9 @@ const Googleads = () => {
                         className="flex items-center justify-center"
                     >
                         <div className="w-full h-80 flex items-center justify-center shadow-md">
-                            <img src="/assets/analytics.webp" alt="Campaign performance dashboard open on a laptop" className="rounded-2xl shadow-lg"
-          width={800}
-          height={800}
+                            <img src="/assets/analytics-dashboard.webp" alt="Campaign performance dashboard open on a laptop" className="rounded-2xl shadow-lg"
+          width={640}
+          height={640}
           loading="lazy"
           decoding="async"
         />
