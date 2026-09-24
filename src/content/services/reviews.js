@@ -1,7 +1,7 @@
 export default {
   route: "/services/reviews",
   directAnswer:
-    "Review generation is the work of making sure a satisfied customer actually leaves the review, instead of meaning to and forgetting. For a home service business it is one of the highest-return things you can automate, because reviews do two jobs at once: they influence where you rank in the Google map pack, and they decide whether the person looking at that result calls you or the company below you. The mechanism that works is simple and boring — an automatic text to the customer shortly after the job is finished, with a direct link to the review form, sent every time without anyone having to remember.",
+    "Review generation is the work of making sure a satisfied customer actually leaves the review, instead of meaning to and forgetting. For a home service business it is one of the more reliable things to automate, because reviews do two jobs at once: they influence where you rank in the Google map pack, and they decide whether the person looking at that result calls you or the company below you. The mechanism that works is simple and boring — an automatic text to the customer shortly after the job is finished, with a direct link to the review form, sent every time without anyone having to remember.",
   sections: [
     {
       h2: "Why asking manually does not work",
@@ -14,7 +14,7 @@ export default {
     {
       h2: "How the automation works",
       steps: [
-        { title: "Trigger from job completion", body: "The request fires when a job is marked complete in your field service software, or from a simple manual trigger if you do not use one. No one has to remember anything." },
+        { title: "Trigger from job completion", body: "The request fires on job completion — from your field service software where it can be connected, or from a simple manual trigger where it cannot. Either way nobody has to remember to ask." },
         { title: "Text first, email as backup", body: "Text messages get read. The message is short, personal, from your business name, and contains one direct link to your Google review form." },
         { title: "Time it correctly", body: "Shortly after completion, while the relief is fresh, but not while the technician is still in the driveway. We tune the delay for your type of work." },
         { title: "One polite reminder", body: "A single follow-up to people who did not respond. One reminder recovers a meaningful share. More than one annoys customers, so we stop there." },
@@ -34,25 +34,14 @@ export default {
       ],
     },
     {
-      h2: "What we will not do",
+      h2: "What we will not do to get reviews",
       body: [
         "We will not write, buy or fabricate reviews. It violates Google's policies, it is detectable, and the penalties include losing the listing outright. No short-term gain justifies that risk to your business.",
         "We will not offer incentives in exchange for reviews. Paying for a review, including with a discount or a gift card, breaks the rules of every major platform and can get reviews removed in bulk.",
         "We will not filter out negative feedback from the public. Asking privately how a job went so you can fix a problem is good service. Blocking unhappy customers from reviewing you is review gating, and it is against Google's policy.",
         "We will not keyword-stuff your business name to boost map rankings. It is a guideline violation, it is the most commonly reported one, and suspensions from it are painful to reverse.",
       ],
-    },
-    {
-      h2: "Industries we automate reviews for",
-      industries: [
-        { name: "HVAC", body: "High job volume in season, which makes automation the difference between dozens of reviews and none." },
-        { name: "Plumbing", body: "Emergency work produces genuinely grateful customers, and they are the easiest reviews you will ever get if you ask in time." },
-        { name: "Roofing", body: "Low job frequency and high value, so every completed job matters and none should be missed." },
-        { name: "Electrical", body: "A mix of small calls and large projects, both worth requesting." },
-        { name: "Junk removal", body: "Very high job volume, where a completion-triggered request compounds quickly." },
-        { name: "General contracting", body: "Long projects where the right moment to ask is at final walkthrough, not at some fixed interval." },
-      ],
-    },
+    }
   ],
   related: [
     { to: "/services/local-maps", label: "Google Maps Optimization", note: "What the reviews feed into." },

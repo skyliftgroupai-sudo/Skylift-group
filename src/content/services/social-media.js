@@ -8,7 +8,7 @@ export default {
       body: [
         "It does not usually generate cold demand. Nobody wakes up wanting a new water heater because they saw a post. Demand for home services is created by things breaking, and it gets captured in search and ads.",
         "What it does do is close the gap between finding you and calling you. A homeowner who has your quote in hand will look you up. A page with recent job photos, a few reviews and visible activity settles the question. A page last updated two years ago raises it.",
-        "The second job is repeat and referral work. Past customers who see you occasionally think of you when the next thing breaks, and they are the ones who pass your name along in a neighborhood group. That is the cheapest work you will ever get.",
+        "The second job is repeat and referral work. Past customers who see you occasionally think of you when the next thing breaks, and they are the ones who pass your name along in a neighborhood group. Repeat and referral work is usually the least expensive work a contractor gets.",
       ],
     },
     {
@@ -29,30 +29,19 @@ export default {
         { title: "Content from your own jobs", body: "Real photos of real work. We build the collection process, not just the posting." },
         { title: "Community engagement", body: "Replying to comments and messages promptly, because an unanswered message on a Saturday is a lost job." },
         { title: "Review amplification", body: "Turning your best Google reviews into posts, which is both content and social proof." },
-        { title: "Local group awareness", body: "Guidance on where and how it is appropriate to participate in neighborhood groups, which drive more contractor referrals than any paid channel." },
-        { title: "Paid amplification when it fits", body: "Boosting a post that is already performing is often the cheapest paid reach available. Covered in more depth on our Facebook ads page." },
+        { title: "Local group awareness", body: "Guidance on where and how it is appropriate to take part in neighborhood groups, and where posting will do more harm than good." },
+        { title: "Paid amplification when it fits", body: "Putting budget behind a post that is already performing is usually cheaper than building a campaign around untested creative. Covered in more depth on our Facebook ads page." },
       ],
     },
     {
-      h2: "What we will not do",
+      h2: "What we will not post",
       body: [
         "We will not buy followers or engagement. It is visible to anyone who looks, it does not produce customers, and it damages the credibility the account exists to build.",
         "We will not post generic stock photos and captions that could belong to any company in the country. That kind of feed is worse than an empty one, because it tells a visitor nobody is really there.",
         "We will not fabricate customer stories or testimonials. Anything presented as a customer's words has to come from a customer.",
         "We will not report follower growth as a result. If the account gained two thousand followers and produced no inquiries, that is not a win.",
       ],
-    },
-    {
-      h2: "Industries we manage accounts for",
-      industries: [
-        { name: "HVAC", body: "Seasonal timing works well here — maintenance reminders ahead of the first cold week reach people before the rush." },
-        { name: "Plumbing", body: "Before-and-after content performs, and the audience is mostly existing customers who will need you again." },
-        { name: "Roofing", body: "Highly visual work and a long consideration period, which is exactly the case where a credible page changes the outcome." },
-        { name: "Electrical", body: "Explaining common safety and capacity questions builds the authority that wins the larger jobs." },
-        { name: "Junk removal", body: "Transformation photos are unusually effective and cost nothing to collect." },
-        { name: "General contracting", body: "Project progress content, which gives a steady supply of posts without inventing anything." },
-      ],
-    },
+    }
   ],
   related: [
     { to: "/services/meta-ads", label: "Facebook & Instagram Ads", note: "The paid side of the same platforms." },

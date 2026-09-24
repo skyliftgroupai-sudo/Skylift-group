@@ -1,7 +1,7 @@
 export default {
   route: "/services/one-click-campaigns",
   directAnswer:
-    "A one-click campaign is a pre-built offer — the message, the audience segment, the landing page and the follow-up — that you can send to your existing customer list whenever you need work. You pick the campaign, you approve it, it goes out. It exists because the list you already own is the cheapest source of booked jobs available to a home service business, and because the reason most contractors never use it is that building a campaign from scratch takes a week they do not have. When the schedule looks thin on a Tuesday, a campaign that takes two minutes to send is a campaign that actually gets sent.",
+    "A one-click campaign is a pre-built offer — the message, the audience segment, the landing page and the follow-up — that you can send to your existing customer list whenever you need work. You pick the campaign, you approve it, it goes out. It exists because the list you already own is usually the least expensive source of booked jobs a home service business has, and because the reason most contractors never use it is that building a campaign from scratch takes a week they do not have. When the schedule looks thin on a Tuesday, a campaign that takes two minutes to send is a campaign that actually gets sent.",
   sections: [
     {
       h2: "Why the list you already own is the best one",
@@ -41,18 +41,7 @@ export default {
         "Every message carries a working opt-out, opt-outs are honored immediately and permanently, and the records are kept.",
         "We will not send at a frequency that burns the list. A list contacted too often stops responding, and rebuilding it costs far more than the extra sends were worth.",
       ],
-    },
-    {
-      h2: "Industries we build campaign libraries for",
-      industries: [
-        { name: "HVAC", body: "The clearest fit, with two natural pre-season windows a year and a maintenance plan worth promoting." },
-        { name: "Plumbing", body: "Water heater age, drain maintenance and fixture upgrades give plenty of reasons to reach out." },
-        { name: "Roofing", body: "Inspection campaigns after weather events, and follow-up on estimates that stalled." },
-        { name: "Electrical", body: "Panel upgrades, EV chargers and safety inspections promoted to a customer base that already trusts you." },
-        { name: "Junk removal", body: "Seasonal cleanout campaigns to past customers, which convert quickly and cost nothing to send." },
-        { name: "General contracting", body: "Reaching past clients about the next phase of work they talked about and never scheduled." },
-      ],
-    },
+    }
   ],
   related: [
     { to: "/services/database-reactivation", label: "Database Reactivation", note: "The deeper version of the same idea." },

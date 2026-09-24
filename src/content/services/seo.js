@@ -30,7 +30,7 @@ export default {
         { title: "Google Business Profile", body: "Categories, service lists, service area, photos and posts, kept consistent with the site. Covered in more depth on our Google Maps page." },
         { title: "Review generation", body: "A steady flow of recent, real reviews, requested automatically after work is completed." },
         { title: "Internal linking", body: "Making sure every page is reachable, and that related services link to each other so authority moves through the site instead of pooling on the homepage." },
-        { title: "Reporting you can read", body: "A monthly view of what changed, what moved and what we are doing next, in plain language." },
+        { title: "Reporting you can read", body: "What changed, what moved and what we are doing next, written in plain language rather than as a keyword position dump." },
       ],
     },
     {
@@ -41,18 +41,7 @@ export default {
         "We will not publish fifty thin location pages to fill a sitemap. If we build a page for a city, it is because you genuinely work there and there is something specific to say about working there.",
         "We will not report on rankings for your own company name and call it growth. Branded search was already yours.",
       ],
-    },
-    {
-      h2: "Industries we do this for",
-      industries: [
-        { name: "HVAC", body: "Seasonal demand swings hard, so the work is about being ranked before the first heat wave rather than during it." },
-        { name: "Plumbing", body: "Emergency searches convert immediately and forgive nothing. Speed, clarity and a visible phone number matter as much as the ranking." },
-        { name: "Roofing", body: "High-ticket, heavily researched work where depth on the page and review credibility decide whether the call happens." },
-        { name: "Electrical", body: "A mix of urgent calls and planned upgrades, each needing its own page rather than one shared services list." },
-        { name: "Junk removal", body: "Proximity-driven and competitive on price, where map pack presence usually matters more than a website ranking." },
-        { name: "General contracting", body: "Broad service mixes where the main gain is usually splitting one overloaded services page into the jobs you actually want." },
-      ],
-    },
+    }
   ],
   related: [
     { to: "/services/local-maps", label: "Google Maps Optimization", note: "The map pack side of local search." },

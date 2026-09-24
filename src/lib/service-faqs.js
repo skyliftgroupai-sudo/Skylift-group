@@ -93,15 +93,15 @@ export const routeFaqs = {
       },
       {
           q: "Does this work with the software I already use?",
-          a: "In most cases, yes. We integrate your phone system, CRM or field service software, calendar and website forms rather than asking you to switch platforms. If something genuinely cannot connect, we will tell you before you commit.",
+          a: "It depends what you use. Most mainstream phone systems, CRMs and field service platforms can be connected, but the only honest answer is to check yours specifically before anyone commits to anything. If a piece of it genuinely cannot connect, you should hear that before you sign, not after.",
       },
       {
           q: "Will this replace my office staff?",
           a: "That is not what it is for. It handles the tasks that were falling through the cracks when your people were busy — the calls at seven in the evening, the follow-up nobody had time for. Judgment work stays with people.",
       },
       {
-          q: "What happens if I stop working with you?",
-          a: "You keep the system. It is documented, you can see every automation and read every message it sends, and you can turn any of it off. A setup only we can maintain is a dependency, not a service.",
+          q: "What does it take to keep this running once it is built?",
+          a: "Less than building it, but not nothing. Messages get stale, offers change, and a follow-up sequence written for last spring will not fit this one. Automations need reviewing periodically rather than being set up once and forgotten.",
       },
   ],
   "/services/lead-follow-up": [
@@ -141,15 +141,15 @@ export const routeFaqs = {
   "/services/web-design": [
       {
           q: "How long does a new website take?",
-          a: "Most home service sites take four to eight weeks from kickoff to launch. The build is rarely the slow part. Waiting on content, photos and feedback is, which is why we agree on those dates up front.",
+          a: "It depends on how many service pages the site needs and how quickly content, photos and feedback come back. The build is rarely the slow part. We agree a schedule at the start of the project rather than quoting a standard number here.",
       },
       {
           q: "Will I lose my Google rankings when the site is rebuilt?",
           a: "Not if the migration is handled properly. Existing URLs are kept wherever they are worth keeping, anything that has to move gets a permanent redirect, and we compare the page inventory before and after. Sites lose rankings in a rebuild almost entirely because nobody did that step.",
       },
       {
-          q: "Do I own the website?",
-          a: "Yes. The domain, the hosting account and the site itself are yours, and you keep all of it if you stop working with us. We will not hold a site hostage to a retainer.",
+          q: "What usually slows a website project down?",
+          a: "Content and photos, almost every time. The design and build move quickly; waiting three weeks for someone to find the job photos does not. Agreeing early on who is supplying what is the single biggest thing that keeps a site on schedule.",
       },
       {
           q: "Can I update the site myself?",
@@ -160,14 +160,14 @@ export const routeFaqs = {
           a: "Often it can be fixed. If the structure is sound and the content is reasonable, improving speed, adding the missing service pages and cleaning up the conversion path is cheaper and lower risk than starting over. We will tell you which one your site needs before quoting a rebuild.",
       },
       {
-          q: "What happens after launch?",
-          a: "Ongoing support for updates, monitoring so problems surface before customers find them, and periodic speed checks. A website is not a project that finishes.",
+          q: "How will I know whether the new site is actually working?",
+          a: "By watching calls and form submissions rather than compliments about the design. Tracking is set up as part of the build so the before-and-after is measurable, and so you can see which pages are producing work and which are just sitting there.",
       },
   ],
   "/services/reviews": [
       {
           q: "How does the review request actually get sent?",
-          a: "A short text with a direct link to your Google review form, triggered when a job is marked complete in your field service software, or from a simple manual trigger if you do not use one. Nobody has to remember anything.",
+          a: "A short text with a direct link to your Google review form, triggered by job completion — from your field service software where it can be connected, or from a simple manual trigger where it cannot. Either way it stops depending on someone remembering.",
       },
       {
           q: "When is the request sent, and how many times?",
@@ -269,7 +269,7 @@ export const routeFaqs = {
       },
       {
           q: "What is the best audience to start with?",
-          a: "Almost always the data you already own: your customer list, your website visitors, and lookalikes built from them. These outperform interest targeting built from scratch in most accounts we have worked on.",
+          a: "Almost always the data you already own: your customer list, your website visitors, and lookalikes built from them. An audience built from people who have already dealt with you starts from a warmer position than one assembled out of interest categories.",
       },
       {
           q: "How fast do leads need to be followed up?",
@@ -350,8 +350,8 @@ export const routeFaqs = {
           a: "It depends on your trade and how competitive your area is — clicks in HVAC and plumbing are expensive because the jobs are valuable. Rather than quote a figure that would be a guess, we look at your service area and current keyword costs before recommending anything.",
       },
       {
-          q: "Do I own the ad account?",
-          a: "Yes. The account and its full history stay yours, and you keep both if you leave. We will not run your spend inside an agency container you cannot take with you.",
+          q: "Should I let Google use broad match?",
+          a: "Only with a negative keyword list that is actually maintained, and only once conversion tracking is reliable enough to steer it. Broad match with neither is the fastest way to spend a month's budget on searches from people who will never hire you.",
       },
       {
           q: "How is this different from Local Services Ads?",
@@ -363,7 +363,7 @@ export const routeFaqs = {
       },
       {
           q: "Why do negative keywords matter so much?",
-          a: "Because without them you pay for searches that will never hire you — people looking for DIY instructions, job listings or training courses. Reviewing the actual search terms every week is the unglamorous work that separates accounts that improve from accounts that plateau.",
+          a: "Because without them you pay for searches that will never hire you — people looking for DIY instructions, job listings or training courses. Reading the actual search terms report regularly, and adding to the negative list from it, is the unglamorous work that keeps an account improving.",
       },
       {
           q: "Should I run ads or invest in SEO?",
@@ -373,7 +373,7 @@ export const routeFaqs = {
   "/services/seo": [
       {
           q: "How long does local SEO take to show results?",
-          a: "For most home service businesses, early movement shows up in three to six months and meaningful change takes six to twelve. Technical fixes can move things faster, and a site with no service pages at all often sees the largest early gains. Anyone promising results in thirty days is either describing a term nobody searches for or is about to disappoint you.",
+          a: "Longer than anyone wants, and the honest answer is months rather than weeks. How long depends on how competitive your area is, how much of the groundwork is missing, and whether the site has any service pages at all to begin with. What we will not do is quote you a date, because nobody outside Google is in a position to promise one.",
       },
       {
           q: "Should I do SEO or run ads first?",
@@ -459,7 +459,7 @@ export const routeFaqs = {
       },
       {
           q: "How much of my time does this take?",
-          a: "Usually one call per batch of pages. The details that make content worth reading come from the people doing the work, so we interview you rather than writing from a template. After that, review and approval.",
+          a: "Less than writing it yourself, but not nothing. The details that make a page worth reading come from the people doing the work, so there is an interview stage before writing and a review stage after it.",
       },
       {
           q: "How often should we publish?",

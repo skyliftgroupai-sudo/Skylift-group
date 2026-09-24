@@ -19,7 +19,7 @@ export default {
         { title: "Write the answer first", body: "The page opens with the direct answer to the question it is about, then goes into detail. A reader skimming on a phone should get what they came for in the first paragraph." },
         { title: "Structure for scanning", body: "Real headings that describe what is under them, short paragraphs, and lists where a list is genuinely clearer than prose." },
         { title: "Link it into the site", body: "New pages linked from related existing pages and back again, so they get crawled and so readers move deeper instead of leaving." },
-        { title: "Revisit what underperforms", body: "Pages that earn impressions but no clicks usually have a title problem. Pages that earn neither usually have a topic problem. Both are fixable, and we check." },
+        { title: "Revisit what underperforms", body: "Pages that are not performing get looked at again rather than left alone. Whether the cause is the title, the topic, the depth or the competition is something to diagnose from the data, not to assume." },
       ],
     },
     {
@@ -34,25 +34,14 @@ export default {
       ],
     },
     {
-      h2: "What we will not do",
+      h2: "Where we draw the line",
       body: [
         "We will not pad a page to a word count. If the answer takes six hundred words, the page is six hundred words. Inflated content is worse than short content because readers leave in the middle of it.",
         "We will not invent statistics, case study numbers or customer quotes. If a claim appears on your site it has to be something you can stand behind, because eventually a customer will ask.",
         "We will not publish generic AI output under your name. Tools are useful for research and outlines. They do not know what your techs find when they open up a twenty-year-old system, and pages that read like they were generated do not build trust with a homeowner about to spend real money.",
         "We will not duplicate the same paragraph across pages with the service or town swapped out.",
       ],
-    },
-    {
-      h2: "Industries we write for",
-      industries: [
-        { name: "HVAC", body: "Repair versus replace, system sizing, seasonal timing — the decisions homeowners research hardest." },
-        { name: "Plumbing", body: "Urgent problems where the page has to be useful in the first two sentences or not at all." },
-        { name: "Roofing", body: "Long-consideration work where depth, process detail and honest cost discussion do the selling." },
-        { name: "Electrical", body: "Panel capacity, EV charger installs, code questions — technical topics explained without condescension." },
-        { name: "Junk removal", body: "Short, practical pages about what can and cannot be taken, and how pricing works." },
-        { name: "General contracting", body: "Splitting a broad service mix into pages that each stand on their own." },
-      ],
-    },
+    }
   ],
   related: [
     { to: "/services/seo", label: "Local SEO", note: "What the content is written to support." },

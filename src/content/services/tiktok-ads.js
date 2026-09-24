@@ -35,12 +35,12 @@ export default {
       ],
     },
     {
-      h2: "What we will not do",
+      h2: "Being honest about this channel",
       body: [
         "We will not tell you TikTok is essential. It is one option among several and for plenty of home service businesses it is the wrong one this year.",
         "We will not use trending audio or formats in ways that misrepresent the work or make the company look unserious to the customers you actually want.",
         "We will not claim view counts as a business result. Views are not calls.",
-        "We will not keep a losing channel running to protect a retainer.",
+        "We will not ask your crews to film things that get in the way of the job. The moment content collection starts eating billable hours it has stopped being cheap.",
       ],
     },
     {

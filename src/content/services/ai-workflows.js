@@ -19,14 +19,14 @@ export default {
         { title: "Connect the tools you already use", body: "Your phone system, your CRM or field service software, your calendar, your website forms. We integrate what you have rather than asking you to change platforms." },
         { title: "Write the messages carefully", body: "Automated does not mean robotic. Every message sounds like it came from your business, and every one has an obvious way to reach a human." },
         { title: "Test with real scenarios", body: "Including the awkward ones: duplicate leads, customers who reply immediately, people who opt out, calls that come in at two in the morning." },
-        { title: "Hand over the controls", body: "You can see every automation, read every message it sends, and turn any of it off. It is your system, documented, not a black box we hold." },
+        { title: "Hand over the controls", body: "You can see every automation and read every message it sends, and anything can be switched off. A setup nobody but us can follow is not a good outcome for either side." },
       ],
     },
     {
       h2: "Automations worth building first",
       benefits: [
         { title: "Instant lead response", body: "Every form submission and ad lead gets a text and an email within seconds, before the prospect has moved on to the next company." },
-        { title: "Missed call text back", body: "An unanswered call turns into a text conversation instead of a lost job. Usually the single highest-return automation available." },
+        { title: "Missed call text back", body: "An unanswered call turns into a text conversation instead of a lost job. For most contractors this is the first one worth building." },
         { title: "Estimate follow-up", body: "A quote that has gone quiet gets a sequence of polite check-ins on a schedule, instead of being remembered occasionally." },
         { title: "Appointment reminders", body: "Confirmations and reminders by text, which reduces the no-shows that waste a truck roll." },
         { title: "Review requests on completion", body: "Triggered by the job being marked done, so it happens every time without being asked for." },
@@ -41,18 +41,7 @@ export default {
         "We will not send marketing texts to people who did not consent to receive them. Consent, opt-outs and A2P 10DLC registration are handled properly, because the penalties for getting it wrong are real and they land on your business.",
         "We will not build something so complicated that only we can maintain it. If you cannot understand your own system, you cannot run it without us, and that is not a service — it is a dependency.",
       ],
-    },
-    {
-      h2: "Industries we automate for",
-      industries: [
-        { name: "HVAC", body: "Seasonal call spikes where the phones overflow for six weeks and automation absorbs what people cannot." },
-        { name: "Plumbing", body: "Emergency calls at all hours, where an instant text back is often the whole difference." },
-        { name: "Roofing", body: "Long sales cycles with estimates that need chasing over weeks rather than days." },
-        { name: "Electrical", body: "Mixed urgent and scheduled work, each needing its own follow-up rhythm." },
-        { name: "Junk removal", body: "High lead volume and fast decisions, where response time decides almost everything." },
-        { name: "General contracting", body: "Multi-stage projects with scheduling, updates and approvals that otherwise live in someone's head." },
-      ],
-    },
+    }
   ],
   related: [
     { to: "/services/missed-call-text-back", label: "Missed Call Text Back", note: "Usually the first automation to build." },

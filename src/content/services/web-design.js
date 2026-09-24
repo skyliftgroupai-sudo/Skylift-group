@@ -19,18 +19,18 @@ export default {
         { title: "A page per service", body: "Each service gets its own URL, its own heading, and enough content to be genuinely useful. This is what makes the site rankable rather than just present." },
         { title: "Build for speed on purpose", body: "Images sized and compressed properly, fonts that do not shift the layout when they load, scripts kept to what earns its place. We measure before and after rather than guessing." },
         { title: "Make the conversion path obvious", body: "Tap-to-call, a short form, and online booking where it fits the business. One clear next step per page instead of five competing ones." },
-        { title: "Wire up tracking before launch", body: "Call tracking, form submissions and analytics working on day one, so you can tell which pages produce work instead of arguing about it later." },
+        { title: "Wire up tracking before launch", body: "Analytics and form tracking configured as part of the build rather than bolted on later, so you can tell which pages produce work." },
       ],
     },
     {
       h2: "What you get",
       benefits: [
-        { title: "Mobile-first layouts", body: "Built and tested at the screen size most of your customers will actually use." },
-        { title: "Fast page loads", body: "Measured with real tooling, not asserted. We report the numbers before and after so you can see what changed." },
+        { title: "Mobile-first layouts", body: "Designed at phone width first, then expanded — which is the opposite order from most builds, and the reason most sites feel cramped on the screen people actually use." },
+        { title: "Fast page loads", body: "Speed treated as a build requirement rather than something checked at the end: images sized properly, fonts that do not shift the layout, and scripts kept to what earns its place." },
         { title: "Service pages that can rank", body: "A separate, properly written page for each job, which is the difference between a site search engines can use and one they cannot." },
         { title: "Tap-to-call everywhere", body: "The phone number as a link, visible without scrolling, on every page." },
         { title: "Forms people finish", body: "Short, clear and working. Every field you add is a percentage of submissions you give up." },
-        { title: "Content you can edit", body: "You should be able to change your hours, add a service or post a photo without filing a support ticket." },
+        { title: "Content you can edit", body: "Routine changes — hours, a new service, fresh job photos — should not need a developer." },
       ],
     },
     {
@@ -40,18 +40,7 @@ export default {
         "A rebuild makes sense when the site cannot be made fast, when the platform blocks the pages you need, or when the existing content is so thin that keeping it would mean rewriting everything anyway.",
         "When we do rebuild, existing URLs are preserved wherever they are worth keeping, and anything that has to move gets a permanent redirect. Sites lose their rankings in a rebuild almost entirely because nobody handled that step.",
       ],
-    },
-    {
-      h2: "Industries we build for",
-      industries: [
-        { name: "HVAC", body: "Separate paths for emergency repair, replacement and maintenance plans, since those buyers behave nothing alike." },
-        { name: "Plumbing", body: "Built around urgency: the number reachable in one tap, service area stated plainly, no obstacles between problem and call." },
-        { name: "Roofing", body: "Room for the research a homeowner does before a large spend — process, materials, real project photos and reviews." },
-        { name: "Electrical", body: "Panel upgrades, EV chargers and emergency work each treated as their own service rather than a bullet on a list." },
-        { name: "Junk removal", body: "Fast quoting and booking, since the decision is usually made in a couple of minutes." },
-        { name: "General contracting", body: "A clear structure across a wide service mix, so visitors and search engines can both find the specific thing." },
-      ],
-    },
+    }
   ],
   related: [
     { to: "/services/seo", label: "Local SEO", note: "Getting the new site found." },

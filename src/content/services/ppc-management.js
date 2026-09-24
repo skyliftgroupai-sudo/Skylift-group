@@ -15,45 +15,34 @@ export default {
     {
       h2: "How we manage an account",
       steps: [
-        { title: "Audit what is already running", body: "Search terms report, wasted spend, conversion tracking accuracy, landing page match. Most accounts we look at have obvious waste visible in the first twenty minutes." },
-        { title: "Rebuild around intent", body: "Campaigns structured by the job being searched for, tight keyword groups, and a negative list that grows every week from the actual search terms." },
+        { title: "Audit what is already running", body: "Search terms report, wasted spend, conversion tracking accuracy, landing page match. The point is to find out where the money is currently going before changing anything." },
+        { title: "Rebuild around intent", body: "Campaigns structured by the job being searched for, tight keyword groups, and a negative keyword list built from the actual search terms rather than guessed at up front." },
         { title: "Match the landing page to the ad", body: "The page a click lands on answers the exact search. Where the site does not have that page yet, building it is part of the work." },
         { title: "Track calls properly", body: "Call tracking numbers, call recording where legal and appropriate, and conversion data flowing back into the account so bidding optimizes toward booked work." },
         { title: "Set schedules and geography honestly", body: "Ads run where you actually work and when someone can actually answer. Coverage outside either is money spent on frustration." },
-        { title: "Review the search terms weekly", body: "This is the unglamorous work that separates accounts that improve from accounts that plateau. There is no way to automate it away entirely." },
+        { title: "Keep reviewing the search terms", body: "This is the unglamorous work that separates accounts that improve from accounts that plateau. There is no way to automate it away entirely." },
       ],
     },
     {
       h2: "What we manage",
       benefits: [
         { title: "Google Search campaigns", body: "The highest-intent traffic available. Someone searching for your service right now is closer to hiring than any other audience." },
-        { title: "Local Services Ads guidance", body: "Where they are available for your trade, they often produce cheaper leads than search ads. We help you get set up and compare the two honestly." },
+        { title: "Local Services Ads guidance", body: "Where they are available for your trade, these charge per lead rather than per click and are worth comparing against search ads rather than ignoring." },
         { title: "Meta ads", body: "For services people do not search for urgently — maintenance plans, upgrades, seasonal offers. Detailed on our Facebook ads page." },
-        { title: "Remarketing", body: "Reaching people who visited a service page and did not call, which is usually the cheapest conversion in the account." },
+        { title: "Remarketing", body: "Reaching people who visited a service page and did not call. They already know who you are, which generally makes them less expensive to convert than a first-time visitor." },
         { title: "Conversion tracking", body: "Calls, forms and bookings tracked back to the campaign that produced them, so the reporting means something." },
         { title: "Budget pacing", body: "Spend matched to your capacity. There is no point generating more calls than your crews can service." },
       ],
     },
     {
-      h2: "What we will not do",
+      h2: "What we will not do with your budget",
       body: [
         "We will not report clicks and impressions as results. The only numbers that matter are qualified calls, booked jobs and what each one cost.",
-        "We will not lock your ad account inside an agency container you cannot take with you. The account is yours, the data history is yours, and you keep both if you leave.",
+        "We will not report on a channel selectively. If one campaign is carrying the account and another is wasting money, both appear in the reporting.",
         "We will not promise a cost per lead before seeing your market. Anyone quoting a number for a trade and territory they have not looked at is guessing.",
         "We will not keep spending into a channel that is not working because it is in the contract. If paid search is not the right use of your budget, we would rather tell you.",
       ],
-    },
-    {
-      h2: "Industries we manage spend for",
-      industries: [
-        { name: "HVAC", body: "Extreme seasonal swings where budget pacing and schedule control matter more than in almost any other trade." },
-        { name: "Plumbing", body: "Emergency intent dominates. Speed of answer decides whether the click becomes a job." },
-        { name: "Roofing", body: "High cost per click and high job value, which makes negative keywords and call qualification worth real attention." },
-        { name: "Electrical", body: "A wide mix from urgent faults to planned upgrades, each needing its own campaign and its own landing page." },
-        { name: "Junk removal", body: "Price-sensitive and fast-converting, where quoting speed decides most outcomes." },
-        { name: "General contracting", body: "Broad keyword sets that need disciplined structure to avoid paying for work you do not want." },
-      ],
-    },
+    }
   ],
   related: [
     { to: "/services/google-ads", label: "Google Ads Management", note: "The search side in detail." },
