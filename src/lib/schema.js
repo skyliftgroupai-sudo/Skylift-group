@@ -72,6 +72,22 @@ function organization() {
     email: ORG_EMAIL,
     areaServed: { "@type": "Country", name: "United States" },
     sameAs: ORG_SAME_AS,
+    // The service catalogue lives on Organization rather than on a separate
+    // ProfessionalService node. See the note above schemaForRoute().
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Sky Lift Group services",
+      itemListElement: SERVICES.map((s) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: s.name,
+          url: `${SITE_URL}${s.path}`,
+          provider: { "@id": ORG_ID },
+          areaServed: { "@type": "Country", name: "United States" },
+        },
+      })),
+    },
   };
 }
 
@@ -84,36 +100,6 @@ function website() {
     description: ORG_DESCRIPTION,
     publisher: { "@id": ORG_ID },
     inLanguage: "en-US",
-  };
-}
-
-// The agency as a bookable service provider, with everything it sells.
-// Separate node from Organization: Organization says who the entity is,
-// ProfessionalService says what it offers and to whom.
-function professionalService() {
-  return {
-    "@type": "ProfessionalService",
-    "@id": `${SITE_URL}/#professionalservice`,
-    name: ORG_NAME,
-    description: ORG_DESCRIPTION,
-    url: SITE_URL,
-    email: ORG_EMAIL,
-    parentOrganization: { "@id": ORG_ID },
-    areaServed: { "@type": "Country", name: "United States" },
-    serviceType: "Digital marketing and AI automation for home service businesses",
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Sky Lift Group services",
-      itemListElement: SERVICES.map((s) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: s.name,
-          url: `${SITE_URL}${s.path}`,
-          provider: { "@id": ORG_ID },
-        },
-      })),
-    },
   };
 }
 
@@ -171,12 +157,23 @@ function crumbName(path) {
 
 /**
  * Build the complete JSON-LD graph for one route.
+ *
+ * There is deliberately no ProfessionalService node. ProfessionalService is a
+ * subtype of LocalBusiness, which asserts a physical place of business and is
+ * expected to carry a postal address. Sky Lift Group's registered address is a
+ * registered-agent / virtual mailbox, not a customer-facing location, so
+ * claiming LocalBusiness would be describing a business that does not exist and
+ * would leave a LocalBusiness permanently missing its defining property.
+ *
+ * Organization is the truthful type: it says who the entity is, needs no
+ * address, and carries hasOfferCatalog and areaServed perfectly well. Each
+ * service page additionally emits its own Service node pointing back at it.
  * Returns a single @graph object — one script tag per page, every node
  * cross-referenced by @id, which is what keeps Organization from being
  * redefined three times on the same page.
  */
 export function schemaForRoute(path, extra = null) {
-  const nodes = [organization(), website(), professionalService()];
+  const nodes = [organization(), website()];
 
   const trail = trailFor(path, crumbName(path));
   if (trail) nodes.push(breadcrumb(trail));
