@@ -19,7 +19,7 @@ export default function CTASection() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          Elevate Your Brand to the Next Level
+          Talk to someone who works with contractors
         </motion.h2>
 
         <motion.p
@@ -29,9 +29,10 @@ export default function CTASection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          At <strong className="text-white">Sky Lift Group</strong>, we craft smart,
-          data-driven strategies that grow your audience, boost conversions,
-          and help your brand stand out.
+          If you run a home service business and you are losing calls, quotes or
+          past customers, that is the conversation to have. No charge for it, and
+          nothing to prepare -- bring what is not working and we will tell you
+          whether it is something we can help with.
         </motion.p>
 
         <motion.div
@@ -56,7 +57,7 @@ export default function CTASection() {
               hover:scale-105
             "
           >
-            Get Your Free Consultation
+            Start a conversation
             <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>
