@@ -64,7 +64,7 @@ const OneClickMarketing = () => {
                 {/* Real <img> rather than a CSS background: the preload scanner can see
                     this in the initial HTML, which is what makes it the LCP it should be. */}
                 <img
-                  src="/assets/marketing.webp"
+                  src="/assets/marketing-v2.webp"
                   alt=""
                   aria-hidden="true"
                   fetchPriority="high"

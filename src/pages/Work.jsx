@@ -69,7 +69,7 @@ return (
     {/* Hero Section */}
     <section
       className="relative w-full min-h-[70vh] md:min-h-[88vh] flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat px-4"
-      style={{ backgroundImage: `url("/assets/our-work.webp")` }}
+      style={{ backgroundImage: `url("/assets/our-work-v2.webp")` }}
     >
       <div className="absolute inset-0 bg-black/50" />
 

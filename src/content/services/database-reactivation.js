@@ -8,7 +8,7 @@ export default {
   h1: "Database Reactivation Campaigns for HVAC & Plumbing Companies",
   heroSub:
     "You already paid to acquire every customer in your CRM. A reactivation campaign goes back to the ones who have not booked in a year or more and turns a dormant list into scheduled work — without buying a single new lead.",
-  heroImage: "/assets/lead-hero.webp",
+  heroImage: "/assets/lead-hero-v2.webp",
   heroImageAlt:
     "Contractor reviewing a customer database on a laptop in a service van",
 

@@ -15,7 +15,7 @@ export default function AboutUs() {
         <div className="w-full overflow-hidden bg-[#0a0a0a]">
             <section
                 className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/servicebgimg.webp")` }}
+                style={{ backgroundImage: `url("/assets/servicebgimg-v2.webp")` }}
             >
                 <div className="absolute inset-0 bg-black/80" />
 
