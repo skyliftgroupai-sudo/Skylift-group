@@ -196,7 +196,7 @@ const PrivacyPolicy = () => {
                             Introduction
                         </h2>
                         <p>
-Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky Lift LLC, referred to as "Sky Lift Group," "we," "us," or "our" throughout this policy.                             This Privacy Policy explains how Sky Lift Group collects, uses,
+Last updated: September 24, 2026. This website (skyliftgroup.com) is operated by Sky Lift LLC, referred to as "Sky Lift Group," "we," "us," or "our" throughout this policy.                             This Privacy Policy explains how Sky Lift Group collects, uses,
                             processes, and protects your information when you use our website
                             and services. By accessing or using our services, you agree to the
                             collection and use of information in accordance with this policy.
@@ -234,10 +234,68 @@ Last updated: July 15, 2026. This website (skyliftgroup.com) is operated by Sky 
                             Cookies & Tracking Technologies
                         </h2>
                         <p>
-                            We use cookies and similar tracking technologies to enhance your browsing experience, analyze website traffic, and improve our services. You can choose to disable cookies through your browser settings; however, some parts of the website may not function properly.
+                            We use Google Analytics 4 to understand how people find and use this
+                            website. We do not use advertising pixels, retargeting tags or any other
+                            third-party tracking on this site.
+                        </p>
+                        <h3 className="text-xl font-semibold text-white mb-2">
+                            Your choice
+                        </h3>
+                        <p>
+                            The first time you visit, a bar at the bottom of the screen asks whether
+                            you accept analytics. Until you choose, Google Consent Mode is set to
+                            deny analytics storage, ad storage, ad user data and ad personalization,
+                            which means no analytics cookies or identifiers are stored on your device.
+                        </p>
+                        <p>
+                            If you accept, Google Analytics sets its own cookies to recognise a
+                            returning visit and measure a session. If you decline, no analytics
+                            cookies are stored. You should know that with consent denied, Google still
+                            receives a basic, cookieless record that a page was viewed — it carries no
+                            identifier, nothing is written to or read from your device, and it cannot
+                            be used to recognise you on a later visit. We would rather state that
+                            plainly than describe declining as switching everything off.
+                        </p>
+                        <h3 className="text-xl font-semibold text-white mb-2">
+                            Changing your mind
+                        </h3>
+                        <p>
+                            Your choice is saved in your browser's local storage, not in a cookie.
+                            Clearing your browsing data for this site removes it and the bar will
+                            appear again so you can choose differently. You can also block cookies for
+                            this site in your browser settings at any time.
+                        </p>
+                        <h3 className="text-xl font-semibold text-white mb-2">
+                            What analytics records
+                        </h3>
+                        <p>
+                            Pages viewed, approximate location derived from IP address, browser and
+                            device type, how you arrived at the site, and a small number of actions:
+                            opening a booking link, tapping a phone number or email address, and
+                            reaching the end of an article. We do not send names, email addresses,
+                            phone numbers or the contents of any message to Google Analytics.
                         </p>
                     </div>
 
+                    {/* How you contact us */}
+                    <div>
+                        <h2 className="text-2xl font-semibold text-white mb-4">
+                            How You Contact Us, and What Happens to It
+                        </h2>
+                        <p>
+                            There is no contact form on this website. You can reach us through the
+                            chat assistant, by email at hello@skyliftgroup.com, or by phone. The chat
+                            assistant is operated for us by a third-party platform, so a conversation
+                            you start there is processed by that provider in order to pass your
+                            enquiry to us.
+                        </p>
+                        <p>
+                            What you tell us in an enquiry is used to reply to you and to provide the
+                            services you ask about. None of it is sent to Google Analytics. Please do
+                            not send payment card details, passwords or sensitive personal
+                            information through the chat assistant.
+                        </p>
+                    </div>
                     {/* No Selling of Data */}
                     <div>
                         <h2 className="text-2xl font-semibold text-white mb-4">

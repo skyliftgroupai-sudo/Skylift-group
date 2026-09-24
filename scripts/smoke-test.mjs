@@ -47,9 +47,12 @@ for (const viewport of [{ name: "desktop", width: 1440, height: 900 }, { name: "
     const errors = [];
     page.on("console", (m) => { if (m.type() === "error") errors.push(m.text().slice(0, 160)); });
     page.on("pageerror", (e) => errors.push("PAGEERROR: " + e.message.slice(0, 160)));
-    // Third-party chat/booking widgets are not part of what we are verifying.
+    // Third-party chat/booking/analytics scripts are not part of what we are
+    // verifying, and in a sandboxed CI environment they cannot be reached at all
+    // -- an unreachable script logs a console error that would fail every page.
     await page.route("**://widgets.leadconnectorhq.com/**", (r) => r.abort());
     await page.route("**://link.msgsndr.com/**", (r) => r.abort());
+    await page.route("**://www.googletagmanager.com/**", (r) => r.abort());
     await page.goto(`http://localhost:4178${route}`, { waitUntil: "networkidle", timeout: 30000 });
     const overflow = await page.evaluate(() =>
       document.documentElement.scrollWidth - document.documentElement.clientWidth
