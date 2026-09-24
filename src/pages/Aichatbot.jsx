@@ -59,9 +59,18 @@ const AIChatbot = () => {
         <div className="w-full">
             {/* HERO SECTION */}
             <section
-                className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-                style={{ backgroundImage: `url("/assets/chat.webp")` }}
+                className="relative w-full h-[88vh] flex flex-col items-center justify-center overflow-hidden"
             >
+                {/* Real <img> rather than a CSS background: the preload scanner can see
+                    this in the initial HTML, which is what makes it the LCP it should be. */}
+                <img
+                  src="/assets/chat.webp"
+                  alt=""
+                  aria-hidden="true"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                />
                 <div className="absolute inset-0 bg-black/70" />
 
                 <motion.h1

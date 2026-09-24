@@ -38,9 +38,18 @@ export default function ServicePage({ content }) {
     <div className="w-full bg-[#0a0a0a] text-gray-100">
       {/* HERO */}
       <section
-        className="relative w-full min-h-[70vh] flex flex-col items-center justify-center bg-cover bg-center px-6 py-24"
-        style={{ backgroundImage: `url("${content.heroImage}")` }}
+        className="relative w-full min-h-[70vh] flex flex-col items-center justify-center px-6 py-24 overflow-hidden"
       >
+        {/* Real <img> rather than a CSS background: the preload scanner can see
+            this in the initial HTML, which is what makes it the LCP it should be. */}
+        <img
+          src={content.heroImage}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
         <div className="absolute inset-0 bg-black/75" />
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
