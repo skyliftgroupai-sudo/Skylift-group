@@ -99,7 +99,7 @@ const Designweb = () => {
                     transition={{ duration: 1 }}
                     className="relative text-white text-lg md:text-xl mt-4 text-center max-w-xl"
                 >
-                    Helping brands rise with creativity, strategy and measurable growth.
+                    Websites for contractors, built around the phone call. Fast on mobile data, a page for each service so search engines have something to rank, and an obvious way to get in touch on every screen.
                 </motion.p>
             </section>
 

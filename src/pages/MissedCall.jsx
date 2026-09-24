@@ -89,7 +89,7 @@ const MissedCall = () => {
           transition={{ duration: 1 }}
           className="relative text-white text-lg md:text-xl mt-4 text-center max-w-xl"
         >
-          Our automated missed call text-back service instantly responds to every missed call, turning lost opportunities into loyal customers and measurable revenue.
+          When your crew is on a job and the phone rings out, the caller gets a text back in seconds instead of calling the next contractor on the list. It uses the business number you already advertise -- nothing about how you advertise has to change.
         </motion.p>
 
       </section>

@@ -94,7 +94,7 @@ const Seo = () => {
                     transition={{ duration: 1 }}
                     className="relative text-white text-lg md:text-xl mt-4 text-center max-w-xl"
                 >
-                    Boost your online visibility and attract qualified leads with proven SEO strategies.
+                    For home service businesses whose website does not come up when someone searches for the job they do. A real page per service, a Google Business Profile that matches it, and the technical work underneath.
                 </motion.p>
             </section>
 

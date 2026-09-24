@@ -89,7 +89,7 @@ const AIVoiceAgents = () => {
                     transition={{ duration: 1 }}
                     className="relative text-white text-lg md:text-xl mt-4 text-center max-w-xl"
                 >
-                    Deploy intelligent AI voice agents that handle calls 24/7 with human-like conversations, qualifying leads and booking appointments effortlessly.
+                    An AI agent answers your phone when nobody can -- after hours, mid-job, or on a second line ringing at the same time. Built for home service businesses, and anything urgent or anyone asking for a person is handed straight to one.
                 </motion.p>
 
             </section>
