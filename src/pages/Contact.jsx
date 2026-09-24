@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MessageCircle, MapPin, Clock } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Clock, PhoneCall } from "lucide-react";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 
@@ -47,24 +47,28 @@ const Contact = () => {
                 {
                   icon: <Mail className="h-6 w-6 text-white" />,
                   title: "Email Us",
-                  lines: ["hello@skyliftgroup.com"],
+                  lines: [
+                    <a href="mailto:hello@skyliftgroup.com" className="hover:text-[#00A693] transition-colors">
+                      hello@skyliftgroup.com
+                    </a>,
+                  ],
+                },
+                {
+                  icon: <PhoneCall className="h-6 w-6 text-white" />,
+                  title: "Call Us",
+                  lines: [
+                    <a href="tel:+17252631475" className="hover:text-[#00A693] transition-colors">
+                      +1 (725) 263-1475
+                    </a>,
+                  ],
                 },
                 {
                   icon: <MapPin className="h-6 w-6 text-white" />,
                   title: "Location",
                   lines: [
-                    <div className="flex items-center gap-2">
-                      <i className="fa fa-flag text-red-500"></i>
-                      United States Of America
-                    </div>,
-                    <div className="flex items-center gap-2">
-                      <i className="fa fa-flag text-blue-500"></i>
-                      Canada
-                    </div>,
-                    <div className="flex items-center gap-2">
-                      <i className="fa fa-flag text-green-500"></i>
-                      Australia
-                    </div>,
+                    "United States Of America",
+                    "Canada",
+                    "Australia",
                   ],
                 },
                 {
@@ -110,6 +114,24 @@ const Contact = () => {
     <p className="text-gray-300 text-base md:text-lg max-w-xl mb-3">Get instant answers about our services, pricing, websites, AI automation, Google Business Profile optimization, SEO, and marketing solutions.</p>
     <p className="text-gray-300 text-base md:text-lg max-w-xl mb-3">Our AI Assistant is available 24/7 to answer your questions, qualify your needs, and help you get started.</p>
     <p className="text-[#00A693] font-semibold text-base md:text-lg">Click the chat icon in the bottom-right corner to begin.</p>
+
+    <div className="mt-8 w-full max-w-xl border-t border-white/10 pt-6">
+      <p className="text-gray-400 text-sm mb-4">Prefer not to chat? Reach us directly.</p>
+      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <a
+          href="mailto:hello@skyliftgroup.com"
+          className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00A693] px-6 py-3 font-semibold text-white transition hover:bg-[#00947F]"
+        >
+          <Mail className="h-4 w-4" /> Email us
+        </a>
+        <a
+          href="tel:+17252631475"
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#00A693] px-6 py-3 font-semibold text-[#00A693] transition hover:bg-[#00A693] hover:text-white"
+        >
+          <PhoneCall className="h-4 w-4" /> +1 (725) 263-1475
+        </a>
+      </div>
+    </div>
   </div>
 </motion.div>
           </div>
