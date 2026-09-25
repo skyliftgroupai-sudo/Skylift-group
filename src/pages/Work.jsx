@@ -57,7 +57,6 @@ const Work = () => {
   const stats = [
     { value: 500, suffix: "+", label: "Projects Delivered" },
     { value: 350, suffix: "+", label: "Happy Clients" },
-    { value: 85, suffix: "%", label: "Average Growth" },
     { value: 95, suffix: "%", label: "Client Retention" }
   ];
 
@@ -96,7 +95,7 @@ return (
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,#00A69325,transparent_70%)] blur-2xl"></div>
 
       <div ref={ref} className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-12 text-center">
           {stats.map((stat, i) => {
             const animatedValue = useCountUp(inView ? stat.value : 0);
 

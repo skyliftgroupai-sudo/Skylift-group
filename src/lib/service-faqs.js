@@ -74,8 +74,8 @@ export const routeFaqs = {
           a: "Yes. Our AI agents are trained to handle complex multi-step conversations, answer specific questions about your business, and intelligently transfer calls to human staff when needed.",
       },
       {
-          q: "How much can I save with AI voice agents?",
-          a: "Most clients reduce call center costs by 50 to 70 percent while increasing call answer rates to nearly 100 percent, ensuring no lead or customer inquiry goes unanswered.",
+          q: "Will this reduce what I spend on answering calls?",
+          a: "That depends on what you spend now and how many calls you are currently missing, so it is not something to answer with a figure before looking at your numbers. What an AI agent changes is which calls get answered at all -- the ones going to voicemail after hours, while a tech is mid-job, or when a second call comes in during the first. The comparison worth making is against both what answering currently costs you and the work those unanswered calls would have turned into.",
       },
   ],
   "/services/ai-workflows": [
