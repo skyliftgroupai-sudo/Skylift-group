@@ -58,46 +58,86 @@
        always resolve. A second hardcoded copy here would duplicate it. -->
 
 
-  <!-- Google Analytics 4 with Consent Mode v2.
-       Ordering matters and is not accidental:
-         1. the gtag stub and dataLayer exist first,
+  <!-- Google Analytics 4 with Consent Mode v2. One tag, no tag manager.
+       Ordering is load-bearing:
+         1. dataLayer and the gtag stub exist,
          2. consent defaults to DENIED for all four v2 signals,
-         3. a previously granted choice is restored from localStorage,
-         4. only then does the GA4 config call run,
-         5. gtag.js itself loads async and replays whatever is queued.
-       If the defaults were queued after the config call, the first hit of every
-       session would go out under the wrong consent state.
+         3. a previously granted choice is replayed from localStorage,
+         4. only then does the config call run,
+         5. gtag.js is injected and replays the queue.
+       Queue the defaults after config and the first hit of every session goes
+       out under the wrong consent state.
 
-       send_page_view is false: src/components/Layout.jsx sends one page_view per
-       route instead, so client-side navigation is counted and the initial load
-       is not counted twice. -->
+       The tag only loads on the production hostnames. On localhost, on Vercel
+       preview deployments and anywhere else, no request is made to Google at
+       all, so development and preview traffic cannot reach the property. Set
+       localStorage 'slg-ga-debug' to '1', or add ?ga_debug=1, to deliberately
+       enable it elsewhere -- those hits carry debug_mode so they are
+       identifiable in DebugView.
+
+       allow_google_signals and allow_ad_personalization_signals are both off.
+       Google Signals is also a property-level setting in the GA4 admin; turning
+       it off here means the tag never asks for it, but it should be confirmed
+       off in the property as well.
+
+       send_page_view is false. src/components/Layout.jsx sends exactly one
+       page_view per route -- initial load, in-app navigation and back/forward
+       alike -- so nothing is counted twice. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
 
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied',
-      wait_for_update: 500
-    });
+    (function () {
+      var GA_ID = 'G-L6KM3R8YGF';
+      var PROD_HOSTS = ['www.skyliftgroup.com', 'skyliftgroup.com'];
+      var isProd = PROD_HOSTS.indexOf(location.hostname) !== -1;
 
-    try {
-      if (window.localStorage.getItem('slg-consent-v1') === 'granted') {
-        gtag('consent', 'update', {
-          ad_storage: 'granted',
-          ad_user_data: 'granted',
-          ad_personalization: 'granted',
-          analytics_storage: 'granted'
-        });
-      }
-    } catch (e) { /* storage blocked: defaults stand */ }
+      var forced = false;
+      try {
+        forced = localStorage.getItem('slg-ga-debug') === '1'
+          || /[?&]ga_debug=1/.test(location.search);
+      } catch (e) { /* storage blocked */ }
 
-    gtag('js', new Date());
-    gtag('config', 'G-L6KM3R8YGF', { send_page_view: false });
+      var enabled = isProd || forced;
+      window.__slgGa = { enabled: enabled, debug: !isProd && forced };
+
+      // Consent defaults are queued whether or not the tag loads, so that the
+      // state is already correct if it is enabled later in the page's life.
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+      });
+
+      try {
+        if (localStorage.getItem('slg-consent-v1') === 'granted') {
+          gtag('consent', 'update', {
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+            analytics_storage: 'granted'
+          });
+        }
+      } catch (e) { /* storage blocked: defaults stand */ }
+
+      if (!enabled) return;
+
+      gtag('js', new Date());
+      gtag('config', GA_ID, {
+        send_page_view: false,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+        debug_mode: window.__slgGa.debug
+      });
+
+      var t = document.createElement('script');
+      t.async = true;
+      t.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(t);
+    })();
   </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6KM3R8YGF"></script>
 
   <title>Sky Lift Group</title>
 </head>

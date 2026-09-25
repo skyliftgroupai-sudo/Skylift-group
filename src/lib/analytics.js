@@ -59,15 +59,32 @@ export function setConsent(choice) {
 }
 
 /**
+ * Strip the query string and fragment from a path before it is sent anywhere.
+ *
+ * No page on this site is driven by a query parameter -- blog pagination uses
+ * /blog/page/2 as a path -- so nothing is lost. What it prevents is a URL that
+ * has picked up an email address, a phone number, a token or a chat-widget
+ * parameter carrying that into Analytics, which is not something to rely on
+ * never happening.
+ */
+export function cleanPath(path) {
+  return String(path || "/").split("?")[0].split("#")[0] || "/";
+}
+
+/**
  * One page_view per route.
  * index.html configures GA4 with send_page_view: false so that this is the only
  * thing sending them -- otherwise the initial load would be counted twice, once
  * by the config call and once here on hydration.
+ *
+ * page_location is rebuilt from the origin and the cleaned path rather than
+ * taken from window.location.href, for the reason above.
  */
 export function pageView(path, title) {
+  const p = cleanPath(path);
   gtag("event", "page_view", {
-    page_path: path,
-    page_location: typeof window !== "undefined" ? window.location.href : undefined,
+    page_path: p,
+    page_location: typeof window !== "undefined" ? window.location.origin + p : undefined,
     page_title: title || (typeof document !== "undefined" ? document.title : undefined),
   });
 }
@@ -113,7 +130,7 @@ function locationOf(el) {
   if (el.closest("footer")) return "footer";
   if (el.closest("header")) return "header";
   if (el.closest("section")?.querySelector("h1")) return "hero";
-  return (typeof window !== "undefined" ? window.location.pathname : "") || "body";
+  return cleanPath(typeof window !== "undefined" ? window.location.pathname : "") || "body";
 }
 
 // --- scroll depth ------------------------------------------------------------
@@ -136,7 +153,7 @@ export function installScrollDepth(path, enabled) {
     if (scrollable <= 0) return;
     if ((window.scrollY / scrollable) * 100 >= 90) {
       fired = true;
-      track("scroll_90", { page_path: path });
+      track("scroll_90", { page_path: cleanPath(path) });
       window.removeEventListener("scroll", scrollBound);
       scrollBound = null;
     }
