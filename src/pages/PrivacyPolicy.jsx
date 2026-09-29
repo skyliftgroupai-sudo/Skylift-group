@@ -249,7 +249,10 @@ Last updated: September 24, 2026. This website (skyliftgroup.com) is operated by
                         </p>
                         <p>
                             If you accept, Google Analytics sets its own cookies to recognise a
-                            returning visit and measure a session. If you decline, no analytics
+                            returning visit and measure a session. Accepting grants analytics only:
+                            ad storage, ad user data and ad personalization stay denied whether you
+                            accept or not, because this site runs no advertising tags and there is
+                            nothing for that permission to switch on. If you decline, no analytics
                             cookies are stored. You should know that with consent denied, Google still
                             receives a basic, cookieless record that a page was viewed — it carries no
                             identifier, nothing is written to or read from your device, and it cannot

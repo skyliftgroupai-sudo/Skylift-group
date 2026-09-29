@@ -43,8 +43,30 @@ const Schedule = () => {
             fontSize: "18px",
           }}
         >
-          Ready to book your appointment? Our AI Assistant makes it quick and easy.
+          Pick a time that works for you. If you would rather talk first, the options below reach us directly.
         </p>
+
+        {/* Sky Lift Group's own LeadConnector booking calendar. Same calendar ID
+            that was embedded on this page until July 2026, recovered from commit
+            91ddeb4 -- not a new integration. link.msgsndr.com/js/form_embed.js is
+            already loaded in index.html, which is what LeadConnector uses to size
+            this iframe. */}
+        <div
+          style={{
+            borderRadius: "20px",
+            overflow: "hidden",
+            border: "2px solid #00A693",
+            backgroundColor: "#fff",
+            marginBottom: "40px",
+          }}
+        >
+          <iframe
+            src="https://api.leadconnectorhq.com/widget/booking/Mi5gk5QCFKULntPciL7d"
+            title="Book an appointment with Sky Lift Group"
+            scrolling="no"
+            style={{ width: "100%", height: "900px", border: "none", display: "block" }}
+          />
+        </div>
 
         <motion.div
           initial={{ opacity: 0, x: 40 }}
@@ -91,7 +113,7 @@ const Schedule = () => {
                 marginBottom: "16px",
               }}
             >
-              Book Your Appointment with Our AI Assistant
+              Rather not use the calendar?
             </h3>
             <p
               style={{
@@ -101,7 +123,7 @@ const Schedule = () => {
                 marginBottom: "8px",
               }}
             >
-              Our AI Assistant will help you find the perfect time and schedule your appointment in just a few messages.
+              The chat assistant in the bottom-right corner can also take you through booking, or reach us directly below.
             </p>
             <p
               style={{

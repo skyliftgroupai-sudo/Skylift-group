@@ -113,11 +113,14 @@
 
       try {
         if (localStorage.getItem('slg-consent-v1') === 'granted') {
+          // Analytics only -- the three advertising signals stay denied even for
+          // a visitor who accepted. See the GRANTED constant in
+          // src/lib/analytics.js for why.
           gtag('consent', 'update', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-            analytics_storage: 'granted'
+            analytics_storage: 'granted',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
           });
         }
       } catch (e) { /* storage blocked: defaults stand */ }

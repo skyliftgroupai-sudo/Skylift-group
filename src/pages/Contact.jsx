@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MessageCircle, MapPin, Clock, PhoneCall } from "lucide-react";
+import { Mail, MapPin, Clock, PhoneCall } from "lucide-react";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 
@@ -12,9 +12,18 @@ const Contact = () => {
   return (
     <div className="flex flex-col">
       <section
-        className="relative w-full h-[88vh] flex flex-col items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url("/assets/contact.webp")` }}
+        className="relative w-full h-[88vh] flex flex-col items-center justify-center overflow-hidden"
       >
+        {/* Real <img> rather than a CSS background: the preload scanner can see
+            this in the initial HTML, which is what makes it the LCP it should be. */}
+        <img
+          src="/assets/contact.webp"
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
         <div className="absolute inset-0 bg-black/50" />
 
         <motion.h1
@@ -105,35 +114,39 @@ const Contact = () => {
     viewport={{ once: true }}
     transition={{ duration: 0.6 }}
     className="lg:col-span-2"
-  ><div className="relative w-full h-full min-h-[600px] rounded-lg overflow-hidden bg-[#111111] shadow-md flex flex-col items-center justify-center text-center p-10 md:p-16"
-     >
-  <div className="h-16 w-16 flex items-center justify-center rounded-full bg-[#00A693] shadow-md mb-6">
-    <MessageCircle className="h-8 w-8 text-white" />
+  ><div className="relative w-full h-full min-h-[760px] rounded-lg overflow-hidden bg-[#111111] shadow-md">
+    {/* Sky Lift Group's own LeadConnector intake form. This is the same form ID
+        that was embedded on this page until July 2026, recovered from commit
+        471ef69 -- not a new integration. Where it delivers submissions is
+        configured inside LeadConnector, not here. */}
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/form/J6Gtz1pzBFNFDvoMGV05"
+      title="Contact Sky Lift Group"
+      className="w-full h-full min-h-[760px] border-none bg-white"
+    />
   </div>
-    <h2 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">Talk With Our AI Business Assistant</h2>
-    <p className="text-gray-300 text-base md:text-lg max-w-xl mb-3">Get instant answers about our services, pricing, websites, AI automation, Google Business Profile optimization, SEO, and marketing solutions.</p>
-    <p className="text-gray-300 text-base md:text-lg max-w-xl mb-3">Our AI Assistant is available 24/7 to answer your questions, qualify your needs, and help you get started.</p>
-    <p className="text-[#00A693] font-semibold text-base md:text-lg">Click the chat icon in the bottom-right corner to begin.</p>
 
-    <div className="mt-8 w-full max-w-xl border-t border-white/10 pt-6">
-      <p className="text-gray-400 text-sm mb-4">Prefer not to chat? Reach us directly.</p>
-      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <a
-          href="mailto:hello@skyliftgroup.com"
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00A693] px-6 py-3 font-semibold text-white transition hover:bg-[#00947F]"
-        >
-          <Mail className="h-4 w-4" /> Email us
-        </a>
-        <a
-          href="tel:+17252631475"
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#00A693] px-6 py-3 font-semibold text-[#00A693] transition hover:bg-[#00A693] hover:text-white"
-        >
-          <PhoneCall className="h-4 w-4" /> +1 (725) 263-1475
-        </a>
-      </div>
+  <div className="mt-6 rounded-lg border border-white/10 bg-[#111111] p-6 text-center">
+    <p className="text-gray-400 text-sm mb-4">Prefer not to use the form? Reach us directly.</p>
+    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+      <a
+        href="mailto:hello@skyliftgroup.com"
+        className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00A693] px-6 py-3 font-semibold text-white transition hover:bg-[#00947F]"
+      >
+        <Mail className="h-4 w-4" /> Email us
+      </a>
+      <a
+        href="tel:+17252631475"
+        className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#00A693] px-6 py-3 font-semibold text-[#00A693] transition hover:bg-[#00A693] hover:text-white"
+      >
+        <PhoneCall className="h-4 w-4" /> +1 (725) 263-1475
+      </a>
     </div>
+    <p className="text-gray-500 text-xs mt-4">
+      The chat assistant in the bottom-right corner is also available.
+    </p>
   </div>
-</motion.div>
+  </motion.div>
           </div>
         </div>
       </section>

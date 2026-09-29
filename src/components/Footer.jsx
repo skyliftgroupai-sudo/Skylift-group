@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Facebook, Linkedin, Mail, MapPin, PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
 import { ORG_DESCRIPTION } from "../lib/schema";
+import { openConsentPreferences } from "../lib/analytics";
 
 export const Footer = () => {
 
@@ -68,6 +69,17 @@ export const Footer = () => {
                 </Link>
               </li>
             ))}
+            <li>
+              {/* Lets a visitor change a consent choice they already made.
+                  Without it the bar never reappears once a choice is stored. */}
+              <button
+                type="button"
+                onClick={openConsentPreferences}
+                className="inline-block hover:text-[#00A693] hover:scale-105 transition-all duration-300 cursor-pointer"
+              >
+                Cookie preferences
+              </button>
+            </li>
           </ul>
         </motion.div>
 

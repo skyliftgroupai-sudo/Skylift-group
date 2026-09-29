@@ -21,11 +21,18 @@ const DENIED = {
   analytics_storage: "denied",
 };
 
+// Accepting the banner grants analytics only.
+//
+// The three advertising signals stay denied in every state, including after a
+// visitor accepts. This site runs no advertising tags, Google Signals is off at
+// the tag (allow_google_signals: false) and off in the GA4 property, and ads
+// personalisation is off. There is nothing for those three to switch on, so
+// asking for them would be collecting a permission we have no use for.
 const GRANTED = {
-  ad_storage: "granted",
-  ad_user_data: "granted",
-  ad_personalization: "granted",
   analytics_storage: "granted",
+  ad_storage: "denied",
+  ad_user_data: "denied",
+  ad_personalization: "denied",
 };
 
 function gtag() {
@@ -69,6 +76,18 @@ export function setConsent(choice) {
  */
 export function cleanPath(path) {
   return String(path || "/").split("?")[0].split("#")[0] || "/";
+}
+
+/**
+ * Reopen the consent bar so a visitor can change a choice they already made.
+ * Clears the stored choice and asks the banner to show itself again. The
+ * previously applied consent state stays in effect until they choose again.
+ */
+export function openConsentPreferences() {
+  try { window.localStorage.removeItem(CONSENT_KEY); } catch { /* storage blocked */ }
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("slg:consent-reopen"));
+  }
 }
 
 /**
@@ -162,20 +181,57 @@ export function installScrollDepth(path, enabled) {
 }
 
 /**
- * Contact form submission. Exported and ready, but nothing calls it yet: there
- * is no <form> element anywhere on this site. Wire this to the success handler
- * -- not the click -- when a real form is added, so it counts submissions
- * rather than attempts.
+ * Confirmed inquiry submission. NOT wired yet -- see installEmbedProbe below.
+ * When it is wired it must be called from the embed's confirmed-success signal,
+ * never from a click or an iframe load, so it counts submissions and not
+ * attempts.
  */
 export function trackFormSubmit(formLocation) {
   track("form_submit", { form_location: formLocation });
 }
 
 /**
- * Completed booking. Not wired: /book currently has no booking embed, only an
- * instruction to open the chat widget. When an embed is added, call this from
- * its completion callback or postMessage event, never on page load.
+ * Completed booking. NOT wired yet -- see installEmbedProbe below. Must be
+ * called only from a confirmed booking-complete signal.
  */
 export function trackBooking(source) {
-  track("calendly_booking", { booking_source: source });
+  track("booking_complete", { booking_source: source });
+}
+
+const EMBED_ORIGINS = [
+  "https://api.leadconnectorhq.com",
+  "https://link.msgsndr.com",
+  "https://widgets.leadconnectorhq.com",
+];
+
+/**
+ * Diagnostic only. Sends nothing, tracks nothing, and is silent unless someone
+ * deliberately turns it on.
+ *
+ * The LeadConnector form and booking embeds are cross-origin iframes. They
+ * signal completion by posting a message to the parent window, but the shape of
+ * that message is not documented publicly and the endpoints are unreachable from
+ * the environment this was built in, so the contract could not be observed. It
+ * would be easy to guess a property name here and ship something that either
+ * never fires or fires on every message -- inventing leads. Neither is
+ * acceptable, so no lead event is wired.
+ *
+ * To capture the real contract on the live site: set localStorage
+ * 'slg-embed-debug' to '1', complete a submission or booking, and read the
+ * logged payloads from the console. Wire trackFormSubmit / trackBooking to
+ * whichever message genuinely indicates success, then remove this.
+ */
+export function installEmbedProbe() {
+  if (typeof window === "undefined" || window.__slgEmbedProbe) return;
+  window.__slgEmbedProbe = true;
+
+  let on = false;
+  try { on = window.localStorage.getItem("slg-embed-debug") === "1"; } catch { /* storage blocked */ }
+  if (!on) return;
+
+  window.addEventListener("message", (e) => {
+    if (!EMBED_ORIGINS.includes(e.origin)) return;
+    // eslint-disable-next-line no-console
+    console.log("[slg embed message]", e.origin, e.data);
+  });
 }

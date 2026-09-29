@@ -53,6 +53,7 @@ for (const viewport of [{ name: "desktop", width: 1440, height: 900 }, { name: "
     await page.route("**://widgets.leadconnectorhq.com/**", (r) => r.abort());
     await page.route("**://link.msgsndr.com/**", (r) => r.abort());
     await page.route("**://www.googletagmanager.com/**", (r) => r.abort());
+    await page.route("**://api.leadconnectorhq.com/**", (r) => r.abort());
     await page.goto(`http://localhost:4178${route}`, { waitUntil: "networkidle", timeout: 30000 });
     const overflow = await page.evaluate(() =>
       document.documentElement.scrollWidth - document.documentElement.clientWidth

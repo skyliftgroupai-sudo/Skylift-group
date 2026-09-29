@@ -3,13 +3,14 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import ConsentBanner from "./ConsentBanner";
-import { pageView, installLinkTracking, installScrollDepth } from "../lib/analytics";
+import { pageView, installLinkTracking, installScrollDepth, installEmbedProbe } from "../lib/analytics";
 
 export const Layout = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
     installLinkTracking();
+    installEmbedProbe();
   }, []);
 
   useEffect(() => {

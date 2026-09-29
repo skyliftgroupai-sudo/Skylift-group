@@ -67,9 +67,18 @@ return (
 
     {/* Hero Section */}
     <section
-      className="relative w-full min-h-[70vh] md:min-h-[88vh] flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat px-4"
-      style={{ backgroundImage: `url("/assets/our-work-v2.webp")` }}
+      className="relative w-full min-h-[70vh] md:min-h-[88vh] flex flex-col items-center justify-center bg-no-repeat px-4 overflow-hidden"
     >
+      {/* Real <img> rather than a CSS background: the preload scanner can see
+          this in the initial HTML, which is what makes it the LCP it should be. */}
+      <img
+        src="/assets/our-work-v2.webp"
+        alt=""
+        aria-hidden="true"
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
       <div className="absolute inset-0 bg-black/50" />
 
       <motion.h1

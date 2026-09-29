@@ -275,7 +275,9 @@ const TermsConditions = () => {
             <p>
               This website uses Google Analytics 4 to measure how the site is used. Analytics
               storage is denied by default until you accept it using the bar shown on your
-              first visit, and your choice is saved in your browser. No advertising pixels or
+              first visit, and your choice is saved in your browser. Accepting grants analytics
+              only — advertising storage, ad user data and ad personalization remain denied in
+              all cases. No advertising pixels or
               retargeting tags are used on this site. The Privacy Policy sets out what is
               recorded, what happens if you decline, and how to change your choice.
             </p>

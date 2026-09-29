@@ -22,6 +22,9 @@ export default function ConsentBanner() {
 
   useEffect(() => {
     if (readConsent() === null) setVisible(true);
+    const reopen = () => setVisible(true);
+    window.addEventListener("slg:consent-reopen", reopen);
+    return () => window.removeEventListener("slg:consent-reopen", reopen);
   }, []);
 
   if (!visible) return null;
