@@ -11,7 +11,12 @@
 //
 // Plain ESM with no Vite-only syntax so the Node build scripts can import it too.
 
+import { videoTestimonials } from "./video-testimonials.js";
+
 export const SITE_URL = "https://www.skyliftgroup.com";
+
+// Flips on its own the moment a real testimonial lands in video-testimonials.js.
+export const HAS_TESTIMONIALS = videoTestimonials.length > 0;
 export const DEFAULT_OG_IMAGE = "/og-image.png";
 
 export const routeSeo = {
@@ -34,6 +39,12 @@ export const routeSeo = {
     title: "Marketing for HVAC, Plumbing & Roofing | Sky Lift Group",
     description:
       "AI marketing and automation for roofing, plumbing, HVAC, electrical, junk removal, spray foam, and general contracting businesses across the US.",
+  },
+  "/testimonials": {
+    title: "Client Testimonials | Sky Lift Group",
+    description:
+      "Video testimonials from home service business owners we work with, with full transcripts. Real clients only \u2014 we do not write our own reviews.",
+    noindex: !HAS_TESTIMONIALS,
   },
   "/blog": {
     title: "AI Marketing & Local SEO Blog | Sky Lift Group",

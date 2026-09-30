@@ -38,6 +38,7 @@ const OneClickMarketing = lazy(() => import("./pages/Oneclickmarketing"));
 const AIWorkflowAutomation = lazy(() => import("./pages/Aiworkflowautomation"));
 const AIVoiceAgents = lazy(() => import("./pages/Aivoiceagents"));
 const AIChatbot = lazy(() => import("./pages/Aichatbot"));
+const Testimonials = lazy(() => import("./pages/Testimonials"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 
@@ -48,6 +49,7 @@ export const AppRoutes = () => (
       <Route path="/services" element={<Services />} />
       <Route path="/work" element={<Work />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/testimonials" element={<Testimonials />} />
       <Route path="/about-us" element={<AboutUs />} />
       <Route path="/services/web-design" element={<Designweb />} />
       <Route path="/services/seo" element={<Seo />} />

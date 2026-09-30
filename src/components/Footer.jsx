@@ -3,6 +3,7 @@ import { Facebook, Linkedin, Mail, MapPin, PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
 import { ORG_DESCRIPTION } from "../lib/schema";
 import { openConsentPreferences } from "../lib/analytics";
+import { HAS_TESTIMONIALS } from "../lib/seo-config";
 
 export const Footer = () => {
 
@@ -56,6 +57,10 @@ export const Footer = () => {
               { label: "Services", path: "/services" },
               { label: "Our Work", path: "/work" },
               { label: "Contact", path: "/contact" },
+              // Appears with the first real testimonial; see lib/video-testimonials.js.
+              ...(HAS_TESTIMONIALS
+                ? [{ label: "Testimonials", path: "/testimonials" }]
+                : []),
               { label: "Privacy policy", path: "/privacy-policy" },
               { label: "Terms Conditions", path: "/terms-conditions" },
               { label: "FAQ", path: "/faq" },

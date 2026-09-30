@@ -246,6 +246,51 @@ export default function MissedCallCalculator() {
       <section className="px-6 py-12">
         <motion.div {...fadeUp} className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+            Why HVAC and plumbing get very different numbers out of this
+          </h2>
+          <p className="text-gray-300 leading-relaxed text-[1.05rem] mb-5">
+            The calculator is deliberately trade-agnostic, because we are not going
+            to hand you an average job value for your trade and your market. Anyone
+            who does is quoting a number they cannot support. But the three inputs
+            do behave differently depending on what you do, and knowing how helps
+            you pick them.
+          </p>
+          <ul className="space-y-4 mb-5">
+            {[
+              {
+                t: "HVAC",
+                d: "The job value input has the widest spread of any trade — a diagnostic visit and a full system replacement sit in the same call log. Missed calls also concentrate hard into the first cold snap and the first heat wave, so a week counted in a shoulder month will understate the year badly. Count during a busy stretch, or count twice.",
+              },
+              {
+                t: "Plumbing",
+                d: "The booking rate input tends to run higher, because a burst pipe caller is not comparison shopping. That same urgency is why the missed ones are gone for good: they are calling the next company before you have finished the job you were on.",
+              },
+              {
+                t: "Roofing and other quoted work",
+                d: "Job value is high and booking rate is low, and the gap between the call and the decision is weeks. The revenue attached to a missed call is real but it arrives later, which makes follow-up matter more than instant response.",
+              },
+            ].map((s, i) => (
+              <li key={i} className="flex gap-4">
+                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#00A693]" />
+                <div>
+                  <h3 className="font-semibold text-white mb-1">{s.t}</h3>
+                  <p className="text-gray-300 leading-relaxed">{s.d}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="text-gray-300 leading-relaxed text-[1.05rem]">
+            If you run more than one of these under one phone number, run the
+            calculator once per trade rather than blending them. A blended average
+            job value is the fastest way to a figure that is wrong in both
+            directions at once.
+          </p>
+        </motion.div>
+      </section>
+
+      <section className="px-6 py-12">
+        <motion.div {...fadeUp} className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
             What to do about the number
           </h2>
           <p className="text-gray-300 leading-relaxed text-[1.05rem] mb-5">

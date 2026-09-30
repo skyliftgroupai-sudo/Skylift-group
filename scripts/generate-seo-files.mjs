@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { parseFrontmatter } from "../src/lib/frontmatter.js";
 import { blogIndexRoutes } from "../src/lib/blog-taxonomy.js";
+import { HAS_TESTIMONIALS } from "../src/lib/seo-config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -45,6 +46,11 @@ const staticRoutes = [
   { path: "/privacy-policy", priority: "0.3", changefreq: "yearly" },
   { path: "/terms-conditions", priority: "0.3", changefreq: "yearly" },
   { path: "/faq", priority: "0.6", changefreq: "monthly" },
+  // Listed only once a real testimonial exists. An empty page in the sitemap
+  // is a thin URL we asked Google to crawl.
+  ...(HAS_TESTIMONIALS
+    ? [{ path: "/testimonials", priority: "0.7", changefreq: "monthly" }]
+    : []),
 ];
 
 function escapeXml(str = "") {

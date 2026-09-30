@@ -11,6 +11,7 @@
 // under plain Node just as the browser bundle does.
 
 import { SITE_URL, routeSeo, pageSeo } from "./seo-config.js";
+import { videoTestimonials } from "./video-testimonials.js";
 import { routeFaqs } from "./service-faqs.js";
 
 export const ORG_ID = `${SITE_URL}/#organization`;
@@ -191,6 +192,25 @@ export function schemaForRoute(path, extra = null) {
       publisher: { "@id": ORG_ID },
       inLanguage: "en-US",
     });
+  }
+
+  if (path === "/testimonials") {
+    for (const t of videoTestimonials) {
+      nodes.push({
+        "@type": "VideoObject",
+        "@id": `${SITE_URL}/testimonials#${t.id}`,
+        name: t.headline || `${t.name}, ${t.business}`,
+        description: t.description,
+        thumbnailUrl: t.thumbnailUrl,
+        uploadDate: t.uploadDate,
+        ...(t.duration ? { duration: t.duration } : {}),
+        ...(t.embedUrl ? { embedUrl: t.embedUrl } : {}),
+        ...(t.contentUrl ? { contentUrl: t.contentUrl } : {}),
+        ...(t.transcript?.length ? { transcript: t.transcript.join("\n\n") } : {}),
+        publisher: { "@id": ORG_ID },
+        inLanguage: "en-US",
+      });
+    }
   }
 
   const service = SERVICES.find((s) => s.path === path);
