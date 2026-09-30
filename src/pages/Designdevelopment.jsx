@@ -11,6 +11,7 @@ import {
     Wrench
 } from "lucide-react";
 import CTASection from "./CtaSection";
+import ServiceInquiryForm from "../components/ServiceInquiryForm";
 import Testimonials from "./Testionmial";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
@@ -287,6 +288,7 @@ const Designweb = () => {
                 </div>
             </motion.section>
 
+            <ServiceInquiryForm />
             <CTASection />
             <Testimonials />
         </div>

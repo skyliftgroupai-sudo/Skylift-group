@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Mic, PhoneCall, Bot, Globe, Headphones, Sparkles, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import CTASection from "./CtaSection";
+import ServiceInquiryForm from "../components/ServiceInquiryForm";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
@@ -291,6 +292,7 @@ const AIVoiceAgents = () => {
                 </div>
             </motion.section>
 
+            <ServiceInquiryForm />
             <CTASection />
             <Testimonials />
         </div>

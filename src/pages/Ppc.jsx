@@ -2,6 +2,7 @@ import { use, useState } from "react";
 import { ChevronDown, BarChart2, TrendingUp, Zap, Settings, Search, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import CTASection from "./CtaSection";
+import ServiceInquiryForm from "../components/ServiceInquiryForm";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
@@ -280,6 +281,7 @@ const PPCManagement = () => {
                 </div>
             </motion.section>
 
+            <ServiceInquiryForm />
             <CTASection />
             <Testimonials />
         </div>

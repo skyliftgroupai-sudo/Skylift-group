@@ -15,6 +15,7 @@ import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 import { routeFaqs } from "../lib/service-faqs";
 import CTASection from "./CtaSection";
+import ServiceInquiryForm from "../components/ServiceInquiryForm";
 import {
   DirectAnswer,
   ServiceSections,
@@ -117,6 +118,7 @@ export default function ServicePage({ content }) {
 
       <RelatedServices related={content.related} />
 
+      <ServiceInquiryForm />
       <CTASection />
     </div>
   );

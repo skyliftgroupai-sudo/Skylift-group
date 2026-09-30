@@ -2,6 +2,7 @@ import { use, useState } from "react";
 import { ChevronDown, Users, TrendingUp, MessageCircle, Zap, BarChart2, Settings } from "lucide-react";
 import { motion } from "framer-motion";
 import CTASection from "./CtaSection";
+import ServiceInquiryForm from "../components/ServiceInquiryForm";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
@@ -281,6 +282,7 @@ const SocialMediaMarketing = () => {
                 </div>
             </motion.section>
 
+            <ServiceInquiryForm />
             <CTASection />
             <Testimonials />
         </div>

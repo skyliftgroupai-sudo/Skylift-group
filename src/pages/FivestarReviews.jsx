@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MessageSquare, Star, Clock, ShieldCheck, Repeat, LineChart, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import CTASection from "./CtaSection";
+import ServiceInquiryForm from "../components/ServiceInquiryForm";
 import Testimonials from "./Testionmial";
 import { Link } from "react-router-dom";
 import useSeo from "../hooks/useSeo";
@@ -292,6 +293,7 @@ const FivestarReviews = () => {
                 </div>
             </motion.section>
 
+            <ServiceInquiryForm />
             <CTASection />
             <Testimonials />
         </div>
