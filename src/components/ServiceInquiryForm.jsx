@@ -73,7 +73,7 @@ export default function ServiceInquiryForm({
           {mountFrame ? (
             <iframe
               src={FORM_SRC}
-              title="Send Sky Lift Group an enquiry"
+              title="Send Sky Lift Group an inquiry"
               loading="lazy"
               className="w-full border-none bg-white"
               style={{ height: `${FRAME_HEIGHT}px`, display: "block" }}
@@ -83,7 +83,7 @@ export default function ServiceInquiryForm({
               className="w-full flex items-center justify-center text-gray-500 text-sm"
               style={{ height: `${FRAME_HEIGHT}px` }}
             >
-              Loading the enquiry form&hellip;
+              Loading the inquiry form&hellip;
             </div>
           )}
         </div>

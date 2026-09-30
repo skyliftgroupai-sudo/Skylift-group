@@ -80,8 +80,8 @@ const AIChatbot = () => {
                     transition={{ duration: 0.8 }}
                     className="relative text-white text-4xl md:text-6xl font-bold text-center"
                 >
-                    AI Chatbot Solutions <br />
-                    <span className="text-[#00A693]"> Engage. Support. Convert.</span>
+                    AI Chatbots for HVAC &amp; Home Service Companies <br />
+                    <span className="text-[#00A693]"> Answering your website visitors around the clock</span>
                 </motion.h1>
 
                 <motion.p

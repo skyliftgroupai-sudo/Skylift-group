@@ -80,8 +80,8 @@ const AutomatedLeadFollowUp = () => {
                     transition={{ duration: 0.8 }}
                     className="relative text-white text-4xl md:text-6xl font-bold text-center"
                 >
-                    Automated Lead Follow Up <br />
-                    <span className="text-[#00A693]"> Convert More, Work Less</span>
+                    Automated Lead Follow-Up for Contractors <br />
+                    <span className="text-[#00A693]"> Every inquiry chased, without anyone remembering to</span>
                 </motion.h1>
 
                 <motion.p

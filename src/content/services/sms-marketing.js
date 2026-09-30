@@ -84,6 +84,59 @@ export default {
       ],
     },
     {
+      h2: "What the messages actually say",
+      body: [
+        "Owners usually want to see the wording before they agree to any of this, which is fair. Below is the shape of the sequence we set up first for most trades businesses. The bracketed parts are filled with your business name, your booking link and your own scheduling rules — nothing here is sent as-is.",
+      ],
+      steps: [
+        {
+          title: "Within about a minute of the missed call",
+          body: "\u201CHi, this is [name] at [your company] \u2014 sorry we missed your call, we\u2019re on a job. What do you need help with? Text me back here and I\u2019ll get you on the schedule. Reply STOP to opt out.\u201D The opt-out line is not optional, and the message goes out from the same number they dialled so the reply lands where they expect.",
+        },
+        {
+          title: "About an hour later, if there is no reply",
+          body: "\u201CStill happy to help if you need us. We have openings [day] and [day] \u2014 want me to hold one?\u201D One nudge, with a concrete option in it. A second message that only says \u2018just following up\u2019 gives the customer nothing to answer and is the fastest way to earn a complaint.",
+        },
+        {
+          title: "The next morning, then stop",
+          body: "\u201CLast one from me \u2014 if you\u2019d still like a quote, reply with your address and I\u2019ll get someone out. Otherwise no hard feelings.\u201D Three messages and the sequence ends. Contacts who do not respond are not rolled into a marketing list, because they never consented to one.",
+        },
+        {
+          title: "After the job is booked, a different track starts",
+          body: "Confirmation at booking, a reminder the day before, a note when the tech leaves the previous job, and a review request once the work is signed off. These are transactional and they are what earns you the right to send anything else later.",
+        },
+      ],
+    },
+    {
+      h2: "What text message marketing costs to run",
+      body: [
+        "There is no single price, and anyone quoting one without looking at your volume is guessing. What we can do is name every line on the bill so nothing arrives as a surprise.",
+        "The carrier fees below are set by AT&T, T-Mobile and Verizon through The Campaign Registry, not by us, and they have changed more than once in the last two years. We pull the current figures and put them in writing before you commit to anything.",
+      ],
+      benefits: [
+        {
+          title: "One-time registration",
+          body: "Registering your business as a brand, and then registering each messaging campaign under it, both carry a one-time fee paid to The Campaign Registry. Sole proprietors and standard businesses are priced differently, and some standard brands are also charged for secondary vetting.",
+        },
+        {
+          title: "A recurring campaign fee",
+          body: "Every registered campaign carries a monthly fee for as long as it is active. The rate depends on the campaign type you qualify for, so the number of separate campaigns you run matters more than most people expect.",
+        },
+        {
+          title: "Per-message carrier surcharges",
+          body: "The major carriers each add a small charge per message segment delivered on their network, and some now charge on inbound replies as well. This is the line that scales with volume, and it is why message length matters \u2014 a text that runs past one segment is billed as two.",
+        },
+        {
+          title: "The platform itself",
+          body: "The system that holds your contacts, runs the sequences and keeps the reply inbox. For most of our clients this sits inside the same platform that handles their missed calls and follow-up, rather than as a separate subscription.",
+        },
+        {
+          title: "Setup, on our side",
+          body: "Writing the sequences, wiring them to your booking and scheduling, getting the registration through, and setting up consent capture so the list you build is one you can legally send to. This is one-off work, not a retainer line.",
+        },
+      ],
+    },
+    {
       h2: "Staying on the right side of the rules",
       body: [
         "Business texting in the US is regulated, and the penalties for getting it wrong are real. The short version: you need express written consent before sending marketing texts, every message needs a clear way to opt out, opt-outs have to be honored promptly, and your business has to be registered with the carriers through A2P 10DLC.",

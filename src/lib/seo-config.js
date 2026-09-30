@@ -126,14 +126,14 @@ export const routeSeo = {
       "Turn past customers into booked jobs. Reactivation campaigns for HVAC and plumbing companies using the list you already own. Book a free call.",
   },
   "/services/sms-marketing": {
-    title: "SMS Marketing for Home Services | Sky Lift Group",
+    title: "Text Message Marketing for Home Services | Sky Lift Group",
     description:
       "Text message marketing built for contractors: missed-call replies, appointment reminders, and review requests. A2P 10DLC handled. Book a free call.",
   },
   "/services/missed-call-text-back": {
     title: "Missed Call Text Back for Home Services | Sky Lift Group",
     description:
-      "Never lose another lead to a missed call. An automatic text goes back in seconds, so the caller replies to you instead of calling the next contractor.",
+      "When you cannot pick up, an automatic text goes back in seconds, so the caller replies to you instead of dialing the next contractor on their list.",
   },
   "/services/lead-follow-up": {
     title: "Automated Lead Follow-Up for Contractors | Sky Lift Group",

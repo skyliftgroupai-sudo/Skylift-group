@@ -80,8 +80,8 @@ const AIVoiceAgents = () => {
                     transition={{ duration: 0.8 }}
                     className="relative text-white text-4xl md:text-6xl font-bold text-center"
                 >
-                    AI Voice Agents <br />
-                    <span className="text-[#00A693]"> Always On, Always Human</span>
+                    AI Voice Agents &amp; AI Answering Service <br />
+                    <span className="text-[#00A693]"> Calls answered and booked when your office cannot</span>
                 </motion.h1>
 
                 <motion.p

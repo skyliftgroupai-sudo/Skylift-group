@@ -80,8 +80,8 @@ const MissedCall = () => {
           transition={{ duration: 0.8 }}
           className="relative text-white text-4xl md:text-6xl font-bold text-center"
         >
-          Missed Call & Text Back <br />
-          <span className="text-[#00A693]"> Never Lose a Lead Again</span>
+          Missed Call Text Back for Contractors <br />
+          <span className="text-[#00A693]"> An automatic reply while the caller is still deciding</span>
         </motion.h1>
 
         <motion.p
