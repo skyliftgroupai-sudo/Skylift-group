@@ -143,6 +143,11 @@ function trailFor(path, title) {
   if (path.startsWith("/blog/")) {
     return [home, { name: "Blog", path: "/blog" }, { name: title, path }];
   }
+  // /work is already the industries hub, so the trade pages sit under it rather
+  // than under an /industries index that would exist only to hold a breadcrumb.
+  if (path.startsWith("/industries/")) {
+    return [home, { name: "Industries", path: "/work" }, { name: title, path }];
+  }
   return [home, { name: title, path }];
 }
 

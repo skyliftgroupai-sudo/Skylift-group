@@ -58,5 +58,7 @@ export default {
     { to: "/services/lead-follow-up", label: "AI Lead Capture & Follow-Up", note: "What happens to the lead after the first reply." },
     { to: "/services/ai-voice-agents", label: "AI Voice Agents", note: "For callers who would rather talk than text." },
     { to: "/services/database-reactivation", label: "Database Reactivation", note: "Bringing past customers back without new ads." },
+    { to: "/industries/plumbing-marketing", label: "Plumbing Marketing", note: "The trade where an unanswered call is lost permanently." },
+    { to: "/industries/hvac-marketing", label: "HVAC Marketing", note: "Peak-season weeks when the phone will not stop." },
   ],
 };

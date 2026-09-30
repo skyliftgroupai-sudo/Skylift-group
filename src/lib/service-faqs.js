@@ -10,6 +10,84 @@
 // importing the React component.
 
 export const routeFaqs = {
+  "/industries/hvac-marketing": [
+    {
+      q: "How much should an HVAC company spend on marketing?",
+      a: "There is no percentage that holds across markets, and anyone quoting one is guessing. The useful question is different: before you set a budget, count your unanswered calls for two weeks and multiply by your average job value. Most HVAC owners find the number large enough that fixing call handling comes before deciding what to spend on advertising.",
+    },
+    {
+      q: "When should HVAC marketing start for the heating season?",
+      a: "Before the weather turns, not during it. Search visibility and review flow build over weeks, and maintenance reminder campaigns have to reach customers ahead of the first cold snap to be useful. The work you do in September is what pays in November.",
+    },
+    {
+      q: "Do you handle HVAC Google Ads as well as SEO?",
+      a: "Yes, but usually not first. HVAC click costs peak exactly when every competitor is bidding, so paying for clicks while calls go unanswered scales the waste rather than the revenue. We would get response handling in place, then spend on the terms tied to replacement and install work rather than generic diagnostics.",
+    },
+    {
+      q: "Can you help with maintenance agreement renewals?",
+      a: "That is usually where the fastest return sits. Renewals and tune-up reminders are a scheduling problem more than a marketing one, and automated text and email sequences to your existing install base book work from customers you already paid to acquire.",
+    },
+    {
+      q: "We are busy in season and quiet in spring. Can marketing fix that?",
+      a: "Partly, and not by generating emergency demand out of season, because that demand does not exist. The shoulder months are filled from your own customer list — tune-ups, maintenance agreements, replacements for aging systems — rather than from advertising to strangers.",
+    },
+    {
+      q: "Do you work with HVAC companies outside your area?",
+      a: "Yes. We work remotely with contractors across the United States. Nothing we set up requires us to be in your market.",
+    },
+  ],
+  "/industries/roofing-marketing": [
+    {
+      q: "What does a roofing marketing agency actually do?",
+      a: "For a roofing company the work splits three ways: being visible in local search before a storm rather than after it, capturing the calls that arrive when demand spikes, and following up on estimates through the weeks a homeowner spends waiting on an adjuster and comparing quotes. The third is where most roofing leads are lost.",
+    },
+    {
+      q: "Is buying roofing leads worth it?",
+      a: "Shared leads sold to several roofers at once are a race rather than a lead, and they reward whoever calls within seconds. If your response speed is not already handled, buying them makes the problem more expensive. If it is handled, they can work — but usually your own search visibility costs less per job.",
+    },
+    {
+      q: "How long does roofing SEO take to work?",
+      a: "Months rather than weeks, which is exactly why it has to be built before the storm season you want it for. We will not tell you a specific timeline, because it depends on your market, your existing reviews and who you are competing with, and any agency quoting you a date is inventing it.",
+    },
+    {
+      q: "How do you help with insurance claim work?",
+      a: "Not by advising on claims, which is your expertise rather than ours. What we do is make sure your website answers the questions a homeowner in a claim is actually asking, and that your follow-up keeps the estimate alive through the adjuster wait instead of going silent for three weeks.",
+    },
+    {
+      q: "We get plenty of enquiries but they go cold. What fixes that?",
+      a: "Scheduled follow-up. A roofing estimate is rarely decided the day it is given, and in most roofing businesses the chasing depends on someone remembering to do it. Automating that sequence recovers work that is already in your pipeline rather than buying more of it.",
+    },
+    {
+      q: "Do you work with commercial roofing contractors?",
+      a: "Some of this applies and some does not. Commercial roofing is won through relationships and bids more than inbound search, so we would be honest about which parts are worth doing rather than selling you the residential playbook.",
+    },
+  ],
+  "/industries/plumbing-marketing": [
+    {
+      q: "What do plumbing marketing services include?",
+      a: "For a plumbing company the priority order is unusual. First, making sure no inbound call goes unanswered, because an emergency caller who reaches voicemail is gone permanently. Then local and map visibility for emergency searches. Then follow-up on the planned work — water heaters, repipes, drain service — which is compared over days rather than seconds.",
+    },
+    {
+      q: "Why does response speed matter so much for plumbers?",
+      a: "Because the homeowner is standing in water. They are not comparing quotes, they are working down a list of search results and stopping at whoever picks up. In most trades a missed enquiry can be recovered with good follow-up; in emergency plumbing it cannot, because by the time you call back another van is outside.",
+    },
+    {
+      q: "Do I need Google Ads to get plumbing leads?",
+      a: "Not necessarily, and not first. Map visibility, reviews and reliable call handling produce emergency work without a per-click cost. Ads are worth adding when you want volume on a specific timeline or you are entering a market where nobody knows you — but not while calls are still ringing out.",
+    },
+    {
+      q: "How do you handle after-hours plumbing calls?",
+      a: "With an automatic text reply on any missed call, and an AI voice agent that answers, establishes urgency and location, and either books or escalates to your on-call tech. After-hours calls are frequently the most valuable work a plumbing company gets, and voicemail loses them.",
+    },
+    {
+      q: "Can you get more water heater and repipe work rather than call-outs?",
+      a: "Yes, and it is usually neglected. Those are planned purchases with better margins and longer decision windows, so they need scheduled follow-up rather than instant response. Reactivation campaigns to past customers with aging water heaters are the other route, and they cost a fraction of advertising.",
+    },
+    {
+      q: "Do you work with plumbing companies nationwide?",
+      a: "Yes, remotely, with plumbing contractors across the United States. We do not sell shared leads and we do not resell your own customers back to you.",
+    },
+  ],
   "/services/ai-chatbots": [
       {
           q: "Will the chatbot give customers wrong information?",

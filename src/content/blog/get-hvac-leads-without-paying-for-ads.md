@@ -94,4 +94,4 @@ Everything above is durable and cheap and slow to build. None of it produces fif
 
 The argument is about sequence, not about virtue. Fix the leaks first, then turn on the tap. An HVAC company that answers every call, texts its own list, and shows up properly in the map pack gets more out of the same ad budget than one that does not — and it keeps a base of work if the budget ever has to go to zero.
 
-If you want a second opinion on which of these is worth doing first in your market, [book a free strategy call](/book). We work with HVAC, plumbing and roofing companies across the United States, and the answer is usually the phone.
+There is more on [how we work with heating and cooling companies](/industries/hvac-marketing) if you want the longer version. If you want a second opinion on which of these is worth doing first in your market, [book a free strategy call](/book). We work with HVAC, plumbing and roofing companies across the United States, and the answer is usually the phone.

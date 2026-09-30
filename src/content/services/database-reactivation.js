@@ -108,5 +108,6 @@ export default {
     { to: "/services/lead-follow-up", label: "AI Lead Capture & Follow-Up", note: "Handling the replies a campaign generates." },
     { to: "/services/missed-call-text-back", label: "Missed Call Text Back", note: "Catching the customers who call instead of texting." },
     { to: "/services/reviews", label: "Review Generation", note: "Turning reactivated jobs into new reviews." },
+    { to: "/industries/hvac-marketing", label: "HVAC Marketing", note: "Where the install base is the whole opportunity." },
   ],
 };

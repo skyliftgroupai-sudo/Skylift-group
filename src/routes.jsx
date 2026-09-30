@@ -38,6 +38,9 @@ const OneClickMarketing = lazy(() => import("./pages/Oneclickmarketing"));
 const AIWorkflowAutomation = lazy(() => import("./pages/Aiworkflowautomation"));
 const AIVoiceAgents = lazy(() => import("./pages/Aivoiceagents"));
 const AIChatbot = lazy(() => import("./pages/Aichatbot"));
+const HvacMarketing = lazy(() => import("./pages/HvacMarketing"));
+const RoofingMarketing = lazy(() => import("./pages/RoofingMarketing"));
+const PlumbingMarketing = lazy(() => import("./pages/PlumbingMarketing"));
 const Testimonials = lazy(() => import("./pages/Testimonials"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -50,6 +53,12 @@ export const AppRoutes = () => (
       <Route path="/work" element={<Work />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/testimonials" element={<Testimonials />} />
+      {/* Trade-vertical pages. The service pages are organised by what we
+          sell; contractors search by trade plus marketing. These meet that
+          query and route into the service pages. */}
+      <Route path="/industries/hvac-marketing" element={<HvacMarketing />} />
+      <Route path="/industries/roofing-marketing" element={<RoofingMarketing />} />
+      <Route path="/industries/plumbing-marketing" element={<PlumbingMarketing />} />
       <Route path="/about-us" element={<AboutUs />} />
       <Route path="/services/web-design" element={<Designweb />} />
       <Route path="/services/seo" element={<Seo />} />

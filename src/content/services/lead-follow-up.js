@@ -58,5 +58,6 @@ export default {
     { to: "/services/missed-call-text-back", label: "Missed Call Text Back", note: "Capturing the leads that arrive as unanswered calls." },
     { to: "/services/sms-marketing", label: "SMS & Text Message Marketing", note: "The channel most follow-up runs on." },
     { to: "/services/google-ads", label: "Google Ads Management", note: "Feeding the top of this system." },
+    { to: "/industries/roofing-marketing", label: "Roofing Marketing", note: "Where a quote sits unanswered through an insurance claim." },
   ],
 };

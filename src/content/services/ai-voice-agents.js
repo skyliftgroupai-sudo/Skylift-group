@@ -59,5 +59,6 @@ export default {
     { to: "/services/ai-chatbots", label: "AI Chatbots", note: "The same coverage for website visitors." },
     { to: "/services/lead-follow-up", label: "AI Lead Capture & Follow-Up", note: "Following up the calls that did not book." },
     { to: "/services/sms-marketing", label: "SMS & Text Message Marketing", note: "Confirmations and reminders after the booking." },
+    { to: "/industries/hvac-marketing", label: "HVAC Marketing", note: "After-hours cover through a cold snap." },
   ],
 };

@@ -116,9 +116,19 @@ return (
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 className="relative"
               >
-                <div className="text-4xl md:text-5xl font-extrabold text-[#00A693] drop-shadow-[0_0_15px_#00A69370]">
-                  {animatedValue}
-                  {stat.suffix}
+                {/* The counter animates 0 -> value. Without a reserved box the
+                    number grows from one character to four as it counts, which
+                    reflows the block and is the whole of this page's layout
+                    shift. tabular-nums fixes the per-digit width; the ch-based
+                    minWidth reserves the final length up front. */}
+                <div className="text-4xl md:text-5xl font-extrabold text-[#00A693] drop-shadow-[0_0_15px_#00A69370] tabular-nums">
+                  <span
+                    className="inline-block text-center"
+                    style={{ minWidth: `${String(stat.value).length + stat.suffix.length}ch` }}
+                  >
+                    {animatedValue}
+                    {stat.suffix}
+                  </span>
                 </div>
 
                 <div className="text-sm md:text-base text-gray-200 opacity-90 mt-2 tracking-wide">
@@ -207,6 +217,54 @@ return (
             Explore Our Services <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
+      </div>
+    </section>
+
+    {/* Trade pages. /work is the industries hub, so this is where the
+        per-trade pages hang off it -- without these links they would be
+        orphans in the crawl. */}
+    <section className="px-6 py-16 bg-[#0a0a0a]">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+          Marketing by trade
+        </h2>
+        <p className="text-gray-400 leading-relaxed mb-8">
+          The problems are not the same from one trade to the next. An HVAC
+          company drowns in calls for two weeks and goes quiet for two months;
+          a plumber loses the job in the seconds before someone picks up; a
+          roofer loses it in the three weeks after the estimate. These go into
+          the detail.
+        </p>
+        <div className="grid md:grid-cols-3 gap-4">
+          {[
+            {
+              to: "/industries/hvac-marketing",
+              label: "HVAC Marketing",
+              note: "Peak-season call capture, and filling the shoulder months from your install base.",
+            },
+            {
+              to: "/industries/roofing-marketing",
+              label: "Roofing Marketing",
+              note: "Storm cycles, insurance claims, and estimate follow-up that runs for weeks.",
+            },
+            {
+              to: "/industries/plumbing-marketing",
+              label: "Plumbing Marketing",
+              note: "Response speed first, because an unanswered emergency call does not come back.",
+            },
+          ].map((t) => (
+            <Link
+              key={t.to}
+              to={t.to}
+              className="group rounded-xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-[#00A693]/50"
+            >
+              <span className="font-semibold text-white group-hover:text-[#00A693] transition-colors">
+                {t.label}
+              </span>
+              <p className="text-gray-400 text-[0.95rem] mt-1">{t.note}</p>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
 

@@ -40,6 +40,21 @@ export const routeSeo = {
     description:
       "AI marketing and automation for roofing, plumbing, HVAC, electrical, junk removal, spray foam, and general contracting businesses across the US.",
   },
+  "/industries/hvac-marketing": {
+    title: "HVAC Marketing Company for Contractors | Sky Lift Group",
+    description:
+      "HVAC marketing that catches the calls you miss in peak season and fills the shoulder months from your own install base. Book a free strategy call.",
+  },
+  "/industries/roofing-marketing": {
+    title: "Roofing Marketing Agency for Contractors | Sky Lift Group",
+    description:
+      "Roofing marketing built around storm cycles, insurance claims and estimates that take weeks to close. Follow-up that keeps a quote alive.",
+  },
+  "/industries/plumbing-marketing": {
+    title: "Plumbing Marketing Services & SEO | Sky Lift Group",
+    description:
+      "Plumbing marketing for companies where the job goes to whoever answers first. We fix the response gap before spending a dollar on demand.",
+  },
   "/testimonials": {
     title: "Client Testimonials | Sky Lift Group",
     description:

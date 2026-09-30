@@ -48,5 +48,6 @@ export default {
     { to: "/services/content-writing", label: "SEO Content Writing", note: "The service pages this work depends on." },
     { to: "/services/reviews", label: "Review Generation", note: "Recent reviews feed local rankings." },
     { to: "/blog/local-seo-home-service-businesses-2026", label: "Local SEO Guide for Home Services", note: "The long version, written out." },
+    { to: "/industries/roofing-marketing", label: "Roofing Marketing", note: "Built before the storm season you want it for." },
   ],
 };

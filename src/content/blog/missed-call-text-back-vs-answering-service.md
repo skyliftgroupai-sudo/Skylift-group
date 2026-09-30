@@ -118,4 +118,4 @@ It depends on volume. Answering services bill per call, so low steady volume can
 
 ---
 
-**Not sure which fits your business?** [Book a free strategy call](/book) and we will look at your actual call volume and customer base. See how [the automatic text reply](/services/missed-call-text-back) works in practice.
+**Not sure which fits your business?** [Book a free strategy call](/book) and we will look at your actual call volume and customer base. See how [the automatic text reply](/services/missed-call-text-back) works in practice, or read what this looks like for [a roofing business](/industries/roofing-marketing).

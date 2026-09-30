@@ -68,7 +68,7 @@ Each of these is trying to solve the problem with more human availability, which
 
 Responding within the window before they dial the next company — which is a few minutes, not an hour.
 
-[Texting the caller back automatically](/services/missed-call-text-back) is the simplest version. The call goes unanswered, and within about a minute the caller gets a text: your company name, an acknowledgment, and a question about what they need. Most people find replying by text easier than calling back, especially if they are at work.
+[Texting the caller back automatically](/services/missed-call-text-back) is the simplest version. The arithmetic bites hardest in [plumbing](/industries/plumbing-marketing), where the caller is standing in water and will not wait. The call goes unanswered, and within about a minute the caller gets a text: your company name, an acknowledgment, and a question about what they need. Most people find replying by text easier than calling back, especially if they are at work.
 
 This works because it inverts the problem. Instead of needing a person available at the exact moment the phone rings, you need a person available sometime in the next hour to work through replies. That is a much easier staffing problem.
 

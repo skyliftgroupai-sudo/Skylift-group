@@ -58,5 +58,6 @@ export default {
     { to: "/services/reviews", label: "Review Generation", note: "The review flow map rankings depend on." },
     { to: "/services/google-ads", label: "Google Ads Management", note: "Paid results above the map pack." },
     { to: "/blog/google-business-profile-optimization-home-service-businesses", label: "GBP Optimization Guide (2026)", note: "The full checklist, written out." },
+    { to: "/industries/plumbing-marketing", label: "Plumbing Marketing", note: "Emergency searches are decided here more than anywhere." },
   ],
 };
