@@ -79,7 +79,7 @@ Profile fixes — categories, services, information consistency — can show eff
 
 Anyone promising a specific position by a specific date is guessing. Google offers no such guarantee and neither should a provider. What is reasonable to expect is directional movement within a quarter if the fundamentals were genuinely broken and get genuinely fixed.
 
-This is also why [Google Ads](/services/google-ads) and local SEO belong together rather than being alternatives. Ads produce calls while the organic side builds. The organic side keeps producing when you stop paying.
+This is also why [paid placement](/services/google-ads) and local SEO belong together rather than being alternatives. Ads produce calls while the organic side builds. The organic side keeps producing when you stop paying.
 
 ## What about AI search and answer engines?
 

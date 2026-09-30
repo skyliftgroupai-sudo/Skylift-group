@@ -63,7 +63,7 @@ What to avoid:
 
 **Do not send it three days later.** The goodwill fades. Same day or next day is the window.
 
-**Do not send from a number they do not recognize.** It should come from the same business line they have been texting with about the appointment, which is one reason [SMS marketing](/services/sms-marketing) and review requests belong in the same system.
+**Do not send from a number they do not recognize.** It should come from the same business line they have been texting with about the appointment, which is one reason [your texting](/services/sms-marketing) and review requests belong in the same system.
 
 ## What should I not do to get reviews?
 

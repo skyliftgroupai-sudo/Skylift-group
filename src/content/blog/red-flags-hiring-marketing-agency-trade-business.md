@@ -25,7 +25,7 @@ Guaranteed lead volume is a softer version of the same problem. It is achievable
 
 ## Red flag 2: Reporting on clicks and impressions
 
-Impressions are not revenue. Clicks are not revenue. A monthly report full of graphs trending up while your calendar stays empty is the most common way contractors get quietly overcharged. This matters most with [Google Ads](/services/google-ads), where the platform hands over impressive-looking numbers by default.
+Impressions are not revenue. Clicks are not revenue. A monthly report full of graphs trending up while your calendar stays empty is the most common way contractors get quietly overcharged. This matters most with [managed ad campaigns](/services/google-ads), where the platform hands over impressive-looking numbers by default.
 
 The problem is structural rather than dishonest: it is easy to report what the ad platform gives you and hard to report on booked jobs, which requires connecting to your actual business.
 
@@ -127,4 +127,4 @@ Concrete, checkable things: audit and fix the Google Business Profile, set up ca
 
 ---
 
-**Want a second opinion on your current marketing?** [Book a free strategy call](/book). No pitch — we will tell you what we would prioritize and whether you need an agency at all. You can also read [what we actually do](/services) and decide for yourself.
+**Want a second opinion on your current marketing?** [Book a free strategy call](/book). No pitch — we will tell you what we would prioritize and whether you need an agency at all. You can also see [what we actually do](/services) and [the kind of businesses we work with](/), then decide for yourself.

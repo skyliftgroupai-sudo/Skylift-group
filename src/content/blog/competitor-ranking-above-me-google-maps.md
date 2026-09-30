@@ -88,7 +88,7 @@ Proximity is the one factor with no workaround. A business two miles from the se
 
 What you can do is win the areas where you are closest, and compete on relevance and prominence everywhere else. That means service-area pages on your site that genuinely describe your work in those areas, reviews that mention the towns you serve, and the strongest possible profile — so that when you are second-closest, you are still the best match.
 
-This is also where [local SEO on your website](/services/seo) — covered in more depth in our [local SEO guide for contractors](/blog/local-seo-home-service-businesses-2026) — and [Google Ads](/services/google-ads) earn their place: ranking organically and paying for placement are both ways to appear where the map pack is stacked against you.
+This is also where [local SEO on your website](/services/seo) — covered in more depth in our [local SEO guide for contractors](/blog/local-seo-home-service-businesses-2026) — and [paid search](/services/google-ads) earn their place: ranking organically and paying for placement are both ways to appear where the map pack is stacked against you.
 
 ## How do I even know where I rank?
 

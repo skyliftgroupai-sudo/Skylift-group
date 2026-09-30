@@ -56,7 +56,7 @@ An ad that runs at 9pm produces a call at 9pm. If nobody answers, you paid for a
 
 This is the most straightforwardly wasteful pattern in contractor advertising, and it is common because ad scheduling is not on by default.
 
-Two ways to fix it, and they are not mutually exclusive. Restrict the schedule to hours you can cover. Or keep running and put [missed call text back](/services/missed-call-text-back) or an [AI voice agent](/blog/can-ai-answer-the-phone-for-my-business) behind the ads so after-hours calls get an immediate reply instead of a voicemail. The second usually earns more, because urgent after-hours calls are often the most valuable work you get.
+Two ways to fix it, and they are not mutually exclusive. Restrict the schedule to hours you can cover. Or keep running and put [an automatic text reply](/services/missed-call-text-back) or an [AI voice agent](/blog/can-ai-answer-the-phone-for-my-business) behind the ads so after-hours calls get an immediate reply instead of a voicemail. The second usually earns more, because urgent after-hours calls are often the most valuable work you get.
 
 What you should not do is run ads around the clock with voicemail as the safety net. That is paying full price for a lead and giving it away.
 

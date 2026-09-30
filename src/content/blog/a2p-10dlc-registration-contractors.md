@@ -28,7 +28,7 @@ Three things, in escalating order of damage.
 
 **Messages get filtered.** Not bounced with an error — silently dropped. You see the message as sent, the customer never receives it, and nobody tells you. This is the failure mode that costs the most, because you keep operating as though your reminders are arriving.
 
-**Your throughput gets throttled.** Unregistered traffic gets the lowest priority and the tightest rate limits. Send to twenty customers and some arrive hours later, which defeats the entire purpose of a [missed call text back](/services/missed-call-text-back) that is supposed to land within a minute — and [missed calls are expensive](/blog/what-missed-calls-cost-contractors).
+**Your throughput gets throttled.** Unregistered traffic gets the lowest priority and the tightest rate limits. Send to twenty customers and some arrive hours later, which defeats the entire purpose of an [automatic reply](/services/missed-call-text-back) that is supposed to land within a minute — and [missed calls are expensive](/blog/what-missed-calls-cost-contractors).
 
 **Your number gets blocked.** At the far end, carriers block the number entirely. Recovering from this is slow, and in the meantime the number on your trucks does not deliver texts.
 

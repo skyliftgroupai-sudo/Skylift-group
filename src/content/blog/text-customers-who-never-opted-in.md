@@ -46,7 +46,7 @@ The written part matters and catches people out. A customer saying "yeah, sure, 
 
 This is the real question, and the honest answer has layers.
 
-**Keep sending transactional messages.** Appointment confirmations, reminders, en-route notices, replies to inbound calls. These relate to work the customer booked and are the least risky category. This includes [missed call text back](/services/missed-call-text-back), which replies to a call the customer made.
+**Keep sending transactional messages.** Appointment confirmations, reminders, en-route notices, replies to inbound calls. These relate to work the customer booked and are the least risky category. This includes [the reply that goes out when you miss a call](/services/missed-call-text-back), which answers a call the customer made.
 
 **Do not blast the whole list with promotions.** A seasonal offer to two thousand numbers where you cannot evidence consent for any of them is the scenario that generates complaints, and complaints are what bring scrutiny.
 
@@ -132,4 +132,4 @@ There is no universal expiry, but consent from many years ago for a one-off job 
 
 ---
 
-**Want your texting set up so this is not a worry?** [Book a free strategy call](/book). We handle consent capture, registration and opt-out management as part of every [SMS marketing](/services/sms-marketing) build.
+**Want your texting set up so this is not a worry?** [Book a free strategy call](/book). We handle consent capture, registration and opt-out management as part of [every texting system we set up](/services/sms-marketing).

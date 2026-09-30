@@ -78,7 +78,7 @@ A rough decision path:
 
 **Use both if** you have a real emergency category that needs human triage, or you want live coverage in hours and automation outside them.
 
-**Fix this before scaling ads either way.** Paying for a click and then missing the resulting call is the most expensive mistake available. Response handling should be in place before [Google Ads](/services/google-ads) spend goes up, not after.
+**Fix this before scaling ads either way.** Paying for a click and then missing the resulting call is the most expensive mistake available. Response handling should be in place before [your paid search spend](/services/google-ads) goes up, not after.
 
 ## What about the calls that are not customers?
 
@@ -118,4 +118,4 @@ It depends on volume. Answering services bill per call, so low steady volume can
 
 ---
 
-**Not sure which fits your business?** [Book a free strategy call](/book) and we will look at your actual call volume and customer base. See how [missed call text back](/services/missed-call-text-back) works in practice.
+**Not sure which fits your business?** [Book a free strategy call](/book) and we will look at your actual call volume and customer base. See how [the automatic text reply](/services/missed-call-text-back) works in practice.

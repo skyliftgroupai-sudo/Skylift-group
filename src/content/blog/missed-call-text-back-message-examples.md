@@ -107,7 +107,7 @@ A single message sent to every missed caller at every hour works, but it leaves 
 
 **By time.** During business hours the message can promise a quick callback, because someone will be there. After hours it should be honest about the time and lean harder on text as the channel. A message promising a callback "shortly" at 9pm sets an expectation you will not meet.
 
-**By where the call came from.** If you run [Google Ads](/services/google-ads) with call tracking, you know which calls came from an ad and often which service they searched for. A caller who clicked an emergency plumbing ad can get a message that already assumes urgency, which saves a round trip.
+**By where the call came from.** If you run [search ads](/services/google-ads) with call tracking, you know which calls came from an ad and often which service they searched for. A caller who clicked an emergency plumbing ad can get a message that already assumes urgency, which saves a round trip.
 
 The principle is that every piece of context you already hold should remove a question from the conversation. The fewer exchanges needed before booking, the more callers make it through.
 
@@ -145,4 +145,4 @@ Yes. Acknowledging the hour honestly while staying reachable by text beats an au
 
 ---
 
-**Want your missed-call messaging written and set up properly?** [Book a free strategy call](/book), or see how [missed call text back](/services/missed-call-text-back) fits with the rest of your [SMS marketing](/services/sms-marketing).
+**Want your missed-call messaging written and set up properly?** [Book a free strategy call](/book), or see how [the automated reply](/services/missed-call-text-back) fits with the rest of your [text message program](/services/sms-marketing).

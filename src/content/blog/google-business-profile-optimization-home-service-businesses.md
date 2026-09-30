@@ -148,9 +148,9 @@ Keep each post short, add a photo, and include a clear call-to-action button ("C
 
 Your Google Business Profile doesn't work in a vacuum. It performs best when it's the front door to a well-built system:
 
-- **A fast, mobile-first website** with location and service pages reinforces relevance and prominence. (See our approach to [local SEO](/services/seo).)
+- **A fast, mobile-first website** with location and service pages reinforces relevance and prominence. (See our approach to [local SEO on the website side](/services/seo).)
 - **Local Map ranking as a dedicated discipline** — tracking your position in the Map Pack across your service area and improving it methodically. That's the focus of our [Local Maps service](/services/local-maps).
-- **Instant lead follow-up.** The average buyer calls three companies; the first to respond usually wins. Tools like [missed-call text-back](/services/missed-call-text-back) and [automated lead follow-up](/services/lead-follow-up) make sure a GBP lead never slips away because you were on a ladder.
+- **Instant lead follow-up.** A homeowner with an urgent problem is rarely calling only one company, and the one that responds first has a real advantage. Tools like [an instant text reply](/services/missed-call-text-back) and [automatic follow-up sequences](/services/lead-follow-up) make sure a GBP lead never slips away because you were on a ladder.
 - **An AI chatbot** on your website to capture and qualify the visitors your profile sends over. (See [AI chatbots](/services/ai-chatbots).)
 
 Optimizing GBP gets the phone to ring. The systems around it make sure every ring turns into a booked job.

@@ -68,7 +68,7 @@ Each of these is trying to solve the problem with more human availability, which
 
 Responding within the window before they dial the next company — which is a few minutes, not an hour.
 
-[Missed call text back](/services/missed-call-text-back) is the simplest version. The call goes unanswered, and within about a minute the caller gets a text: your company name, an acknowledgment, and a question about what they need. Most people find replying by text easier than calling back, especially if they are at work.
+[Texting the caller back automatically](/services/missed-call-text-back) is the simplest version. The call goes unanswered, and within about a minute the caller gets a text: your company name, an acknowledgment, and a question about what they need. Most people find replying by text easier than calling back, especially if they are at work.
 
 This works because it inverts the problem. Instead of needing a person available at the exact moment the phone rings, you need a person available sometime in the next hour to work through replies. That is a much easier staffing problem.
 
@@ -80,7 +80,7 @@ Neither replaces answering your phone. They cover the calls you were going to lo
 
 If you are spending money on advertising and missing calls, fix the missed calls first. Paying for a click and then not answering the resulting call is the most expensive mistake available — you bought the lead and handed it to a competitor.
 
-That ordering matters more than it sounds. Contractors routinely increase ad budget while the leak at the bottom stays open, which scales the waste rather than the revenue. Scaling [Google Ads](/services/google-ads) before response is handled turns a small loss into a large one. It is one of the patterns worth watching for when [choosing an agency](/blog/red-flags-hiring-marketing-agency-trade-business).
+That ordering matters more than it sounds. Contractors routinely increase ad budget while the leak at the bottom stays open, which scales the waste rather than the revenue. Scaling [paid campaigns](/services/google-ads) before response is handled turns a small loss into a large one. It is one of the patterns worth watching for when [choosing an agency](/blog/red-flags-hiring-marketing-agency-trade-business).
 
 ## What about the calls that were never going to be jobs?
 

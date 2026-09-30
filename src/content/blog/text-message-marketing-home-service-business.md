@@ -33,7 +33,7 @@ A handful of specific uses work consistently. The rest mostly do not.
 
 The highest-value message by a wide margin. A call comes in while your crew is on a roof, goes unanswered, and within about a minute the caller gets a text asking what they need. The competitor they were about to dial never gets called.
 
-This one message addresses the single most expensive failure in the trades: you paid to make the phone ring, and then nobody could answer it. If you set up nothing else, set up [missed call text back](/services/missed-call-text-back).
+This one message addresses the single most expensive failure in the trades: you paid to make the phone ring, and then nobody could answer it. If you set up nothing else, set up [the automatic reply to a missed call](/services/missed-call-text-back).
 
 ### Appointment confirmations and reminders
 
@@ -121,7 +121,7 @@ Only if the messages are unexpected. A confirmation for an appointment they book
 
 ### What is the difference between SMS marketing and missed call text back?
 
-Missed call text back is one message within a larger system. [SMS marketing](/services/sms-marketing) covers the full set: missed-call replies, confirmations, reminders, en-route notifications, review requests and reactivation campaigns. Most businesses start with missed-call text back because it recovers the most revenue for the least setup, then add the rest.
+Missed call text back is one message within a larger system. [Text message marketing](/services/sms-marketing) covers the full set: missed-call replies, confirmations, reminders, en-route notifications, review requests and reactivation campaigns. Most businesses start with missed-call text back because it recovers the most revenue for the least setup, then add the rest.
 
 ### Can I use my existing business number for texting?
 

@@ -126,4 +126,4 @@ Yes, and for an honest review rather than a positive one. Asking selectively is 
 
 ---
 
-**Want review requests going out after every job automatically?** [Book a free strategy call](/book), or see how [review generation](/services/reviews) works alongside [Google Business Profile optimization](/services/local-maps).
+**Want review requests going out after every job automatically?** [Book a free strategy call](/book), or see how [automated review requests](/services/reviews) work alongside [getting the profile itself right](/services/local-maps).
