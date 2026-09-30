@@ -136,17 +136,19 @@ export const Footer = () => {
               </a>
             </li>
 
+            {/* Mailing address, not a staffed office -- confirmed by the owner.
+                It stays published, because one identical name/address/phone
+                everywhere is what separates this company from the other
+                "Skylift" firms Google keeps confusing it with. It is no longer
+                a Google Maps link: a Maps pin on a mailbox invites a customer
+                to drive to one. */}
             <li className="flex items-start gap-2">
               <MapPin className="w-5 h-5 text-[#00A693] mt-1" />
-              <a
-                href="https://maps.google.com/?q=1001+S+Main+St+STE+500,+Kalispell,+MT+59901"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#00A693] transition-colors duration-300"
-              >
+              <span className="not-italic">
+                <span className="block text-sm text-gray-400">Mailing address</span>
                 1001 S Main St STE 500, <br />
                 Kalispell, MT 59901
-              </a>
+              </span>
             </li>
 
             <li className="flex items-center gap-2">

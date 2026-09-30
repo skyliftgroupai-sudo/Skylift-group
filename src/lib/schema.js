@@ -161,10 +161,12 @@ function crumbName(path) {
  *
  * There is deliberately no ProfessionalService node. ProfessionalService is a
  * subtype of LocalBusiness, which asserts a physical place of business and is
- * expected to carry a postal address. Sky Lift Group's registered address is a
- * registered-agent / virtual mailbox, not a customer-facing location, so
- * claiming LocalBusiness would be describing a business that does not exist and
- * would leave a LocalBusiness permanently missing its defining property.
+ * expected to carry a postal address. The owner has confirmed that the
+ * Kalispell address is a mailbox, not a staffed office, so there is no
+ * customer-facing location to describe. Claiming LocalBusiness would assert a
+ * place of business that does not exist and would leave the node permanently
+ * missing its defining property. This is settled, not an open question -- do
+ * not add LocalBusiness, PostalAddress or geo coordinates back.
  *
  * Organization is the truthful type: it says who the entity is, needs no
  * address, and carries hasOfferCatalog and areaServed perfectly well. Each

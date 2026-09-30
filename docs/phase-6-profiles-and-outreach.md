@@ -17,9 +17,9 @@ name, address and phone match exactly. Use the block below verbatim, every time.
 ```
 Business name:  Sky Lift Group
 Legal entity:   Sky Lift LLC
-Address:        1001 S Main St STE 500
-                Kalispell, MT 59901
-                United States
+Address:        1001 S Main St STE 500     <- MAILING ADDRESS, not an office.
+                Kalispell, MT 59901           Never present it as a location
+                United States                 you can visit. See note below.
 Phone:          +1 (725) 263-1475
 Email:          hello@skyliftgroup.com
 Website:        https://www.skyliftgroup.com
@@ -101,7 +101,7 @@ General Contracting · Handyman Services · Auto Detailing
 | Platform | Priority | Notes |
 |---|---|---|
 | **LinkedIn Company Page** | Do first | Free, you control it, and it is already in your Organization schema `sameAs`. Use the medium description. Add the services list as LinkedIn "Specialties". |
-| **Bing Places** | Do first | Free. Bing feeds ChatGPT search, which matters for your AI-visibility goal more than its search share suggests. Mirrors your Google Business Profile. |
+| **Bing Places** | **Do not** | Withdrawn. Bing Places lists a business at a location customers can visit or that serves a defined area from a real premises. The Kalispell address is a mailbox, so a storefront listing there is grounds for suspension. See the mailing-address note below before considering a service-area listing. |
 | **Crunchbase** | Do first | Free basic profile, strong entity signal for the brand-collision problem. Use legal name Sky Lift LLC with Sky Lift Group as the brand. |
 | **Clutch** | High | Requires verified client reviews to rank. Do not create the profile until you have at least one client willing to do a Clutch interview — an empty profile ranks nowhere and looks worse than none. |
 | **UpCity** | High | Has a free tier. Asks for service breakdown percentages — estimate honestly. |
@@ -111,10 +111,30 @@ General Contracting · Handyman Services · Auto Detailing
 | **Agency Spotter** | Medium | Portfolio-heavy. Worth doing once you have case studies with visuals. |
 | **G2** | Low for now | Built for software products, not service agencies. Skip unless you productize something. |
 
-**Sequence that makes sense:** LinkedIn, Bing Places and Crunchbase this week —
-all free, all fast, all strengthen the entity. Then UpCity and GoodFirms. Hold
-Clutch and Agency Spotter until you have a client review and a case study,
-because both are review-gated and an empty profile is worse than absent.
+**Sequence that makes sense:** LinkedIn and Crunchbase this week — both free,
+both fast, both strengthen the entity. Then UpCity and GoodFirms. Hold Clutch
+and Agency Spotter until you have a client review and a case study, because
+both are review-gated and an empty profile is worse than absent.
+
+### Mailing address — what it rules out
+
+The owner has confirmed 1001 S Main St STE 500 is a mailbox, not a staffed
+office. That settles three things:
+
+- **Bing Places: no.** A storefront listing at a mailbox risks suspension.
+- **Google Business Profile: no**, on the same grounds. Google requires a
+  location with staff during stated hours, or a service-area business that
+  works from a real premises it does not publish. A mailbox is neither. If a
+  profile already exists at this address, it is exposed — say so and we will
+  deal with it rather than leave it sitting there.
+- **`LocalBusiness` schema: no.** Already excluded from the site's structured
+  data for exactly this reason, and it stays excluded.
+
+What it does **not** rule out: publishing the address for citation
+consistency. One identical name, address and phone across every profile is
+still the strongest available signal that Sky Lift Group is a distinct entity
+from the lift-equipment companies. Keep using it verbatim — just never as a
+place to visit, and never with a map pin on it.
 
 ---
 
@@ -389,9 +409,10 @@ this for when there is bandwidth to do it properly.
 
 ## 4. Suggested order
 
-**This week** — LinkedIn, Bing Places, Crunchbase. Free, fast, and they
-strengthen the brand entity that Search Console currently confuses with
-lift-equipment companies.
+**This week** — LinkedIn and Crunchbase. Free, fast, and they strengthen the
+brand entity that Search Console currently confuses with lift-equipment
+companies. (Bing Places was on this list and has been withdrawn — see the
+mailing-address note in section 2.)
 
 **Next two weeks** — Pitch the two publications with confirmed contributor
 guidelines (ACHR News, Contractor Magazine) and three podcasts. Podcasts first

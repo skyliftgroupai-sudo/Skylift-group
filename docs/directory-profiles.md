@@ -20,7 +20,7 @@ that, so paste these verbatim rather than rewriting per site.
 | Website | https://www.skyliftgroup.com |
 | Email | hello@skyliftgroup.com |
 | Phone | +1 (725) 263-1475 |
-| Mailing address | 1001 S Main St STE 500, Kalispell, MT 59901 |
+| Mailing address | 1001 S Main St STE 500, Kalispell, MT 59901 — **a mailbox, not an office**. Use it for citation consistency; never present it as a place to visit. |
 | Entity type | Montana LLC |
 | Facebook | https://www.facebook.com/share/199LNKDqTT/ |
 | LinkedIn | https://www.linkedin.com/company/sky-lift-group/ |
@@ -158,16 +158,18 @@ behind. "Not disclosed" is an available answer on every one of these.
   the page's "About" matches section 4 word for word.
 - **Crunchbase** — expects a founding year and funding status. Fine to list as
   bootstrapped/no funding; do not invent a raise.
-- **Bing Places** — **check eligibility before applying.** Bing, like Google,
-  requires a location that is staffed or a properly configured service-area
-  business. If 1001 S Main St STE 500 is a mailbox rather than a staffed
-  office, listing it as a storefront risks suspension. Tell me which it is and
-  I will advise; if it is a mailbox, the correct route is a service-area
-  listing with the address hidden, or skipping Bing Places entirely.
+- **Bing Places** — **skip it.** Confirmed with the owner: the Kalispell
+  address is a mailbox, not a staffed office. Bing, like Google, lists a
+  business at a location customers can visit, or a service-area business
+  working from real premises it chooses not to publish. A mailbox is neither,
+  so a storefront listing there is grounds for suspension. The same reasoning
+  rules out a **Google Business Profile** at this address. Nine profiles on
+  this list remain worth doing; this one is not.
 
-The same caveat is why the site's structured data does **not** currently claim
-a `LocalBusiness` with a postal address — we should not assert a physical
-place of business in schema that we could not defend in a listing review.
+That is also why the site's structured data does **not** claim a
+`LocalBusiness` with a postal address, and why it should not be added later.
+We do not assert a physical place of business in schema that we could not
+defend in a listing review.
 
 ---
 
