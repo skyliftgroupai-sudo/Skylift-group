@@ -67,10 +67,13 @@ export default function AboutUs() {
                         >
                             Our Story
                         </motion.h2>
-                        <span className="text-[#00A693] text-semibold">Sky Lift Group</span> began with a simple idea: support businesses with smart digital
-                        solutions that actually make a difference. What started as a small team grew into
-                        a full-service agency trusted by clients worldwide. Our focus is on real results,
-                        clear communication and long-term success.
+                        <span className="text-[#00A693] text-semibold">Sky Lift Group</span> is a marketing and AI
+                        automation agency for home service businesses — HVAC, plumbing, roofing, electrical
+                        and the trades around them. We work with contractors across the United States.
+                        We started because the same work kept getting lost in the same three places: calls
+                        that rang out while a crew was on a job, quotes that went quiet and were never
+                        chased, and past customers nobody contacted again. Everything we build is aimed at
+                        one of those three.
                     </motion.p>
 
                     {/* Image */}

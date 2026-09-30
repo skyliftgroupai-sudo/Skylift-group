@@ -21,9 +21,9 @@ export const routeSeo = {
       "Sky Lift Group helps home service businesses get more leads with AI chatbots, missed-call text back, SMS marketing, ads, and local SEO. Book a free call.",
   },
   "/about-us": {
-    title: "About Our AI Marketing Agency | Sky Lift Group",
+    title: "Marketing Agency for Home Services | Sky Lift Group",
     description:
-      "Sky Lift Group is an AI automation and marketing agency for home service businesses. Meet the team and see how we turn missed leads into booked jobs.",
+      "We are a marketing and AI automation agency for contractors across the US. HVAC, plumbing, roofing and the trades around them. Meet the team behind it.",
   },
   "/services": {
     title: "AI Marketing Services for Contractors | Sky Lift Group",
@@ -31,7 +31,7 @@ export const routeSeo = {
       "AI chatbots, missed-call text back, SMS marketing, lead capture, Google Ads, and local SEO built for HVAC, plumbing, and roofing companies.",
   },
   "/work": {
-    title: "Industries We Serve | Sky Lift Group",
+    title: "Marketing for HVAC, Plumbing & Roofing | Sky Lift Group",
     description:
       "AI marketing and automation for roofing, plumbing, HVAC, electrical, junk removal, spray foam, and general contracting businesses across the US.",
   },
@@ -51,9 +51,9 @@ export const routeSeo = {
       "Book a free strategy call with Sky Lift Group and get a plan for turning more of your calls, forms, and leads into booked jobs.",
   },
   "/services/web-design": {
-    title: "Website Design for Home Service Businesses | Sky Lift Group",
+    title: "Contractor Website Design That Books Jobs | Sky Lift Group",
     description:
-      "Fast, mobile-first websites for HVAC, roofing, and plumbing companies. Built to load quickly and turn visitors into booked jobs. Get a free quote.",
+      "Websites for HVAC, plumbing and roofing companies. Fast on a phone, a page per service so you can rank, and a number people can tap. Free site review.",
   },
   "/services/seo": {
     title: "Local SEO for Home Service Businesses | Sky Lift Group",
@@ -133,10 +133,10 @@ export const routeSeo = {
   "/services/missed-call-text-back": {
     title: "Missed Call Text Back for Home Services | Sky Lift Group",
     description:
-      "Never lose another lead to a missed call. Automatic text-back replies in seconds and turns missed calls into booked jobs. See how it works.",
+      "Never lose another lead to a missed call. An automatic text goes back in seconds, so the caller replies to you instead of calling the next contractor.",
   },
   "/services/lead-follow-up": {
-    title: "AI Lead Capture for Contractors | Sky Lift Group",
+    title: "Automated Lead Follow-Up for Contractors | Sky Lift Group",
     description:
       "Automated lead follow-up that responds in seconds and nurtures every inquiry into a booked job for home service businesses.",
   },
