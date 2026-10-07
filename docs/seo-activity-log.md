@@ -146,6 +146,37 @@ Owner reported both admin changes made. Re-read of the Admin API:
 (unchanged — `book_call_click` absent). One of the two landed. Detail in the
 blocker list above.
 
+### Custom-event firing, verified 2026-10-07
+
+The GA4 **Recent events** list contains only six names, all GA4 built-ins:
+`click`, `first_visit`, `page_view`, `scroll`, `session_start`,
+`user_engagement`. No custom event from this site has ever been collected, which
+is why `book_call_click` could not be toggled — GA4 had never seen it.
+
+That is either "nobody clicked" or "the tracking is broken", so it was tested
+rather than assumed. Clicking the real elements in the real build, with the
+loader aborted so nothing reached Google:
+
+```
+phone_click      {"link_location":"footer"}
+email_click      {"link_location":"footer"}
+book_call_click  {"button_location":"header"}
+scroll_90        {"page_path":"/blog/get-hvac-leads-without-paying-for-ads"}
+```
+
+**The tracking works.** The delegated listener in `installLinkTracking()` fires
+on `tel:`, `mailto:` and `/book` links and labels the location correctly.
+Nothing is collected because nobody has clicked. That is consistent with the
+traffic: 2-3 users in the period, viewing `/about-us`, `/blog`, `/blog/page/2`,
+`/contact` and `/privacy-policy`, with no phone, email or booking click among
+them.
+
+**Open question raised by this, not yet acted on:** our `scroll_90` duplicates
+GA4 enhanced measurement's built-in `scroll`, which also fires at 90% depth and
+already carries page context. Two events, one signal. Recommend dropping ours
+and keeping the built-in, but that is a measurement-scope decision, so it is
+flagged rather than changed.
+
 ### Next step
 
 `book_call_click` still needs creating via **Admin → Key events → New key
