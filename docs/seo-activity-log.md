@@ -102,16 +102,24 @@ No URLs added, changed or removed.
 
 ### Remaining blockers
 
-1. **Enhanced measurement "page changes based on browser history events" is
-   still ON** (property confirms `pageChangesEnabled: true`, stream unchanged
-   since 2026-09-24). On a React SPA this is a second page_view mechanism beside
-   the deliberate one in `Layout.jsx`. It cannot be verified or ruled out from
-   this environment. Requires a GA4 admin change or a DebugView session.
-2. **`book_call_click` is still not a key event.** Property key events remain
-   `purchase`, `qualify_lead`, `close_convert_lead` — none of which this site
-   sends, which is why key events read 0 on every row. Until one of the site's
-   own events is marked as key, firing of `book_call_click`, `phone_click` and
-   `email_click` cannot be confirmed through the reporting API.
+1. ~~**Enhanced measurement "page changes based on browser history events".**~~
+   **RESOLVED 2026-10-07.** Owner turned it off; re-read of the Admin API
+   confirms `pageChangesEnabled: false`. There is now exactly one page_view
+   mechanism on the site — the deliberate one in `Layout.jsx` — and the direct
+   test shows it emits exactly one `page_view` per route. The configuration risk
+   is closed. Note this is a configuration fact read from the Admin API, not a
+   live observation of `gtag.js`, which still cannot load in this environment.
+2. **`book_call_click` is still not a key event — the change did not take.**
+   Re-read on 2026-10-07 after the owner reported making it: `keyEventCount` is
+   still 3 and the list is unchanged (`purchase`, `qualify_lead`,
+   `close_convert_lead`). The key-events report returns 0 rows for
+   2026-09-24..2026-10-06.
+   Most likely cause: GA4's **Events** table only lists event names it has
+   already collected, so there was no `book_call_click` row to toggle. With 2
+   active users in the period the event has probably never fired. The path that
+   works for an unseen event is **Admin → Key events → New key event**, typing
+   the name manually. Marking it is configuration only — it will read 0 until
+   someone actually clicks a "Book a Free Strategy Call" link.
 3. **Google Signals property setting** — tag-side is verified off
    (`allow_google_signals: false`). The property-level toggle was last confirmed
    off by the owner's screenshot on 2026-09-30 and is not exposed by the
@@ -131,10 +139,18 @@ Two changes in the GA4 admin UI, both outside any API available here:
 - **Admin → Events → Key events →** mark **`book_call_click`** as a key event
   (intent signal, not a lead — do not report it as booked calls).
 
+### Verification follow-up, 2026-10-07 (same day)
+
+Owner reported both admin changes made. Re-read of the Admin API:
+`pageChangesEnabled` **false** (confirmed changed), `keyEventCount` **3**
+(unchanged — `book_call_click` absent). One of the two landed. Detail in the
+blocker list above.
+
 ### Next step
 
-Re-read GA4 key events once `book_call_click` is marked, to confirm the
-intent-event wiring end to end. Unrelated and still open from 2026-09-30: the
+`book_call_click` still needs creating via **Admin → Key events → New key
+event** rather than the Events-table toggle. Re-read key events after that to
+confirm the intent-event wiring end to end. Unrelated and still open from 2026-09-30: the
 three trade pages need indexing requested, and the unverified counters on
 `/work` (500+ Projects, 350+ Happy Clients, 95% Client Retention) are still live
 pending the owner's decision.
