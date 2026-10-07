@@ -46,11 +46,19 @@ const Schedule = () => {
           Pick a time that works for you. If you would rather talk first, the options below reach us directly.
         </p>
 
-        {/* Sky Lift Group's own LeadConnector booking calendar. Same calendar ID
-            that was embedded on this page until July 2026, recovered from commit
-            91ddeb4 -- not a new integration. link.msgsndr.com/js/form_embed.js is
-            already loaded in index.html, which is what LeadConnector uses to size
-            this iframe. */}
+        {/* Sky Lift Group's LeadConnector booking calendar, supplied by the
+            owner on 2026-10-07. It replaces calendar Mi5gk5QCFKULntPciL7d, which
+            had been recovered from an old commit.
+
+            link.msgsndr.com/js/form_embed.js is already loaded in index.html and
+            is what resizes this iframe. It targets the element by id, so the id
+            keeps LeadConnector's own {widgetId}_{timestamp} form.
+
+            minHeight rather than a fixed height: the box is reserved at 900px
+            from first paint so nothing moves while the calendar loads, and
+            form_embed.js can still grow it if the calendar needs more room.
+            A fixed height would have clipped a taller calendar, since
+            scrolling is off. */}
         <div
           style={{
             borderRadius: "20px",
@@ -58,13 +66,16 @@ const Schedule = () => {
             border: "2px solid #00A693",
             backgroundColor: "#fff",
             marginBottom: "40px",
+            minHeight: "900px",
           }}
         >
           <iframe
-            src="https://api.leadconnectorhq.com/widget/booking/Mi5gk5QCFKULntPciL7d"
+            src="https://api.leadconnectorhq.com/widget/booking/go3vHktAyk0Z9QABNphm"
             title="Book an appointment with Sky Lift Group"
+            id="go3vHktAyk0Z9QABNphm_1791404836301"
+            allow="payment"
             scrolling="no"
-            style={{ width: "100%", height: "900px", border: "none", display: "block" }}
+            style={{ width: "100%", minHeight: "900px", border: "none", display: "block" }}
           />
         </div>
 

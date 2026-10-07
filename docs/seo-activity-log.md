@@ -146,6 +146,33 @@ Owner reported both admin changes made. Re-read of the Admin API:
 (unchanged — `book_call_click` absent). One of the two landed. Detail in the
 blocker list above.
 
+### Booking calendar replaced, 2026-10-07
+
+The owner supplied the current LeadConnector booking calendar
+(`go3vHktAyk0Z9QABNphm`). `/book` was still embedding
+`Mi5gk5QCFKULntPciL7d`, which had been recovered from an old commit when the
+page had no working booking method at all. Swapped.
+
+Carried over from the owner's snippet: `allow="payment"`, `scrolling="no"`, and
+the `{widgetId}_{timestamp}` id that `link.msgsndr.com/js/form_embed.js` uses to
+find and resize the iframe. That script was already loaded in `index.html`.
+
+Changed from the snippet, deliberately: the raw embed sets no height and lets
+form_embed.js size it from zero, which shifts the page as it loads. Replaced
+with `minHeight: 900px` on both the wrapper and the iframe, so the box is
+reserved from first paint and form_embed.js can still grow it if the calendar
+needs more room. A fixed height would have clipped a taller calendar, because
+scrolling is off.
+
+**Not verifiable from this environment:** `api.leadconnectorhq.com` is
+unreachable from the container, so the calendar itself cannot be loaded here.
+Confirmed: the markup ships correctly, the 900px box is reserved at 996x900
+desktop and 346x900 mobile, and CLS is 0.0000 on both. Whether the calendar
+renders and accepts a booking needs a look at the live page.
+
+All "Book a Free Strategy Call" buttons across the site point at `/book`, so
+this one change covers every entry point.
+
 ### Custom-event firing, verified 2026-10-07
 
 The GA4 **Recent events** list contains only six names, all GA4 built-ins:
