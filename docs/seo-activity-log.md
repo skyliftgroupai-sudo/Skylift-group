@@ -17,6 +17,85 @@ the git history and `seo-engagement-report.md` are the record for those.
 
 ---
 
+## 2026-10-07 — Inquiry path: blocked-embed fallback shipped, native form prepared
+
+Full write-up: `docs/inquiry-path.md`.
+
+### Evidence — the inquiry capability and its destination
+
+The site has working inquiry capability; no native form is not the same as no
+way to inquire. Live: LeadConnector form `J6Gtz1pzBFNFDvoMGV05` on `/contact`
+and all 18 service pages, booking calendar `go3vHktAyk0Z9QABNphm` on `/book`,
+chat widget `6a4ec0f6d77eb8016d211bce` site-wide, plus `form_embed.js`. Direct
+routes (`hello@skyliftgroup.com`, `+1 (725) 263-1475`) on `/contact` and every
+service page.
+
+**Where submissions land is not established.** Checked and ruled out:
+all four LeadConnector hosts unreachable from the container; no endpoint,
+webhook or key in `.env`, `vercel.json` or source; Zapier has Facebook Pages,
+LinkedIn and GA4 only; LeadConnector exists in the Zapier catalog but is not
+enabled and has no connections, shared included. Nothing assumed, nothing
+invented.
+
+### Changed files
+
+- `src/pages/Contact.jsx` — blocked-embed fallback (**shipped**)
+- `src/components/ServiceInquiryForm.jsx` — same, covers 18 service pages (**shipped**)
+- `src/components/InquiryForm.jsx` — native short form (**new, not rendered**)
+- `src/lib/inquiry-endpoint.js` — destination config, deliberately empty (**new**)
+- `docs/inquiry-path.md` — deliverable (**new**)
+- `public/sitemap.xml`, `public/rss.xml` — regenerated timestamps only
+
+No URLs added, changed or removed.
+
+### A wrong first implementation, caught by testing
+
+The fallback first used the iframe's `onLoad` plus a timeout. A test with the
+embed blocked proved it never fired the fallback: Chromium fires `onLoad` for
+its own error page, so `onLoad` cannot distinguish success from failure.
+Replaced with a `no-cors` probe to the same origin — an ad blocker blocks that
+too and the promise rejects — with the timer kept as a backstop. Had the test
+not been run, this would have shipped looking correct and doing nothing.
+
+### Tests — 22 of 22 passed
+
+Every POST intercepted and fulfilled locally; nothing left the machine and no
+real inquiry was created. Labels and a11y 2/2, empty submit 4/4, bad
+email/short message 3/3, destination rejects 5/5 (no false success, message
+preserved, no analytics event), destination accepts 5/5 (success only after
+acceptance, attribution sent, no PII in analytics), blocked embed 3/3.
+
+Build clean 56 pages, audit 0 critical, smoke 110/110, CLS 0.0000 on `/contact`
+and `/services/missed-call-text-back`, sitemap URL set unchanged.
+
+### Shipped vs preview-only
+
+**Shipped:** the blocked-embed fallback on `/contact` and 18 service pages.
+**Preview-only:** the native `InquiryForm`. It is imported nowhere and renders
+`null` while `INQUIRY_ENDPOINT` is empty, so nothing about the live inquiry path
+changed. Previews captured locally.
+
+### Remaining blockers
+
+1. **Destination URL for the native form.** A webhook URL that accepts the JSON
+   payload and returns 2xx — in LeadConnector, an Inbound Webhook trigger on a
+   workflow. Must be safe for client-side code: a webhook URL, never an API key.
+2. **No real test inquiry sent, and none will be without specific permission** —
+   a live test creates a real contact and may trigger real notifications.
+3. Carried over: `book_call_click` still not a key event (GA4's Events table
+   only lists names already collected; the custom events have never fired
+   because nobody has clicked). Google Signals property toggle not re-verifiable
+   through the read-only API.
+4. Noted, not acted on: `scroll_90` duplicates GA4's built-in `scroll`.
+
+### Next step
+
+Supply the destination URL and the native form goes live with a one-line change.
+Until then the verified LeadConnector embed remains the live path, now with a
+fallback so it cannot dead-end.
+
+---
+
 ## 2026-10-07 — GA4 consent and event-sequence verification
 
 **Scope:** continue the existing GA4 install on `G-L6KM3R8YGF`. No property

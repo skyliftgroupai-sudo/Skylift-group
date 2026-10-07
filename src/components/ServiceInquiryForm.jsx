@@ -11,6 +11,10 @@ const FORM_SRC = "https://api.leadconnectorhq.com/widget/form/J6Gtz1pzBFNFDvoMGV
 // box, so mounting the embed moves nothing on the page and CLS stays at 0.
 const FRAME_HEIGHT = 700;
 
+// How long to wait for the embed before offering a route that does not depend
+// on it. Generous enough not to trip on a slow connection.
+const FRAME_TIMEOUT_MS = 6000;
+
 /**
  * Compact version of the /contact form for the foot of a service page.
  *
@@ -26,6 +30,12 @@ export default function ServiceInquiryForm({
 }) {
   const sectionRef = useRef(null);
   const [mountFrame, setMountFrame] = useState(false);
+  // "pending" until the embed reports a load. If it never does -- the commonest
+  // cause is an ad blocker, since leadconnectorhq.com sits on the usual block
+  // lists -- we stop waiting and show a contact route that always works. Before
+  // this, a blocked embed left a silent blank box as the page's main call to
+  // action.
+  const [frameState, setFrameState] = useState("pending");
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -51,6 +61,27 @@ export default function ServiceInquiryForm({
     return () => io.disconnect();
   }, [mountFrame]);
 
+// Detecting a blocked cross-origin embed is harder than it looks. An iframe's
+// onLoad fires even when the navigation failed -- Chromium treats its own error
+// page as a load -- so onLoad cannot tell success from failure. The reliable
+// signal is a separate no-cors request to the same origin: an ad blocker, which
+// is the usual cause, blocks that too and the promise rejects. A real response
+// resolves opaquely, and we do not care about its status, only that it arrived.
+  useEffect(() => {
+    if (!mountFrame || frameState !== "pending") return;
+    let cancelled = false;
+    const settle = (next) =>
+      !cancelled && setFrameState((cur) => (cur === "pending" ? next : cur));
+
+    fetch(FORM_SRC, { mode: "no-cors", cache: "no-store" })
+      .then(() => settle("loaded"))
+      .catch(() => settle("failed"));
+
+    // Backstop for a request that neither resolves nor rejects.
+    const t = setTimeout(() => settle("failed"), FRAME_TIMEOUT_MS);
+    return () => { cancelled = true; clearTimeout(t); };
+  }, [mountFrame, frameState]);
+
   return (
     <section
       ref={sectionRef}
@@ -70,7 +101,35 @@ export default function ServiceInquiryForm({
           className="mt-8 rounded-lg overflow-hidden bg-[#111111] shadow-md"
           style={{ height: `${FRAME_HEIGHT}px` }}
         >
-          {mountFrame ? (
+          {frameState === "failed" ? (
+            <div
+              role="status"
+              className="flex w-full flex-col items-center justify-center gap-4 px-6 text-center"
+              style={{ height: `${FRAME_HEIGHT}px` }}
+            >
+              <p className="text-white font-semibold">
+                The inquiry form could not load.
+              </p>
+              <p className="max-w-md text-sm text-gray-400 leading-relaxed">
+                Usually a browser extension blocking it. Nothing is wrong on your
+                end — these two reach us just as well.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a
+                  href="mailto:hello@skyliftgroup.com"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00A693] px-6 py-3 font-semibold text-white transition hover:bg-[#00947F]"
+                >
+                  <Mail className="h-4 w-4" /> hello@skyliftgroup.com
+                </a>
+                <a
+                  href="tel:+17252631475"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#00A693] px-6 py-3 font-semibold text-[#00A693] transition hover:bg-[#00A693] hover:text-white"
+                >
+                  <PhoneCall className="h-4 w-4" /> +1 (725) 263-1475
+                </a>
+              </div>
+            </div>
+          ) : mountFrame ? (
             <iframe
               src={FORM_SRC}
               title="Send Sky Lift Group an inquiry"

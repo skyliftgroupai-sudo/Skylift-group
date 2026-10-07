@@ -1,9 +1,31 @@
+import { useEffect, useState } from "react";
+
+const CONTACT_FORM_SRC =
+  "https://api.leadconnectorhq.com/widget/form/J6Gtz1pzBFNFDvoMGV05";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Clock, PhoneCall } from "lucide-react";
 import useSeo from "../hooks/useSeo";
 import { seoFor } from "../lib/schema";
 
 const Contact = () => {
+  // Detecting a blocked cross-origin embed is harder than it looks. An iframe's
+  // onLoad fires even when the navigation failed -- Chromium treats its own
+  // error page as a load -- so onLoad cannot tell success from failure. A test
+  // with the embed blocked proved the onLoad version never showed the fallback.
+  // The reliable signal is a separate no-cors request to the same origin: an ad
+  // blocker, which is the usual cause, blocks that too and the promise rejects.
+  // A real response resolves opaquely; its status does not matter, only that it
+  // arrived.
+  const [formFailed, setFormFailed] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    const fail = () => !cancelled && setFormFailed(true);
+    fetch(CONTACT_FORM_SRC, { mode: "no-cors", cache: "no-store" }).catch(fail);
+    // Backstop for a request that neither resolves nor rejects.
+    const t = setTimeout(fail, 6000);
+    return () => { cancelled = true; clearTimeout(t); };
+  }, []);
+
 
 
   useSeo(seoFor("/contact"));
@@ -115,15 +137,45 @@ const Contact = () => {
     transition={{ duration: 0.6 }}
     className="lg:col-span-2"
   ><div className="relative w-full h-full min-h-[760px] rounded-lg overflow-hidden bg-[#111111] shadow-md">
-    {/* Sky Lift Group's own LeadConnector intake form. This is the same form ID
-        that was embedded on this page until July 2026, recovered from commit
-        471ef69 -- not a new integration. Where it delivers submissions is
-        configured inside LeadConnector, not here. */}
-    <iframe
-      src="https://api.leadconnectorhq.com/widget/form/J6Gtz1pzBFNFDvoMGV05"
-      title="Contact Sky Lift Group"
-      className="w-full h-full min-h-[760px] border-none bg-white"
-    />
+    {/* Sky Lift Group's own LeadConnector intake form, form J6Gtz1pzBFNFDvoMGV05.
+        Where it delivers submissions is configured inside LeadConnector, not here.
+
+        formFailed covers the case where the embed never loads -- most often an
+        ad blocker, since leadconnectorhq.com is on the common block lists.
+        Without this, the main call to action on this page is a silent blank
+        box and the visitor has no idea anything is wrong. */}
+    {formFailed ? (
+      <div
+        role="status"
+        className="flex h-full min-h-[760px] w-full flex-col items-center justify-center gap-4 px-6 text-center"
+      >
+        <p className="font-semibold text-white">The form could not load.</p>
+        <p className="max-w-sm text-sm text-gray-400 leading-relaxed">
+          Usually a browser extension blocking it. Nothing is wrong on your end —
+          these reach us just as well.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <a
+            href="mailto:hello@skyliftgroup.com"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00A693] px-6 py-3 font-semibold text-white transition hover:bg-[#00947F]"
+          >
+            <Mail className="h-4 w-4" /> hello@skyliftgroup.com
+          </a>
+          <a
+            href="tel:+17252631475"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#00A693] px-6 py-3 font-semibold text-[#00A693] transition hover:bg-[#00A693] hover:text-white"
+          >
+            <PhoneCall className="h-4 w-4" /> +1 (725) 263-1475
+          </a>
+        </div>
+      </div>
+    ) : (
+      <iframe
+        src={CONTACT_FORM_SRC}
+        title="Contact Sky Lift Group"
+        className="w-full h-full min-h-[760px] border-none bg-white"
+      />
+    )}
   </div>
 
   <div className="mt-6 rounded-lg border border-white/10 bg-[#111111] p-6 text-center">
