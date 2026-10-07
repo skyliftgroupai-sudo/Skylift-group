@@ -99,7 +99,30 @@ export function openConsentPreferences() {
  * page_location is rebuilt from the origin and the cleaned path rather than
  * taken from window.location.href, for the reason above.
  */
+/**
+ * Is this page actually measuring?
+ *
+ * index.html decides that once, on the production hostname check, and records
+ * it on window.__slgGa. Until now only index.html acted on it: it skipped
+ * injecting gtag.js, but pageView() and track() still pushed into dataLayer on
+ * preview and local builds. Nothing reached the property, because without
+ * gtag.js nothing ever processes the queue -- but the queue grew unbounded, and
+ * the rule "no measurement off production" was enforced in one place out of
+ * two. If anything else ever loaded gtag.js on a preview URL, the whole backlog
+ * would flush to the property with preview URLs attached.
+ *
+ * Consent calls are deliberately NOT gated. Consent state must stay correct
+ * whether or not the tag is live, so that it is already right if measurement is
+ * enabled later in the page's life.
+ */
+function measuring() {
+  if (typeof window === "undefined") return false;
+  // Undefined means the inline snippet has not run (tests, SSR). Fail closed.
+  return window.__slgGa ? window.__slgGa.enabled === true : false;
+}
+
 export function pageView(path, title) {
+  if (!measuring()) return;
   const p = cleanPath(path);
   gtag("event", "page_view", {
     page_path: p,
@@ -110,6 +133,7 @@ export function pageView(path, title) {
 
 /** Custom event. Never pass names, emails, phone numbers or message contents. */
 export function track(name, params = {}) {
+  if (!measuring()) return;
   gtag("event", name, params);
 }
 
