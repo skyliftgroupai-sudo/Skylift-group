@@ -17,6 +17,64 @@ the git history and `seo-engagement-report.md` are the record for those.
 
 ---
 
+## 2026-10-08 — Removed scroll_90, kept GA4's built-in scroll
+
+Owner's decision on the duplication flagged 2026-10-07.
+
+### Evidence checked first
+
+Before removing ours, re-read the Admin API to confirm the built-in would still
+be there: `scrollsEnabled: true` on stream `15840970192`. Had enhanced
+measurement's scroll been off, removing ours would have left no scroll tracking
+at all. Also re-confirmed `pageChangesEnabled: false`.
+
+Our `scroll_90` fired at 90% depth on blog posts only. GA4's built-in `scroll`
+fires at the same depth site-wide and already carries page context, so this
+removal loses nothing and widens coverage.
+
+### Changed files
+
+- `src/lib/analytics.js` — removed the scroll-depth section (27 lines):
+  `installScrollDepth()`, the `scrollBound` module variable and the `scroll_90`
+  event.
+- `src/components/Layout.jsx` — removed the import and the per-route call.
+- `public/sitemap.xml`, `public/rss.xml` — regenerated timestamps only.
+
+No URLs added, changed or removed.
+
+### Tests — 5 of 5 passed
+
+Loader aborted throughout; nothing reached Google.
+
+```
+no scroll event from our code after a full-page scroll   queued: []
+phone_click still fires
+email_click still fires
+book_call_click still fires
+page_view still fires
+```
+
+`scroll_90` is absent from the whole of `dist/`. Build clean 56 pages, audit
+0 critical, smoke 110/110, sitemap URL set unchanged.
+
+### Shipped vs preview-only
+
+**Shipped.**
+
+### Remaining blockers
+
+Unchanged from 2026-10-07: the inquiry destination URL (native `InquiryForm`
+stays inert until then), `book_call_click` not yet a key event, and the Google
+Signals property toggle not re-verifiable through the read-only API.
+
+### Next step
+
+Nothing outstanding on analytics instrumentation. Next action is the owner's:
+either the inquiry destination URL, or clicking a "Book a Free Strategy Call"
+button on the live site so `book_call_click` appears in GA4 and can be starred.
+
+---
+
 ## 2026-10-07 — Inquiry path: blocked-embed fallback shipped, native form prepared
 
 Full write-up: `docs/inquiry-path.md`.

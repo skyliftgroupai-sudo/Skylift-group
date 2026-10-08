@@ -176,34 +176,6 @@ function locationOf(el) {
   return cleanPath(typeof window !== "undefined" ? window.location.pathname : "") || "body";
 }
 
-// --- scroll depth ------------------------------------------------------------
-// Blog posts only, once per page view.
-let scrollBound = null;
-
-export function installScrollDepth(path, enabled) {
-  if (typeof window === "undefined") return;
-  if (scrollBound) {
-    window.removeEventListener("scroll", scrollBound);
-    scrollBound = null;
-  }
-  if (!enabled) return;
-
-  let fired = false;
-  scrollBound = () => {
-    if (fired) return;
-    const doc = document.documentElement;
-    const scrollable = doc.scrollHeight - window.innerHeight;
-    if (scrollable <= 0) return;
-    if ((window.scrollY / scrollable) * 100 >= 90) {
-      fired = true;
-      track("scroll_90", { page_path: cleanPath(path) });
-      window.removeEventListener("scroll", scrollBound);
-      scrollBound = null;
-    }
-  };
-  window.addEventListener("scroll", scrollBound, { passive: true });
-}
-
 /**
  * Confirmed inquiry submission. NOT wired yet -- see installEmbedProbe below.
  * When it is wired it must be called from the embed's confirmed-success signal,

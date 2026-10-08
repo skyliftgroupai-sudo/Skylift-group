@@ -3,7 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import ConsentBanner from "./ConsentBanner";
-import { pageView, installLinkTracking, installScrollDepth, installEmbedProbe } from "../lib/analytics";
+import { pageView, installLinkTracking, installEmbedProbe } from "../lib/analytics";
 
 export const Layout = () => {
   const { pathname } = useLocation();
@@ -18,7 +18,6 @@ export const Layout = () => {
     // of page_view. The timeout lets useSeo apply the route's <title> first,
     // otherwise every hit would carry the previous page's title.
     const t = setTimeout(() => pageView(pathname), 0);
-    installScrollDepth(pathname, pathname.startsWith("/blog/") && !pathname.startsWith("/blog/category/") && !pathname.startsWith("/blog/page/"));
     return () => clearTimeout(t);
   }, [pathname]);
 
