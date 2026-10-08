@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import ConsentBanner from "./ConsentBanner";
 import { pageView, installLinkTracking, installEmbedProbe } from "../lib/analytics";
+import { installConversionTracking } from "../lib/conversions";
 
 export const Layout = () => {
   const { pathname } = useLocation();
@@ -11,6 +12,7 @@ export const Layout = () => {
   useEffect(() => {
     installLinkTracking();
     installEmbedProbe();
+    installConversionTracking();
   }, []);
 
   useEffect(() => {

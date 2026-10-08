@@ -17,6 +17,110 @@ the git history and `seo-engagement-report.md` are the record for those.
 
 ---
 
+## 2026-10-08 — Confirmed-conversion tracking, event spec, CRM reconciliation
+
+Full spec: `docs/event-spec-and-reconciliation.md`.
+
+### Booking calendar — already settled, not re-asked
+
+The owner supplied `go3vHktAyk0Z9QABNphm` on 2026-10-07 and it was integrated on
+`/book` in commit `2576c6f`. Verified still in place. No new request made.
+
+### Evidence — the callback documentation
+
+**There is no official LeadConnector documentation for these postMessage
+events.** Public sources are third-party write-ups and pull requests; they agree
+on the message *names* and **disagree on the origin**, and one reported payload
+shape conflicts with the others. LeadConnector's own help article says its
+external tracking script does not support iframe-embedded forms, so a
+postMessage listener is the only available route.
+
+Two findings that shaped the build:
+
+- The reported inquiry payload (`set-sticky-contacts`) **carries contact JSON
+  with email, full name and phone**. No payload body is read into any event.
+- The reported booking payload has `fingerprint` and `calendarId` but **no email
+  or contactId**, so it cannot be joined to a contact on its own — which is why
+  reconciliation needs our own identifier.
+
+**The implemented signatures are plausible but UNVERIFIED against this account.**
+They have not been seen on a real submission. The matcher is strict, so a wrong
+guess produces silence, never a false conversion.
+
+### Changed files
+
+- `src/lib/conversions.js` — **new.** Origin-validated listener. Fires
+  `generate_lead` and `booking_complete` only on a confirmation message from an
+  exact allow-listed origin.
+- `src/components/Layout.jsx` — installs it once per session.
+- `docs/event-spec-and-reconciliation.md` — **new.** Deliverable.
+
+No URLs added, changed or removed. No new pages.
+
+### Counting rules implemented
+
+- **De-duplication is not session-wide.** Only the same message within 5 seconds
+  collapses. A genuine later submission still counts.
+- **One prospect who inquires and books is one qualified lead.** Both events
+  carry the same `lead_ref`; the reporting rule is distinct `lead_ref`, never
+  the sum of the two events.
+- Button, phone and email events stay **intent** and were not touched.
+- `form_submit` deliberately avoided for conversions — enhanced measurement
+  already emits that name.
+
+### CRM reconciliation
+
+`lead_ref`: random, first-party, `slg-` + 16 hex, no personal data, safe in GA4.
+Proposed join is a hidden `lead_ref` custom field on the LeadConnector form,
+passed in as a URL parameter. **Unverified step:** whether LeadConnector
+prefills a custom field from a URL parameter *on an embedded iframe form* has
+not been confirmed on this account. Until it is, GA4 reports conversion counts
+that cannot be tied to named CRM records — stated rather than worked around.
+
+### Tests — 13 of 13 passed
+
+Messages dispatched synthetically with controlled origins; no embed loaded,
+nothing reached Google or LeadConnector.
+
+Origin validation 2/2 (wrong origin ignored; look-alike suffix origin
+`api.leadconnectorhq.com.evil.example` ignored). Noise rejection 3/3
+(`[iFrameSizer]` chatter, unrecognised object, unrecognised array all fire
+nothing). Confirmed booking 3/3. Confirmed inquiry 2/2, including a payload
+seeded with an email, a full name and a phone number, asserting none of it
+reaches the event. De-duplication 3/3.
+
+Two initial failures in the de-duplication section were the test firing inside a
+window still open from earlier sections, not an implementation fault; the
+sequencing was corrected.
+
+Build clean 56 pages, audit 0 critical, smoke 110/110, sitemap URL set
+unchanged.
+
+### Shipped vs preview-only
+
+**Shipped.** Active on the live site, firing only on strict matches.
+
+### Remaining blockers
+
+1. **The real payload shape is unconfirmed.** One real submission with
+   `localStorage.setItem('slg-embed-debug','1')` logs the true origin and
+   payload; the matcher then gets tightened to what was observed. No live test
+   has been run — it creates a real contact and may trigger notifications, so it
+   needs specific permission.
+2. **URL-parameter prefill into the embedded form is unverified**, so the GA4 to
+   CRM join is specified but not built.
+3. Carried over: inquiry destination URL for the native `InquiryForm` (still
+   inert); `book_call_click` not yet a key event; Google Signals property toggle
+   not re-verifiable through the read-only API.
+
+### Next step
+
+Owner to run the probe on one real inquiry or booking and send the console
+output. That resolves blocker 1, and confirms in passing that the new calendar
+renders.
+
+---
+
 ## 2026-10-08 — Removed scroll_90, kept GA4's built-in scroll
 
 Owner's decision on the duplication flagged 2026-10-07.
