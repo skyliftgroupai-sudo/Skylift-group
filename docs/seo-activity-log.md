@@ -17,6 +17,81 @@ the git history and `seo-engagement-report.md` are the record for those.
 
 ---
 
+## 2026-10-09 — New inquiry form on /contact
+
+Owner supplied the current LeadConnector inquiry form, `wF3454LwddFo7Lmjp5V2`
+("Sky Lift Group"). `/contact` was still on `J6Gtz1pzBFNFDvoMGV05`, recovered
+from an old commit back when that page had no working contact method at all.
+
+### Changed files
+
+- `src/pages/Contact.jsx` — new form id, the owner's `data-*` attributes, and
+  the height fix below. **Shipped.**
+- `public/sitemap.xml`, `public/rss.xml` — regenerated timestamps only.
+
+No URLs added, changed or removed.
+
+### Carried over from the owner's snippet
+
+`allow`-free iframe with `data-layout`, `data-trigger-type`,
+`data-activation-type`, `data-deactivation-type`, `data-form-name`,
+`data-height`, `data-layout-iframe-id`, `data-form-id`, `data-cookie-consent`,
+`data-cookie-consent-provider`, and the `inline-<formId>` id that
+`form_embed.js` uses to find and resize the frame.
+
+One deliberate change: the snippet's `title` was "Sky Lift Group". An iframe
+title is announced to describe what the frame is for, so it reads "Contact form
+for Sky Lift Group". The LeadConnector-facing name is `data-form-name`, which is
+untouched.
+
+### A layout-shift risk found by testing, not by reading
+
+`data-height="923"` is the form's own declared height, so the box is reserved at
+exactly that. The first attempt kept the existing `h-full` class, and the frame
+measured **1115px desktop / 1211px mobile** — stretched to the column. Had
+`form_embed.js` then sized it to its declared 923, that is a shrink and a
+layout shift. The frame now starts at exactly 923px and `form_embed.js` can
+still grow it. The previous reservation was 760px, a guess that would have
+shifted by 163px.
+
+### Tests — 8 of 8 passed
+
+Two cases, since the blocked-embed fallback means the iframe does not render at
+all when LeadConnector is unreachable:
+
+```
+A. embed reachable (probe fulfilled, frame aborted)
+   desktop  frame exactly 923px (819x923)   CLS 0.0000
+   mobile   frame exactly 923px (358x923)   CLS 0.0000
+   new form requested, old id never requested
+B. embed blocked
+   fallback panel shown; email and phone offered
+```
+
+Build clean 56 pages, audit 0 critical, smoke 110/110.
+
+### Shipped vs preview-only
+
+**Shipped.**
+
+### Remaining blockers
+
+1. **22 pages still use the old recovered form `J6Gtz1pzBFNFDvoMGV05`** — the 18
+   service pages, the 3 trade pages and `/testimonials`, all via
+   `ServiceInquiryForm`. The owner named `/contact` only, so they were left
+   alone. If the recovered form is stale, those pages are collecting into
+   nothing. **Asked once; awaiting the decision.**
+2. Carried over: the conversion matcher signatures remain unverified (the live
+   test cannot run from this environment — see 2026-10-09 entry below); the
+   native `InquiryForm` destination URL; `book_call_click` not yet a key event.
+
+### Next step
+
+Owner to say whether the 22 other pages should move to `wF3454LwddFo7Lmjp5V2`
+too. One-line change if yes.
+
+---
+
 ## 2026-10-08 — Confirmed-conversion tracking, event spec, CRM reconciliation
 
 Full spec: `docs/event-spec-and-reconciliation.md`.

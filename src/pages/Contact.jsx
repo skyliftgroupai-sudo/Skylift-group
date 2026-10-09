@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 
-const CONTACT_FORM_SRC =
-  "https://api.leadconnectorhq.com/widget/form/J6Gtz1pzBFNFDvoMGV05";
+// Sky Lift Group's LeadConnector inquiry form, supplied by the owner on
+// 2026-10-09. It replaces J6Gtz1pzBFNFDvoMGV05, which had been recovered from an
+// old commit when this page had no working contact method at all.
+//
+// FORM_HEIGHT comes from data-height on the owner's embed snippet: the form's
+// own declared height. Reserving exactly that means form_embed.js sizes the
+// frame to a box that is already the right size, so nothing moves. The previous
+// 760px was a guess and would have shifted by 163px once the form loaded.
+const CONTACT_FORM_ID = "wF3454LwddFo7Lmjp5V2";
+const CONTACT_FORM_SRC = `https://api.leadconnectorhq.com/widget/form/${CONTACT_FORM_ID}`;
+const FORM_HEIGHT = 923;
 import { motion } from "framer-motion";
 import { Mail, MapPin, Clock, PhoneCall } from "lucide-react";
 import useSeo from "../hooks/useSeo";
@@ -136,7 +145,10 @@ const Contact = () => {
     viewport={{ once: true }}
     transition={{ duration: 0.6 }}
     className="lg:col-span-2"
-  ><div className="relative w-full h-full min-h-[760px] rounded-lg overflow-hidden bg-[#111111] shadow-md">
+  ><div
+    style={{ minHeight: `${FORM_HEIGHT}px` }}
+    className="relative w-full h-full rounded-lg overflow-hidden bg-[#111111] shadow-md"
+  >
     {/* Sky Lift Group's own LeadConnector intake form, form J6Gtz1pzBFNFDvoMGV05.
         Where it delivers submissions is configured inside LeadConnector, not here.
 
@@ -147,7 +159,8 @@ const Contact = () => {
     {formFailed ? (
       <div
         role="status"
-        className="flex h-full min-h-[760px] w-full flex-col items-center justify-center gap-4 px-6 text-center"
+        style={{ minHeight: `${FORM_HEIGHT}px` }}
+        className="flex h-full w-full flex-col items-center justify-center gap-4 px-6 text-center"
       >
         <p className="font-semibold text-white">The form could not load.</p>
         <p className="max-w-sm text-sm text-gray-400 leading-relaxed">
@@ -172,8 +185,33 @@ const Contact = () => {
     ) : (
       <iframe
         src={CONTACT_FORM_SRC}
-        title="Contact Sky Lift Group"
-        className="w-full h-full min-h-[760px] border-none bg-white"
+        /* form_embed.js finds and resizes the frame by this id, so it keeps
+           LeadConnector's own inline-<formId> shape. */
+        id={`inline-${CONTACT_FORM_ID}`}
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Sky Lift Group"
+        data-height={FORM_HEIGHT}
+        data-layout-iframe-id={`inline-${CONTACT_FORM_ID}`}
+        data-form-id={CONTACT_FORM_ID}
+        data-cookie-consent="true"
+        data-cookie-consent-provider="auto"
+        /* The snippet's title was "Sky Lift Group". An iframe title is read out
+           to describe what the frame is for, so it says that instead. The
+           LeadConnector-facing name is data-form-name, which is unchanged. */
+        title="Contact form for Sky Lift Group"
+        /* height, not h-full. h-full stretched the frame to the column's full
+           height (1115px measured), and form_embed.js would then have resized it
+           down to its declared 923 -- a shrink, and a layout shift. Starting at
+           the declared height means the resize is a no-op. form_embed.js sets
+           its own inline height afterwards and can still grow it. */
+        style={{ height: `${FORM_HEIGHT}px` }}
+        className="w-full border-none bg-white"
       />
     )}
   </div>
