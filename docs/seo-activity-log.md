@@ -113,6 +113,27 @@ unchanged.
    inert); `book_call_click` not yet a key event; Google Signals property toggle
    not re-verifiable through the read-only API.
 
+### Live test attempt, 2026-10-09 — could not be run from this environment
+
+Owner authorized the live test. It could not be executed here.
+
+The environment's network policy denies every host the test needs:
+`www.skyliftgroup.com`, `api.leadconnectorhq.com`, `link.msgsndr.com` and
+`www.google-analytics.com` all fail to connect. No browser that runs on the
+owner's own machine is available to this session either, so there is no route to
+load the live page, render the embed, or submit anything.
+
+**No test submission was made and no result is claimed.** The matcher signatures
+remain UNVERIFIED.
+
+Two ways forward, neither assumed: the owner runs the capture themselves with
+`docs/capture-embed-payload.js` pasted into the browser console, or the
+environment's Network access is widened to those hosts and the test is run here.
+
+The capture snippet redacts anything resembling personal data before printing,
+since the reported inquiry payload carries email, full name and phone. The shape
+is what is needed; the contact's details are not.
+
 ### Next step
 
 Owner to run the probe on one real inquiry or booking and send the console
