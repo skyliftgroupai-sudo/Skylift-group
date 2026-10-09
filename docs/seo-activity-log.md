@@ -103,10 +103,14 @@ is stated in the test file itself.
 
 No URL changed. No redirect added. No content changed.
 
+### Confirmed by the owner
+
+2026-10-09, after `a2a02ef` deployed: the form renders on `/contact` and stays
+there. Both /contact defects are closed.
+
 ### Next step
 
-Owner to confirm the form renders on `/contact` and stays there past ten
-seconds. Still open and unchanged: `book_call_click` needs creating via
+Still open and unchanged: `book_call_click` needs creating via
 **Admin → Key events → New key event**; the LeadConnector postMessage
 signatures in `src/lib/conversions.js` remain UNVERIFIED pending one real
 submission; indexing not yet requested for the three trade pages; the `/work`
