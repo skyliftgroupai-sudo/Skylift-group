@@ -17,6 +17,62 @@ the git history and `seo-engagement-report.md` are the record for those.
 
 ---
 
+## 2026-10-09 — Form delivers a real lead; four wrong key events in GA4
+
+### The form works end to end
+
+The owner submitted the form on `/contact` and the lead arrived in GoHighLevel.
+That is the part that matters and it is now confirmed by the owner, not inferred:
+`wF3454LwddFo7Lmjp5V2` is live, reachable, and delivering into the CRM.
+
+**Not yet confirmed:** whether GA4 received `generate_lead` from it. The
+postMessage matchers in `src/lib/conversions.js` are still UNVERIFIED. GA4
+reporting has no data for the current day, so this cannot be read until
+2026-10-10 at the earliest; the only same-day check is GA4's Realtime report,
+which holds 30 minutes.
+
+### Key events — read from the property, not assumed
+
+`get_google_analytics_measurement_health` on property `555951601`:
+
+| event | created | should it be a key event? |
+| --- | --- | --- |
+| `book_call_click` | 18:19:44 today | **no** — see below |
+| `first_visit` | 18:19:59 today | **no** |
+| `click` | 18:20:03 today | **no** |
+| `page_view` | 18:20:06 today | **no** |
+| `scroll` | 18:20:11 today | **no** |
+| `purchase` | 2026-09-24 (property creation) | GA4 default, not deletable |
+| `qualify_lead` | 2026-09-24 (property creation) | GA4 default |
+| `close_convert_lead` | 2026-09-24 (property creation) | GA4 default |
+
+`page_view`, `scroll`, `click` and `first_visit` were marked alongside
+`book_call_click`. A key event is a conversion in every GA4 report, so with
+`page_view` marked the conversion count equals the pageview count and the
+metric carries no information at all. These four need unmarking.
+
+`generate_lead` and `booking_complete` — the two events that represent an actual
+lead and an actual booking — are **not** key events. They are the only two that
+should be, and only once the matchers are verified.
+
+### Correction to my own earlier recommendation
+
+I put "mark `book_call_click` as a key event" on the owner's list across several
+sessions. That was wrong and it contradicts the standing instruction to keep
+booking-button, phone, email and chat-open events as intent rather than lead
+conversions. Key-event status is not what makes an event countable — GA4 reports
+per-event counts regardless — so marking it buys nothing and inflates
+conversions with button clicks. Recommended: unmark it too.
+
+### Next step
+
+Owner to unmark `page_view`, `scroll`, `click`, `first_visit` and
+`book_call_click` in **Admin → Key events**, leaving the three GA4 defaults.
+Then read GA4 Realtime within 30 minutes of a submission, or wait for
+2026-10-10 reporting, to establish whether `generate_lead` fired.
+
+---
+
 ## 2026-10-09 — Second /contact defect: the fallback replaced the form after 6s
 
 ### What the owner saw
