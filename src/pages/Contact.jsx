@@ -149,8 +149,8 @@ const Contact = () => {
     style={{ minHeight: `${FORM_HEIGHT}px` }}
     className="relative w-full h-full rounded-lg overflow-hidden bg-[#111111] shadow-md"
   >
-    {/* Sky Lift Group's own LeadConnector intake form, form J6Gtz1pzBFNFDvoMGV05.
-        Where it delivers submissions is configured inside LeadConnector, not here.
+    {/* Sky Lift Group's LeadConnector inquiry form. Where it delivers
+        submissions is configured inside LeadConnector, not here.
 
         formFailed covers the case where the embed never loads -- most often an
         ad blocker, since leadconnectorhq.com is on the common block lists.

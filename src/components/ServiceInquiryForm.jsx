@@ -1,15 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { Mail, PhoneCall } from "lucide-react";
 
-// Sky Lift Group's own LeadConnector intake form -- the same form ID that is
-// embedded on /contact, recovered from commit 471ef69. Where it delivers
-// submissions is configured inside LeadConnector, not here.
-const FORM_SRC = "https://api.leadconnectorhq.com/widget/form/J6Gtz1pzBFNFDvoMGV05";
+// Sky Lift Group's current LeadConnector inquiry form -- the same one /contact
+// uses, supplied by the owner on 2026-10-09. It replaces J6Gtz1pzBFNFDvoMGV05,
+// which had been recovered from commit 471ef69 and whose live status was never
+// confirmed. Where it delivers submissions is configured inside LeadConnector.
+const FORM_ID = "wF3454LwddFo7Lmjp5V2";
+const FORM_SRC = `https://api.leadconnectorhq.com/widget/form/${FORM_ID}`;
 
 // The height is fixed in both states. The placeholder that ships in the
 // prerendered HTML and the iframe that replaces it occupy exactly the same
 // box, so mounting the embed moves nothing on the page and CLS stays at 0.
-const FRAME_HEIGHT = 700;
+//
+// 923 is the form's own declared height, from data-height on the embed snippet
+// the owner supplied. This was 700 -- chosen to keep the section compact -- but
+// it is the same form as /contact, so form_embed.js would have grown the frame
+// by 223px on first size and shifted everything below it. Reserving the real
+// height costs vertical space and makes the resize a no-op.
+const FRAME_HEIGHT = 923;
 
 // How long to wait for the embed before offering a route that does not depend
 // on it. Generous enough not to trip on a slow connection.
@@ -134,6 +142,14 @@ export default function ServiceInquiryForm({
               src={FORM_SRC}
               title="Send Sky Lift Group an inquiry"
               loading="lazy"
+              id={`inline-${FORM_ID}`}
+              data-layout="{'id':'INLINE'}"
+              data-form-name="Sky Lift Group"
+              data-layout-iframe-id={`inline-${FORM_ID}`}
+              data-form-id={FORM_ID}
+              data-height={FRAME_HEIGHT}
+              data-cookie-consent="true"
+              data-cookie-consent-provider="auto"
               className="w-full border-none bg-white"
               style={{ height: `${FRAME_HEIGHT}px`, display: "block" }}
             />

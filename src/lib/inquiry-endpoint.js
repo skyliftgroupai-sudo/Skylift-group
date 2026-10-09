@@ -3,9 +3,9 @@
 // EMPTY ON PURPOSE. Nothing is guessed here.
 //
 // The site already has a working inquiry capability: the LeadConnector form
-// widget J6Gtz1pzBFNFDvoMGV05, embedded on /contact and on all 18 service
-// pages, plus the LeadConnector chat widget and the booking calendar. Those
-// deliver into LeadConnector. Where inside LeadConnector they land -- which
+// widget wF3454LwddFo7Lmjp5V2, embedded on /contact and on every page that
+// renders ServiceInquiryForm, plus the LeadConnector chat widget and the
+// booking calendar. Those deliver into LeadConnector. Where inside LeadConnector they land -- which
 // sub-account, pipeline, and notification -- is configured in LeadConnector and
 // is not readable from this codebase.
 //

@@ -85,10 +85,37 @@ Build clean 56 pages, audit 0 critical, smoke 110/110.
    test cannot run from this environment — see 2026-10-09 entry below); the
    native `InquiryForm` destination URL; `book_call_click` not yet a key event.
 
+### Follow-up, same day — all 22 other pages switched too
+
+Owner confirmed. `ServiceInquiryForm` now uses `wF3454LwddFo7Lmjp5V2`, which
+covers the 18 service pages, the 3 trade pages and `/testimonials`. The old form
+id appears **nowhere in the build** — not in HTML, not in any JS chunk.
+
+The compact embed also gained the LeadConnector wiring `/contact` has
+(`inline-<formId>` id, `data-layout`, `data-form-name`, `data-form-id`,
+`data-height`, cookie-consent attributes) so `form_embed.js` can find and size
+it.
+
+**A second instance of the same layout-shift bug, found by testing.** The
+compact embed reserved 700px — chosen when it was meant to be a compact version.
+It is the same form as `/contact`, which declares 923px, so `form_embed.js`
+would have grown the frame by 223px on first size and shifted everything below
+it on 22 pages. Reserved at the real 923px; the resize is now a no-op. Costs
+vertical space, which is the right trade against a visible jump.
+
+Two comments that had become untrue were corrected rather than left: one in
+`Contact.jsx` still naming the old form as the live embed, one in
+`inquiry-endpoint.js` describing the old widget's placement.
+
+Tests: 6 of 6 across three routes and both viewports — frame exactly 923px,
+CLS 0.0000 everywhere. Plus the earlier 8 on `/contact`. Build clean 56 pages,
+audit 0 critical, smoke 110/110, sitemap URL set unchanged.
+
 ### Next step
 
-Owner to say whether the 22 other pages should move to `wF3454LwddFo7Lmjp5V2`
-too. One-line change if yes.
+Nothing outstanding on the inquiry form. The live-test blocker is unchanged: the
+conversion matcher signatures still need one real submission to confirm, which
+cannot be run from this environment.
 
 ---
 
