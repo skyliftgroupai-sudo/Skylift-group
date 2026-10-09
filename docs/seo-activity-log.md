@@ -17,6 +17,75 @@ the git history and `seo-engagement-report.md` are the record for those.
 
 ---
 
+## 2026-10-09 — INCIDENT: /contact blanked in production, fixed
+
+### What happened
+
+After `61edf3c`, `/contact` rendered as a blank white page on the live site.
+Reported by the owner with a screenshot: correct tab title, LeadConnector chat
+widget drawing, nothing else.
+
+### Cause — confirmed, not inferred
+
+The `data-*` attributes copied from the owner's embed snippet are exactly what
+`form_embed.js` scans for. With them present it adopts the iframe and mutates a
+node React is actively reconciling. The next React render then hits a DOM it no
+longer recognises and unmounts the entire tree. The chat widget survives because
+it owns its own container — which is precisely the pattern in the screenshot.
+
+Reproduced locally against the broken build with a stand-in for `form_embed.js`:
+
+```
+/contact   root innerText 0 chars, 2 frames adopted
+           Failed to execute 'removeChild' on 'Node':
+           The node to be removed is not a child of this node.
+```
+
+The service pages did not blank — one frame adopted, tree intact — so `/contact`
+was the acute case, matching what the owner saw.
+
+### Why every test passed anyway
+
+**This is the real failure.** Every local test aborts `leadconnectorhq.com` and
+`link.msgsndr.com`, so `form_embed.js` never ran in any of them. Fourteen checks
+passed against a page with the thing that breaks it switched off. The attributes
+were a mistake; testing around the dependency was the bigger one.
+
+### Fix — `88bd7e3`
+
+Reverted to the iframe shape that ran unbroken for weeks: `src`, `title`,
+`height`, `class`, nothing else. The new form id `wF3454LwddFo7Lmjp5V2` is kept
+on `/contact` and all 22 `ServiceInquiryForm` pages. The `data-*` attributes only
+drove `form_embed.js`'s auto-resize, and the reserved 923px already makes that a
+no-op, so nothing of value was lost.
+
+### New permanent check — `scripts/embed-adoption-test.mjs`
+
+Serves a stand-in for `form_embed.js` that does what a resizer does to an adopted
+frame — rewrite attributes, replace the node — then forces a React re-render and
+asserts the app is still on screen.
+
+Validated both ways, which is the point: **fails** on the broken build (0 chars
+rendered, the `removeChild` error), **passes** on the fixed one (0 frames
+adopted, app intact). Run it after any change to an embedded third-party iframe.
+
+### Shipped vs preview-only
+
+**Shipped.** `88bd7e3` restored the page; this entry's regression test follows.
+
+### Remaining blockers
+
+Unchanged: conversion matcher signatures unverified; native `InquiryForm`
+destination; `book_call_click` not a key event.
+
+### Next step
+
+Owner to confirm `/contact` renders again. Blocked-embed and adoption behaviour
+now both have tests; the remaining untested surface is anything requiring a real
+submission.
+
+---
+
 ## 2026-10-09 — New inquiry form on /contact
 
 Owner supplied the current LeadConnector inquiry form, `wF3454LwddFo7Lmjp5V2`
