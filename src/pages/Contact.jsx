@@ -183,33 +183,14 @@ const Contact = () => {
         </div>
       </div>
     ) : (
+      /* No data-* attributes, deliberately. Adding them made form_embed.js
+         adopt this node -- it mutates an element React is reconciling, and the
+         next React render then unmounted the whole tree, leaving a blank page in
+         production. The src alone loads the form; the data-* attributes only
+         drive form_embed.js's auto-resize, which is not worth the page. */
       <iframe
         src={CONTACT_FORM_SRC}
-        /* form_embed.js finds and resizes the frame by this id, so it keeps
-           LeadConnector's own inline-<formId> shape. */
-        id={`inline-${CONTACT_FORM_ID}`}
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-trigger-value=""
-        data-activation-type="alwaysActivated"
-        data-activation-value=""
-        data-deactivation-type="neverDeactivate"
-        data-deactivation-value=""
-        data-form-name="Sky Lift Group"
-        data-height={FORM_HEIGHT}
-        data-layout-iframe-id={`inline-${CONTACT_FORM_ID}`}
-        data-form-id={CONTACT_FORM_ID}
-        data-cookie-consent="true"
-        data-cookie-consent-provider="auto"
-        /* The snippet's title was "Sky Lift Group". An iframe title is read out
-           to describe what the frame is for, so it says that instead. The
-           LeadConnector-facing name is data-form-name, which is unchanged. */
         title="Contact form for Sky Lift Group"
-        /* height, not h-full. h-full stretched the frame to the column's full
-           height (1115px measured), and form_embed.js would then have resized it
-           down to its declared 923 -- a shrink, and a layout shift. Starting at
-           the declared height means the resize is a no-op. form_embed.js sets
-           its own inline height afterwards and can still grow it. */
         style={{ height: `${FORM_HEIGHT}px` }}
         className="w-full border-none bg-white"
       />

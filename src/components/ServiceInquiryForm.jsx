@@ -138,18 +138,12 @@ export default function ServiceInquiryForm({
               </div>
             </div>
           ) : mountFrame ? (
+            /* No data-* attributes -- see the note in Contact.jsx. They make
+               form_embed.js adopt a node React owns, which unmounts the tree. */
             <iframe
               src={FORM_SRC}
               title="Send Sky Lift Group an inquiry"
               loading="lazy"
-              id={`inline-${FORM_ID}`}
-              data-layout="{'id':'INLINE'}"
-              data-form-name="Sky Lift Group"
-              data-layout-iframe-id={`inline-${FORM_ID}`}
-              data-form-id={FORM_ID}
-              data-height={FRAME_HEIGHT}
-              data-cookie-consent="true"
-              data-cookie-consent-provider="auto"
               className="w-full border-none bg-white"
               style={{ height: `${FRAME_HEIGHT}px`, display: "block" }}
             />
