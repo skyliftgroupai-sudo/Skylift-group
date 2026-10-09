@@ -38,6 +38,13 @@ const b=await chromium.launch({executablePath:"/opt/pw-browsers/chromium"});
 let pass=0, fail=0;
 const ok=(c,m)=>{console.log(`   ${c?"PASS":"FAIL"}  ${m}`);c?pass++:fail++;};
 
+// probe "ok"      -- the no-cors reachability probe resolves: the embed must stay.
+// probe "blocked"  -- it rejects, as an ad blocker makes it: the fallback must show.
+//
+// The iframe's own request is aborted either way (this container has no egress to
+// leadconnectorhq.com), so "the embed stays" is asserted on the element being in
+// the DOM, not on the form inside it having rendered.
+for (const probe of ["ok", "blocked"]) {
 for (const route of ["/contact", "/services/missed-call-text-back"]) {
   const ctx=await b.newContext({viewport:{width:1280,height:900}});
   const p=await ctx.newPage();
@@ -48,7 +55,8 @@ for (const route of ["/contact", "/services/missed-call-text-back"]) {
   await ctx.route("**://link.msgsndr.com/js/form_embed.js", r=>
     r.fulfill({status:200, contentType:"text/javascript", body:SIM}));
   await ctx.route("**://*.leadconnectorhq.com/**", r=>
-    r.request().resourceType()==="fetch" ? r.fulfill({status:200,body:""}) : r.abort());
+    r.request().resourceType()!=="fetch" ? r.abort()
+      : probe==="ok" ? r.fulfill({status:200,body:""}) : r.abort());
 
   await p.goto(BASE+route, {waitUntil:"load"});
   await p.waitForTimeout(1200);
@@ -56,13 +64,24 @@ for (const route of ["/contact", "/services/missed-call-text-back"]) {
   await p.waitForTimeout(3000);
   // Force the React re-render that previously killed the tree.
   await p.evaluate(()=>window.dispatchEvent(new Event("resize")));
+  // Past the 6s backstop: a timer that is not cancelled on success fires in here.
   await p.waitForTimeout(4000);
-
   const adopted = await p.evaluate(()=>window.__simAdopted || 0);
   const rootText = (await p.evaluate(()=>document.getElementById("root")?.innerText || "")).trim();
-  ok(rootText.length > 200, `${route.padEnd(34)} app still rendered after the resizer ran (${rootText.length} chars, ${adopted} frame(s) adopted)`);
-  ok(errors.length === 0, `${route.padEnd(34)} no uncaught page errors ${errors.length?JSON.stringify(errors):""}`);
+  const tag = `${probe.padEnd(7)} ${route.padEnd(34)}`;
+  ok(rootText.length > 200, `${tag} app still rendered after the resizer ran (${rootText.length} chars, ${adopted} frame(s) adopted)`);
+  ok(errors.length === 0, `${tag} no uncaught page errors ${errors.length?JSON.stringify(errors):""}`);
+
+  const frames = await p.locator('iframe[src*="leadconnectorhq.com/widget/form"]').count();
+  const fellBack = /could not load/i.test(rootText);
+  if (probe === "ok") {
+    ok(frames === 1, `${tag} embed still mounted past the backstop (${frames} iframe)`);
+    ok(!fellBack, `${tag} fallback not shown while the probe is reachable`);
+  } else {
+    ok(frames === 0 && fellBack, `${tag} fallback shown when the probe is blocked (${frames} iframe, fellBack=${fellBack})`);
+  }
   await ctx.close();
+}
 }
 await b.close(); s.close();
 console.log(`\n  ${pass} passed, ${fail} failed`);

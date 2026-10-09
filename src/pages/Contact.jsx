@@ -25,14 +25,33 @@ const Contact = () => {
   // blocker, which is the usual cause, blocks that too and the promise rejects.
   // A real response resolves opaquely; its status does not matter, only that it
   // arrived.
+  //
+  // The probe has to settle once. An earlier version attached only .catch and
+  // left the 6s timer armed, so the timer fired on every visit whether the
+  // probe had succeeded or not: the form appeared, then six seconds later the
+  // fallback replaced it. The `settled` flag is what makes the timer a backstop
+  // rather than a deadline.
   const [formFailed, setFormFailed] = useState(false);
   useEffect(() => {
     let cancelled = false;
-    const fail = () => !cancelled && setFormFailed(true);
-    fetch(CONTACT_FORM_SRC, { mode: "no-cors", cache: "no-store" }).catch(fail);
+    let settled = false;
+    let timer;
+    const fail = () => {
+      if (cancelled || settled) return;
+      settled = true;
+      clearTimeout(timer);
+      setFormFailed(true);
+    };
+    const succeed = () => {
+      settled = true;
+      clearTimeout(timer);
+    };
+    // Only a rejection means blocked. Fires for an ad blocker, DNS failure or a
+    // dropped connection; an opaque response resolves and we stop waiting.
+    fetch(CONTACT_FORM_SRC, { mode: "no-cors", cache: "no-store" }).then(succeed, fail);
     // Backstop for a request that neither resolves nor rejects.
-    const t = setTimeout(fail, 6000);
-    return () => { cancelled = true; clearTimeout(t); };
+    timer = setTimeout(fail, 6000);
+    return () => { cancelled = true; clearTimeout(timer); };
   }, []);
 
 

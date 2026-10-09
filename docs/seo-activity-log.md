@@ -17,6 +17,103 @@ the git history and `seo-engagement-report.md` are the record for those.
 
 ---
 
+## 2026-10-09 — Second /contact defect: the fallback replaced the form after 6s
+
+### What the owner saw
+
+Screenshot of `/contact` in Incognito after the blank-page fix: the page renders
+correctly — nav, hero, and all four contact cards — but the right-hand panel
+shows the blocked-embed fallback, "The form could not load.", instead of the
+form. So the React fix held and a second, separate defect was underneath it.
+
+### Cause — confirmed in code, not inferred from the screenshot
+
+Mine, in `src/pages/Contact.jsx`. The reachability probe attached only a
+rejection handler:
+
+```js
+fetch(CONTACT_FORM_SRC, { mode: "no-cors", cache: "no-store" }).catch(fail);
+const t = setTimeout(fail, 6000);          // never cleared on success
+```
+
+`cancelled` is only set on unmount, so the timer fired on **every** visit
+regardless of what the probe did. The form loaded, and six seconds later the
+fallback replaced it. It was not an extension, not a block, and not a false
+positive from the probe: the backstop was behaving as a deadline.
+
+`ServiceInquiryForm.jsx` — the other 22 pages — never had this. It settles
+through a tri-state (`pending` → `loaded` | `failed`) where the timer's write is
+ignored once the state has left `pending`, so success already disarmed it. Only
+`/contact` was affected.
+
+### Fix
+
+`Contact.jsx` now settles once: a `settled` flag, a success handler that clears
+the timer, and `.then(succeed, fail)` in place of a bare `.catch`. The fallback
+shows only on a genuine rejection (ad blocker, DNS failure, dropped connection)
+or on a probe that never settles at all. Both states still occupy the same
+923px box, so CLS stays at 0 either way.
+
+### Why fourteen tests missed it, again
+
+`scripts/embed-adoption-test.mjs` — the regression test written for the
+blank-page incident the same day — **ran against this bug and passed.** It
+asserted `root.innerText.length > 200`. The fallback is text, so the page was
+never blank and the assertion held while the form was gone. The test measured
+the wrong thing: that something rendered, not that the right thing rendered.
+
+The test now asserts both directions, and runs each route twice:
+
+| probe | assertion |
+| --- | --- |
+| resolves (`200`) | the embed iframe is still mounted past the backstop, and the fallback is **not** shown |
+| rejects (blocked) | the fallback **is** shown and the iframe is gone |
+
+Validated both ways before shipping. Against the build that was live, the new
+assertions fail on `/contact` and pass on `/services/missed-call-text-back`,
+which is exactly the defect's shape:
+
+```
+FAIL  ok  /contact   embed still mounted past the backstop (0 iframe)
+FAIL  ok  /contact   fallback not shown while the probe is reachable
+PASS  ok  /services/missed-call-text-back   embed still mounted past the backstop (1 iframe)
+```
+
+After the fix: 14/14.
+
+The iframe's own request is still aborted in the test — this container has no
+egress to `leadconnectorhq.com` — so "the embed stays" is asserted on the
+element being in the DOM, not on the form inside it having rendered. That limit
+is stated in the test file itself.
+
+### Evidence
+
+- Build: 56 prerendered pages.
+- `scripts/embed-adoption-test.mjs`: 14/14 (was 12/14 on the live build).
+- `scripts/audit-seo.mjs`: 0 critical, 2 high — both the pre-existing "thin"
+  flags on `/book` and `/contact`, which are embed-driven pages by design.
+- `scripts/smoke-test.mjs` across all 34 static routes × 2 viewports: 68/68
+  clean, JSON-LD valid on every one.
+
+### Changed
+
+- `src/pages/Contact.jsx` — probe settles once.
+- `scripts/embed-adoption-test.mjs` — asserts the embed survives, not just that
+  the page is non-empty.
+
+No URL changed. No redirect added. No content changed.
+
+### Next step
+
+Owner to confirm the form renders on `/contact` and stays there past ten
+seconds. Still open and unchanged: `book_call_click` needs creating via
+**Admin → Key events → New key event**; the LeadConnector postMessage
+signatures in `src/lib/conversions.js` remain UNVERIFIED pending one real
+submission; indexing not yet requested for the three trade pages; the `/work`
+counters still await the owner's decision.
+
+---
+
 ## 2026-10-09 — INCIDENT: /contact blanked in production, fixed
 
 ### What happened
